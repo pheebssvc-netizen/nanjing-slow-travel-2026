@@ -265,11 +265,269 @@ nav strong {
         display: none;
     }
 }
+    .quick-menu {
+
+    width: min(
+        720px,
+        calc(100% - 30px)
+    );
+
+    margin: 20px auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+
+.quick-menu a {
+
+    background: white;
+
+    color: #4d4038;
+
+    text-decoration: none;
+
+    padding: 18px 15px;
+
+    border-radius: 18px;
+
+    min-height: 125px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    box-shadow:
+        0 4px 15px
+        rgba(70,50,35,0.08);
+
+    border: 1px solid
+        rgba(120,80,68,0.08);
+
+    transition:
+        transform 0.15s ease;
+}
+
+
+.quick-menu a:active {
+
+    transform: scale(0.97);
+}
+
+
+.quick-menu span {
+
+    font-size: 32px;
+
+    margin-bottom: 6px;
+}
+
+
+.quick-menu strong {
+
+    font-size: 18px;
+
+    color: #60483b;
+}
+
+
+.quick-menu small {
+
+    font-size: 13px;
+
+    color: #82766d;
+
+    margin-top: 3px;
+}
+
+
+@media (max-width: 420px) {
+
+    .quick-menu {
+
+        gap: 10px;
+    }
+
+
+    .quick-menu a {
+
+        min-height: 118px;
+
+        padding: 15px 12px;
+    }
+
+
+    .quick-menu strong {
+
+        font-size: 17px;
+    }
+
+
+    .quick-menu small {
+
+        font-size: 12px;
+    }
+
+}
+.quick-menu {
+
+    width: min(
+        720px,
+        calc(100% - 30px)
+    );
+
+    margin: 20px auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+
+.quick-menu a {
+
+    background: white;
+
+    color: #4d4038;
+
+    text-decoration: none;
+
+    padding: 18px 15px;
+
+    border-radius: 18px;
+
+    min-height: 125px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    box-shadow:
+        0 4px 15px
+        rgba(70,50,35,0.08);
+
+    border: 1px solid
+        rgba(120,80,68,0.08);
+
+    transition:
+        transform 0.15s ease;
+}
+
+
+.quick-menu a:active {
+
+    transform: scale(0.97);
+}
+
+
+.quick-menu span {
+
+    font-size: 32px;
+
+    margin-bottom: 6px;
+}
+
+
+.quick-menu strong {
+
+    font-size: 18px;
+
+    color: #60483b;
+}
+
+
+.quick-menu small {
+
+    font-size: 13px;
+
+    color: #82766d;
+
+    margin-top: 3px;
+}
+
+
+@media (max-width: 420px) {
+
+    .quick-menu {
+
+        gap: 10px;
+    }
+
+
+    .quick-menu a {
+
+        min-height: 118px;
+
+        padding: 15px 12px;
+    }
+
+
+    .quick-menu strong {
+
+        font-size: 17px;
+    }
+
+
+    .quick-menu small {
+
+        font-size: 12px;
+    }
+
+}   
 </style>
 </head>
 
 <body>
+<div class="quick-menu">
 
+    <a href="#today">
+        <span>📅</span>
+        <strong>今日行程</strong>
+        <small>上午・下午・晚上</small>
+    </a>
+
+    <a href="spots.html">
+        <span>📍</span>
+        <strong>景點導遊</strong>
+        <small>歷史・門票・遊覽資料</small>
+    </a>
+
+    <a href="afternoon.html">
+        <span>🌤️</span>
+        <strong>下午去哪裡？</strong>
+        <small>按體力＋天氣選擇</small>
+    </a>
+
+    <a href="transport.html">
+        <span>🚕</span>
+        <strong>交通導航</strong>
+        <small>酒店・景點・高德</small>
+    </a>
+
+    <a href="#food">
+        <span>🍜</span>
+        <strong>南京美食</strong>
+        <small>餐廳・特色・位置</small>
+    </a>
+
+    <a href="#info">
+        <span>ℹ️</span>
+        <strong>實用資料</strong>
+        <small>預約・天氣・注意事項</small>
+    </a>
+
+</div>
 <header class="header">
 
     <div class="small">🏮 金陵六朝古都・慢遊指南</div>
