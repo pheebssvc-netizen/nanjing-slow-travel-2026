@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>下午去哪裡？｜南京六日慢遊</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        sans-serif;
+
+    background: #f7f3ec;
+
+    color: #3b352f;
+
+    line-height: 1.7;
+}
+
+
+.header {
+
+    background:
+        linear-gradient(
+            rgba(91, 62, 48, 0.9),
+            rgba(91, 62, 48, 0.9)
+        );
+
+    color: white;
+
+    text-align: center;
+
+    padding: 35px 20px;
+}
+
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 30px;
+
+    letter-spacing: 2px;
+}
+
+
+.header p {
+
+    margin: 8px 0 0;
+
+    font-size: 16px;
+}
+
+
+.container {
+
+    width: min(
+        720px,
+        calc(100% - 30px)
+    );
+
+    margin: auto;
+}
+
+
+.intro {
+
+    background: white;
+
+    padding: 20px;
+
+    margin: 20px 0;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 4px 15px rgba(70,50,35,0.07);
+
+    font-size: 17px;
+}
+
+
+/* 選擇區 */
+
+.choice-box {
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    margin: 20px 0;
+
+    box-shadow:
+        0 4px 15px rgba(70,50,35,0.07);
+}
+
+
+.choice-box h2 {
+
+    margin-top: 0;
+
+    font-size: 22px;
+
+    color: #60483b;
+}
+
+
+.choice-buttons {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+
+.choice {
+
+    border: none;
+
+    padding: 14px 10px;
+
+    border-radius: 14px;
+
+    background: #eee6dc;
+
+    color: #60483b;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+
+.choice.active {
+
+    background: #785044;
+
+    color: white;
+}
+
+
+/* 推薦結果 */
+
+.result {
+
+    display: none;
+}
+
+
+.result.show {
+
+    display: block;
+}
+
+
+.result-title {
+
+    font-size: 23px;
+
+    margin:
+        25px 0
+        12px;
+
+    color: #60483b;
+}
+
+
+/* 景點卡 */
+
+.card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    margin: 15px 0;
+
+    box-shadow:
+        0 4px 15px rgba(70,50,35,0.07);
+}
+
+
+.card h3 {
+
+    margin-top: 0;
+
+    font-size: 23px;
+
+    color: #573c31;
+}
+
+
+.tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin: 10px 0;
+}
+
+
+.tag {
+
+    background: #f1e9df;
+
+    padding: 6px 10px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+}
+
+
+.card p {
+
+    font-size: 16px;
+
+    margin: 8px 0;
+}
+
+
+.map-button {
+
+    display: block;
+
+    text-align: center;
+
+    background: #785044;
+
+    color: white;
+
+    padding: 13px;
+
+    margin-top: 15px;
+
+    border-radius: 13px;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+
+/* 提示 */
+
+.tip {
+
+    background: #edf3ee;
+
+    border-left: 5px solid #6e9072;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    margin-top: 18px;
+}
+
+
+.warning {
+
+    background: #fff3df;
+
+    border-left: 5px solid #c6944e;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    margin-top: 18px;
+}
+
+
+.home {
+
+    display: block;
+
+    text-align: center;
+
+    background: #e7ddd2;
+
+    color: #60483b;
+
+    padding: 14px;
+
+    border-radius: 14px;
+
+    margin: 30px 0 80px;
+
+    text-decoration: none;
+
+    font-size: 17px;
+}
+
+
+.bottom-nav {
+
+    position: fixed;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    z-index: 50;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    background: rgba(255,255,255,0.97);
+
+    border-top: 1px solid #ddd4ca;
+
+    padding:
+        8px 3px
+        calc(8px + env(safe-area-inset-bottom));
+}
+
+
+.bottom-nav a {
+
+    text-decoration: none;
+
+    color: #675b52;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+
+.bottom-nav strong {
+
+    display: block;
+
+    font-size: 20px;
+}
+
+
+@media (min-width: 700px) {
+
+    .bottom-nav {
+
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .choice-buttons {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <h1>🌤️ 下午去哪裡？</h1>
+
+    <p>
+        按今日體力＋天氣，輕鬆決定下午行程
+    </p>
+
+</header>
+
+
+<main class="container">
+
+
+<div class="intro">
+
+    <strong>💡 今日原則</strong>
+
+    <p>
+        上午完成核心行程後，
+        下午不需要「一定要去景點」。
+    </p>
+
+    <p>
+        7人同行，而且全部60+，
+        最重要係舒服、輕鬆、有選擇。
+    </p>
+
+</div>
+
+
+<!-- 體力 -->
+
+<section class="choice-box">
+
+    <h2>👴 今日團友體力</h2>
+
+    <div class="choice-buttons">
+
+        <button
+            class="choice"
+            onclick="chooseEnergy('good', this)">
+
+            🟢 精神很好
+
+        </button>
+
+
+        <button
+            class="choice"
+            onclick="chooseEnergy('normal', this)">
+
+            🟡 普通
+
+        </button>
+
+
+        <button
+            class="choice"
+            onclick="chooseEnergy('tired', this)">
+
+            🔴 有少少攰
+
+        </button>
+
+
+        <button
+            class="choice"
+            onclick="chooseEnergy('rest', this)">
+
+            🛌 今日想休息
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- 天氣 -->
+
+<section class="choice-box">
+
+    <h2>🌤️ 今日天氣</h2>
+
+    <div class="choice-buttons">
+
+        <button
+            class="choice"
+            onclick="chooseWeather('sun', this)">
+
+            ☀️ 天氣好
+
+        </button>
+
+
+        <button
+            class="choice"
+            onclick="chooseWeather('cloudy', this)">
+
+            ☁️ 陰天
+
+        </button>
+
+
+        <button
+            class="choice"
+            onclick="chooseWeather('rain', this)">
+
+            ☔ 落雨
+
+        </button>
+
+
+        <button
+            class="choice"
+            onclick="chooseWeather('cold', this)">
+
+            🧥 寒冷
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<section
+    id="results"
+    class="result">
+
+    <h2
+        id="result-title"
+        class="result-title">
+
+        推薦下午行程
+
+    </h2>
+
+
+    <div id="cards"></div>
+
+
+    <div class="tip">
+
+        <strong>👴 60+慢遊原則</strong>
+
+        <br>
+
+        下午只建議選
+        <strong>1–2個景點</strong>。
+
+        <br>
+
+        如果上午已經行得比較多，
+        「返酒店休息」本身就是一個好選擇。
+
+    </div>
+
+</section>
+
+
+<a
+    class="home"
+    href="index.html">
+
+    🏠 返回南京六日慢遊
+
+</a>
+
+
+</main>
+
+
+<nav class="bottom-nav">
+
+    <a href="index.html">
+
+        <strong>🏠</strong>
+
+        首頁
+
+    </a>
+
+
+    <a href="spots.html">
+
+        <strong>📍</strong>
+
+        景點
+
+    </a>
+
+
+    <a href="afternoon.html">
+
+        <strong>🌤️</strong>
+
+        下午
+
+    </a>
+
+</nav>
+
+
+<script>
+
+
+let energy = null;
+
+let weather = null;
+
+
+function chooseEnergy(value, button) {
+
+    energy = value;
+
+    button
+        .parentElement
+        .querySelectorAll('.choice')
+        .forEach(
+            b => b.classList.remove('active')
+        );
+
+    button.classList.add('active');
+
+    showResults();
+
+}
+
+
+function chooseWeather(value, button) {
+
+    weather = value;
+
+    button
+        .parentElement
+        .querySelectorAll('.choice')
+        .forEach(
+            b => b.classList.remove('active')
+        );
+
+    button.classList.add('active');
+
+    showResults();
+
+}
+
+
+function showResults() {
+
+    if (!energy || !weather) return;
+
+
+    const results =
+        document.getElementById("results");
+
+    const cards =
+        document.getElementById("cards");
+
+    const title =
+        document.getElementById("result-title");
+
+
+    results.classList.add("show");
+
+
+    let html = "";
+
+
+    /*
+     * 最攰
+     */
+
+    if (energy === "rest") {
+
+        title.innerText =
+            "🛌 今日建議：休息優先";
+
+        html += createCard(
+            "🏨 酒店休息＋夫子廟慢行",
+            "⭐⭐⭐⭐⭐",
+            "🚶 極低",
+            "約1–2小時",
+            "上午已完成核心行程，下午最舒服的選擇是返酒店休息。傍晚如果精神恢復，再到夫子廟附近慢慢散步。",
+            "夫子廟"
+        );
+
+        if (weather === "rain") {
+
+            html += createCard(
+                "🏛️ 科舉博物館",
+                "⭐⭐⭐⭐",
+                "🚶 低",
+                "約1.5小時",
+                "室內景點，適合雨天，但地下空間較大，仍應按體力控制參觀時間。",
+                "南京中國科舉博物館"
+            );
+
+        }
+
+    }
+
+
+    /*
+     * 有少少攰
+     */
+
+    else if (energy === "tired") {
+
+        title.innerText =
+            "🔴 今日建議：輕鬆為主";
+
+        html += createCard(
+            "🏯 瞻園",
+            "⭐⭐⭐⭐⭐",
+            "🚶 低～中",
+            "約1–1.5小時",
+            "距離酒店近，園林景觀集中，適合慢慢行，不需要長時間交通。",
+            "瞻園"
+        );
+
+
+        if (weather === "rain" ||
+            weather === "cold") {
+
+            html += createCard(
+                "🏛️ 德基藝術博物館",
+                "⭐⭐⭐⭐",
+                "🚶 低",
+                "約1.5–2小時",
+                "室內為主，適合天氣較差的下午。",
+                "德基藝術博物館"
+            );
+
+        }
+
+    }
+
+
+    /*
+     * 普通體力
+     */
+
+    else if (energy === "normal") {
+
+        title.innerText =
+            "🟡 今日建議：選擇一個主景點";
+
+        if (weather === "sun") {
+
+            html += createCard(
+                "🌳 玄武湖公園",
+                "⭐⭐⭐⭐⭐",
+                "🚶 中",
+                "約1.5–2小時",
+                "天氣好時非常適合慢慢欣賞湖景。可以使用觀光車，減少步行。",
+                "玄武湖公園"
+            );
+
+            html += createCard(
+                "🏯 雞鳴寺",
+                "⭐⭐⭐⭐",
+                "🚶 中",
+                "約1–1.5小時",
+                "歷史文化氣息濃厚，但部分路段及登高活動需要一定體力。",
+                "雞鳴寺"
+            );
+
+        }
+
+        else {
+
+            html += createCard(
+                "🏛️ 德基藝術博物館",
+                "⭐⭐⭐⭐",
+                "🚶 低",
+                "約1.5–2小時",
+                "室內活動，天氣不穩定時較舒服。",
+                "德基藝術博物館"
+            );
+
+        }
+
+    }
+
+
+    /*
+     * 精神很好
+     */
+
+    else {
+
+        title.innerText =
+            "🟢 今日建議：可以探索多一點";
+
+        if (weather === "sun") {
+
+            html += createCard(
+                "🏯 雞鳴寺＋玄武湖",
+                "⭐⭐⭐⭐⭐",
+                "🚶 中",
+                "約2–3小時",
+                "兩個景點距離近，可以組合成一個南京城北半日遊。",
+                "雞鳴寺"
+            );
+
+            html += createCard(
+                "🏛️ 頤和路民國公館區",
+                "⭐⭐⭐⭐",
+                "🚶 中",
+                "約1–1.5小時",
+                "適合喜歡民國建築及城市散步的團友。",
+                "頤和路"
+            );
+
+        }
+
+        else if (weather === "rain") {
+
+            html += createCard(
+                "🏛️ 德基藝術博物館",
+                "⭐⭐⭐⭐⭐",
+                "🚶 低",
+                "約2小時",
+                "雨天首選，室內活動較舒服。",
+                "德基藝術博物館"
+            );
+
+            html += createCard(
+                "🏛️ 科舉博物館",
+                "⭐⭐⭐⭐",
+                "🚶 中",
+                "約1.5小時",
+                "深入了解南京科舉文化。",
+                "南京中國科舉博物館"
+            );
+
+        }
+
+        else {
+
+            html += createCard(
+                "🌳 玄武湖",
+                "⭐⭐⭐⭐⭐",
+                "🚶 中",
+                "約2小時",
+                "天氣舒適時可安排湖畔慢遊。",
+                "玄武湖公園"
+            );
+
+        }
+
+    }
+
+
+    cards.innerHTML = html;
+
+}
+
+
+function createCard(
+    name,
+    rating,
+    walk,
+    time,
+    description,
+    mapKeyword
+) {
+
+    const mapUrl =
+        "https://uri.amap.com/search?keyword="
+        +
+        encodeURIComponent(mapKeyword)
+        +
+        "&city=南京&view=map&src=nanjing-slow-travel&callnative=1";
+
+
+    return `
+
+        <article class="card">
+
+            <h3>${name}</h3>
+
+            <div class="tags">
+
+                <span class="tag">
+                    ⭐ ${rating}
+                </span>
+
+                <span class="tag">
+                    ${walk}
+                </span>
+
+                <span class="tag">
+                    ⏱️ ${time}
+                </span>
+
+            </div>
+
+            <p>
+                ${description}
+            </p>
+
+            <a
+                class="map-button"
+                href="${mapUrl}"
+                target="_blank">
+
+                📍 高德地圖導航
+
+            </a>
+
+        </article>
+
+    `;
+
+}
+
+</script>
+
+
+</body>
+
+</html>
