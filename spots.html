@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>南京景點導遊｜南京六日慢遊</title>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        sans-serif;
+
+    background: #f7f3ec;
+
+    color: #3b352f;
+
+    line-height: 1.75;
+}
+
+
+/* 頂部 */
+
+.header {
+
+    background:
+        linear-gradient(
+            rgba(91, 62, 48, 0.88),
+            rgba(91, 62, 48, 0.88)
+        ),
+        linear-gradient(
+            135deg,
+            #d8c5a9,
+            #9e8068
+        );
+
+    color: white;
+
+    padding: 36px 20px 34px;
+
+    text-align: center;
+}
+
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 32px;
+
+    letter-spacing: 2px;
+}
+
+
+.header p {
+
+    margin: 8px 0 0;
+
+    font-size: 17px;
+
+    opacity: 0.95;
+}
+
+
+/* 主內容 */
+
+.container {
+
+    width: min(
+        720px,
+        calc(100% - 30px)
+    );
+
+    margin: auto;
+}
+
+
+/* 景點導航 */
+
+.spot-nav {
+
+    background: white;
+
+    padding: 14px;
+
+    margin: 18px 0;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 3px 12px rgba(70,50,35,0.07);
+}
+
+
+.spot-nav a {
+
+    display: inline-block;
+
+    padding: 9px 13px;
+
+    margin: 4px;
+
+    border-radius: 20px;
+
+    background: #eee6dc;
+
+    color: #60483b;
+
+    font-size: 16px;
+}
+
+
+/* 景點 */
+
+.spot {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 23px;
+
+    margin: 20px 0 30px;
+
+    box-shadow:
+        0 4px 18px rgba(70,50,35,0.08);
+}
+
+
+.spot-title {
+
+    margin: 0;
+
+    font-size: 27px;
+
+    color: #573c31;
+}
+
+
+.subtitle {
+
+    font-size: 17px;
+
+    color: #867568;
+
+    margin-top: 3px;
+}
+
+
+/* 評分 */
+
+.tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin: 17px 0;
+}
+
+
+.tag {
+
+    background: #f1e9df;
+
+    border-radius: 12px;
+
+    padding: 7px 11px;
+
+    font-size: 15px;
+}
+
+
+/* 小標題 */
+
+.info-title {
+
+    margin-top: 24px;
+
+    margin-bottom: 7px;
+
+    font-size: 21px;
+
+    color: #65483a;
+}
+
+
+/* 一般文字 */
+
+.spot p {
+
+    font-size: 17px;
+
+    margin: 7px 0;
+}
+
+
+/* 必看 */
+
+.must-see {
+
+    background: #fff9ef;
+
+    border-radius: 14px;
+
+    padding: 15px;
+
+    margin-top: 10px;
+}
+
+
+.must-see div {
+
+    padding: 6px 0;
+
+    font-size: 17px;
+
+    border-bottom: 1px solid #eadfd1;
+}
+
+
+.must-see div:last-child {
+
+    border-bottom: none;
+}
+
+
+/* 60+ 建議 */
+
+.senior {
+
+    background: #edf3ee;
+
+    border-left: 5px solid #6e9072;
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    margin-top: 12px;
+}
+
+
+/* 注意 */
+
+.warning {
+
+    background: #fff3df;
+
+    border-left: 5px solid #c6944e;
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    margin-top: 12px;
+}
+
+
+/* 導航按鈕 */
+
+.map-button {
+
+    display: block;
+
+    width: 100%;
+
+    text-align: center;
+
+    padding: 15px;
+
+    margin-top: 20px;
+
+    border-radius: 14px;
+
+    background: #785044;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+
+/* 回首頁 */
+
+.home-button {
+
+    display: block;
+
+    text-align: center;
+
+    padding: 14px;
+
+    margin: 30px 0;
+
+    border-radius: 14px;
+
+    background: #e7ddd2;
+
+    color: #60483b;
+
+    font-size: 17px;
+}
+
+
+/* 底部 */
+
+.footer {
+
+    text-align: center;
+
+    padding: 30px 20px 80px;
+
+    color: #81756b;
+
+    font-size: 14px;
+}
+
+
+/* 手機底部選單 */
+
+.bottom-nav {
+
+    position: fixed;
+
+    bottom: 0;
+
+    left: 0;
+
+    right: 0;
+
+    z-index: 50;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    background: rgba(255,255,255,0.97);
+
+    border-top: 1px solid #ddd4ca;
+
+    padding:
+        8px
+        3px
+        calc(8px + env(safe-area-inset-bottom));
+}
+
+
+.bottom-nav a {
+
+    text-align: center;
+
+    font-size: 13px;
+
+    color: #675b52;
+}
+
+
+.bottom-nav strong {
+
+    display: block;
+
+    font-size: 21px;
+}
+
+
+@media (min-width: 700px) {
+
+    .bottom-nav {
+        display: none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- 頂部 -->
+
+<header class="header">
+
+    <h1>📍 南京景點導遊</h1>
+
+    <p>
+        南京六日慢遊｜7人｜60+友善指南
+    </p>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- 景點快速選擇 -->
+
+<div class="spot-nav">
+
+    <a href="#museum">🏛️ 南京博物院</a>
+
+    <a href="#mingxiaoling">🌳 明孝陵</a>
+
+    <a href="#president">🏛️ 總統府</a>
+
+</div>
+
+
+
+<!-- ================================= -->
+<!-- 南京博物院 -->
+<!-- ================================= -->
+
+<section class="spot" id="museum">
+
+
+    <h2 class="spot-title">
+        🏛️ 南京博物院
+    </h2>
+
+    <div class="subtitle">
+        中國重要綜合性博物館
+    </div>
+
+
+    <div class="tags">
+
+        <div class="tag">
+            ⭐ 推薦度：★★★★★
+        </div>
+
+        <div class="tag">
+            👴 60+：★★★★★
+        </div>
+
+        <div class="tag">
+            🚶 步行：★★☆☆☆
+        </div>
+
+        <div class="tag">
+            ⏱️ 約3小時
+        </div>
+
+    </div>
+
+
+    <h3 class="info-title">
+        📖 歷史背景
+    </h3>
+
+    <p>
+        南京博物院是中國重要的綜合性博物館之一，
+        館藏涵蓋歷史、藝術、考古及近現代文化。
+    </p>
+
+    <p>
+        對第一次到南京的旅客而言，
+        這裡非常適合作為了解南京及中國歷史文化的第一站。
+    </p>
+
+
+    <h3 class="info-title">
+        👀 今次旅行建議重點
+    </h3>
+
+    <div class="must-see">
+
+        <div>① 歷史館：了解中國古代文明</div>
+
+        <div>② 特展館：視乎當期展覽安排</div>
+
+        <div>③ 民國館：還原民國時期南京街景</div>
+
+        <div>④ 館內選擇休息，避免一次走遍所有展館</div>
+
+    </div>
+
+
+    <h3 class="info-title">
+        👥 7人團特別安排
+    </h3>
+
+    <div class="senior">
+
+        <p>
+            <strong>導覽組：</strong>
+            部分團友參加預約的3小時小團講解。
+        </p>
+
+        <p>
+            <strong>自由組：</strong>
+            其他團友自行選擇展館，
+            可以按體力隨時休息。
+        </p>
+
+        <p>
+            💡 建議兩組事先約定清楚集合時間及位置。
+        </p>
+
+    </div>
+
+
+    <h3 class="info-title">
+        🚶 60+遊覽建議
+    </h3>
+
+    <p>
+        南京博物院最大的優點是室內為主，
+        遇上天氣較冷或下雨尤其適合。
+    </p>
+
+    <p>
+        不建議為了「全部睇晒」而連續步行三小時。
+        可以選擇重點展館，中間安排坐低休息。
+    </p>
+
+
+    <h3 class="info-title">
+        🚕 交通
+    </h3>
+
+    <p>
+        🏨 酒店：
+        南京夫子廟秦淮遊船碼頭亞朵酒店
+    </p>
+
+    <p>
+        📍 秦淮區大石壩街35號
+    </p>
+
+    <p>
+        🚕 建議：直接打車前往。
+    </p>
+
+
+    <a
+        class="map-button"
+        href="https://uri.amap.com/search?keyword=南京博物院&city=南京&view=map&src=nanjing-slow-travel&callnative=1"
+        target="_blank">
+
+        📍 打開高德地圖・南京博物院
+
+    </a>
+
+
+    <div class="warning">
+
+        🎫 <strong>預約提醒</strong><br>
+
+        南京博物院免費參觀，
+        但需要按照當期官方規則提前預約。
+
+        <br><br>
+
+        出發前請再次確認官方最新預約安排。
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================================= -->
+<!-- 明孝陵 -->
+<!-- ================================= -->
+
+<section class="spot" id="mingxiaoling">
+
+
+    <h2 class="spot-title">
+        🌳 明孝陵
+    </h2>
+
+    <div class="subtitle">
+        世界文化遺產・南京秋色代表
+    </div>
+
+
+    <div class="tags">
+
+        <div class="tag">
+            ⭐ 推薦度：★★★★★
+        </div>
+
+        <div class="tag">
+            👴 60+：★★★★☆
+        </div>
+
+        <div class="tag">
+            🚶 步行：★★★☆☆
+        </div>
+
+        <div class="tag">
+            ⏱️ 約2–2.5小時
+        </div>
+
+    </div>
+
+
+    <h3 class="info-title">
+        📖 歷史背景
+    </h3>
+
+    <p>
+        明孝陵是明太祖朱元璋與馬皇后的陵墓，
+        位於南京鐘山南麓。
+    </p>
+
+    <p>
+        其神道、石刻及陵寢格局，
+        對後世明清帝陵制度具有重要影響。
+    </p>
+
+
+    <h3 class="info-title">
+        👀 今次旅行必看
+    </h3>
+
+
+    <div class="must-see">
+
+        <div>① 大金門</div>
+
+        <div>② 四方城</div>
+
+        <div>③ 石象路神道</div>
+
+        <div>④ 翁仲路神道</div>
+
+        <div>⑤ 欞星門</div>
+
+        <div>⑥ 金水橋</div>
+
+        <div>⑦ 方城・明樓</div>
+
+    </div>
+
+
+    <h3 class="info-title">
+        🍂 11月遊覽重點
+    </h3>
+
+    <p>
+        11月初是南京秋色非常值得期待的時期，
+        石象路一帶的秋季景觀尤其適合慢慢欣賞。
+    </p>
+
+    <p>
+        不過實際紅葉、銀杏最佳狀態會受當年天氣影響，
+        不宜把「滿地金黃」視為固定保證。
+    </p>
+
+
+    <h3 class="info-title">
+        👴 60+遊覽建議
+    </h3>
+
+    <div class="senior">
+
+        <p>
+            <strong>最重要：</strong>
+            不需要追求行完整個景區。
+        </p>
+
+        <p>
+            建議以神道及核心陵寢區為主，
+            配合景區交通及中途休息。
+        </p>
+
+        <p>
+            如果當日團友腳力一般，
+            下午不宜再安排大量步行景點。
+        </p>
+
+    </div>
+
+
+    <h3 class="info-title">
+        🚶 步行難度
+    </h3>
+
+    <p>
+        ★★★☆☆ 中等
+    </p>
+
+    <p>
+        景區範圍較大，部分路段需要步行。
+        對60+團友而言，最重要是控制節奏，
+        而不是追求景點數量。
+    </p>
+
+
+    <h3 class="info-title">
+        🚕 交通
+    </h3>
+
+    <p>
+        🏨 從夫子廟酒店出發，
+        建議直接打車前往。
+    </p>
+
+    <p>
+        亦可按當日情況使用地鐵及景區接駁交通。
+    </p>
+
+
+    <a
+        class="map-button"
+        href="https://uri.amap.com/search?keyword=明孝陵&city=南京&view=map&src=nanjing-slow-travel&callnative=1"
+        target="_blank">
+
+        📍 打開高德地圖・明孝陵
+
+    </a>
+
+
+    <div class="warning">
+
+        🎫 <strong>開放時間提醒</strong><br>
+
+        開放時間及售票安排可能按季節或景區政策調整，
+        出發前應再次確認官方最新資料。
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================================= -->
+<!-- 總統府 -->
+<!-- ================================= -->
+
+<section class="spot" id="president">
+
+
+    <h2 class="spot-title">
+        🏛️ 總統府
+    </h2>
+
+    <div class="subtitle">
+        中國近代史的重要歷史場所
+    </div>
+
+
+    <div class="tags">
+
+        <div class="tag">
+            ⭐ 推薦度：★★★★★
+        </div>
+
+        <div class="tag">
+            👴 60+：★★★★★
+        </div>
+
+        <div class="tag">
+            🚶 步行：★★★☆☆
+        </div>
+
+        <div class="tag">
+            ⏱️ 約2–2.5小時
+        </div>
+
+    </div>
+
+
+    <h3 class="info-title">
+        📖 歷史背景
+    </h3>
+
+    <p>
+        南京總統府是中國近代史的重要歷史遺址。
+        太平天國、兩江總督署以及近代南京的政治歷史，
+        都與這片區域有密切關係。
+    </p>
+
+    <p>
+        1912年孫中山在南京就任臨時大總統，
+        使這裡成為近代中國歷史的重要象徵。
+    </p>
+
+
+    <h3 class="info-title">
+        👀 今次旅行必看
+    </h3>
+
+
+    <div class="must-see">
+
+        <div>① 孫中山臨時大總統辦公室</div>
+
+        <div>② 西花園・煦園</div>
+
+        <div>③ 太平天國天王府遺址</div>
+
+        <div>④ 民國時期歷史建築</div>
+
+    </div>
+
+
+    <h3 class="info-title">
+        👴 60+遊覽建議
+    </h3>
+
+    <div class="senior">
+
+        <p>
+            總統府與明孝陵相比，
+            屬於「歷史內容較多、自然景觀較少」的景點。
+        </p>
+
+        <p>
+            建議跟住主線參觀，
+            不需要每一間展室都仔細閱讀。
+        </p>
+
+        <p>
+            如果團友對民國歷史有興趣，
+            這個景點的價值會非常高。
+        </p>
+
+    </div>
+
+
+    <h3 class="info-title">
+        🚶 步行難度
+    </h3>
+
+    <p>
+        ★★★☆☆ 中等
+    </p>
+
+    <p>
+        景區內有庭院、展館及不同歷史建築，
+        需要一定程度步行。
+    </p>
+
+
+    <h3 class="info-title">
+        🚕 交通
+    </h3>
+
+    <p>
+        🏨 從夫子廟酒店出發，
+        建議直接打車。
+    </p>
+
+    <p>
+        市區交通一般方便，
+        但早上出發仍建議預留交通時間。
+    </p>
+
+
+    <a
+        class="map-button"
+        href="https://uri.amap.com/search?keyword=南京總統府&city=南京&view=map&src=nanjing-slow-travel&callnative=1"
+        target="_blank">
+
+        📍 打開高德地圖・總統府
+
+    </a>
+
+
+    <div class="warning">
+
+        🎫 <strong>預約提醒</strong><br>
+
+        總統府開放時間、門票及優惠政策可能調整，
+        出發前請再次確認官方最新資料。
+    </div>
+
+
+</section>
+
+
+
+<!-- 返回首頁 -->
+
+<a
+    class="home-button"
+    href="index.html">
+
+    🏠 返回南京六日慢遊首頁
+
+</a>
+
+
+</main>
+
+
+<footer class="footer">
+
+    南京六日慢遊｜2026.11.02–11.07
+
+    <br>
+
+    7人｜60+輕鬆深度遊
+
+</footer>
+
+
+
+<!-- 手機底部選單 -->
+
+<nav class="bottom-nav">
+
+    <a href="index.html">
+
+        <strong>🏠</strong>
+
+        首頁
+
+    </a>
+
+
+    <a href="#museum">
+
+        <strong>🏛️</strong>
+
+        南博
+
+    </a>
+
+
+    <a href="#mingxiaoling">
+
+        <strong>🌳</strong>
+
+        明孝陵
+
+    </a>
+
+
+    <a href="#president">
+
+        <strong>🏛️</strong>
+
+        總統府
+
+    </a>
+
+</nav>
+
+
+</body>
+
+</html>
