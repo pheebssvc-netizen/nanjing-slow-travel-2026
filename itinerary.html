@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>今日行程｜南京六日慢遊</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f6f2ec;
+    color: #403c37;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        sans-serif;
+    line-height: 1.7;
+}
+
+header {
+    background:
+        linear-gradient(
+            135deg,
+            #657b6d,
+            #879889
+        );
+    color: white;
+    padding: 30px 18px 28px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+header p {
+    margin: 7px 0 0;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+    padding: 18px 15px 50px;
+}
+
+
+/* 今日日期 */
+
+.today-box {
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.06);
+}
+
+.today-date {
+    font-size: 14px;
+    color: #777;
+}
+
+.today-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+.hotel {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #6c665f;
+}
+
+
+/* Day 選擇 */
+
+.day-selector {
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+.day-btn {
+    flex: 0 0 auto;
+    border: 1px solid #d8d0c6;
+    background: white;
+    color: #514b45;
+    border-radius: 12px;
+    padding: 9px 13px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.day-btn.active {
+    background: #657b6d;
+    color: white;
+    border-color: #657b6d;
+}
+
+
+/* 行程 */
+
+.day-heading {
+    font-size: 23px;
+    font-weight: bold;
+    margin: 10px 0 4px;
+}
+
+.day-theme {
+    color: #827a72;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+
+/* 時間線 */
+
+.timeline {
+    position: relative;
+    margin-left: 8px;
+    padding-left: 24px;
+    border-left: 2px solid #c9d0c9;
+}
+
+.event {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    padding: 15px 16px;
+    margin-bottom: 15px;
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.05);
+}
+
+.event::before {
+    content: "";
+    position: absolute;
+    left: -32px;
+    top: 20px;
+    width: 13px;
+    height: 13px;
+    background: #657b6d;
+    border: 3px solid #f6f2ec;
+    border-radius: 50%;
+}
+
+.time {
+    font-size: 13px;
+    color: #657b6d;
+    font-weight: bold;
+}
+
+.event-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 3px 0;
+}
+
+.event-note {
+    font-size: 14px;
+    color: #706961;
+}
+
+
+/* 上午核心 */
+
+.core {
+    border-left: 5px solid #657b6d;
+}
+
+
+/* 下午 */
+
+.afternoon {
+    border-left: 5px solid #b89a68;
+}
+
+.afternoon-label {
+    display: inline-block;
+    background: #f0e7d6;
+    color: #826a43;
+    padding: 3px 9px;
+    border-radius: 15px;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+
+/* 按鈕 */
+
+.buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.buttons a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 6px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.map-btn {
+    background: #657b6d;
+    color: white;
+}
+
+.spot-btn {
+    background: #eee8df;
+    color: #514b45;
+}
+
+
+/* 提醒 */
+
+.reminder {
+    background: #eee9df;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #686159;
+}
+
+
+/* 返回 */
+
+.back {
+    display: block;
+    text-align: center;
+    margin-top: 28px;
+    color: #657b6d;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+
+@media (max-width:600px) {
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .today-title {
+        font-size: 21px;
+    }
+
+    .day-heading {
+        font-size: 21px;
+    }
+
+    .event-title {
+        font-size: 17px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>📅 南京六日慢遊</h1>
+
+<p>今日行程 · 電子導遊</p>
+
+</header>
+
+
+<div class="container">
+
+
+<div class="today-box">
+
+<div class="today-date" id="todayDate">
+</div>
+
+<div class="today-title" id="todayTitle">
+</div>
+
+<div class="hotel">
+🏨 南京夫子廟秦淮遊船碼頭亞朵酒店
+</div>
+
+</div>
+
+
+<div class="day-selector" id="daySelector">
+</div>
+
+
+<div id="itinerary"></div>
+
+
+<div class="reminder">
+
+💡 <strong>慢遊原則</strong><br>
+
+上午以核心行程為主；下午不需要「完成任務」。
+大家可以按當日體力、天氣及興趣，
+決定休息、散步、參觀或者自由活動。
+
+</div>
+
+
+<a href="index.html" class="back">
+← 返回南京六日慢遊首頁
+</a>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================
+   六日行程資料
+===================================== */
+
+const days = [
+
+{
+
+day: 1,
+
+date: "2026-11-02",
+
+weekday: "星期一",
+
+title: "抵達金陵 · 夜泊秦淮",
+
+events: [
+
+{
+time: "10:25",
+title: "香港國際機場 T1",
+note: "國泰航空 CX356 起飛。"
+},
+
+{
+time: "13:00",
+title: "抵達南京祿口國際機場 T2",
+note: "抵達後前往酒店。"
+},
+
+{
+time: "13:30–14:30",
+title: "前往酒店",
+note: "打車約40–50分鐘。"
+},
+
+{
+time: "14:30–15:30",
+title: "入住酒店",
+note: "南京夫子廟秦淮遊船碼頭亞朵酒店。"
+},
+
+{
+time: "15:30–17:30",
+title: "酒店休息 · 熟悉周邊",
+note: "長途飛行後建議充分休息。"
+},
+
+{
+time: "17:30–18:30",
+title: "晚餐：天圓樓·老南京菜",
+note: "酒店附近，大石壩街75號。"
+},
+
+{
+time: "18:30–20:30",
+title: "夫子廟 · 烏衣巷 · 江南貢院",
+note: "晚上沿秦淮河慢步，感受金陵夜色。"
+}
+
+]
+
+},
+
+
+{
+
+day: 2,
+
+date: "2026-11-03",
+
+weekday: "星期二",
+
+title: "南京博物院 · 深入認識金陵",
+
+events: [
+
+{
+time: "08:00–08:30",
+title: "酒店早餐",
+note: "早餐後準備出發。"
+},
+
+{
+time: "08:30–09:00",
+title: "前往南京博物院",
+note: "打車約15分鐘。"
+},
+
+{
+time: "09:00–12:00",
+title: "南京博物院",
+note: "今日上午核心行程。部分團友參加導遊講解，其他團友自由參觀。",
+core: true,
+spot: true
+},
+
+{
+time: "12:00–13:30",
+title: "午餐",
+note: "可選南博附近餐廳，或返回夫子廟。"
+},
+
+{
+time: "13:30–15:30",
+title: "返回酒店休息",
+note: "建議安排午休，避免下午過度疲勞。",
+afternoon: true
+},
+
+{
+time: "15:30–17:00",
+title: "下午彈性時間",
+note: "可選景點、夫子廟自由活動，或留在酒店休息。",
+afternoon: true
+},
+
+{
+time: "18:00",
+title: "晚餐",
+note: "夫子廟附近自理。"
+}
+
+]
+
+},
+
+
+{
+
+day: 3,
+
+date: "2026-11-04",
+
+weekday: "星期三",
+
+title: "明孝陵 · 南京秋色",
+
+events: [
+
+{
+time: "07:30–08:00",
+title: "酒店早餐",
+note: ""
+},
+
+{
+time: "08:00–08:30",
+title: "前往明孝陵",
+note: "打車約30分鐘。"
+},
+
+{
+time: "08:30–11:00",
+title: "明孝陵",
+note: "石象路、翁仲路神道、方城明樓。上午核心行程。",
+core: true,
+spot: true
+},
+
+{
+time: "11:00–11:30",
+title: "景區觀光車",
+note: "建議乘車下山，減少步行。"
+},
+
+{
+time: "11:30–13:00",
+title: "午餐",
+note: "可選中山陵商業街或新街口。"
+},
+
+{
+time: "13:30–16:00",
+title: "下午彈性安排",
+note: "A：返回酒店午休；B：德基藝術博物館。",
+afternoon: true
+},
+
+{
+time: "16:00–17:00",
+title: "新街口自由活動",
+note: "按大家體力決定是否逛街。",
+afternoon: true
+},
+
+{
+time: "18:00",
+title: "晚餐",
+note: "可選茶湯火鍋或返回夫子廟。"
+}
+
+]
+
+},
+
+
+{
+
+day: 4,
+
+date: "2026-11-05",
+
+weekday: "星期四",
+
+title: "總統府 · 科舉文化 · 夜遊秦淮",
+
+events: [
+
+{
+time: "08:00–08:30",
+title: "酒店早餐",
+note: ""
+},
+
+{
+time: "08:30–09:00",
+title: "前往總統府",
+note: "打車約10分鐘。"
+},
+
+{
+time: "09:00–11:30",
+title: "總統府",
+note: "今日上午核心行程。",
+core: true,
+spot: true
+},
+
+{
+time: "11:30–13:00",
+title: "午餐",
+note: "1912街區或返回夫子廟。"
+},
+
+{
+time: "13:00–14:30",
+title: "返回酒店午休",
+note: "建議休息。",
+afternoon: true
+},
+
+{
+time: "14:30–16:00",
+title: "科舉博物館",
+note: "全地下室內，非常適合午後參觀。",
+afternoon: true,
+spot: true
+},
+
+{
+time: "16:15–17:00",
+title: "李香君故居",
+note: "媚香樓，參觀約30分鐘。",
+afternoon: true,
+spot: true
+},
+
+{
+time: "17:30–18:30",
+title: "晚餐",
+note: "夫子廟附近。"
+},
+
+{
+time: "19:00–20:00",
+title: "夜遊秦淮河",
+note: "乘坐畫舫，欣賞秦淮夜景。"
+}
+
+]
+
+},
+
+
+{
+
+day: 5,
+
+date: "2026-11-06",
+
+weekday: "星期五",
+
+title: "彈性探索日",
+
+events: [
+
+{
+time: "08:00–08:30",
+title: "酒店早餐",
+note: ""
+},
+
+{
+time: "08:30–09:00",
+title: "包車接駁",
+note: "如選高淳方案，建議提前預訂包車。"
+},
+
+{
+time: "09:00–10:15",
+title: "前往高淳",
+note: "車程約1–1.5小時。"
+},
+
+{
+time: "10:15–12:30",
+title: "高淳老街",
+note: "900餘年歷史古街。",
+core: true,
+spot: true
+},
+
+{
+time: "12:30–13:30",
+title: "午餐",
+note: "可品嚐固城湖螃蟹。"
+},
+
+{
+time: "13:30–14:00",
+title: "前往漆橋古村",
+note: "車程約25分鐘。"
+},
+
+{
+time: "14:00–15:30",
+title: "漆橋古村",
+note: "江南孔子第一村。",
+core: true,
+spot: true
+},
+
+{
+time: "15:30–17:00",
+title: "返回南京",
+note: "如選市區方案，則按體力自由安排。",
+afternoon: true
+}
+
+]
+
+},
+
+
+{
+
+day: 6,
+
+date: "2026-11-07",
+
+weekday: "星期六",
+
+title: "從容告別金陵",
+
+events: [
+
+{
+time: "08:00–09:00",
+title: "酒店早餐",
+note: "悠閒享受最後一個早晨。"
+},
+
+{
+time: "09:00–10:30",
+title: "老門東／三七八巷",
+note: "購買伴手禮、感受老南京生活。",
+core: true
+},
+
+{
+time: "10:30–11:30",
+title: "返回酒店",
+note: "收拾行李、退房。"
+},
+
+{
+time: "11:30–12:00",
+title: "簡單午餐",
+note: "酒店附近。"
+},
+
+{
+time: "12:00–13:00",
+title: "前往南京祿口機場",
+note: "車程約50分鐘。"
+},
+
+{
+time: "14:15",
+title: "國泰航空 CX357 起飛",
+note: "南京 → 香港。"
+},
+
+{
+time: "17:10",
+title: "抵達香港國際機場 T1",
+note: "旅程圓滿結束。"
+}
+
+]
+
+}
+
+];
+
+
+/* =====================================
+   日期判斷
+===================================== */
+
+function getTodayDay() {
+
+    const now = new Date();
+
+    const current =
+        new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate()
+        );
+
+    const start =
+        new Date(2026, 10, 2);
+
+    const end =
+        new Date(2026, 10, 7);
+
+
+    /* 旅行開始前 → Day 1 */
+
+    if (current < start) {
+        return 1;
+    }
+
+
+    /* 旅行結束後 → Day 6 */
+
+    if (current > end) {
+        return 6;
+    }
+
+
+    /* 旅行期間 */
+
+    for (let i = 0; i < days.length; i++) {
+
+        const d =
+            new Date(days[i].date);
+
+        if (
+            current.getTime() === d.getTime()
+        ) {
+            return days[i].day;
+        }
+
+    }
+
+    return 1;
+}
+
+
+/* =====================================
+   顯示 Day 按鈕
+===================================== */
+
+function renderDayButtons(selectedDay) {
+
+    const box =
+        document.getElementById("daySelector");
+
+    box.innerHTML = "";
+
+    days.forEach(day => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "day-btn";
+
+        if (day.day === selectedDay) {
+            button.classList.add("active");
+        }
+
+        button.textContent =
+            "Day " + day.day;
+
+        button.onclick = function() {
+
+            renderDay(day.day);
+
+        };
+
+        box.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================
+   顯示行程
+===================================== */
+
+function renderDay(dayNumber) {
+
+    const day =
+        days.find(
+            d => d.day === dayNumber
+        );
+
+    if (!day) return;
+
+
+    renderDayButtons(dayNumber);
+
+
+    document.getElementById("todayDate")
+        .textContent =
+        day.date.replaceAll("-", "/")
+        + " · "
+        + day.weekday;
+
+
+    document.getElementById("todayTitle")
+        .textContent =
+        "Day "
+        + day.day
+        + " · "
+        + day.title;
+
+
+    const container =
+        document.getElementById("itinerary");
+
+    container.innerHTML = "";
+
+
+    const heading =
+        document.createElement("div");
+
+    heading.className = "day-heading";
+
+    heading.textContent =
+        "Day "
+        + day.day
+        + "｜"
+        + day.title;
+
+
+    const theme =
+        document.createElement("div");
+
+    theme.className = "day-theme";
+
+    theme.textContent =
+        day.date
+        + "　"
+        + day.weekday;
+
+
+    const timeline =
+        document.createElement("div");
+
+    timeline.className = "timeline";
+
+
+    day.events.forEach(event => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "event";
+
+
+        if (event.core) {
+            card.classList.add("core");
+        }
+
+        if (event.afternoon) {
+            card.classList.add("afternoon");
+        }
+
+
+        let html = "";
+
+
+        if (event.afternoon) {
+
+            html +=
+            `<div class="afternoon-label">
+                🌿 下午彈性
+            </div>`;
+
+        }
+
+
+        html +=
+        `<div class="time">
+            ${event.time}
+        </div>`;
+
+
+        html +=
+        `<div class="event-title">
+            ${event.title}
+        </div>`;
+
+
+        if (event.note) {
+
+            html +=
+            `<div class="event-note">
+                ${event.note}
+            </div>`;
+
+        }
+
+
+        if (event.spot) {
+
+            html +=
+            `<div class="buttons">
+
+                <a
+                    class="spot-btn"
+                    href="spots.html">
+                    📖 導遊資料
+                </a>
+
+                <a
+                    class="map-btn"
+                    target="_blank"
+                    href="https://uri.amap.com/search?keyword=${encodeURIComponent(event.title)}">
+                    🗺️ 高德導航
+                </a>
+
+            </div>`;
+
+        }
+
+
+        card.innerHTML = html;
+
+        timeline.appendChild(card);
+
+    });
+
+
+    container.appendChild(heading);
+
+    container.appendChild(theme);
+
+    container.appendChild(timeline);
+
+}
+
+
+/* =====================================
+   啟動
+===================================== */
+
+const todayDay =
+    getTodayDay();
+
+renderDay(todayDay);
+
+</script>
+
+
+</body>
+
+</html>
