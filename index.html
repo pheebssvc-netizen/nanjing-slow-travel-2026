@@ -7,875 +7,402 @@
 <title>南京六日慢遊｜2026</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-.detail-button {
-
-    display: inline-block;
-
-    margin-top: 10px;
-
-    padding: 10px 15px;
-
-    border-radius: 12px;
-
-    background: #785044;
-
-    color: white;
-
-    text-decoration: none;
-
-    font-size: 15px;
-
-    font-weight: bold;
-}
-body {
-    margin: 0;
+body{
+    margin:0;
     font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Noto Sans TC",
-        "Microsoft JhengHei",
-        sans-serif;
-
-    background: #f7f3ec;
-    color: #3b352f;
-    line-height: 1.7;
+    -apple-system,
+    BlinkMacSystemFont,
+    "Noto Sans TC",
+    "Microsoft JhengHei",
+    sans-serif;
+    background:#f7f4ee;
+    color:#333;
+    line-height:1.7;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+header{
+    background:linear-gradient(
+        rgba(65,60,52,.65),
+        rgba(65,60,52,.65)
+    ),
+    url("images/nanjing.jpg");
+    background-size:cover;
+    background-position:center;
+    color:white;
+    padding:70px 20px 60px;
+    text-align:center;
 }
 
-.header {
-    background:
-        linear-gradient(
-            rgba(92, 61, 48, 0.82),
-            rgba(92, 61, 48, 0.82)
-        ),
-        linear-gradient(135deg, #d8c5a9, #9e8068);
-
-    color: white;
-    padding: 48px 22px 42px;
-    text-align: center;
+header h1{
+    font-size:34px;
+    margin:0 0 10px;
+    letter-spacing:2px;
 }
 
-.header .small {
-    font-size: 17px;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
+header p{
+    font-size:17px;
+    margin:5px 0;
 }
 
-.header h1 {
-    margin: 0;
-    font-size: 34px;
-    letter-spacing: 2px;
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
 }
 
-.header .date {
-    margin-top: 12px;
-    font-size: 19px;
+.intro{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    margin-top:-25px;
+    position:relative;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 
-.header .group {
-    margin-top: 8px;
-    font-size: 18px;
+.intro h2{
+    margin-top:0;
+    font-size:24px;
 }
 
-.container {
-    width: min(720px, calc(100% - 32px));
-    margin: auto;
+.hotel{
+    background:#f1eee6;
+    border-radius:12px;
+    padding:15px;
+    margin-top:15px;
 }
 
-.section-title {
-    font-size: 26px;
-    margin: 34px 0 16px;
-    color: #5b3c30;
+.hotel strong{
+    font-size:17px;
 }
 
-.section-title span {
-    font-size: 18px;
-    color: #8c796b;
-    font-weight: normal;
+.section-title{
+    font-size:25px;
+    margin:35px 0 15px;
 }
 
-.card {
-    background: white;
-    border-radius: 18px;
-    padding: 22px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 18px rgba(70, 50, 35, 0.08);
+.day-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
 }
 
-.card h3 {
-    margin: 0 0 8px;
-    font-size: 23px;
-    color: #55372d;
+.day-card{
+    background:white;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.06);
+    text-decoration:none;
+    color:#333;
+    transition:.2s;
 }
 
-.card p {
-    margin: 7px 0;
-    font-size: 18px;
+.day-card:hover{
+    transform:translateY(-3px);
 }
 
-.day-card {
-    border-left: 6px solid #9b6b52;
+.day{
+    font-size:14px;
+    color:#8a7358;
+    font-weight:bold;
 }
 
-.day-number {
-    font-size: 16px;
-    color: #8d705e;
-    font-weight: bold;
+.day-card h3{
+    margin:6px 0;
+    font-size:20px;
 }
 
-.core {
-    background: #fffaf2;
+.day-card p{
+    margin:5px 0 0;
+    color:#666;
+    font-size:15px;
 }
 
-.core-badge {
-    display: inline-block;
-    background: #8c5144;
-    color: white;
-    padding: 5px 11px;
-    border-radius: 20px;
-    font-size: 15px;
-    margin-bottom: 8px;
+.core{
+    margin-top:12px;
+    padding:8px 10px;
+    background:#edf2e8;
+    border-radius:8px;
+    font-size:14px;
 }
 
-.choice {
-    padding: 20px;
-    border-radius: 17px;
-    margin-bottom: 14px;
-    background: white;
-    box-shadow: 0 3px 12px rgba(70, 50, 35, 0.07);
+.flex{
+    margin-top:8px;
+    padding:8px 10px;
+    background:#f7eee4;
+    border-radius:8px;
+    font-size:14px;
 }
 
-.choice h3 {
-    margin: 0 0 8px;
-    font-size: 22px;
+.menu{
+    margin-top:30px;
+    display:grid;
+    gap:12px;
 }
 
-.choice p {
-    font-size: 18px;
-    margin: 5px 0;
+.menu a{
+    display:block;
+    background:#5e6b58;
+    color:white;
+    text-decoration:none;
+    padding:16px;
+    border-radius:12px;
+    font-size:18px;
+    text-align:center;
 }
 
-.green {
-    border-left: 7px solid #6d9b72;
+.menu a.secondary{
+    background:#8b7861;
 }
 
-.yellow {
-    border-left: 7px solid #d2a34d;
+.note{
+    margin-top:30px;
+    background:#fff;
+    border-left:5px solid #8b7861;
+    padding:18px;
+    border-radius:10px;
 }
 
-.blue {
-    border-left: 7px solid #7193a5;
+footer{
+    text-align:center;
+    color:#888;
+    font-size:13px;
+    padding:35px 15px;
 }
 
-.poi-card {
-    background: white;
-    border-radius: 18px;
-    padding: 21px;
-    margin-bottom: 15px;
-    box-shadow: 0 3px 14px rgba(70, 50, 35, 0.07);
-}
+@media(max-width:600px){
 
-.poi-card h3 {
-    font-size: 24px;
-    margin: 0 0 7px;
-}
-
-.poi-card p {
-    font-size: 17px;
-    margin: 6px 0;
-}
-
-.rating {
-    font-size: 17px;
-    color: #806b5b;
-}
-
-.button {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 14px 12px;
-    margin-top: 14px;
-    border-radius: 13px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.primary {
-    background: #815044;
-    color: white;
-}
-
-.map {
-    background: #e8eee8;
-    color: #385d42;
-}
-
-.info {
-    background: #f0ebe3;
-}
-
-.hotel {
-    background: #eee4d9;
-}
-
-.footer {
-    text-align: center;
-    padding: 40px 20px 70px;
-    color: #82766b;
-    font-size: 15px;
-}
-
-nav {
-    position: sticky;
-    bottom: 0;
-    z-index: 20;
-    background: rgba(255,255,255,0.96);
-    border-top: 1px solid #ddd4c9;
-    display: flex;
-    justify-content: space-around;
-    padding: 8px 3px calc(8px + env(safe-area-inset-bottom));
-}
-
-nav a {
-    text-align: center;
-    font-size: 13px;
-    color: #675b52;
-    min-width: 70px;
-}
-
-nav strong {
-    display: block;
-    font-size: 22px;
-}
-
-@media (min-width: 700px) {
-    nav {
-        display: none;
-    }
-}
-    .quick-menu {
-
-    width: min(
-        720px,
-        calc(100% - 30px)
-    );
-
-    margin: 20px auto;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 12px;
-}
-
-
-.quick-menu a {
-
-    background: white;
-
-    color: #4d4038;
-
-    text-decoration: none;
-
-    padding: 18px 15px;
-
-    border-radius: 18px;
-
-    min-height: 125px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    box-shadow:
-        0 4px 15px
-        rgba(70,50,35,0.08);
-
-    border: 1px solid
-        rgba(120,80,68,0.08);
-
-    transition:
-        transform 0.15s ease;
-}
-
-
-.quick-menu a:active {
-
-    transform: scale(0.97);
-}
-
-
-.quick-menu span {
-
-    font-size: 32px;
-
-    margin-bottom: 6px;
-}
-
-
-.quick-menu strong {
-
-    font-size: 18px;
-
-    color: #60483b;
-}
-
-
-.quick-menu small {
-
-    font-size: 13px;
-
-    color: #82766d;
-
-    margin-top: 3px;
-}
-
-
-@media (max-width: 420px) {
-
-    .quick-menu {
-
-        gap: 10px;
+    header{
+        padding:55px 15px 50px;
     }
 
-
-    .quick-menu a {
-
-        min-height: 118px;
-
-        padding: 15px 12px;
+    header h1{
+        font-size:29px;
     }
 
-
-    .quick-menu strong {
-
-        font-size: 17px;
+    header p{
+        font-size:16px;
     }
 
-
-    .quick-menu small {
-
-        font-size: 12px;
+    .container{
+        padding:15px;
     }
 
-}
-.quick-menu {
-
-    width: min(
-        720px,
-        calc(100% - 30px)
-    );
-
-    margin: 20px auto;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 12px;
-}
-
-
-.quick-menu a {
-
-    background: white;
-
-    color: #4d4038;
-
-    text-decoration: none;
-
-    padding: 18px 15px;
-
-    border-radius: 18px;
-
-    min-height: 125px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    box-shadow:
-        0 4px 15px
-        rgba(70,50,35,0.08);
-
-    border: 1px solid
-        rgba(120,80,68,0.08);
-
-    transition:
-        transform 0.15s ease;
-}
-
-
-.quick-menu a:active {
-
-    transform: scale(0.97);
-}
-
-
-.quick-menu span {
-
-    font-size: 32px;
-
-    margin-bottom: 6px;
-}
-
-
-.quick-menu strong {
-
-    font-size: 18px;
-
-    color: #60483b;
-}
-
-
-.quick-menu small {
-
-    font-size: 13px;
-
-    color: #82766d;
-
-    margin-top: 3px;
-}
-
-
-@media (max-width: 420px) {
-
-    .quick-menu {
-
-        gap: 10px;
+    .day-grid{
+        grid-template-columns:1fr;
     }
 
-
-    .quick-menu a {
-
-        min-height: 118px;
-
-        padding: 15px 12px;
+    .intro{
+        padding:20px;
     }
 
-
-    .quick-menu strong {
-
-        font-size: 17px;
+    .section-title{
+        font-size:23px;
     }
 
-
-    .quick-menu small {
-
-        font-size: 12px;
+    .day-card{
+        padding:18px;
     }
-
-}   
+}
 </style>
 </head>
 
 <body>
-<div class="quick-menu">
 
-    <a href="#today">
-        <span>📅</span>
-        <strong>今日行程</strong>
-        <small>上午・下午・晚上</small>
-    </a>
+<header>
 
-    <a href="spots.html">
-        <span>📍</span>
-        <strong>景點導遊</strong>
-        <small>歷史・門票・遊覽資料</small>
-    </a>
+<h1>南京六日慢遊</h1>
 
-    <a href="afternoon.html">
-        <span>🌤️</span>
-        <strong>下午去哪裡？</strong>
-        <small>按體力＋天氣選擇</small>
-    </a>
+<p>金陵古都・秦淮風雅</p>
 
-    <a href="transport.html">
-        <span>🚕</span>
-        <strong>交通導航</strong>
-        <small>酒店・景點・高德</small>
-    </a>
-
-    <a href="#food">
-        <span>🍜</span>
-        <strong>南京美食</strong>
-        <small>餐廳・特色・位置</small>
-    </a>
-
-    <a href="#info">
-        <span>ℹ️</span>
-        <strong>實用資料</strong>
-        <small>預約・天氣・注意事項</small>
-    </a>
-
-</div>
-<header class="header">
-
-    <div class="small">🏮 金陵六朝古都・慢遊指南</div>
-
-    <h1>南京六日慢遊</h1>
-
-    <div class="date">
-        2026.11.02 — 11.07
-    </div>
-
-    <div class="group">
-        金秋輕鬆旅行
-    </div>
+<p>2026.11.02 — 11.07</p>
 
 </header>
 
 
-<main class="container">
+<div class="container">
 
+<section class="intro">
 
-<!-- 今日提示 -->
+<h2>🌿 一趟從容的金陵之旅</h2>
 
-<h2 class="section-title">
-    📅 六日行程
-    <span>上午核心・下午彈性</span>
-</h2>
+<p>
+這是一趟以「上午核心行程、下午彈性漫遊」為主的南京六日旅程。
+</p>
 
+<p>
+上午安排南京最值得一看的核心景點；下午則按照當日天氣、大家精神及興趣，自由決定下一站。
+</p>
 
-<div class="card day-card">
+<div class="hotel">
 
-    <div class="day-number">DAY 1｜11月2日・星期一</div>
+<strong>🏨 全程住宿</strong><br>
 
-    <h3>✈️ 抵達金陵・夜泊秦淮</h3>
+南京夫子廟秦淮遊船碼頭亞朵酒店<br>
 
-    <p>
-        香港 → 南京 → 酒店休息
-    </p>
-
-    <p>
-        🌙 晚上：夫子廟步行街・烏衣巷
-    </p>
+秦淮區大石壩街35號
 
 </div>
 
+</section>
 
-<div class="card day-card">
 
-    <div class="day-number">DAY 2｜11月3日・星期二</div>
+<h2 class="section-title">📅 六日行程</h2>
 
-    <h3>🏛️ 南京博物院</h3>
 
-    <p>
-        上午核心行程：南京博物院
-    </p>
+<div class="day-grid">
 
-    <p>
-        下午：酒店休息／夫子廟自由活動
-    </p>
+<a class="day-card" href="day1.html">
 
+<div class="day">DAY 1 · 11月2日 星期一</div>
+
+<h3>抵達金陵 · 夜泊秦淮</h3>
+
+<p>香港 → 南京 → 夫子廟</p>
+
+<div class="core">
+✈️ 抵達南京<br>
+🌙 夫子廟・烏衣巷
 </div>
 
-
-<div class="card day-card">
-
-    <div class="day-number">DAY 3｜11月4日・星期三</div>
-
-    <h3>🌳 明孝陵・南京秋色</h3>
-
-    <p>
-        上午核心行程：明孝陵
-    </p>
-
-    <p>
-        下午：德基藝術博物館／新街口／酒店休息
-    </p>
-
-</div>
-
-
-<div class="card day-card">
-
-    <div class="day-number">DAY 4｜11月5日・星期四</div>
-
-    <h3>🏛️ 總統府・夜遊秦淮</h3>
-
-    <p>
-        上午核心行程：總統府
-    </p>
-
-    <p>
-        下午：科舉博物館・李香君故居
-    </p>
-
-    <p>
-        🌙 晚上：秦淮河畫舫
-    </p>
-
-</div>
-
-
-<div class="card day-card">
-
-    <div class="day-number">DAY 5｜11月6日・星期五</div>
-
-    <h3>🏘️ 彈性探索日</h3>
-
-    <p>
-        方案一：高淳老街＋漆橋古村
-    </p>
-
-    <p>
-        方案二：市區自由探索
-    </p>
-
-</div>
-
-
-<div class="card day-card">
-
-    <div class="day-number">DAY 6｜11月7日・星期六</div>
-
-    <h3>🛍️ 從容告別南京</h3>
-
-    <p>
-        老門東／三七八巷
-    </p>
-
-    <p>
-        ✈️ 南京 → 香港
-    </p>
-
-</div>
-
-
-
-<!-- 下午選擇 -->
-
-<h2 class="section-title" id="choice">
-    🌤️ 下午去哪裡？
-    <span>按體力及天氣決定</span>
-</h2>
-
-
-<div class="choice green">
-
-    <h3>🟢 今日精神很好</h3>
-
-    <p>
-        適合：雞鳴寺・玄武湖・中華門・高淳老街
-    </p>
-
-</div>
-
-
-<div class="choice yellow">
-
-    <h3>🟡 今日狀態普通</h3>
-
-    <p>
-        適合：瞻園・德基藝術博物館・老門東・頤和路
-    </p>
-
-</div>
-
-
-<div class="choice blue">
-
-    <h3>🔵 今日比較累</h3>
-
-    <p>
-        適合：酒店休息・夫子廟附近散步・茶飲
-    </p>
-
-</div>
-
-
-
-<!-- 三大核心 -->
-
-<h2 class="section-title" id="places">
-    ⭐ 三大上午核心行程
-</h2>
-
-
-<div class="poi-card core">
-
-    <div class="core-badge">上午必去</div>
-
-    <h3>🏛️ 南京博物院</h3>
-
-    <p>
-        中國重要綜合性博物館，適合安排半日慢慢參觀。
-    </p>
-
-    <div class="rating">
-        ⭐⭐⭐⭐⭐ 推薦度
-        ｜🚶 步行難度：★★☆☆☆
-    </div>
-
-    <a
-        class="button map"
-        href="https://uri.amap.com/search?keyword=南京博物院&city=南京&view=map&src=nanjing-slow-travel&callnative=1"
-        target="_blank">
-        📍 高德地圖・南京博物院
-    </a>
-<a class="detail-button" href="spots.html#museum">
-    📖 查看南京博物院導遊資料
 </a>
+
+
+<a class="day-card" href="day2.html">
+
+<div class="day">DAY 2 · 11月3日 星期二</div>
+
+<h3>南京博物院</h3>
+
+<p>六朝文脈 · 民國風情</p>
+
+<div class="core">
+🏛️ 南京博物院
 </div>
 
+<div class="flex">
+🌿 下午自由漫遊
+</div>
 
-<div class="poi-card core">
-
-    <div class="core-badge">上午必去</div>
-
-    <h3>🌳 明孝陵</h3>
-
-    <p>
-        世界文化遺產，11月初正值南京秋色最值得期待的時段。
-    </p>
-
-    <div class="rating">
-        ⭐⭐⭐⭐⭐ 推薦度
-        ｜🚶 步行難度：★★★☆☆
-    </div>
-
-    <a
-        class="button map"
-        href="https://uri.amap.com/search?keyword=明孝陵&city=南京&view=map&src=nanjing-slow-travel&callnative=1"
-        target="_blank">
-        📍 高德地圖・明孝陵
-    </a>
-<a class="detail-button" href="spots.html#mingxiaoling">
-    📖 查看明孝陵導遊資料
 </a>
+
+
+<a class="day-card" href="day3.html">
+
+<div class="day">DAY 3 · 11月4日 星期三</div>
+
+<h3>明孝陵 · 秋色金陵</h3>
+
+<p>世界文化遺產</p>
+
+<div class="core">
+🍂 明孝陵
 </div>
 
+<div class="flex">
+🌿 德基藝術博物館／休息
+</div>
 
-<div class="poi-card core">
-
-    <div class="core-badge">上午必去</div>
-
-    <h3>🏛️ 總統府</h3>
-
-    <p>
-        南京近代歷史的重要場所，建築與歷史內容兼具。
-    </p>
-
-    <div class="rating">
-        ⭐⭐⭐⭐⭐ 推薦度
-        ｜🚶 步行難度：★★★☆☆
-    </div>
-
-    <a
-        class="button map"
-        href="https://uri.amap.com/search?keyword=南京總統府&city=南京&view=map&src=nanjing-slow-travel&callnative=1"
-        target="_blank">
-        📍 高德地圖・總統府
-    </a>
-<a class="detail-button" href="spots.html#president">
-    📖 查看總統府導遊資料
 </a>
+
+
+<a class="day-card" href="day4.html">
+
+<div class="day">DAY 4 · 11月5日 星期四</div>
+
+<h3>總統府 · 科舉文化</h3>
+
+<p>近代史與秦淮文化</p>
+
+<div class="core">
+🏛️ 總統府
+</div>
+
+<div class="flex">
+🌿 科舉博物館／李香君故居
+</div>
+
+</a>
+
+
+<a class="day-card" href="day5.html">
+
+<div class="day">DAY 5 · 11月6日 星期五</div>
+
+<h3>彈性探索日</h3>
+
+<p>高淳古韻／南京市區</p>
+
+<div class="core">
+🌿 高淳老街＋漆橋古村
+</div>
+
+<div class="flex">
+☀️ 或市區自由探索
+</div>
+
+</a>
+
+
+<a class="day-card" href="day6.html">
+
+<div class="day">DAY 6 · 11月7日 星期六</div>
+
+<h3>從容告別金陵</h3>
+
+<p>老門東 · 購買伴手禮</p>
+
+<div class="core">
+🛍️ 老門東／三七八巷
+</div>
+
+</a>
+
 </div>
 
 
+<h2 class="section-title">🧭 旅行工具</h2>
 
-<!-- 酒店 -->
+<div class="menu">
 
-<h2 class="section-title">
-    🏨 我們的酒店
-</h2>
+<a href="spots.html">
+📍 景點百科
+</a>
 
-
-<div class="card hotel">
-
-    <h3>南京夫子廟秦淮遊船碼頭亞朵酒店</h3>
-
-    <p>
-        📍 秦淮區大石壩街35號
-    </p>
-
-    <p>
-        🚶 步行至夫子廟核心區約3分鐘
-    </p>
+<a href="spots.html" class="secondary">
+🌿 下午漫遊選擇
+</a>
 
 </div>
 
 
+<div class="note">
 
-<!-- 實用資料 -->
+<strong>💡 本行程的玩法</strong>
 
-<h2 class="section-title" id="info">
-    ℹ️ 實用資料
-</h2>
+<p>
+上午是「核心行程」，盡量按計劃完成；
+下午則不追景點數量，按當日天氣、體力及興趣自由選擇。
+</p>
 
+<p>
+旅行不是比賽，留一點時間坐下來喝杯茶、看看秦淮河，也是南京慢遊的一部分。
+</p>
 
-<div class="card info">
-
-    <p>🌡️ 11月上旬：早晚較涼，建議洋蔥式穿衣。</p>
-
-    <p>🎫 南京博物院：免費，但需要提前預約。</p>
-
-    <p>🎫 總統府：建議提前預約。</p>
-
-    <p>🚕 市區景點：以打車最方便。</p>
-
-    <p>🌿 漫遊團友：行程以慢遊、休息及彈性為優先。</p>
+</div>
 
 </div>
 
 
-</main>
+<footer>
 
-
-<footer class="footer">
-
-    南京六日慢遊<br>
-    2026.11.02 — 11.07<br><br>
-
-    金秋輕鬆深度遊
+南京六日慢遊 · 2026<br>
+金陵古都・從容漫遊
 
 </footer>
-
-
-<nav>
-
-    <a href="#">
-        <strong>🏠</strong>
-        首頁
-    </a>
-
-    <a href="#choice">
-        <strong>🌤️</strong>
-        下午選擇
-    </a>
-
-    <a href="#places">
-        <strong>📍</strong>
-        景點
-    </a>
-
-    <a href="#info">
-        <strong>ℹ️</strong>
-        實用
-    </a>
-
-</nav>
-
 
 </body>
 </html>
