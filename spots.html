@@ -7,7 +7,81 @@
 <title>金陵慢遊｜景點導遊</title>
 
 <style>
+/* =========================
+   景點百科
+   ========================= */
 
+.spot-index {
+  margin: 20px 16px 30px;
+  padding: 20px 16px;
+  background: #f8f5ed;
+  border-radius: 22px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+}
+
+.spot-index-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #4f6256;
+  margin-bottom: 5px;
+}
+
+.spot-index-subtitle {
+  font-size: 14px;
+  color: #8b897f;
+  margin-bottom: 16px;
+}
+
+.spot-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.spot-list button {
+  min-height: 58px;
+  padding: 10px 8px;
+
+  border: 1px solid #e1ded5;
+  border-radius: 16px;
+
+  background: #ffffff;
+  color: #4f6256;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.spot-list button:active {
+  transform: scale(0.97);
+  background: #edf2ed;
+}
+
+.spot-list button:hover {
+  background: #f2f5f1;
+}
+
+/* 手機細螢幕 */
+@media (max-width: 380px) {
+
+  .spot-list {
+    grid-template-columns: 1fr;
+  }
+
+  .spot-list button {
+    min-height: 56px;
+    font-size: 17px;
+  }
+
+}
 *{
     box-sizing:border-box;
 }
@@ -236,81 +310,7 @@ li{
 }
 
 </style>
-   /* =========================
-   景點百科
-   ========================= */
 
-.spot-index {
-  margin: 20px 16px 30px;
-  padding: 20px 16px;
-  background: #f8f5ed;
-  border-radius: 22px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
-}
-
-.spot-index-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #4f6256;
-  margin-bottom: 5px;
-}
-
-.spot-index-subtitle {
-  font-size: 14px;
-  color: #8b897f;
-  margin-bottom: 16px;
-}
-
-.spot-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.spot-list button {
-  min-height: 58px;
-  padding: 10px 8px;
-
-  border: 1px solid #e1ded5;
-  border-radius: 16px;
-
-  background: #ffffff;
-  color: #4f6256;
-
-  font-size: 16px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
-
-  transition:
-    transform 0.15s ease,
-    background 0.15s ease;
-}
-
-.spot-list button:active {
-  transform: scale(0.97);
-  background: #edf2ed;
-}
-
-.spot-list button:hover {
-  background: #f2f5f1;
-}
-
-/* 手機細螢幕 */
-@media (max-width: 380px) {
-
-  .spot-list {
-    grid-template-columns: 1fr;
-  }
-
-  .spot-list button {
-    min-height: 56px;
-    font-size: 17px;
-  }
-
-}
 </head>
 
 <body>
