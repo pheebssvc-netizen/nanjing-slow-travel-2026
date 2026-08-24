@@ -7,6 +7,23 @@
 <title>金陵慢遊｜景點導遊</title>
 
 <style>
+   .spot-highlight {
+    animation: spotFlash 1.5s ease;
+}
+
+@keyframes spotFlash {
+    0% {
+        box-shadow: 0 0 0 4px rgba(108, 130, 110, 0.45);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(108, 130, 110, 0.20);
+    }
+
+    100% {
+        box-shadow: 0 4px 18px rgba(80, 70, 50, 0.08);
+    }
+}
 /* =========================
    景點百科
    ========================= */
@@ -1391,5 +1408,35 @@ function goSpot(keyword) {
 }
 
 </script>
+   <script>
+function goSpot(name) {
+    const spots = document.querySelectorAll('.spot');
+
+    for (const spot of spots) {
+        const title = spot.querySelector('.spot-title h2');
+
+        if (title && title.textContent.includes(name)) {
+
+            spot.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+            // 手機畫面輕微停頓，方便團友睇到景點標題
+            setTimeout(() => {
+                spot.classList.add('spot-highlight');
+
+                setTimeout(() => {
+                    spot.classList.remove('spot-highlight');
+                }, 1500);
+            }, 400);
+
+            return;
+        }
+    }
+
+    alert('暫時找不到「' + name + '」的景點資料');
+}
+   </script>
 </body>
 </html>
