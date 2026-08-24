@@ -7,79 +7,7 @@
 <title>金陵慢遊｜景點導遊</title>
 
 <style>
-/* =========================
-   景點百科快速分類
-   ========================= */
 
-.spot-index {
-  margin: 20px 16px 28px;
-  padding: 20px 16px;
-  background: #f8f5ed;
-  border-radius: 22px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
-}
-
-.spot-index-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #4f6256;
-  margin-bottom: 16px;
-}
-
-.spot-index-title span {
-  display: block;
-  margin-top: 5px;
-  font-size: 13px;
-  font-weight: 400;
-  color: #8a8a80;
-}
-
-.spot-category-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.spot-category-grid button {
-  border: 1px solid #e2dfd6;
-  background: #fff;
-  border-radius: 16px;
-  padding: 14px 8px;
-  min-height: 82px;
-  cursor: pointer;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  color: #4f6256;
-  transition: 0.2s;
-}
-
-.spot-category-grid button:first-child {
-  background: #6f8578;
-  color: white;
-}
-
-.spot-category-grid button:hover {
-  transform: translateY(-2px);
-}
-
-.spot-category-grid button:active {
-  transform: scale(0.97);
-}
-
-.spot-category-grid button strong {
-  font-size: 15px;
-  margin-top: 5px;
-}
-
-.spot-category-grid button small {
-  font-size: 11px;
-  margin-top: 3px;
-  opacity: 0.75;
-}
 *{
     box-sizing:border-box;
 }
@@ -308,6 +236,81 @@ li{
 }
 
 </style>
+   /* =========================
+   景點百科
+   ========================= */
+
+.spot-index {
+  margin: 20px 16px 30px;
+  padding: 20px 16px;
+  background: #f8f5ed;
+  border-radius: 22px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+}
+
+.spot-index-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #4f6256;
+  margin-bottom: 5px;
+}
+
+.spot-index-subtitle {
+  font-size: 14px;
+  color: #8b897f;
+  margin-bottom: 16px;
+}
+
+.spot-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.spot-list button {
+  min-height: 58px;
+  padding: 10px 8px;
+
+  border: 1px solid #e1ded5;
+  border-radius: 16px;
+
+  background: #ffffff;
+  color: #4f6256;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.spot-list button:active {
+  transform: scale(0.97);
+  background: #edf2ed;
+}
+
+.spot-list button:hover {
+  background: #f2f5f1;
+}
+
+/* 手機細螢幕 */
+@media (max-width: 380px) {
+
+  .spot-list {
+    grid-template-columns: 1fr;
+  }
+
+  .spot-list button {
+    min-height: 56px;
+    font-size: 17px;
+  }
+
+}
 </head>
 
 <body>
@@ -316,69 +319,84 @@ li{
     <h1>🏮 金陵慢遊</h1>
     <p>南京六日慢遊 · 景點導遊手冊</p>
 </header>
-<!-- 景點百科快速分類 -->
+
+<div class="container">
+<!-- 景點百科快速入口 -->
 <section class="spot-index">
 
   <div class="spot-index-title">
     📚 景點百科
-    <span>快速尋找想去的地方</span>
   </div>
 
-  <div class="spot-category-grid">
+  <div class="spot-index-subtitle">
+    點選景點，直接查看完整導遊資料
+  </div>
+
+  <div class="spot-list">
 
     <button onclick="goSpot('南京博物院')">
-      🏛️
-      <strong>核心歷史</strong>
-      <small>博物館・近代史</small>
+      🏛️ 南京博物院
     </button>
 
     <button onclick="goSpot('明孝陵')">
-      🍂
-      <strong>秋色漫遊</strong>
-      <small>紫金山・秋景</small>
+      🍂 明孝陵
     </button>
 
     <button onclick="goSpot('總統府')">
-      🏛️
-      <strong>民國歷史</strong>
-      <small>總統府・民國</small>
+      🏛️ 南京總統府
     </button>
 
     <button onclick="goSpot('科舉博物館')">
-      📜
-      <strong>秦淮文化</strong>
-      <small>科舉・夫子廟</small>
+      📜 科舉博物館
     </button>
 
     <button onclick="goSpot('德基藝術博物館')">
-      🎨
-      <strong>藝術文化</strong>
-      <small>藝術・室內</small>
+      🎨 德基藝術博物館
     </button>
 
     <button onclick="goSpot('李香君故居')">
-      🏮
-      <strong>秦淮古城</strong>
-      <small>秦淮・古宅</small>
+      🏮 李香君故居
     </button>
 
     <button onclick="goSpot('老門東')">
-      🏘️
-      <strong>老南京</strong>
-      <small>古街・小吃</small>
+      🏘️ 老門東
+    </button>
+
+    <button onclick="goSpot('三七八巷')">
+      🛍️ 三七八巷
+    </button>
+
+    <button onclick="goSpot('雞鳴寺')">
+      ⛩️ 雞鳴寺
     </button>
 
     <button onclick="goSpot('玄武湖')">
-      🌿
-      <strong>自然漫遊</strong>
-      <small>湖景・散步</small>
+      🌿 玄武湖
+    </button>
+
+    <button onclick="goSpot('南京城牆')">
+      🧱 南京城牆・中華門
+    </button>
+
+    <button onclick="goSpot('頤和路')">
+      🌳 頤和路民國公館區
+    </button>
+
+    <button onclick="goSpot('甘熙故居')">
+      🏡 甘熙故居
+    </button>
+
+    <button onclick="goSpot('高淳老街')">
+      🏮 高淳老街
+    </button>
+
+    <button onclick="goSpot('漆橋古村')">
+      🌿 漆橋古村
     </button>
 
   </div>
 
 </section>
-<div class="container">
-
 <!-- 南京博物院 -->
 
 <div class="spot">
@@ -1354,17 +1372,19 @@ function goSpot(keyword) {
   }
 
   if (!target) {
+
     alert('暫時未找到：' + keyword);
+
     return;
   }
 
-  const y =
+  const targetPosition =
     target.getBoundingClientRect().top +
     window.pageYOffset -
-    15;
+    12;
 
   window.scrollTo({
-    top: y,
+    top: targetPosition,
     behavior: 'smooth'
   });
 
