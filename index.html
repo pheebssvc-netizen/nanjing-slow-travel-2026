@@ -1,4 +1,4 @@
-o<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
@@ -8,74 +8,6 @@ o<!DOCTYPE html>
 
 <style>
 
-/* =========================
-   手機底部導航
-   ========================= */
-
-.mobile-nav {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 64px;
-
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    background: rgba(255, 255, 255, 0.96);
-
-    border-top: 1px solid #e8e5dc;
-
-    box-shadow: 0 -3px 15px rgba(0,0,0,0.08);
-
-    z-index: 9998;
-
-    padding-bottom: env(safe-area-inset-bottom);
-}
-
-.mobile-nav a {
-    flex: 1;
-
-    height: 64px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    text-decoration: none;
-
-    color: #88877f;
-
-    -webkit-tap-highlight-color: transparent;
-}
-
-.mobile-nav a span {
-    font-size: 20px;
-    line-height: 22px;
-}
-
-.mobile-nav a small {
-    margin-top: 3px;
-
-    font-size: 11px;
-    font-weight: 600;
-}
-
-.mobile-nav a.active {
-    color: #607667;
-}
-
-.mobile-nav a:active {
-    transform: scale(0.95);
-}
-
-body {
-    padding-bottom: 85px;
-}
-    
 *{
     box-sizing:border-box;
 }
@@ -83,420 +15,639 @@ body {
 body{
     margin:0;
     font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Noto Sans TC",
-    "Microsoft JhengHei",
-    sans-serif;
-    background:#f7f4ee;
-    color:#333;
-    line-height:1.7;
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        sans-serif;
+
+    background:#f7f3eb;
+    color:#3f3933;
+    line-height:1.8;
 }
 
-header{
-    background:linear-gradient(
-        rgba(65,60,52,.65),
-        rgba(65,60,52,.65)
-    ),
-    url("images/nanjing.jpg");
+/* ===== Hero ===== */
+
+.hero{
+
+    min-height:480px;
+
+    background-image:
+        linear-gradient(
+            rgba(35,45,38,.38),
+            rgba(35,45,38,.48)
+        ),
+        url("hero-night.png");
+
     background-size:cover;
-    background-position:center;
+
+    background-position:center top;
+
     color:white;
-    padding:70px 20px 60px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:center;
+
     text-align:center;
+
+    padding:40px 20px 55px;
+
+    position:relative;
 }
 
-header h1{
-    font-size:34px;
-    margin:0 0 10px;
+.hero-content{
+    max-width:760px;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.45);
+}
+
+.hero h1{
+    margin:0;
+
+    font-size:42px;
+
+    letter-spacing:4px;
+
+    font-weight:700;
+}
+
+.hero-subtitle{
+
+    margin:10px 0 4px;
+
+    font-size:21px;
+
     letter-spacing:2px;
 }
 
-header p{
-    font-size:17px;
-    margin:5px 0;
+.hero-date{
+
+    font-size:16px;
+
+    letter-spacing:2px;
+
+    opacity:.95;
 }
+
+/* ===== Main ===== */
 
 .container{
-    max-width:900px;
+
+    max-width:760px;
+
     margin:auto;
-    padding:20px;
+
+    padding:30px 16px 60px;
 }
 
+/* ===== Intro ===== */
+
 .intro{
+
     background:white;
-    border-radius:18px;
-    padding:25px;
-    margin-top:-25px;
-    position:relative;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
+
+    border-radius:20px;
+
+    padding:25px 22px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+        0 5px 20px rgba(80,70,50,.08);
+
+    text-align:center;
 }
 
 .intro h2{
-    margin-top:0;
-    font-size:24px;
+
+    margin:0 0 10px;
+
+    color:#667967;
+
+    font-size:25px;
 }
+
+.intro p{
+
+    margin:0;
+
+    font-size:16px;
+}
+
+/* ===== Hotel ===== */
 
 .hotel{
+
+    margin-top:20px;
+
+    padding:16px;
+
     background:#f1eee6;
-    border-radius:12px;
-    padding:15px;
-    margin-top:15px;
-}
 
-.hotel strong{
-    font-size:17px;
-}
+    border-radius:14px;
 
-.section-title{
-    font-size:25px;
-    margin:35px 0 15px;
-}
-
-.day-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-}
-
-.day-card{
-    background:white;
-    border-radius:16px;
-    padding:20px;
-    box-shadow:0 3px 10px rgba(0,0,0,.06);
-    text-decoration:none;
-    color:#333;
-    transition:.2s;
-}
-
-.day-card:hover{
-    transform:translateY(-3px);
-}
-
-.day{
-    font-size:14px;
-    color:#8a7358;
-    font-weight:bold;
-}
-
-.day-card h3{
-    margin:6px 0;
-    font-size:20px;
-}
-
-.day-card p{
-    margin:5px 0 0;
-    color:#666;
     font-size:15px;
 }
 
-.core{
-    margin-top:12px;
-    padding:8px 10px;
-    background:#edf2e8;
-    border-radius:8px;
-    font-size:14px;
-}
+.hotel strong{
 
-.flex{
-    margin-top:8px;
-    padding:8px 10px;
-    background:#f7eee4;
-    border-radius:8px;
-    font-size:14px;
-}
-
-.menu{
-    margin-top:30px;
-    display:grid;
-    gap:12px;
-}
-
-.menu a{
     display:block;
-    background:#5e6b58;
-    color:white;
+
+    font-size:17px;
+
+    margin-bottom:4px;
+}
+
+/* ===== Section title ===== */
+
+.section-title{
+
+    margin:35px 0 18px;
+
+    font-size:26px;
+
+    color:#596b5d;
+}
+
+/* ===== Day cards ===== */
+
+.day-card{
+
+    display:block;
+
     text-decoration:none;
-    padding:16px;
-    border-radius:12px;
-    font-size:18px;
+
+    color:inherit;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    margin-bottom:15px;
+
+    box-shadow:
+        0 4px 15px rgba(80,70,50,.08);
+
+    transition:.2s;
+}
+
+.day-card:active{
+
+    transform:scale(.98);
+}
+
+.day-number{
+
+    font-size:14px;
+
+    color:#81927f;
+
+    font-weight:bold;
+}
+
+.day-title{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin:3px 0 7px;
+}
+
+.day-desc{
+
+    font-size:15px;
+
+    color:#756e66;
+}
+
+/* ===== Tools ===== */
+
+.tools{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+
+    margin-top:15px;
+}
+
+.tool{
+
+    text-decoration:none;
+
+    color:#4c5e51;
+
+    background:#fff;
+
+    border-radius:16px;
+
+    padding:18px 10px;
+
+    text-align:center;
+
+    box-shadow:
+        0 4px 15px rgba(80,70,50,.08);
+
+    font-size:15px;
+
+    font-weight:bold;
+}
+
+.tool-icon{
+
+    display:block;
+
+    font-size:27px;
+
+    margin-bottom:5px;
+}
+
+/* ===== Philosophy ===== */
+
+.philosophy{
+
+    margin-top:35px;
+
+    padding:25px 20px;
+
+    border-radius:18px;
+
+    background:#e9eee8;
+
     text-align:center;
 }
 
-.menu a.secondary{
-    background:#8b7861;
+.philosophy h3{
+
+    margin:0 0 10px;
+
+    color:#596b5d;
 }
 
-.note{
-    margin-top:30px;
-    background:#fff;
-    border-left:5px solid #8b7861;
-    padding:18px;
-    border-radius:10px;
+.philosophy p{
+
+    margin:0;
+
+    font-size:15px;
 }
+
+/* ===== Footer ===== */
 
 footer{
+
     text-align:center;
+
+    padding:25px 15px 40px;
+
     color:#888;
+
     font-size:13px;
-    padding:35px 15px;
 }
+
+.footer-links{
+
+    margin-top:10px;
+}
+
+.footer-links a{
+
+    color:#687a6b;
+
+    text-decoration:none;
+
+    margin:0 7px;
+}
+
+/* ===== Mobile ===== */
 
 @media(max-width:600px){
 
-    header{
-        padding:55px 15px 50px;
+    .hero{
+
+        min-height:450px;
+
+        padding-bottom:42px;
+
+        background-position:center top;
     }
 
-    header h1{
-        font-size:29px;
+    .hero h1{
+
+        font-size:34px;
+
+        letter-spacing:3px;
     }
 
-    header p{
-        font-size:16px;
+    .hero-subtitle{
+
+        font-size:18px;
     }
 
-    .container{
-        padding:15px;
+    .hero-date{
+
+        font-size:14px;
     }
 
-    .day-grid{
-        grid-template-columns:1fr;
+    .tools{
+
+        grid-template-columns:1fr 1fr;
     }
 
-    .intro{
-        padding:20px;
-    }
-
-    .section-title{
-        font-size:23px;
-    }
-
-    .day-card{
-        padding:18px;
-    }
 }
+
 </style>
 </head>
 
 <body>
 
-<header>
+<!-- =========================
+     HERO
+========================= -->
 
-<h1>南京六日慢遊</h1>
+<header class="hero">
 
-<p>金陵古都・秦淮風雅</p>
+    <div class="hero-content">
 
-<p>2026.11.02 — 11.07</p>
+        <h1>南京六日慢遊</h1>
+
+        <div class="hero-subtitle">
+            金陵古都・秦淮風雅
+        </div>
+
+        <div class="hero-date">
+            2026.11.02 — 11.07
+        </div>
+
+    </div>
 
 </header>
 
 
-<div class="container">
+<main class="container">
+
+
+<!-- =========================
+     INTRO
+========================= -->
 
 <section class="intro">
 
-<h2>🌿 一趟從容的金陵之旅</h2>
+    <h2>🌿 一趟從容的金陵之旅</h2>
 
-<p>
-這是一趟以「上午核心行程、下午彈性漫遊」為主的南京六日旅程。
-</p>
+    <p>
+        這是一趟以「上午核心行程、下午彈性漫遊」為主的南京六日旅程。
+    </p>
 
-<p>
-上午安排南京最值得一看的核心景點；下午則按照當日天氣、大家精神及興趣，自由決定下一站。
-</p>
+    <p>
+        上午安排南京最值得一看的核心景點；
+        下午則按照當日天氣、大家精神及興趣，
+        自由決定下一站。
+    </p>
 
-<div class="hotel">
+    <div class="hotel">
 
-<strong>🏨 全程住宿</strong><br>
+        <strong>🏨 全程住宿</strong>
 
-南京夫子廟秦淮遊船碼頭亞朵酒店<br>
+        南京夫子廟秦淮遊船碼頭亞朵酒店<br>
 
-秦淮區大石壩街35號
+        秦淮區大石壩街35號｜連住5晚
 
-</div>
+    </div>
 
 </section>
 
 
-<h2 class="section-title">📅 六日行程</h2>
+<!-- =========================
+     SIX DAYS
+========================= -->
+
+<h2 class="section-title">
+    📅 六日行程
+</h2>
 
 
-<div class="day-grid">
+<a href="itinerary.html" class="day-card">
 
-<a class="day-card" href="day1.html">
+    <div class="day-number">
+        DAY 1 · 11月2日 星期一
+    </div>
 
-<div class="day">DAY 1 · 11月2日 星期一</div>
+    <div class="day-title">
+        抵達金陵 · 夜泊秦淮
+    </div>
 
-<h3>抵達金陵 · 夜泊秦淮</h3>
-
-<p>香港 → 南京 → 夫子廟</p>
-
-<div class="core">
-✈️ 抵達南京<br>
-🌙 夫子廟・烏衣巷
-</div>
-
-</a>
-
-
-<a class="day-card" href="day2.html">
-
-<div class="day">DAY 2 · 11月3日 星期二</div>
-
-<h3>南京博物院</h3>
-
-<p>六朝文脈 · 民國風情</p>
-
-<div class="core">
-🏛️ 南京博物院
-</div>
-
-<div class="flex">
-🌿 下午自由漫遊
-</div>
+    <div class="day-desc">
+        ✈️ 香港 → 南京 → 夫子廟<br>
+        🌙 夫子廟・烏衣巷
+    </div>
 
 </a>
 
 
-<a class="day-card" href="day3.html">
+<a href="itinerary.html" class="day-card">
 
-<div class="day">DAY 3 · 11月4日 星期三</div>
+    <div class="day-number">
+        DAY 2 · 11月3日 星期二
+    </div>
 
-<h3>明孝陵 · 秋色金陵</h3>
+    <div class="day-title">
+        南京博物院
+    </div>
 
-<p>世界文化遺產</p>
-
-<div class="core">
-🍂 明孝陵
-</div>
-
-<div class="flex">
-🌿 德基藝術博物館／休息
-</div>
-
-</a>
-
-
-<a class="day-card" href="day4.html">
-
-<div class="day">DAY 4 · 11月5日 星期四</div>
-
-<h3>總統府 · 科舉文化</h3>
-
-<p>近代史與秦淮文化</p>
-
-<div class="core">
-🏛️ 總統府
-</div>
-
-<div class="flex">
-🌿 科舉博物館／李香君故居
-</div>
+    <div class="day-desc">
+        🏛️ 六朝文脈・民國風情<br>
+        🌿 下午自由漫遊
+    </div>
 
 </a>
 
 
-<a class="day-card" href="day5.html">
+<a href="itinerary.html" class="day-card">
 
-<div class="day">DAY 5 · 11月6日 星期五</div>
+    <div class="day-number">
+        DAY 3 · 11月4日 星期三
+    </div>
 
-<h3>彈性探索日</h3>
+    <div class="day-title">
+        明孝陵 · 秋色金陵
+    </div>
 
-<p>高淳古韻／南京市區</p>
+    <div class="day-desc">
+        🍂 世界文化遺產<br>
+        🌿 德基藝術博物館／酒店休息
+    </div>
 
-<div class="core">
-🌿 高淳老街＋漆橋古村
-</div>
+</a>
 
-<div class="flex">
-☀️ 或市區自由探索
-</div>
+
+<a href="itinerary.html" class="day-card">
+
+    <div class="day-number">
+        DAY 4 · 11月5日 星期四
+    </div>
+
+    <div class="day-title">
+        總統府 · 科舉文化
+    </div>
+
+    <div class="day-desc">
+        🏛️ 總統府<br>
+        🌿 科舉博物館／李香君故居
+    </div>
 
 </a>
 
 
-<a class="day-card" href="day6.html">
+<a href="itinerary.html" class="day-card">
 
-<div class="day">DAY 6 · 11月7日 星期六</div>
+    <div class="day-number">
+        DAY 5 · 11月6日 星期五
+    </div>
 
-<h3>從容告別金陵</h3>
+    <div class="day-title">
+        彈性探索日
+    </div>
 
-<p>老門東 · 購買伴手禮</p>
-
-<div class="core">
-🛍️ 老門東／三七八巷
-</div>
+    <div class="day-desc">
+        🌿 高淳老街＋漆橋古村<br>
+        ☀️ 或市區自由探索
+    </div>
 
 </a>
 
-</div>
 
+<a href="itinerary.html" class="day-card">
 
-<h2 class="section-title">🧭 旅行工具</h2>
+    <div class="day-number">
+        DAY 6 · 11月7日 星期六
+    </div>
 
-<div class="menu">
-<a href="itinerary.html">
-    📅 今日行程
+    <div class="day-title">
+        從容告別金陵
+    </div>
+
+    <div class="day-desc">
+        🛍️ 老門東／三七八巷
+    </div>
+
 </a>
-<a href="spots.html">
-📍 景點百科
-</a>
 
-<a href="afternoon.html" class="secondary">
-🌿 下午漫遊選擇
-</a>
+
+<!-- =========================
+     TOOLS
+========================= -->
+
+<h2 class="section-title">
+    🧭 旅行工具
+</h2>
+
+
+<div class="tools">
+
+
+    <a href="itinerary.html" class="tool">
+
+        <span class="tool-icon">📅</span>
+
+        今日行程
+
+    </a>
+
+
+    <a href="spots.html" class="tool">
+
+        <span class="tool-icon">📚</span>
+
+        景點百科
+
+    </a>
+
+
+    <a href="afternoon.html" class="tool">
+
+        <span class="tool-icon">🌿</span>
+
+        下午漫遊
+
+    </a>
+
+
+    <a href="spots.html" class="tool">
+
+        <span class="tool-icon">🧭</span>
+
+        景點導遊
+
+    </a>
+
 
 </div>
 
 
-<div class="note">
+<!-- =========================
+     PHILOSOPHY
+========================= -->
 
-<strong>💡 本行程的玩法</strong>
+<section class="philosophy">
 
-<p>
-上午是「核心行程」，盡量按計劃完成；
-下午則不追景點數量，按當日天氣、體力及興趣自由選擇。
-</p>
+    <h3>💡 本行程的玩法</h3>
 
-<p>
-旅行不是比賽，留一點時間坐下來喝杯茶、看看秦淮河，也是南京慢遊的一部分。
-</p>
+    <p>
+        上午是「核心行程」，盡量按計劃完成；
+        下午則不追景點數量，
+        按當日天氣、體力及興趣自由選擇。
+    </p>
 
-</div>
+    <p>
+        旅行不是比賽，
+        留一點時間坐下來喝杯茶、
+        看看秦淮河，
+        也是南京慢遊的一部分。
+    </p>
 
-</div>
+</section>
 
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
-南京六日慢遊 · 2026<br>
-金陵古都・從容漫遊
+    <div>
+        南京六日慢遊 · 2026
+    </div>
+
+    <div>
+        金陵古都・從容漫遊
+    </div>
+
+    <div class="footer-links">
+
+        <a href="index.html">🏠 首頁</a>
+
+        <a href="itinerary.html">📅 六日行程</a>
+
+        <a href="spots.html">📚 景點百科</a>
+
+        <a href="afternoon.html">🌿 下午漫遊</a>
+
+    </div>
 
 </footer>
-<!-- 手機底部導航 -->
-<nav class="mobile-nav">
 
-  <a href="index.html" class="active">
-    <span>🏠</span>
-    <small>首頁</small>
-  </a>
 
-  <a href="itinerary.html">
-    <span>📅</span>
-    <small>六日行程</small>
-  </a>
-
-  <a href="spots.html">
-    <span>📚</span>
-    <small>景點百科</small>
-  </a>
-
-  <a href="afternoon.html">
-    <span>🌿</span>
-    <small>下午漫遊</small>
-  </a>
-
-</nav>
 </body>
 </html>
