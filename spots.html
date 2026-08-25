@@ -325,7 +325,37 @@ li{
     }
 
 }
+/* =========================
+   返回景點目錄按鈕
+   ========================= */
 
+#backToSpots {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 9999;
+
+    border: none;
+    border-radius: 999px;
+
+    padding: 12px 16px;
+
+    background: rgba(108, 126, 111, 0.94);
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+#backToSpots:active {
+    transform: scale(0.95);
+}
 </style>
 
 </head>
@@ -1438,5 +1468,10 @@ function goSpot(name) {
     alert('暫時找不到「' + name + '」的景點資料');
 }
    </script>
+   <!-- 返回景點目錄 -->
+<button id="backToSpots"
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    ↑ 景點目錄
+</button>
 </body>
 </html>
