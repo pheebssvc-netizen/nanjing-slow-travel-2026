@@ -356,6 +356,76 @@ li{
 #backToSpots:active {
     transform: scale(0.95);
 }
+
+/* =========================
+   手機底部導航
+   ========================= */
+
+.mobile-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 64px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border-top: 1px solid #e8e5dc;
+
+    box-shadow: 0 -3px 15px rgba(0,0,0,0.08);
+
+    z-index: 9998;
+
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.mobile-nav a {
+    flex: 1;
+
+    height: 64px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+
+    color: #88877f;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-nav a span {
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.mobile-nav a small {
+    margin-top: 3px;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.mobile-nav a.active {
+    color: #607667;
+}
+
+.mobile-nav a:active {
+    transform: scale(0.95);
+}
+
+/* 避免底部內容被導航列遮住 */
+body {
+    padding-bottom: 85px;
+}
+   
 </style>
 
 </head>
@@ -1473,5 +1543,29 @@ function goSpot(name) {
         onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
     ↑ 景點目錄
 </button>
+   <!-- 手機底部導航 -->
+<nav class="mobile-nav">
+
+  <a href="index.html">
+    <span>🏠</span>
+    <small>首頁</small>
+  </a>
+
+  <a href="itinerary.html">
+    <span>📅</span>
+    <small>六日行程</small>
+  </a>
+
+  <a href="spots.html" class="active">
+    <span>📚</span>
+    <small>景點百科</small>
+  </a>
+
+  <a href="afternoon.html">
+    <span>🌿</span>
+    <small>下午漫遊</small>
+  </a>
+
+</nav>
 </body>
 </html>
