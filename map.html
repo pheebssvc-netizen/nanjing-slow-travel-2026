@@ -4,241 +4,328 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>金陵25景點｜互動地圖</title>
-
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
+<title>參考地圖｜金陵慢遊 2026</title>
 
 <style>
-
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans TC",
+        "PingFang TC",
+        "Microsoft JhengHei",
+        sans-serif;
+    background: #f7f3ec;
+    color: #40382f;
 }
 
 body {
-  margin: 0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Noto Sans TC",
-    "Microsoft JhengHei",
-    sans-serif;
-
-  background: #f5f1e8;
-  color: #34483d;
+    min-height: 100vh;
 }
 
-/* ===== 頁首 ===== */
+/* =========================
+   Header
+========================= */
 
 .header {
-  padding: 20px 18px 14px;
-  text-align: center;
+    padding: 22px 18px 18px;
+    text-align: center;
+    background: rgba(255,255,255,0.92);
+    border-bottom: 1px solid #e7ded1;
 }
 
 .header h1 {
-  margin: 0;
-  font-size: 24px;
-  letter-spacing: 2px;
+    margin: 0;
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .header p {
-  margin: 7px 0 0;
-  font-size: 13px;
-  color: #777;
+    margin: 7px 0 0;
+    font-size: 14px;
+    color: #81766b;
 }
 
-/* ===== 地圖 ===== */
+/* =========================
+   Map
+========================= */
+
+.map-wrap {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 175px);
+    min-height: 500px;
+    background: #e9e4da;
+}
 
 #map {
-  width: 100%;
-  height: 58vh;
-  min-height: 430px;
-  border-top: 1px solid #ddd5c7;
-  border-bottom: 1px solid #ddd5c7;
+    width: 100%;
+    height: 100%;
 }
 
-/* ===== 自訂 Marker ===== */
+/* =========================
+   Legend
+========================= */
 
-.number-marker {
-  width: 30px;
-  height: 30px;
+.legend {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 1000;
 
-  border-radius: 50%;
+    background: rgba(255,255,255,0.94);
+    border-radius: 12px;
+    padding: 10px 13px;
 
-  background: #526b5b;
-  color: white;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.12);
 
-  border: 2px solid white;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 13px;
-  font-weight: bold;
-
-  box-shadow: 0 2px 7px rgba(0,0,0,0.25);
+    font-size: 13px;
+    line-height: 1.8;
 }
 
-/* ===== Popup ===== */
+.legend-title {
+    font-weight: 700;
+    margin-bottom: 3px;
+}
 
-.leaflet-popup-content {
-  margin: 13px 15px;
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #b56d62;
+}
+
+.legend-dot.hotel {
+    background: #7c8e73;
+}
+
+.legend-dot.airport {
+    background: #7c8495;
+}
+
+/* =========================
+   Popup
+========================= */
+
+.popup-box {
+    min-width: 190px;
+    max-width: 250px;
+}
+
+.popup-number {
+    font-size: 12px;
+    color: #a28b78;
+    margin-bottom: 3px;
 }
 
 .popup-title {
-  font-size: 16px;
-  font-weight: bold;
-  color: #34483d;
-  margin-bottom: 6px;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
 }
 
 .popup-address {
-  font-size: 12px;
-  color: #777;
-  line-height: 1.5;
-  margin-bottom: 9px;
+    font-size: 12px;
+    color: #777;
+    line-height: 1.5;
+    margin-bottom: 10px;
 }
 
-.guide-button {
-  display: inline-block;
-
-  padding: 7px 12px;
-
-  background: #526b5b;
-  color: white !important;
-
-  border-radius: 8px;
-
-  text-decoration: none;
-
-  font-size: 13px;
+.popup-link {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 8px;
+    background: #8d6f5d;
+    color: white !important;
+    text-decoration: none;
+    font-size: 13px;
 }
 
-/* ===== 景點清單 ===== */
+/* =========================
+   Bottom navigation
+========================= */
 
-.list-section {
-  padding: 18px 15px 35px;
+.bottom-nav {
+    height: 78px;
+    background: rgba(255,255,255,0.97);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    border-top: 1px solid #e7ded1;
+
+    position: relative;
+    z-index: 2000;
 }
 
-.list-title {
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 12px;
+.bottom-nav a {
+    text-decoration: none;
+    color: #65594f;
+
+    background: #f5efe7;
+
+    padding: 10px 17px;
+    border-radius: 22px;
+
+    font-size: 13px;
+    white-space: nowrap;
 }
 
-.spot-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+.bottom-nav a.active {
+    background: #8d6f5d;
+    color: white;
 }
 
-.spot-item {
-  background: white;
-  border-radius: 10px;
+/* =========================
+   Mobile
+========================= */
 
-  padding: 10px 8px;
+@media (max-width: 600px) {
 
-  border: 1px solid #e5ded2;
+    .header {
+        padding: 17px 14px 14px;
+    }
 
-  font-size: 13px;
+    .header h1 {
+        font-size: 22px;
+    }
 
-  cursor: pointer;
+    .header p {
+        font-size: 13px;
+    }
 
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    .map-wrap {
+        height: calc(100vh - 150px);
+        min-height: 450px;
+    }
+
+    .legend {
+        top: 10px;
+        left: 10px;
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .bottom-nav {
+        height: 72px;
+        gap: 7px;
+        padding: 0 8px;
+    }
+
+    .bottom-nav a {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
 }
-
-.spot-item:active {
-  transform: scale(0.98);
-}
-
-.spot-number {
-  display: inline-flex;
-
-  width: 23px;
-  height: 23px;
-
-  align-items: center;
-  justify-content: center;
-
-  margin-right: 5px;
-
-  border-radius: 50%;
-
-  background: #526b5b;
-  color: white;
-
-  font-size: 11px;
-}
-
-.footer {
-  text-align: center;
-  padding: 18px;
-  font-size: 11px;
-  color: #999;
-}
-
-@media (min-width: 700px) {
-
-  .header {
-    padding-top: 28px;
-  }
-
-  #map {
-    height: 620px;
-    max-width: 1100px;
-    margin: auto;
-  }
-
-  .list-section {
-    max-width: 900px;
-    margin: auto;
-  }
-
-  .spot-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 </style>
+
+<!-- Leaflet -->
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
 </head>
 
 <body>
 
+<!-- =========================
+     Header
+========================= -->
+
 <header class="header">
-
-  <h1>🗺️ 金陵25景點互動地圖</h1>
-
-  <p>
-    一眼掌握各景點大概位置 · 只作位置參考，不作導航用途
-  </p>
-
+    <h1>🗺️ 參考地圖</h1>
+    <p>金陵慢遊 2026｜行程相關地點位置一覽</p>
 </header>
 
 
-<div id="map"></div>
+<!-- =========================
+     Map
+========================= -->
 
+<div class="map-wrap">
 
-<section class="list-section">
+    <div id="map"></div>
 
-  <div class="list-title">
-    📍 25個景點
-  </div>
+    <div class="legend">
 
-  <div id="spotList" class="spot-list"></div>
+        <div class="legend-title">
+            📍 地圖說明
+        </div>
 
-</section>
+        <div class="legend-item">
+            <span class="legend-dot"></span>
+            景點
+        </div>
 
+        <div class="legend-item">
+            <span class="legend-dot hotel"></span>
+            酒店
+        </div>
 
-<div class="footer">
-  金陵慢遊 · 南京 2026
+        <div class="legend-item">
+            <span class="legend-dot airport"></span>
+            機場
+        </div>
+
+    </div>
+
 </div>
 
 
+<!-- =========================
+     Bottom navigation
+========================= -->
+
+<nav class="bottom-nav">
+
+    <a href="index.html">
+        🏠 首頁
+    </a>
+
+    <a href="itinerary.html">
+        📅 行程
+    </a>
+
+    <a href="spots.html">
+        📚 景點百科
+    </a>
+
+    <a href="afternoon.html">
+        🌿 下午漫遊
+    </a>
+
+    <a href="map.html" class="active">
+        🗺️ 參考地圖
+    </a>
+
+</nav>
+
+
+<!-- Leaflet JS -->
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+<!-- =========================
+     Load spots-data.js
+========================= -->
 
 <script src="spots-data.js"></script>
 
@@ -247,134 +334,177 @@ body {
 
 /* =========================================================
    建立地圖
-   ========================================================= */
+========================================================= */
 
 const map = L.map("map", {
-  zoomControl: true
+    zoomControl: true,
+    attributionControl: true
 });
 
 
-/* OpenStreetMap 底圖 */
+/* =========================================================
+   OpenStreetMap
+========================================================= */
 
 L.tileLayer(
-  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-  {
-    maxZoom: 19,
-    attribution: "&copy; OpenStreetMap contributors"
-  }
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+    }
 ).addTo(map);
 
 
 /* =========================================================
-   Marker
-   ========================================================= */
+   自訂 Marker
+========================================================= */
 
-const markers = {};
+function createMarkerIcon(number, type) {
 
+    let bg = "#b56d62";
 
-spots.forEach(spot => {
+    if (type === "住宿") {
+        bg = "#7c8e73";
+    }
 
-  const icon = L.divIcon({
+    if (type === "交通樞紐") {
+        bg = "#7c8495";
+    }
 
-    className: "",
+    return L.divIcon({
 
-    html: `
-      <div class="number-marker">
-        ${spot.number}
-      </div>
-    `,
+        className: "",
 
-    iconSize: [30, 30],
+        html: `
+            <div style="
+                width:34px;
+                height:34px;
+                border-radius:50%;
+                background:${bg};
+                border:3px solid white;
+                box-shadow:0 2px 7px rgba(0,0,0,.28);
 
-    iconAnchor: [15, 15],
+                display:flex;
+                align-items:center;
+                justify-content:center;
 
-    popupAnchor: [0, -15]
-  });
+                color:white;
+                font-size:11px;
+                font-weight:700;
+            ">
+                ${String(number).padStart(2, "0")}
+            </div>
+        `,
 
+        iconSize: [34, 34],
+        iconAnchor: [17, 17],
+        popupAnchor: [0, -18]
 
-  const marker = L.marker(
-    [spot.lat, spot.lng],
-    { icon: icon }
-  ).addTo(map);
-
-
-  marker.bindPopup(`
-    <div class="popup-title">
-      ${spot.number}. ${spot.name}
-    </div>
-
-    <div class="popup-address">
-      ${spot.address}
-    </div>
-
-    <a
-      class="guide-button"
-      href="spots.html#${spot.id}"
-    >
-      📚 查看景點百科
-    </a>
-  `);
-
-
-  markers[spot.id] = marker;
-
-});
+    });
+}
 
 
 /* =========================================================
-   自動顯示全部25點
-   ========================================================= */
+   加入 25 個地點
+========================================================= */
 
-const bounds = L.latLngBounds(
-  spots.map(spot => [spot.lat, spot.lng])
-);
-
-map.fitBounds(bounds, {
-  padding: [35, 35]
-});
-
-
-/* =========================================================
-   建立下面的景點清單
-   ========================================================= */
-
-const spotList = document.getElementById("spotList");
-
+const markers = [];
 
 spots.forEach(spot => {
 
-  const item = document.createElement("div");
+    if (
+        typeof spot.lat !== "number" ||
+        typeof spot.lng !== "number"
+    ) {
+        return;
+    }
 
-  item.className = "spot-item";
-
-  item.innerHTML = `
-    <span class="spot-number">
-      ${spot.number}
-    </span>
-    ${spot.shortName}
-  `;
-
-
-  item.addEventListener("click", () => {
-
-    map.flyTo(
-      [spot.lat, spot.lng],
-      16,
-      {
-        duration: 0.8
-      }
+    const marker = L.marker(
+        [spot.lat, spot.lng],
+        {
+            icon: createMarkerIcon(
+                spot.number,
+                spot.category
+            )
+        }
     );
 
-    setTimeout(() => {
-      markers[spot.id].openPopup();
-    }, 500);
 
-  });
+    /* =========================
+       Popup
+    ========================= */
 
+    const popupHTML = `
 
-  spotList.appendChild(item);
+        <div class="popup-box">
+
+            <div class="popup-number">
+                NO.${String(spot.number).padStart(2, "0")}
+            </div>
+
+            <div class="popup-title">
+                ${spot.name}
+            </div>
+
+            <div class="popup-address">
+                ${spot.address || ""}
+            </div>
+
+            ${
+                spot.number >= 3
+                ?
+                `
+                <a
+                    class="popup-link"
+                    href="spots.html#${spot.id}"
+                >
+                    📖 查看景點百科
+                </a>
+                `
+                :
+                ""
+            }
+
+        </div>
+
+    `;
+
+    marker.bindPopup(popupHTML);
+
+    marker.addTo(map);
+
+    markers.push(marker);
 
 });
+
+
+/* =========================================================
+   自動調整地圖範圍
+========================================================= */
+
+if (markers.length > 0) {
+
+    const group = L.featureGroup(markers);
+
+    map.fitBounds(
+        group.getBounds(),
+        {
+            padding: [35, 35]
+        }
+    );
+
+}
+
+
+/* =========================================================
+   手機體驗
+========================================================= */
+
+setTimeout(() => {
+
+    map.invalidateSize();
+
+}, 300);
 
 </script>
 
