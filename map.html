@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>參考地圖｜金陵慢遊 2026</title>
 
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
 <style>
+
+/* =========================
+   基本設定
+========================= */
+
 * {
     box-sizing: border-box;
 }
@@ -15,6 +29,7 @@ html,
 body {
     margin: 0;
     padding: 0;
+
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -22,264 +37,382 @@ body {
         "PingFang TC",
         "Microsoft JhengHei",
         sans-serif;
+
     background: #f7f3ec;
-    color: #40382f;
+    color: #3f3a35;
 }
 
-body {
-    min-height: 100vh;
-}
 
 /* =========================
-   Header
+   頁首
 ========================= */
 
 .header {
-    padding: 22px 18px 18px;
+
+    background: #eef1e9;
+
     text-align: center;
-    background: rgba(255,255,255,0.92);
-    border-bottom: 1px solid #e7ded1;
+
+    padding: 20px 15px 16px;
+
+    border-bottom: 1px solid #ddd8cf;
 }
 
 .header h1 {
+
     margin: 0;
+
     font-size: 25px;
-    font-weight: 700;
+
+    color: #596d60;
+
     letter-spacing: 1px;
 }
 
 .header p {
-    margin: 7px 0 0;
-    font-size: 14px;
-    color: #81766b;
+
+    margin: 6px 0 0;
+
+    font-size: 13px;
+
+    color: #80786f;
 }
 
+
 /* =========================
-   Map
+   地圖區
 ========================= */
 
-.map-wrap {
+.map-container {
+
     position: relative;
+
     width: 100%;
-    height: calc(100vh - 175px);
+
+    height: calc(100vh - 170px);
+
     min-height: 500px;
-    background: #e9e4da;
 }
 
 #map {
+
     width: 100%;
     height: 100%;
 }
 
+
 /* =========================
-   Legend
+   地圖說明
 ========================= */
 
-.legend {
+.map-legend {
+
     position: absolute;
-    top: 14px;
-    left: 14px;
+
+    top: 12px;
+    left: 12px;
+
     z-index: 1000;
 
     background: rgba(255,255,255,0.94);
-    border-radius: 12px;
+
     padding: 10px 13px;
 
-    box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+    border-radius: 12px;
 
-    font-size: 13px;
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.15);
+
+    font-size: 12px;
+
     line-height: 1.8;
 }
 
 .legend-title {
+
     font-weight: 700;
-    margin-bottom: 3px;
+
+    margin-bottom: 2px;
 }
 
-.legend-item {
+.legend-row {
+
     display: flex;
+
     align-items: center;
+
     gap: 6px;
 }
 
 .legend-dot {
-    width: 10px;
-    height: 10px;
+
+    width: 11px;
+    height: 11px;
+
     border-radius: 50%;
-    background: #b56d62;
+
+    background: #8b6f5c;
 }
 
 .legend-dot.hotel {
-    background: #7c8e73;
+
+    background: #6f8677;
 }
 
 .legend-dot.airport {
-    background: #7c8495;
+
+    background: #6d7d92;
 }
+
+
+/* =========================
+   Marker
+========================= */
+
+.number-marker {
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    border: 3px solid white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 2px 7px rgba(0,0,0,0.3);
+}
+
 
 /* =========================
    Popup
 ========================= */
 
-.popup-box {
-    min-width: 190px;
+.popup {
+
+    min-width: 185px;
+
     max-width: 250px;
 }
 
 .popup-number {
-    font-size: 12px;
-    color: #a28b78;
+
+    font-size: 11px;
+
+    color: #9a8878;
+
     margin-bottom: 3px;
 }
 
-.popup-title {
-    font-size: 17px;
+.popup-name {
+
+    font-size: 16px;
+
     font-weight: 700;
-    margin-bottom: 6px;
+
+    line-height: 1.4;
+
+    margin-bottom: 5px;
 }
 
 .popup-address {
+
     font-size: 12px;
+
     color: #777;
+
     line-height: 1.5;
-    margin-bottom: 10px;
+
+    margin-bottom: 9px;
 }
 
 .popup-link {
+
     display: inline-block;
-    padding: 7px 12px;
+
+    padding: 7px 11px;
+
     border-radius: 8px;
-    background: #8d6f5d;
+
+    background: #6f8577;
+
     color: white !important;
+
     text-decoration: none;
-    font-size: 13px;
+
+    font-size: 12px;
 }
 
+
 /* =========================
-   Bottom navigation
+   底部導航
 ========================= */
 
 .bottom-nav {
-    height: 78px;
-    background: rgba(255,255,255,0.97);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    border-top: 1px solid #e7ded1;
 
     position: relative;
+
     z-index: 2000;
+
+    height: 72px;
+
+    background: rgba(255,255,255,0.97);
+
+    border-top: 1px solid #ddd8cf;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 8px;
 }
 
 .bottom-nav a {
+
     text-decoration: none;
-    color: #65594f;
 
-    background: #f5efe7;
+    color: #625a52;
 
-    padding: 10px 17px;
-    border-radius: 22px;
+    font-size: 12px;
 
-    font-size: 13px;
+    padding: 9px 12px;
+
+    border-radius: 20px;
+
+    background: #f4efe7;
+
     white-space: nowrap;
 }
 
 .bottom-nav a.active {
-    background: #8d6f5d;
+
+    background: #6f8577;
+
     color: white;
 }
 
+
 /* =========================
-   Mobile
+   手機版
 ========================= */
 
 @media (max-width: 600px) {
 
     .header {
-        padding: 17px 14px 14px;
+
+        padding:
+            17px 12px 14px;
     }
 
     .header h1 {
+
         font-size: 22px;
     }
 
     .header p {
-        font-size: 13px;
+
+        font-size: 12px;
     }
 
-    .map-wrap {
-        height: calc(100vh - 150px);
+    .map-container {
+
+        height: calc(100vh - 145px);
+
         min-height: 450px;
     }
 
-    .legend {
-        top: 10px;
-        left: 10px;
-        padding: 8px 10px;
-        font-size: 12px;
+    .map-legend {
+
+        top: 9px;
+        left: 9px;
+
+        padding:
+            8px 10px;
+
+        font-size: 11px;
     }
 
     .bottom-nav {
-        height: 72px;
-        gap: 7px;
-        padding: 0 8px;
+
+        height: 70px;
+
+        gap: 5px;
+
+        padding: 0 5px;
     }
 
     .bottom-nav a {
-        padding: 9px 12px;
-        font-size: 12px;
+
+        font-size: 11px;
+
+        padding:
+            8px 9px;
     }
 }
-</style>
 
-<!-- Leaflet -->
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
+</style>
 
 </head>
 
+
 <body>
 
+
 <!-- =========================
-     Header
+     頁首
 ========================= -->
 
 <header class="header">
+
     <h1>🗺️ 參考地圖</h1>
-    <p>金陵慢遊 2026｜行程相關地點位置一覽</p>
+
+    <p>
+        金陵慢遊 2026 · 行程地點位置一覽
+    </p>
+
 </header>
 
 
 <!-- =========================
-     Map
+     地圖
 ========================= -->
 
-<div class="map-wrap">
+<div class="map-container">
 
     <div id="map"></div>
 
-    <div class="legend">
+
+    <div class="map-legend">
 
         <div class="legend-title">
             📍 地圖說明
         </div>
 
-        <div class="legend-item">
+        <div class="legend-row">
             <span class="legend-dot"></span>
             景點
         </div>
 
-        <div class="legend-item">
+        <div class="legend-row">
             <span class="legend-dot hotel"></span>
             酒店
         </div>
 
-        <div class="legend-item">
+        <div class="legend-row">
             <span class="legend-dot airport"></span>
             機場
         </div>
@@ -290,7 +423,7 @@ body {
 
 
 <!-- =========================
-     Bottom navigation
+     底部導航
 ========================= -->
 
 <nav class="bottom-nav">
@@ -311,34 +444,267 @@ body {
         🌿 下午漫遊
     </a>
 
-    <a href="map.html" class="active">
-        🗺️ 參考地圖
+    <a href="map.html"
+       class="active">
+        🗺️ 地圖
     </a>
 
 </nav>
 
 
-<!-- Leaflet JS -->
+<!-- Leaflet -->
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-
-<!-- =========================
-     Load spots-data.js
-========================= -->
-
-<script src="spots-data.js"></script>
+<script
+src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
 
 
 <script>
+
+/* =========================================================
+   25 個最終地點
+========================================================= */
+
+const mapSpots = [
+
+    {
+        no: 1,
+        name: "南京祿口國際機場（T2）",
+        lat: 31.73834,
+        lng: 118.88016,
+        type: "airport",
+        address: "江寧區空港南路"
+    },
+
+    {
+        no: 2,
+        name: "南京夫子廟秦淮遊船碼頭亞朵酒店",
+        lat: 32.020572,
+        lng: 118.792501,
+        type: "hotel",
+        address: "秦淮區大石壩街35號"
+    },
+
+    {
+        no: 3,
+        name: "夫子廟步行街",
+        lat: 32.0157931,
+        lng: 118.7773852,
+        type: "spot",
+        address: "秦淮區瞻園路7號"
+    },
+
+    {
+        no: 4,
+        name: "烏衣巷",
+        lat: 32.017116,
+        lng: 118.790742,
+        type: "spot",
+        address: "秦淮河文德橋南岸"
+    },
+
+    {
+        no: 5,
+        name: "江南貢院牌坊",
+        lat: 32.023086,
+        lng: 118.785478,
+        type: "spot",
+        address: "秦淮區貢院街65號"
+    },
+
+    {
+        no: 6,
+        name: "天下文樞",
+        lat: 32.0225,
+        lng: 118.7872,
+        type: "spot",
+        address: "夫子廟貢院街一帶"
+    },
+
+    {
+        no: 7,
+        name: "南京博物院",
+        lat: 32.041314,
+        lng: 118.824928,
+        type: "spot",
+        address: "玄武區中山東路321號"
+    },
+
+    {
+        no: 8,
+        name: "明孝陵",
+        lat: 32.058355,
+        lng: 118.839731,
+        type: "spot",
+        address: "玄武區石象路7號"
+    },
+
+    {
+        no: 9,
+        name: "德基藝術博物館",
+        lat: 32.044875,
+        lng: 118.785075,
+        type: "spot",
+        address: "玄武區中山路18號德基廣場二期8樓"
+    },
+
+    {
+        no: 10,
+        name: "總統府",
+        lat: 32.044258,
+        lng: 118.797318,
+        type: "spot",
+        address: "玄武區長江路292號"
+    },
+
+    {
+        no: 11,
+        name: "科舉博物館",
+        lat: 32.02171,
+        lng: 118.79049,
+        type: "spot",
+        address: "秦淮區貢院街95號"
+    },
+
+    {
+        no: 12,
+        name: "李香君故居（媚香樓）",
+        lat: 32.018432,
+        lng: 118.788833,
+        type: "spot",
+        address: "秦淮區大石壩街150號"
+    },
+
+    {
+        no: 13,
+        name: "秦淮河（夜遊畫舫碼頭）",
+        lat: 32.019666,
+        lng: 118.789292,
+        type: "spot",
+        address: "夫子廟遊船碼頭"
+    },
+
+    {
+        no: 14,
+        name: "老門東歷史街區",
+        lat: 32.01162,
+        lng: 118.78724,
+        type: "spot",
+        address: "秦淮區剪子巷一帶"
+    },
+
+    {
+        no: 15,
+        name: "三七八巷",
+        lat: 32.015373,
+        lng: 118.790913,
+        type: "spot",
+        address: "秦淮區飲虹園37號"
+    },
+
+    {
+        no: 16,
+        name: "高淳老街",
+        lat: 31.32018,
+        lng: 118.86773,
+        type: "spot",
+        address: "高淳區淳溪街道中山大街"
+    },
+
+    {
+        no: 17,
+        name: "漆橋古村",
+        lat: 31.37593,
+        lng: 118.992493,
+        type: "spot",
+        address: "高淳區漆橋村523號"
+    },
+
+    {
+        no: 18,
+        name: "瞻園",
+        lat: 32.020711,
+        lng: 118.785706,
+        type: "spot",
+        address: "秦淮區瞻園路128號"
+    },
+
+    {
+        no: 19,
+        name: "雞鳴寺",
+        lat: 32.057266,
+        lng: 118.798082,
+        type: "spot",
+        address: "玄武區雞鳴寺路1號"
+    },
+
+    {
+        no: 20,
+        name: "玄武湖公園",
+        lat: 32.074816,
+        lng: 118.792841,
+        type: "spot",
+        address: "玄武區玄武巷1號"
+    },
+
+    {
+        no: 21,
+        name: "南京城牆（中華門甕城）",
+        lat: 32.0128,
+        lng: 118.781821,
+        type: "spot",
+        address: "秦淮區中華路"
+    },
+
+    {
+        no: 22,
+        name: "頤和路民國公館區",
+        lat: 32.0657,
+        lng: 118.7639,
+        type: "spot",
+        address: "鼓樓區頤和路歷史文化街區"
+    },
+
+    {
+        no: 23,
+        name: "甘熙故居（南京民俗博物館）",
+        lat: 32.02816,
+        lng: 118.77642,
+        type: "spot",
+        address: "秦淮區中山南路400號"
+    },
+
+    {
+        no: 24,
+        name: "侵華日軍南京大屠殺遇難同胞紀念館",
+        lat: 32.035217,
+        lng: 118.742372,
+        type: "spot",
+        address: "建鄴區水西門大街418號"
+    },
+
+    {
+        no: 25,
+        name: "六朝博物館",
+        lat: 32.042840,
+        lng: 118.799124,
+        type: "spot",
+        address: "玄武區長江路302號"
+    }
+
+];
+
 
 /* =========================================================
    建立地圖
 ========================================================= */
 
 const map = L.map("map", {
+
     zoomControl: true,
+
     attributionControl: true
+
 });
 
 
@@ -347,166 +713,203 @@ const map = L.map("map", {
 ========================================================= */
 
 L.tileLayer(
+
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
     {
+
         maxZoom: 19,
-        attribution: '&copy; OpenStreetMap contributors'
+
+        attribution:
+            '&copy; OpenStreetMap contributors'
+
     }
+
 ).addTo(map);
 
 
 /* =========================================================
-   自訂 Marker
+   Marker 顏色
 ========================================================= */
 
-function createMarkerIcon(number, type) {
+function markerColor(type) {
 
-    let bg = "#b56d62";
+    if (type === "hotel") {
 
-    if (type === "住宿") {
-        bg = "#7c8e73";
+        return "#6f8677";
+
     }
 
-    if (type === "交通樞紐") {
-        bg = "#7c8495";
+    if (type === "airport") {
+
+        return "#6d7d92";
+
     }
 
-    return L.divIcon({
+    return "#9a7562";
 
-        className: "",
-
-        html: `
-            <div style="
-                width:34px;
-                height:34px;
-                border-radius:50%;
-                background:${bg};
-                border:3px solid white;
-                box-shadow:0 2px 7px rgba(0,0,0,.28);
-
-                display:flex;
-                align-items:center;
-                justify-content:center;
-
-                color:white;
-                font-size:11px;
-                font-weight:700;
-            ">
-                ${String(number).padStart(2, "0")}
-            </div>
-        `,
-
-        iconSize: [34, 34],
-        iconAnchor: [17, 17],
-        popupAnchor: [0, -18]
-
-    });
 }
 
 
 /* =========================================================
-   加入 25 個地點
+   建立 Marker
 ========================================================= */
 
-const markers = [];
+mapSpots.forEach(spot => {
 
-spots.forEach(spot => {
+    const icon = L.divIcon({
 
-    if (
-        typeof spot.lat !== "number" ||
-        typeof spot.lng !== "number"
-    ) {
-        return;
-    }
+        className: "",
+
+        html: `
+
+            <div
+                class="number-marker"
+                style="
+                    background:${markerColor(spot.type)};
+                "
+            >
+
+                ${String(spot.no).padStart(2, "0")}
+
+            </div>
+
+        `,
+
+        iconSize: [34,34],
+
+        iconAnchor: [17,17],
+
+        popupAnchor: [0,-17]
+
+    });
+
 
     const marker = L.marker(
+
         [spot.lat, spot.lng],
+
         {
-            icon: createMarkerIcon(
-                spot.number,
-                spot.category
-            )
+            icon: icon
         }
+
     );
 
 
-    /* =========================
-       Popup
-    ========================= */
+    let encyclopediaLink = "";
 
-    const popupHTML = `
 
-        <div class="popup-box">
+    /*
+       03–25 為景點百科項目。
+       01 機場、02 酒店不需要進入百科。
+    */
+
+    if (spot.no >= 3) {
+
+        encyclopediaLink = `
+
+            <a
+                class="popup-link"
+                href="spots.html#spot-${String(spot.no).padStart(2,"0")}"
+            >
+                📖 查看景點百科
+            </a>
+
+        `;
+
+    }
+
+
+    const popup = `
+
+        <div class="popup">
 
             <div class="popup-number">
-                NO.${String(spot.number).padStart(2, "0")}
+
+                NO.${String(spot.no).padStart(2,"0")}
+
             </div>
 
-            <div class="popup-title">
+            <div class="popup-name">
+
                 ${spot.name}
+
             </div>
 
             <div class="popup-address">
-                ${spot.address || ""}
+
+                ${spot.address}
+
             </div>
 
-            ${
-                spot.number >= 3
-                ?
-                `
-                <a
-                    class="popup-link"
-                    href="spots.html#${spot.id}"
-                >
-                    📖 查看景點百科
-                </a>
-                `
-                :
-                ""
-            }
+            ${encyclopediaLink}
 
         </div>
 
     `;
 
-    marker.bindPopup(popupHTML);
 
-    marker.addTo(map);
-
-    markers.push(marker);
+    marker
+        .bindPopup(popup)
+        .addTo(map);
 
 });
 
 
 /* =========================================================
-   自動調整地圖範圍
+   初始位置
 ========================================================= */
 
-if (markers.length > 0) {
+/*
+   以南京市區作為初始中心。
+   高淳會在縮放範圍中，但不會令市區景點變得太細。
+*/
 
-    const group = L.featureGroup(markers);
+map.setView(
 
-    map.fitBounds(
-        group.getBounds(),
-        {
-            padding: [35, 35]
-        }
-    );
+    [32.025, 118.795],
 
-}
+    12
+
+);
 
 
 /* =========================================================
-   手機體驗
+   手機版重新計算地圖
 ========================================================= */
 
 setTimeout(() => {
 
     map.invalidateSize();
 
-}, 300);
+}, 400);
+
+
+/* =========================================================
+   防止旋轉手機後地圖尺寸錯誤
+========================================================= */
+
+window.addEventListener(
+
+    "resize",
+
+    () => {
+
+        setTimeout(
+
+            () => map.invalidateSize(),
+
+            200
+
+        );
+
+    }
+
+);
 
 </script>
 
+
 </body>
+
 </html>
