@@ -354,63 +354,109 @@ body{
     margin-bottom:6px;
 }
 
-/* ===== Weather Block（極簡版 · 參考雲南頁面） ===== */
+/* ===== 天氣小工具（跟足雲南簡約風格） ===== */
 
-.weather-block {
+.weather-card {
     background: #e9eee8;
     border-radius: 18px;
-    padding: 20px 24px;
+    padding: 18px 24px;
     margin-top: 25px;
     box-shadow: 0 4px 15px rgba(80,70,50,.08);
     display: flex;
     align-items: center;
-    gap: 20px;
-}
-
-.weather-block .weather-icon {
-    font-size: 48px;
-    flex-shrink: 0;
-}
-
-.weather-block .weather-info {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
+    justify-content: space-between;
     flex-wrap: wrap;
+    gap: 8px 16px;
 }
 
-.weather-block .weather-info .city {
-    font-size: 18px;
+.weather-card .weather-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.weather-card .weather-icon {
+    font-size: 2.8rem;
+    line-height: 1;
+}
+
+.weather-card .weather-city {
+    font-size: 1.2rem;
     font-weight: 600;
     color: #4d5748;
+    letter-spacing: 0.5px;
 }
 
-.weather-block .weather-info .temp {
-    font-size: 38px;
+.weather-card .weather-desc {
+    font-size: 1.0rem;
+    color: #6a7a6a;
+    margin-top: 2px;
+}
+
+.weather-card .weather-temp {
+    font-size: 2.6rem;
     font-weight: 700;
     color: #3f3933;
+    letter-spacing: 0.5px;
 }
 
-.weather-block .weather-info .humidity {
-    font-size: 18px;
-    color: #5a6b5a;
+.weather-card .weather-temp-small {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #8a8a7a;
 }
 
-.weather-block .weather-info .desc {
-    font-size: 18px;
-    color: #5a6b5a;
+.weather-card .weather-extra {
+    text-align: right;
+    font-size: 0.95rem;
+    color: #6a7a6a;
+    margin-top: 2px;
 }
 
-.weather-block .loading {
-    font-size: 20px;
-    color: #888;
-    padding: 6px 0;
+.weather-loading {
+    color: #8a8a7a;
+    font-size: 1.1rem;
+    padding: 8px 0;
 }
 
-.weather-block .error {
-    font-size: 18px;
+.weather-error {
     color: #b07a6a;
-    padding: 6px 0;
+    font-size: 1.0rem;
+    padding: 8px 0;
+}
+
+@media (max-width: 600px) {
+    .weather-card {
+        padding: 16px 18px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+    }
+
+    .weather-card .weather-left {
+        gap: 12px;
+    }
+
+    .weather-card .weather-icon {
+        font-size: 2.2rem;
+    }
+
+    .weather-card .weather-temp {
+        font-size: 2.2rem;
+    }
+
+    .weather-card .weather-city {
+        font-size: 1.0rem;
+    }
+
+    .weather-card .weather-desc {
+        font-size: 0.9rem;
+    }
+
+    .weather-card .weather-extra {
+        text-align: left;
+        font-size: 0.9rem;
+    }
 }
 
 /* ===== Philosophy ===== */
@@ -494,29 +540,6 @@ footer{
     .tools{
 
         grid-template-columns:1fr 1fr 1fr;
-    }
-
-    .weather-block {
-        padding: 16px 18px;
-        gap: 14px;
-        flex-wrap: wrap;
-    }
-
-    .weather-block .weather-icon {
-        font-size: 38px;
-    }
-
-    .weather-block .weather-info .temp {
-        font-size: 32px;
-    }
-
-    .weather-block .weather-info .city {
-        font-size: 16px;
-    }
-
-    .weather-block .weather-info .humidity,
-    .weather-block .weather-info .desc {
-        font-size: 16px;
     }
 
     .intro h2 {
@@ -744,13 +767,11 @@ footer{
 
 
 <!-- =========================
-     WEATHER BLOCK（極簡版）
+     天氣小工具（跟足雲南簡約風格）
 ========================= -->
 
-<div class="weather-block" id="weatherBlock">
-
-    <div class="loading">🌤️ 讀取天氣中...</div>
-
+<div class="weather-card" id="weatherCard">
+    <div class="weather-loading">🌤️ 讀取天氣中...</div>
 </div>
 
 
@@ -818,10 +839,10 @@ const API_KEY = '236796fae33215243c53c1a42b345773';
 const CITY = 'Nanjing';
 const UNITS = 'metric';
 
-const weatherBlock = document.getElementById('weatherBlock');
+const weatherCard = document.getElementById('weatherCard');
 
 function getWeather() {
-    weatherBlock.innerHTML = '<div class="loading">🌤️ 讀取天氣中...</div>';
+    weatherCard.innerHTML = '<div class="weather-loading">🌤️ 讀取天氣中...</div>';
 
     const url =
         `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&units=${UNITS}&appid=${API_KEY}`;
@@ -837,19 +858,23 @@ function getWeather() {
             const desc = data.weather[0].description;
             const icon = getWeatherIcon(data.weather[0].icon);
 
-            weatherBlock.innerHTML = `
-                <div class="weather-icon">${icon}</div>
-                <div class="weather-info">
-                    <span class="city">📍 南京天氣</span>
-                    <span class="temp">${temp}°C</span>
-                    <span class="humidity">💧 濕度 ${humidity}%</span>
-                    <span class="desc">${desc}</span>
+            weatherCard.innerHTML = `
+                <div class="weather-left">
+                    <span class="weather-icon">${icon}</span>
+                    <div>
+                        <div class="weather-city">📍 南京天氣</div>
+                        <div class="weather-desc">${desc}</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="weather-temp">${temp}°C</div>
+                    <div class="weather-extra">💧 濕度 ${humidity}%</div>
                 </div>
             `;
         })
         .catch(err => {
-            weatherBlock.innerHTML = `
-                <div class="error">⚠️ 無法載入天氣資料，請稍後再試</div>
+            weatherCard.innerHTML = `
+                <div class="weather-error">⚠️ 無法載入天氣資料，請稍後再試</div>
             `;
             console.warn('Weather API error:', err);
         });
