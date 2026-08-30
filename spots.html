@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>金陵慢遊｜景點導遊</title>
+<title>金陵慢遊｜景點百科</title>
 
 <style>
    .spot-highlight {
@@ -194,8 +194,12 @@ header p{
 }
 
 .section p{
-    margin:0;
+    margin:0 0 10px;
     font-size:15px;
+}
+
+.section p:last-child {
+    margin-bottom:0;
 }
 
 ul{
@@ -438,6 +442,7 @@ body {
 </header>
 
 <div class="container">
+
 <!-- 景點百科快速入口 -->
 <section class="spot-index">
 
@@ -451,73 +456,31 @@ body {
 
   <div class="spot-list">
 
-    <button onclick="goSpot('南京博物院')">
-      🏛️ 南京博物院
-    </button>
-
-    <button onclick="goSpot('明孝陵')">
-      🍂 明孝陵
-    </button>
-
-    <button onclick="goSpot('總統府')">
-      🏛️ 南京總統府
-    </button>
-
-    <button onclick="goSpot('科舉博物館')">
-      📜 科舉博物館
-    </button>
-
-    <button onclick="goSpot('德基藝術博物館')">
-      🎨 德基藝術博物館
-    </button>
-
-    <button onclick="goSpot('李香君故居')">
-      🏮 李香君故居
-    </button>
-
-    <button onclick="goSpot('老門東')">
-      🏘️ 老門東
-    </button>
-
-    <button onclick="goSpot('三七八巷')">
-      🛍️ 三七八巷
-    </button>
-
-    <button onclick="goSpot('雞鳴寺')">
-      ⛩️ 雞鳴寺
-    </button>
-
-    <button onclick="goSpot('玄武湖')">
-      🌿 玄武湖
-    </button>
-
-    <button onclick="goSpot('南京城牆')">
-      🧱 南京城牆・中華門
-    </button>
-
-    <button onclick="goSpot('頤和路')">
-      🌳 頤和路民國公館區
-    </button>
-
-    <button onclick="goSpot('甘熙故居')">
-      🏡 甘熙故居
-    </button>
-
-    <button onclick="goSpot('高淳老街')">
-      🏮 高淳老街
-    </button>
-
-    <button onclick="goSpot('漆橋古村')">
-      🌿 漆橋古村
-    </button>
+    <button onclick="goSpot('南京博物院')">🏛️ 南京博物院</button>
+    <button onclick="goSpot('明孝陵')">🍂 明孝陵</button>
+    <button onclick="goSpot('總統府')">🏛️ 總統府</button>
+    <button onclick="goSpot('科舉博物館')">📜 科舉博物館</button>
+    <button onclick="goSpot('德基藝術博物館')">🎨 德基藝術博物館</button>
+    <button onclick="goSpot('六朝博物館')">🏛️ 六朝博物館</button>
+    <button onclick="goSpot('李香君故居')">🏮 李香君故居</button>
+    <button onclick="goSpot('老門東')">🏘️ 老門東</button>
+    <button onclick="goSpot('三七八巷')">🛍️ 三七八巷</button>
+    <button onclick="goSpot('瞻園')">🌿 瞻園</button>
+    <button onclick="goSpot('雞鳴寺')">⛩️ 雞鳴寺</button>
+    <button onclick="goSpot('玄武湖')">🌿 玄武湖</button>
+    <button onclick="goSpot('南京城牆')">🧱 南京城牆</button>
+    <button onclick="goSpot('頤和路')">🌳 頤和路</button>
+    <button onclick="goSpot('甘熙故居')">🏡 甘熙故居</button>
+    <button onclick="goSpot('高淳老街')">🏮 高淳老街</button>
+    <button onclick="goSpot('漆橋古村')">🌿 漆橋古村</button>
 
   </div>
 
 </section>
-<!-- 南京博物院 -->
 
+
+<!-- 1. 南京博物院 -->
 <div class="spot">
-
 <div class="spot-title">
 <h2>1. 南京博物院</h2>
 <div class="subtitle">中國三大博物館之一 · 江蘇五千年文明縮影</div>
@@ -525,940 +488,685 @@ body {
 
 <div class="section">
 <h3>📖 歷史背景</h3>
-
-<p>
-南京博物院是中國三大博物館之一，擁有超過42萬件珍貴藏品。
-館區由歷史館、特展館、數字館、民國館及藝術館組成，
-不同展館各有特色，非常適合用半日時間慢慢探索。
-</p>
+<p>南京博物院是中國三大博物館之一，擁有42萬件珍貴藏品。館區分為歷史館、特展館、數字館、民國館和藝術館，三幢建築相連。</p>
 </div>
 
 <div class="section">
 <h3>✨ 不可錯過的看點</h3>
-
 <ul>
-<li><b>歷史館：</b>由遠古至明清展示江蘇文明，金縷衣、銀縷衣及「竹林七賢」磚畫值得留意。</li>
-
-<li><b>民國館：</b>完整還原民國街景，郵局、商店等細節非常有趣，甚至有民國小火車。</li>
-
-<li><b>數字館：</b>以多媒體方式呈現《南都繁會景物圖卷》及《韓熙載夜宴圖》，互動性很高。</li>
+<li><b>歷史館：</b>從遠古到明清按時代順序陳列文物，行走其中如同漫步江蘇上下五千年文明。鎮館之寶包括金縷衣、銀縷衣，以及南北朝時期刻有「竹林七賢」的磚雕牆。</li>
+<li><b>民國館：</b>南博最具特色的展館，復原了一整條民國街道。服裝店真的賣旗袍、郵局真的賣郵票。建築內部彼此連通，可從一棟樓穿到另一棟的二層，俯瞰街景。館內甚至陳列著一列民國小火車，踏進展館瞬間彷彿穿越時空。</li>
+<li><b>數字館：</b>以多媒體呈現明代《南都繁會景物圖卷》——堪稱江南版《清明上河圖》；還有動態展示的《韓熙載夜宴圖》，沿弧形牆面行走如同走進畫中。</li>
 </ul>
-
 </div>
 
 <div class="section">
-
 <h3>🎫 導遊攻略</h3>
-
 <div class="info-grid">
-
-<div class="info">
-<strong>⏱ 建議時間</strong>
-<span>約 3 小時</span>
+<div class="info"><strong>⏱ 建議時間</strong><span>約 3 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>免費，需預約</span></div>
+<div class="info"><strong>🕐 開放</strong><span>週二至週日 9:00–17:00</span></div>
+<div class="info"><strong>🚕 酒店車程</strong><span>約 15 分鐘</span></div>
+<div class="info"><strong>🚶 步行難度</strong><span>中等，館區較大</span></div>
+<div class="info"><strong>📍 地址</strong><span>中山東路321號</span></div>
 </div>
-
-<div class="info">
-<strong>🎫 門票</strong>
-<span>免費，需預約</span>
-</div>
-
-<div class="info">
-<strong>🕐 開放</strong>
-<span>週二至週日 9:00–17:00</span>
-</div>
-
-<div class="info">
-<strong>🚕 酒店車程</strong>
-<span>約 15–20 分鐘</span>
-</div>
-
-<div class="info">
-<strong>🚶 步行難度</strong>
-<span>中等，館區較大</span>
-</div>
-
-<div class="info">
-<strong>📍 地址</strong>
-<span>中山東路321號</span>
-</div>
-
-</div>
-
 <br>
-
-<div class="mood">
-<span class="mood-title">🌿 漫遊程度</span>
-<span>🌿🌿🌿🌿</span>
-</div>
-
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
 </div>
 
 <div class="section">
-
 <h3>💡 導遊建議</h3>
-
-<p>
-如果團友對歷史、文物有興趣，南博非常值得預留完整上午。
-部分團友可以參加專業講解團，其他人則可以按照自己的興趣自由參觀。
-兩種玩法可以同時進行，最後再約定時間集合。
-</p>
-
+<p>務必提前7天通過官方小程序預約，門票免費但名額極其搶手。建議預留3小時，可租借講解器（租金20元）。部分團友可以參加專業講解團，其他人則可按自己興趣自由參觀。</p>
 </div>
 
 <div class="section">
-
 <div class="buttons">
-
-<a class="btn map"
-href="https://uri.amap.com/navigation?to=118.8325,32.0408,南京博物院"
-target="_blank">
-🗺️ 高德導航
-</a>
-
-<a class="btn search"
-href="https://www.amap.com/search?query=南京博物院"
-target="_blank">
-🔎 查看地圖
-</a>
-
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=南京博物院">🗺️ 查看地圖</a>
 </div>
-
 </div>
-
 </div>
 
 
-<!-- 明孝陵 -->
-
+<!-- 2. 明孝陵 -->
 <div class="spot">
-
 <div class="spot-title">
 <h2>2. 明孝陵</h2>
 <div class="subtitle">世界文化遺產 · 南京秋色之魂</div>
 </div>
 
 <div class="section">
-
 <h3>📖 歷史背景</h3>
-
-<p>
-明孝陵是明太祖朱元璋與馬皇后的陵寢，
-屬於世界文化遺產「明清皇家陵寢」的重要組成部分。
-陵墓神道並非筆直，而是依山勢蜿蜒，
-形成明孝陵非常獨特的空間布局。
-</p>
-
+<p>明孝陵是明太祖朱元璋與馬皇后的陵寢，世界文化遺產明清皇家陵寢的組成部分。與前朝帝王陵墓不同，明孝陵神道蜿蜒曲折，環繞梅花山形成北斗七星狀。</p>
 </div>
 
 <div class="section">
-
 <h3>✨ 不可錯過的看點</h3>
-
 <ul>
-
-<li>
-<b>石象路：</b>
-全長約615米，排列獅子、獬豸、駱駝、大象、麒麟、馬等石獸，
-11月初秋色非常漂亮。
-</li>
-
-<li>
-<b>翁仲路：</b>
-八尊文武官石像守護神道，歷史氣氛濃厚。
-</li>
-
-<li>
-<b>方城明樓：</b>
-明孝陵核心建築，可欣賞紫金山景色。
-</li>
-
+<li><b>石象路（「南京最美600米」）：</b>神道東段全長615米，兩側依次排列獅子、獬豸、駱駝、大象、麒麟、馬六種石獸，每種兩跪兩立，共12對24件。最大石象重達80噸。11月初銀杏金黃、紅楓似火，色彩斑斕，是南京秋色的巔峰之作。</li>
+<li><b>翁仲路：</b>神道北段，立有八尊文武官像（兩對武將、兩對文臣），源於秦將阮翁仲守陵典故。</li>
+<li><b>方城明樓：</b>明孝陵核心建築，登上明樓可遠眺紫金山全景。</li>
 </ul>
-
 </div>
 
 <div class="section">
-
 <h3>🎫 導遊攻略</h3>
-
 <div class="info-grid">
-
-<div class="info">
-<strong>⏱ 建議時間</strong>
-<span>約 2.5 小時</span>
+<div class="info"><strong>⏱ 建議時間</strong><span>約 2.5 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>約 ¥70</span></div>
+<div class="info"><strong>🕐 開放</strong><span>約 6:30–18:30</span></div>
+<div class="info"><strong>🚕 酒店車程</strong><span>約 30 分鐘</span></div>
+<div class="info"><strong>🚶 步行難度</strong><span>較高，景區範圍大</span></div>
+<div class="info"><strong>🚌 建議</strong><span>善用景區觀光車（¥10/程）</span></div>
 </div>
-
-<div class="info">
-<strong>🎫 門票</strong>
-<span>約 ¥70</span>
-</div>
-
-<div class="info">
-<strong>🕐 開放</strong>
-<span>約 6:30–18:30</span>
-</div>
-
-<div class="info">
-<strong>🚕 酒店車程</strong>
-<span>約 25–35 分鐘</span>
-</div>
-
-<div class="info">
-<strong>🚶 步行難度</strong>
-<span>較高，景區範圍大</span>
-</div>
-
-<div class="info">
-<strong>🚌 建議</strong>
-<span>善用景區觀光車</span>
-</div>
-
-</div>
-
 <br>
-
-<div class="mood">
-<span class="mood-title">🌿 漫遊程度</span>
-<span>🌿🌿</span>
-</div>
-
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿</span></div>
 </div>
 
 <div class="section">
-
 <h3>💡 導遊建議</h3>
-
-<p>
-呢個景點最重要唔係「行得多」，而係「行得啱」。
-建議集中欣賞石象路、翁仲路及方城，
-並利用觀光車減少不必要步行。
-11月初正值南京秋色季節，上午光線及氣溫通常較舒服，
-所以安排作核心上午行程非常合理。
-</p>
-
+<p>建議上午8:00前抵達，避開人潮並捕捉最佳光線。景區極大，務必乘坐景區觀光車減少步行。集中欣賞石象路、翁仲路及方城明樓即可。</p>
 </div>
 
 <div class="section">
-
 <div class="buttons">
-
-<a class="btn map"
-href="https://uri.amap.com/navigation?to=118.8518,32.0587,明孝陵"
-target="_blank">
-🗺️ 高德導航
-</a>
-
-<a class="btn search"
-href="https://www.amap.com/search?query=明孝陵"
-target="_blank">
-🔎 查看地圖
-</a>
-
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=明孝陵">🗺️ 查看地圖</a>
 </div>
-
 </div>
-
 </div>
 
 
-<!-- 總統府 -->
-
+<!-- 3. 總統府 -->
 <div class="spot">
-
 <div class="spot-title">
-
-<h2>3. 南京總統府</h2>
-
-<div class="subtitle">
-中國近代史縮影 · 六百年歷史建築群
-</div>
-
+<h2>3. 總統府</h2>
+<div class="subtitle">中國近代史縮影 · 六百年歷史建築群</div>
 </div>
 
 <div class="section">
-
 <h3>📖 歷史背景</h3>
-
-<p>
-南京總統府擁有超過600年歷史，
-歷經明代王府、清代兩江總督署、
-太平天國天王府，以及民國總統府等重要歷史階段。
-1912年，孫中山在此宣誓就任中華民國臨時大總統。
-</p>
-
+<p>南京總統府是中國近代建築遺存中規模最大、保存最完整的建築群，有600多年歷史。明初為歸德侯府和漢王府；清代為兩江總督署、江寧織造署；太平天國時改建為天王府；1912年孫中山在此宣誓就職臨時大總統。</p>
 </div>
 
 <div class="section">
-
 <h3>✨ 不可錯過的看點</h3>
-
 <ul>
-
-<li>
-<b>孫中山臨時大總統辦公室：</b>
-了解南京與近代中國歷史的重要位置。
-</li>
-
-<li>
-<b>煦園：</b>
-典型江南園林，與總統府的近代建築形成有趣對比。
-</li>
-
-<li>
-<b>太平天國遺址：</b>
-了解南京在19世紀的歷史變遷。
-</li>
-
-<li>
-<b>民國建築群：</b>
-可以觀察近代中國建築由傳統走向現代的轉變。
-</li>
-
+<li><b>中西建築融合：</b>既有中國傳統江南園林（煦園），也有西風東漸的民國建築遺存。</li>
+<li><b>三大展區：</b>中區為國民政府及總統府舊址；西區有孫中山臨時大總統辦公室、西花園；東區有行政院舊址等。</li>
 </ul>
-
 </div>
 
 <div class="section">
-
 <h3>🎫 導遊攻略</h3>
-
 <div class="info-grid">
-
-<div class="info">
-<strong>⏱ 建議時間</strong>
-<span>2–2.5 小時</span>
+<div class="info"><strong>⏱ 建議時間</strong><span>約 2.5 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>約 ¥35（60-69歲半價）</span></div>
+<div class="info"><strong>🕐 開放</strong><span>8:30–17:00（週一閉館）</span></div>
+<div class="info"><strong>🚕 酒店車程</strong><span>約 10 分鐘</span></div>
+<div class="info"><strong>🚶 步行難度</strong><span>中等</span></div>
+<div class="info"><strong>📍 地址</strong><span>長江路292號</span></div>
 </div>
-
-<div class="info">
-<strong>🎫 門票</strong>
-<span>約 ¥35</span>
-</div>
-
-<div class="info">
-<strong>🕐 開放</strong>
-<span>8:30–17:00</span>
-</div>
-
-<div class="info">
-<strong>🚕 酒店車程</strong>
-<span>約 10–15 分鐘</span>
-</div>
-
-<div class="info">
-<strong>🚶 步行難度</strong>
-<span>中等</span>
-</div>
-
-<div class="info">
-<strong>📍 地址</strong>
-<span>長江路292號</span>
-</div>
-
-</div>
-
 <br>
-
-<div class="mood">
-<span class="mood-title">🌿 漫遊程度</span>
-<span>🌿🌿🌿</span>
-</div>
-
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿</span></div>
 </div>
 
 <div class="section">
-
 <h3>💡 導遊建議</h3>
-
-<p>
-如果第一次來南京，總統府非常值得保留。
-建議不要只把它當成「睇建築」，
-而是按照明代王府 → 太平天國 → 民國總統府的時間線參觀，
-會更加容易理解南京在中國近代史中的特殊地位。
-</p>
-
+<p>建議按照明代王府 → 太平天國 → 民國總統府的時間線參觀，會更加容易理解南京在中國近代史中的特殊地位。需提前在「南京總統府」小程序預約。</p>
 </div>
 
 <div class="section">
-
 <div class="buttons">
-
-<a class="btn map"
-href="https://uri.amap.com/navigation?to=118.7986,32.0457,南京總統府"
-target="_blank">
-🗺️ 高德導航
-</a>
-
-<a class="btn search"
-href="https://www.amap.com/search?query=南京總統府"
-target="_blank">
-🔎 查看地圖
-</a>
-
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=總統府">🗺️ 查看地圖</a>
 </div>
-
 </div>
-
 </div>
 
 
-<!-- 科舉博物館 -->
-
+<!-- 4. 科舉博物館 -->
 <div class="spot">
-
 <div class="spot-title">
-
-<h2>4. 中國科舉博物館</h2>
-
-<div class="subtitle">
-江南貢院遺址 · 中國唯一地下博物館
-</div>
-
+<h2>4. 科舉博物館</h2>
+<div class="subtitle">中國唯一地下博物館 · 江南貢院遺址</div>
 </div>
 
 <div class="section">
-
 <h3>📖 歷史背景</h3>
-
-<p>
-中國科舉博物館以江南貢院遺址為基礎修建。
-江南貢院曾是中國規模最大的科舉考場，
-鼎盛時期擁有超過兩萬間號舍。
-今日博物館以地下空間重新呈現中國科舉制度的發展。
-</p>
-
+<p>中國科舉博物館以江南貢院遺址為基礎修建。江南貢院曾是中國最大考場，佔地30餘萬平方米，僅號舍就有20644間。</p>
 </div>
 
 <div class="section">
-
 <h3>✨ 不可錯過的看點</h3>
-
 <ul>
-
-<li>
-<b>地下博物館：</b>
-建築以地下空間為主，設計十分獨特。
-</li>
-
-<li>
-<b>130米入口坡道：</b>
-象徵科舉制度1300多年歷史。
-</li>
-
-<li>
-<b>五大展區：</b>
-為國求賢、魚龍變化、金榜題名、金陵佳話、源遠流長。
-</li>
-
-<li>
-<b>珍貴文物：</b>
-科第世家牌坊、宋代陶俑及清代科舉文書等。
-</li>
-
+<li><b>獨特建築：</b>中國唯一一座地下博物館。屋頂是一方如明鏡的「墨池」，四周環繞竹簡。入口坡道長130米，象徵科舉制度1300多年歷史。</li>
+<li><b>五大展區：</b>為國求賢、魚龍變化、金榜題名、金陵佳話、源遠流長。</li>
+<li><b>珍貴文物：</b>科第世家牌坊、宋代「唯有讀書高」陶俑、林則徐制定的規約、光緒二十年大金榜等。</li>
 </ul>
-
 </div>
 
 <div class="section">
-
 <h3>🎫 導遊攻略</h3>
-
 <div class="info-grid">
-
-<div class="info">
-<strong>⏱ 建議時間</strong>
-<span>1.5–2 小時</span>
+<div class="info"><strong>⏱ 建議時間</strong><span>1.5–2 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>約 ¥50（60-69歲半價）</span></div>
+<div class="info"><strong>🕐 開放</strong><span>約 9:00–21:30</span></div>
+<div class="info"><strong>🚕 酒店距離</strong><span>步行約 3–5 分鐘</span></div>
+<div class="info"><strong>🚶 步行難度</strong><span>低</span></div>
+<div class="info"><strong>☔ 天氣適應</strong><span>★★★★★</span></div>
 </div>
-
-<div class="info">
-<strong>🎫 門票</strong>
-<span>約 ¥50</span>
-</div>
-
-<div class="info">
-<strong>🕐 開放</strong>
-<span>約 9:00–21:30</span>
-</div>
-
-<div class="info">
-<strong>🚕 酒店距離</strong>
-<span>步行約 3–5 分鐘</span>
-</div>
-
-<div class="info">
-<strong>🚶 步行難度</strong>
-<span>低至中等</span>
-</div>
-
-<div class="info">
-<strong>☔ 天氣適應</strong>
-<span>★★★★★</span>
-</div>
-
-</div>
-
 <br>
-
-<div class="mood">
-<span class="mood-title">🌿 漫遊程度</span>
-<span>🌿🌿🌿🌿🌿</span>
-</div>
-
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿🌿</span></div>
 </div>
 
 <div class="section">
-
 <h3>💡 導遊建議</h3>
-
-<p>
-非常適合作為下午行程。
-全程室內、有空調，而且距離酒店極近，
-如果上午行程後覺得有點攰，可以慢慢參觀，
-不需要再長途乘車。
-</p>
-
-</div>
-
-</div>
-
-
-<!-- 雞鳴寺 -->
-
-<div class="spot">
-
-<div class="spot-title">
-
-<h2>5. 雞鳴寺</h2>
-
-<div class="subtitle">
-南朝第一寺 · 南京最具代表性的古寺之一
-</div>
-
+<p>全地下室、恆溫空調，非常適合午後參觀。開放至22:00，時間從容。位於夫子廟核心區，從酒店步行可達。</p>
 </div>
 
 <div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=科舉博物館">🗺️ 查看地圖</a>
+</div>
+</div>
+</div>
 
+
+<!-- 5. 德基藝術博物館 -->
+<div class="spot">
+<div class="spot-title">
+<h2>5. 德基藝術博物館</h2>
+<div class="subtitle">全球唯一的「0點博物館」</div>
+</div>
+
+<div class="section">
 <h3>📖 歷史背景</h3>
-
-<p>
-雞鳴寺歷史悠久，有「南朝第一寺」之稱。
-寺院坐落於雞籠山，與玄武湖及台城形成南京非常經典的城市景觀。
-秋季寺院黃牆、銀杏與玄武湖景色尤其漂亮。
-</p>
-
+<p>德基藝術博物館位於德基廣場二期8樓，是全球唯一常態化開放至午夜0點的博物館。</p>
 </div>
 
 <div class="section">
-
 <h3>✨ 不可錯過的看點</h3>
-
 <ul>
-
-<li>古寺建築與黃牆景色。</li>
-
-<li>藥師佛塔及周邊城市景觀。</li>
-
-<li>秋季銀杏與玄武湖景色。</li>
-
+<li><b>《金陵圖》數字藝術展：</b>清代宮廷畫師馮寧1794年所作，描繪宋代南京城市風貌。展覽以110米長、3.6米高的超大LED屏呈現。觀眾戴上手環、選擇宋代人物角色，即可「穿越」到畫中，與533位畫中人互動。</li>
 </ul>
-
 </div>
 
 <div class="section">
-
 <h3>🎫 導遊攻略</h3>
-
 <div class="info-grid">
-
-<div class="info">
-<strong>⏱ 建議時間</strong>
-<span>1–1.5 小時</span>
+<div class="info"><strong>⏱ 建議時間</strong><span>約 1.5 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>約 80–140 元</span></div>
+<div class="info"><strong>🕐 開放</strong><span>週二 12:00–24:00；其他 10:00–24:00</span></div>
+<div class="info"><strong>🚕 酒店車程</strong><span>約 10 分鐘</span></div>
+<div class="info"><strong>🚶 步行難度</strong><span>低</span></div>
+<div class="info"><strong>📍 地址</strong><span>中山路18號德基廣場二期8樓</span></div>
 </div>
-
-<div class="info">
-<strong>🎫 門票</strong>
-<span>約 ¥10</span>
-</div>
-
-<div class="info">
-<strong>🕐 開放</strong>
-<span>7:30–17:00</span>
-</div>
-
-<div class="info">
-<strong>🚕 酒店車程</strong>
-<span>約 20 分鐘</span>
-</div>
-
-<div class="info">
-<strong>🚶 步行難度</strong>
-<span>中等，有坡度</span>
-</div>
-
-<div class="info">
-<strong>💡 最佳組合</strong>
-<span>雞鳴寺＋玄武湖</span>
-</div>
-
-</div>
-
 <br>
-
-<div class="mood">
-<span class="mood-title">🌿 漫遊程度</span>
-<span>🌿🌿🌿</span>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- 玄武湖 -->
-
-<div class="spot">
-
-<div class="spot-title">
-
-<h2>6. 玄武湖</h2>
-
-<div class="subtitle">
-金陵明珠 · 城市中的大型湖泊公園
-</div>
-
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
 </div>
 
 <div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=德基藝術博物館">🗺️ 查看地圖</a>
+</div>
+</div>
+</div>
 
+
+<!-- 6. 六朝博物館 -->
+<div class="spot">
+<div class="spot-title">
+<h2>6. 六朝博物館</h2>
+<div class="subtitle">貝氏光影美學 · 六朝文物精華</div>
+</div>
+
+<div class="section">
 <h3>📖 歷史背景</h3>
-
-<p>
-玄武湖擁有超過1600年歷史，
-是南京重要的城市景觀與休閒空間。
-湖中五洲各具特色，秋季銀杏、菊花及湖景非常適合慢遊。
-</p>
-
+<p>六朝博物館展示六朝文物，由貝聿銘家族設計，光影空間極美。館藏以六朝時期陶瓷、石雕、磚畫為主，展陳雅緻。</p>
 </div>
 
 <div class="section">
+<h3>🎫 導遊攻略</h3>
+<div class="info-grid">
+<div class="info"><strong>⏱ 建議時間</strong><span>1–1.5 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>約 ¥30（60-69歲半價）</span></div>
+<div class="info"><strong>🕐 開放</strong><span>週二至週日 9:00–17:00（週一閉館）</span></div>
+<div class="info"><strong>🚕 酒店車程</strong><span>約 10 分鐘</span></div>
+<div class="info"><strong>📍 地址</strong><span>長江路302號（總統府旁）</span></div>
+</div>
+<br>
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
+</div>
 
+<div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=六朝博物館">🗺️ 查看地圖</a>
+</div>
+</div>
+</div>
+
+
+<!-- 7. 李香君故居 -->
+<div class="spot">
+<div class="spot-title">
+<h2>7. 李香君故居（媚香樓）</h2>
+<div class="subtitle">《桃花扇》中的秦淮名妓</div>
+</div>
+
+<div class="section">
+<h3>📖 歷史背景</h3>
+<p>李香君是明末「秦淮八豔」之一，清初戲劇家孔尚任名著《桃花扇》中的女主角。媚香樓是十里秦淮兩岸唯一保存的明清時期古建築，已有300多年歷史。</p>
+</div>
+
+<div class="section">
 <h3>✨ 不可錯過的看點</h3>
-
 <ul>
-
-<li>梁洲銀杏景觀。</li>
-
-<li>湖面與紫金山城市景觀。</li>
-
-<li>五洲園林及湖畔步道。</li>
-
+<li><b>唯一倖存的明清河房建築：</b>背依秦淮河，擁有私家小碼頭，李香君當年從這裡出入畫舫。</li>
+<li><b>兩層木樓：</b>樓上為李香君與侯方域的新房，陳列著扇面、琵琶等展品，以及後人歌頌李香君的詩聯。</li>
 </ul>
-
 </div>
 
 <div class="section">
-
 <h3>🎫 導遊攻略</h3>
-
 <div class="info-grid">
-
-<div class="info">
-<strong>⏱ 建議時間</strong>
-<span>1.5–3 小時</span>
+<div class="info"><strong>⏱ 建議時間</strong><span>約 30 分鐘</span></div>
+<div class="info"><strong>🎫 門票</strong><span>約 ¥10（60歲以上免票）</span></div>
+<div class="info"><strong>🕐 開放</strong><span>約 9:00–22:00</span></div>
+<div class="info"><strong>🚕 酒店距離</strong><span>步行約 5 分鐘</span></div>
+<div class="info"><strong>📍 地址</strong><span>大石壩街150號</span></div>
 </div>
-
-<div class="info">
-<strong>🎫 門票</strong>
-<span>免費</span>
-</div>
-
-<div class="info">
-<strong>🕐 開放</strong>
-<span>6:00–21:00</span>
-</div>
-
-<div class="info">
-<strong>🚕 酒店車程</strong>
-<span>約 20–25 分鐘</span>
-</div>
-
-<div class="info">
-<strong>🚶 步行難度</strong>
-<span>中等，範圍很大</span>
-</div>
-
-<div class="info">
-<strong>🚌 建議</strong>
-<span>乘觀光車</span>
-</div>
-
-</div>
-
 <br>
-
-<div class="mood">
-<span class="mood-title">🌿 漫遊程度</span>
-<span>🌿🌿🌿🌿</span>
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿🌿</span></div>
 </div>
 
+<div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=李香君故居">🗺️ 查看地圖</a>
+</div>
+</div>
 </div>
 
-</div>
 
-
-<!-- 老門東 -->
-
+<!-- 8. 老門東 -->
 <div class="spot">
-
 <div class="spot-title">
-
-<h2>7. 老門東歷史街區</h2>
-
-<div class="subtitle">
-明清街巷 · 南京傳統小吃集中地
-</div>
-
+<h2>8. 老門東歷史街區</h2>
+<div class="subtitle">明清街巷 · 南京傳統小吃集中地</div>
 </div>
 
 <div class="section">
-
-<h3>📖 景點背景</h3>
-
-<p>
-老門東保存大量明清風格街巷及傳統建築，
-是了解南京城市生活與飲食文化的好地方。
-相比大型景區，這裡更適合隨意行走、買手信及感受氣氛。
-</p>
-
+<h3>📖 歷史背景</h3>
+<p>老門東保存大量明清風格街巷及傳統建築，是了解南京城市生活與飲食文化的好地方。相比大型景區，這裡更適合隨意行走、買手信及感受氣氛。</p>
 </div>
 
 <div class="section">
-
 <h3>✨ 不可錯過</h3>
-
 <ul>
-
-<li>明清風格街巷。</li>
-
-<li>蔣有記鍋貼。</li>
-
-<li>梅花糕、糖芋苗等南京小吃。</li>
-
-<li>傳統店舖及手信。</li>
-
+<li>蔣有記鍋貼、陸氏梅花糕、藍老大糖芋苗等南京小吃</li>
+<li>明清風格街巷與傳統店舖</li>
 </ul>
-
 </div>
 
 <div class="section">
-
 <h3>🎫 導遊攻略</h3>
-
 <div class="info-grid">
-
-<div class="info">
-<strong>⏱ 建議時間</strong>
-<span>1–2 小時</span>
+<div class="info"><strong>⏱ 建議時間</strong><span>1–2 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>免費</span></div>
+<div class="info"><strong>🚕 酒店距離</strong><span>約 1.2 公里（步行15分鐘）</span></div>
 </div>
-
-<div class="info">
-<strong>🎫 門票</strong>
-<span>免費</span>
-</div>
-
-<div class="info">
-<strong>🚕 酒店距離</strong>
-<span>約 1.2 公里</span>
-</div>
-
-<div class="info">
-<strong>🚶 步行</strong>
-<span>約 15 分鐘</span>
-</div>
-
-</div>
-
 <br>
-
-<div class="mood">
-<span class="mood-title">🌿 漫遊程度</span>
-<span>🌿🌿🌿🌿</span>
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
 </div>
 
+<div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=老門東">🗺️ 查看地圖</a>
+</div>
+</div>
 </div>
 
-</div>
 
-
-<!-- 頤和路 -->
-
+<!-- 9. 三七八巷 -->
 <div class="spot">
-
 <div class="spot-title">
-
-<h2>8. 頤和路民國公館區</h2>
-
-<div class="subtitle">
-梧桐深處 · 一條頤和路，半部民國史
-</div>
-
+<h2>9. 三七八巷</h2>
+<div class="subtitle">藏在居民樓下的地道菜市場</div>
 </div>
 
 <div class="section">
-
-<h3>📖 景點背景</h3>
-
-<p>
-頤和路及周邊街區保存大量民國時期建築，
-包括使領館、名人公館及不同風格的住宅。
-相比大型博物館，這裡更適合用散步方式慢慢感受南京民國氣息。
-</p>
-
+<h3>📖 歷史背景</h3>
+<p>藏在居民樓下的地道菜市場，充滿老南京煙火氣。可品嚐剛出爐的燒餅、現炸油條、蒸兒糕。環境接地氣，適合喜歡體驗本地生活的長輩。</p>
 </div>
 
 <div class="section">
-
-<h3>✨ 不可錯過</h3>
-
-<ul>
-
-<li>民國洋房建築群。</li>
-<li>梧桐街道。</li>
-<li>安靜住宅街景。</li>
-
-</ul>
-
-</div>
-
-<div class="section">
-
 <h3>🎫 導遊攻略</h3>
-
 <div class="info-grid">
-
-<div class="info">
-<strong>⏱ 建議時間</strong>
-<span>1.5–2.5 小時</span>
+<div class="info"><strong>⏱ 建議時間</strong><span>1 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>免費</span></div>
+<div class="info"><strong>🚕 酒店距離</strong><span>約 900 米（步行12分鐘）</span></div>
 </div>
-
-<div class="info">
-<strong>🎫 門票</strong>
-<span>免費</span>
-</div>
-
-<div class="info">
-<strong>🚕 酒店車程</strong>
-<span>約 20 分鐘</span>
-</div>
-
-<div class="info">
-<strong>🚶 步行難度</strong>
-<span>低</span>
-</div>
-
-</div>
-
 <br>
-
-<div class="mood">
-<span class="mood-title">🌿 漫遊程度</span>
-<span>🌿🌿🌿🌿🌿</span>
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
 </div>
 
+<div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=三七八巷">🗺️ 查看地圖</a>
+</div>
+</div>
 </div>
 
-</div>
 
-
-<!-- 高淳 -->
-
+<!-- 10. 瞻園 -->
 <div class="spot">
-
 <div class="spot-title">
-
-<h2>9. 高淳老街＋漆橋古村</h2>
-
-<div class="subtitle">
-南京郊區慢遊 · 古鎮與原生態村落
-</div>
-
+<h2>10. 瞻園</h2>
+<div class="subtitle">金陵第一園 · 太平天國歷史博物館</div>
 </div>
 
 <div class="section">
-
-<h3>📖 景點背景</h3>
-
-<p>
-高淳老街擁有900多年歷史，是江蘇保存較完整的古建築街區之一。
-漆橋古村則擁有超過2000年歷史，
-南宋時期孔子後裔遷居於此，因此有「江南孔子第一村」之稱。
-</p>
-
+<h3>📖 歷史背景</h3>
+<p>瞻園是南京現存歷史最悠久的明代古典園林，已有600餘年歷史，與蘇州拙政園、上海豫園等並稱為「江南四大名園」。明初為中山王徐達府邸花園，清代為布政使衙署。園內同時設有太平天國歷史博物館。87版《紅樓夢》和《新白娘子傳奇》都曾在此取景。</p>
 </div>
 
 <div class="section">
-
-<h3>✨ 不可錯過</h3>
-
-<ul>
-
-<li><b>高淳老街：</b>明清建築、吳氏宗祠、楊廳、關王廟。</li>
-
-<li><b>漆橋古村：</b>青石板老街、古橋、古井及孔氏歷史遺存。</li>
-
-<li><b>11月特色：</b>固城湖螃蟹正值季節。</li>
-
-</ul>
-
-</div>
-
-<div class="section">
-
 <h3>🎫 導遊攻略</h3>
-
 <div class="info-grid">
-
-<div class="info">
-<strong>⏱ 建議時間</strong>
-<span>一天</span>
+<div class="info"><strong>⏱ 建議時間</strong><span>1.5–2 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>日場約 ¥30（60-69歲半價）；夜場約 ¥50</span></div>
+<div class="info"><strong>🕐 開放</strong><span>日場約 8:00–17:00；夜場至 21:00</span></div>
+<div class="info"><strong>🚕 酒店距離</strong><span>步行約 10 分鐘</span></div>
 </div>
-
-<div class="info">
-<strong>🎫 門票</strong>
-<span>老街街區免費</span>
-</div>
-
-<div class="info">
-<strong>🚕 酒店車程</strong>
-<span>約 1–1.5 小時</span>
-</div>
-
-<div class="info">
-<strong>🚶 步行難度</strong>
-<span>中等</span>
-</div>
-
-</div>
-
 <br>
-
-<div class="mood">
-<span class="mood-title">🌿 漫遊程度</span>
-<span>🌿🌿🌿</span>
-</div>
-
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
 </div>
 
 <div class="section">
-
 <h3>💡 導遊建議</h3>
-
-<p>
-如果大家當日精神好，又希望離開南京市中心感受比較原汁原味的江南古鎮，
-呢個係非常值得考慮的一日選擇。
-建議包車，行程會舒服好多。
-</p>
-
+<p>秋季園內銀杏金黃，運氣好可遇見園中「喵星人」。若Day 4下午時間充裕，可在遊覽完科舉博物館和李香君故居後，直接步行前往。</p>
 </div>
 
+<div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=瞻園">🗺️ 查看地圖</a>
+</div>
+</div>
+</div>
+
+
+<!-- 11. 雞鳴寺 -->
+<div class="spot">
+<div class="spot-title">
+<h2>11. 雞鳴寺</h2>
+<div class="subtitle">南朝第一寺 · 千年古剎</div>
+</div>
+
+<div class="section">
+<h3>📖 歷史背景</h3>
+<p>南京最古老的梵剎之一，有「南朝第一寺」之稱，始建於西晉，已逾1700年歷史。秋季銀杏落滿黃牆，秋意濃郁。</p>
+</div>
+
+<div class="section">
+<h3>✨ 不可錯過的看點</h3>
+<ul>
+<li>古寺建築與黃牆景色</li>
+<li>登上藥師佛塔可北眺玄武湖全景，東望紫金山</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>🎫 導遊攻略</h3>
+<div class="info-grid">
+<div class="info"><strong>⏱ 建議時間</strong><span>1–2 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>約 ¥10（含三炷香，60歲以上半價）</span></div>
+<div class="info"><strong>🕐 開放</strong><span>7:30–17:00</span></div>
+<div class="info"><strong>🚕 酒店車程</strong><span>約 20 分鐘</span></div>
+</div>
+<br>
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿</span></div>
+</div>
+
+<div class="section">
+<h3>💡 導遊建議</h3>
+<p>可與玄武湖、台城城牆一併遊覽，安排在同一上午或下午。</p>
+</div>
+
+<div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=雞鳴寺">🗺️ 查看地圖</a>
+</div>
+</div>
+</div>
+
+
+<!-- 12. 玄武湖 -->
+<div class="spot">
+<div class="spot-title">
+<h2>12. 玄武湖</h2>
+<div class="subtitle">金陵明珠 · 皇家園林湖泊</div>
+</div>
+
+<div class="section">
+<h3>📖 歷史背景</h3>
+<p>江南現存最大的皇家園林湖泊，已有1600多年歷史。秋季梁洲銀杏大道一片金黃，菊花展亦在10月底至11月舉辦，是賞秋好去處。</p>
+</div>
+
+<div class="section">
+<h3>🎫 導遊攻略</h3>
+<div class="info-grid">
+<div class="info"><strong>⏱ 建議時間</strong><span>1.5–3 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>免費</span></div>
+<div class="info"><strong>🕐 開放</strong><span>6:00–21:00</span></div>
+<div class="info"><strong>🚕 酒店車程</strong><span>約 20 分鐘</span></div>
+<div class="info"><strong>🚌 建議</strong><span>乘坐觀光車（約¥30/圈）</span></div>
+</div>
+<br>
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
+</div>
+
+<div class="section">
+<h3>💡 導遊建議</h3>
+<p>可與雞鳴寺、台城段城牆一併遊覽。乘觀光車遊覽輕鬆愜意。</p>
+</div>
+
+<div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=玄武湖">🗺️ 查看地圖</a>
+</div>
+</div>
+</div>
+
+
+<!-- 13. 南京城牆 -->
+<div class="spot">
+<div class="spot-title">
+<h2>13. 南京城牆（中華門甕城）</h2>
+<div class="subtitle">世界最長城垣 · 最大甕城</div>
+</div>
+
+<div class="section">
+<h3>📖 歷史背景</h3>
+<p>南京城牆是現存世界最長、規模最大的古代城垣，全長35.3公里。中華門甕城是我國現存規模最大的甕城，設有三道甕城、四道券門，城內有27個藏兵洞，可藏兵三千。</p>
+</div>
+
+<div class="section">
+<h3>🎫 導遊攻略</h3>
+<div class="info-grid">
+<div class="info"><strong>⏱ 建議時間</strong><span>1–2 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>約 ¥47</span></div>
+<div class="info"><strong>🕐 開放</strong><span>8:30–21:00</span></div>
+<div class="info"><strong>🚕 酒店車程</strong><span>約 5 分鐘</span></div>
+</div>
+<br>
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿</span></div>
+</div>
+
+<div class="section">
+<h3>💡 導遊建議</h3>
+<p>緊鄰老門東，可安排在一起遊覽。登上城牆可了解古代軍事防衛智慧，並眺望南京城景。</p>
+</div>
+
+<div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=南京城牆">🗺️ 查看地圖</a>
+</div>
+</div>
+</div>
+
+
+<!-- 14. 頤和路 -->
+<div class="spot">
+<div class="spot-title">
+<h2>14. 頤和路民國公館區</h2>
+<div class="subtitle">梧桐深處 · 半部民國史</div>
+</div>
+
+<div class="section">
+<h3>📖 歷史背景</h3>
+<p>被譽為「一條頤和路，半部民國史」。頤和路及周邊12個片區，聚集了上百棟民國時期使領館、名人公館，包括蔣介石、宋子文、汪精衛等故居。秋季梧桐葉黃，光影斑駁。</p>
+</div>
+
+<div class="section">
+<h3>🎫 導遊攻略</h3>
+<div class="info-grid">
+<div class="info"><strong>⏱ 建議時間</strong><span>2–3 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>免費</span></div>
+<div class="info"><strong>🕐 開放</strong><span>全天</span></div>
+<div class="info"><strong>🚕 酒店車程</strong><span>約 20 分鐘</span></div>
+<div class="info"><strong>🚶 步行難度</strong><span>低</span></div>
+</div>
+<br>
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿🌿</span></div>
+</div>
+
+<div class="section">
+<h3>💡 導遊建議</h3>
+<p>適合散步拍照，安排在上午或黃昏最佳。</p>
+</div>
+
+<div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=頤和路">🗺️ 查看地圖</a>
+</div>
+</div>
+</div>
+
+
+<!-- 15. 甘熙故居 -->
+<div class="spot">
+<div class="spot-title">
+<h2>15. 甘熙故居（南京民俗博物館）</h2>
+<div class="subtitle">九十九間半 · 江南最大私人民居</div>
+</div>
+
+<div class="section">
+<h3>📖 歷史背景</h3>
+<p>江南現存規模最大、保存最完整的私人民居，有「九十九間半」之稱。始建於清代，為甘熙家族宅第，融合徽派與蘇式建築風格。現為南京民俗博物館，展示南京傳統民居、婚嫁習俗、非遺技藝等。</p>
+</div>
+
+<div class="section">
+<h3>🎫 導遊攻略</h3>
+<div class="info-grid">
+<div class="info"><strong>⏱ 建議時間</strong><span>1–2 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>約 ¥20</span></div>
+<div class="info"><strong>🕐 開放</strong><span>9:00–17:30（週一閉館）</span></div>
+<div class="info"><strong>🚕 酒店距離</strong><span>步行約 15 分鐘</span></div>
+<div class="info"><strong>📍 地址</strong><span>中山南路400號熙南里街區</span></div>
+</div>
+<br>
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
+</div>
+
+<div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=甘熙故居">🗺️ 查看地圖</a>
+</div>
+</div>
+</div>
+
+
+<!-- 16. 高淳老街 -->
+<div class="spot">
+<div class="spot-title">
+<h2>16. 高淳老街</h2>
+<div class="subtitle">金陵第一古街 · 900年歷史</div>
+</div>
+
+<div class="section">
+<h3>📖 歷史背景</h3>
+<p>高淳老街擁有900多年歷史，是江蘇保存較完整的古建築街區之一。11月正值固城湖螃蟹最肥美季節。</p>
+</div>
+
+<div class="section">
+<h3>✨ 不可錯過的看點</h3>
+<ul>
+<li>明清建築、吳氏宗祠、楊廳、關王廟</li>
+<li>11月限定：固城湖螃蟹</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>🎫 導遊攻略</h3>
+<div class="info-grid">
+<div class="info"><strong>⏱ 建議時間</strong><span>約 2 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>街區免費，小景點聯票約 ¥60</span></div>
+<div class="info"><strong>🚕 酒店車程</strong><span>約 1–1.5 小時</span></div>
+</div>
+<br>
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿</span></div>
+</div>
+
+<div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=高淳老街">🗺️ 查看地圖</a>
+</div>
+</div>
+</div>
+
+
+<!-- 17. 漆橋古村 -->
+<div class="spot">
+<div class="spot-title">
+<h2>17. 漆橋古村</h2>
+<div class="subtitle">江南孔子第一村 · 原生態古村</div>
+</div>
+
+<div class="section">
+<h3>📖 歷史背景</h3>
+<p>漆橋古村擁有2000多年歷史，南宋時期孔子後裔遷居於此，是僅次於曲阜的孔子後裔第二大居住地。500米原生態青石板老街、古橋、古井保存完好。</p>
+</div>
+
+<div class="section">
+<h3>🎫 導遊攻略</h3>
+<div class="info-grid">
+<div class="info"><strong>⏱ 建議時間</strong><span>1–1.5 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>完全免費</span></div>
+<div class="info"><strong>🚕 酒店車程</strong><span>約 1.5 小時</span></div>
+</div>
+<br>
+<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿</span></div>
+</div>
+
+<div class="section">
+<div class="buttons">
+<a class="btn search" href="spots.html">📖 景點導遊</a>
+<a class="btn map" href="map.html?spot=漆橋古村">🗺️ 查看地圖</a>
+</div>
+</div>
 </div>
 
 
@@ -1467,48 +1175,8 @@ target="_blank">
 </div>
 
 </div>
+
 <script>
-
-function goSpot(keyword) {
-
-  const elements = document.querySelectorAll(
-    'h1, h2, h3, h4, .spot-card, section'
-  );
-
-  let target = null;
-
-  for (const el of elements) {
-
-    const text = el.innerText || '';
-
-    if (text.includes(keyword)) {
-      target = el;
-      break;
-    }
-
-  }
-
-  if (!target) {
-
-    alert('暫時未找到：' + keyword);
-
-    return;
-  }
-
-  const targetPosition =
-    target.getBoundingClientRect().top +
-    window.pageYOffset -
-    12;
-
-  window.scrollTo({
-    top: targetPosition,
-    behavior: 'smooth'
-  });
-
-}
-
-</script>
-   <script>
 function goSpot(name) {
     const spots = document.querySelectorAll('.spot');
 
@@ -1516,56 +1184,44 @@ function goSpot(name) {
         const title = spot.querySelector('.spot-title h2');
 
         if (title && title.textContent.includes(name)) {
-
             spot.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
 
-            // 手機畫面輕微停頓，方便團友睇到景點標題
             setTimeout(() => {
                 spot.classList.add('spot-highlight');
-
                 setTimeout(() => {
                     spot.classList.remove('spot-highlight');
                 }, 1500);
             }, 400);
-
             return;
         }
     }
-
     alert('暫時找不到「' + name + '」的景點資料');
 }
-   </script>
-   <!-- 返回景點目錄 -->
-<button id="backToSpots"
-        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+</script>
+
+<!-- 返回景點目錄 -->
+<button id="backToSpots" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
     ↑ 景點目錄
 </button>
-   <!-- 手機底部導航 -->
-<nav class="mobile-nav">
 
+<!-- 手機底部導航 -->
+<nav class="mobile-nav">
   <a href="index.html">
     <span>🏠</span>
     <small>首頁</small>
   </a>
-
   <a href="itinerary.html">
     <span>📅</span>
     <small>六日行程</small>
   </a>
-
   <a href="spots.html" class="active">
     <span>📚</span>
     <small>景點百科</small>
   </a>
-
-  <a href="afternoon.html">
-    <span>🌿</span>
-    <small>下午漫遊</small>
-  </a>
-
 </nav>
+
 </body>
 </html>
