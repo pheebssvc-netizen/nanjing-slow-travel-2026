@@ -209,28 +209,41 @@ body{
     margin-bottom:0;
 }
 
-/* ===== Hotel ===== */
+/* ===== Hotel（可點擊跳轉地圖） ===== */
 
-.hotel{
-
-    margin-top:20px;
-
-    padding:18px;
-
-    background:#f1eee6;
-
-    border-radius:14px;
-
-    font-size:17px;
+.hotel-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    margin-top: 20px;
+    padding: 18px;
+    background: #f1eee6;
+    border-radius: 14px;
+    font-size: 17px;
+    transition: 0.2s;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.hotel strong{
+.hotel-link:active {
+    transform: scale(0.98);
+    background: #e8e4da;
+}
 
-    display:block;
+.hotel-link strong {
+    display: block;
+    font-size: 19px;
+    margin-bottom: 4px;
+    color: #4d5748;
+}
 
-    font-size:19px;
-
-    margin-bottom:4px;
+.hotel-link .hint {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: #8a8a7a;
+    background: rgba(255,255,255,0.5);
+    padding: 2px 12px;
+    border-radius: 20px;
 }
 
 /* ===== Section title ===== */
@@ -557,6 +570,15 @@ footer{
     .day-title {
         font-size: 20px;
     }
+
+    .hotel-link {
+        padding: 14px 16px;
+        font-size: 16px;
+    }
+
+    .hotel-link strong {
+        font-size: 17px;
+    }
 }
 
 </style>
@@ -608,7 +630,8 @@ footer{
         自由決定休息或輕鬆散步。
     </p>
 
-    <div class="hotel">
+    <!-- 全程住宿：可點擊跳轉地圖 -->
+    <a href="map.html?spot=夫子廟亞朵酒店" class="hotel-link">
 
         <strong>🏨 全程住宿</strong>
 
@@ -616,7 +639,9 @@ footer{
 
         秦淮區大石壩街35號｜連住5晚
 
-    </div>
+        <span class="hint">🗺️ 點擊查看地圖位置</span>
+
+    </a>
 
 </section>
 
@@ -767,7 +792,7 @@ footer{
 
 
 <!-- =========================
-     天氣小工具（跟足雲南簡約風格）
+     天氣小工具
 ========================= -->
 
 <div class="weather-card" id="weatherCard">
