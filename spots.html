@@ -37,14 +37,14 @@
 }
 
 .spot-index-title {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   color: #4f6256;
   margin-bottom: 5px;
 }
 
 .spot-index-subtitle {
-  font-size: 14px;
+  font-size: 16px;
   color: #8b897f;
   margin-bottom: 16px;
 }
@@ -56,8 +56,8 @@
 }
 
 .spot-list button {
-  min-height: 58px;
-  padding: 10px 8px;
+  min-height: 64px;
+  padding: 12px 10px;
 
   border: 1px solid #e1ded5;
   border-radius: 16px;
@@ -65,7 +65,7 @@
   background: #ffffff;
   color: #4f6256;
 
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 
   cursor: pointer;
@@ -94,8 +94,8 @@
   }
 
   .spot-list button {
-    min-height: 56px;
-    font-size: 17px;
+    min-height: 60px;
+    font-size: 19px;
   }
 
 }
@@ -114,7 +114,8 @@ body{
 
     background:#f7f3ed;
     color:#3f3933;
-    line-height:1.8;
+    line-height:1.9;
+    font-size:18px;
 }
 
 header{
@@ -131,13 +132,13 @@ header{
 
 header h1{
     margin:0;
-    font-size:28px;
+    font-size:30px;
     letter-spacing:2px;
 }
 
 header p{
     margin:6px 0 0;
-    font-size:14px;
+    font-size:16px;
     opacity:.9;
 }
 
@@ -172,14 +173,14 @@ header p{
 
 .spot-title h2{
     margin:0;
-    font-size:22px;
+    font-size:26px;
     color:#4d5748;
 }
 
 .subtitle{
     margin-top:4px;
     color:#8a715c;
-    font-size:14px;
+    font-size:16px;
 }
 
 .section{
@@ -188,14 +189,14 @@ header p{
 }
 
 .section h3{
-    margin:0 0 10px;
-    font-size:17px;
+    margin:0 0 12px;
+    font-size:20px;
     color:#59644f;
 }
 
 .section p{
-    margin:0 0 10px;
-    font-size:15px;
+    margin:0 0 12px;
+    font-size:18px;
 }
 
 .section p:last-child {
@@ -208,8 +209,8 @@ ul{
 }
 
 li{
-    margin-bottom:7px;
-    font-size:15px;
+    margin-bottom:8px;
+    font-size:18px;
 }
 
 /* 資訊格 */
@@ -223,40 +224,53 @@ li{
 .info{
     background:#f7f4ee;
     border-radius:12px;
-    padding:10px 12px;
+    padding:12px 14px;
 }
 
 .info strong{
     display:block;
     color:#6c7562;
-    font-size:13px;
+    font-size:15px;
 }
 
 .info span{
-    font-size:14px;
+    font-size:16px;
 }
 
-/* 漫遊 */
+/* 活力需求 */
 
-.mood{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:#eef1e9;
-    padding:12px 14px;
-    border-radius:12px;
+.energy {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f0f2ec;
+    padding: 14px 16px;
+    border-radius: 12px;
+    flex-wrap: wrap;
 }
 
-.mood-title{
-    font-weight:bold;
-    color:#59644f;
+.energy-title {
+    font-weight: bold;
+    color: #59644f;
+    font-size: 17px;
+}
+
+.energy .bolts {
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+.energy .hint {
+    font-size: 15px;
+    color: #8a8a7a;
+    margin-left: auto;
 }
 
 /* 按鈕 */
 
 .buttons{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
     gap:10px;
 }
 
@@ -265,22 +279,17 @@ li{
     text-align:center;
     text-decoration:none;
 
-    padding:11px 8px;
+    padding:13px 10px;
 
     border-radius:12px;
 
-    font-size:14px;
+    font-size:17px;
     font-weight:bold;
 }
 
 .map{
     background:#e9eee5;
     color:#53614b;
-}
-
-.search{
-    background:#f3ece1;
-    color:#765f4d;
 }
 
 /* 回頂 */
@@ -293,6 +302,7 @@ li{
 .top a{
     color:#68735e;
     text-decoration:none;
+    font-size:17px;
 }
 
 /* 手機 */
@@ -300,7 +310,7 @@ li{
 @media(max-width:500px){
 
     header h1{
-        font-size:24px;
+        font-size:26px;
     }
 
     .container{
@@ -316,16 +326,29 @@ li{
     }
 
     .spot-title h2{
-        font-size:20px;
+        font-size:22px;
     }
 
     .section h3{
-        font-size:16px;
+        font-size:18px;
     }
 
     .section p,
     li{
-        font-size:14px;
+        font-size:17px;
+    }
+
+    .spot-index-title {
+        font-size:22px;
+    }
+
+    .spot-list button {
+        font-size:17px;
+        min-height:58px;
+    }
+
+    .energy .bolts {
+        font-size:19px;
     }
 
 }
@@ -336,18 +359,18 @@ li{
 #backToSpots {
     position: fixed;
     right: 16px;
-    bottom: 85px;
+    bottom: 90px;
     z-index: 9999;
 
     border: none;
     border-radius: 999px;
 
-    padding: 12px 16px;
+    padding: 14px 18px;
 
     background: rgba(108, 126, 111, 0.94);
     color: white;
 
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
 
     box-shadow: 0 4px 14px rgba(0,0,0,0.18);
@@ -371,7 +394,7 @@ li{
     right: 0;
     bottom: 0;
 
-    height: 64px;
+    height: 70px;
 
     display: flex;
     justify-content: space-around;
@@ -391,7 +414,7 @@ li{
 .mobile-nav a {
     flex: 1;
 
-    height: 64px;
+    height: 70px;
 
     display: flex;
     flex-direction: column;
@@ -406,14 +429,14 @@ li{
 }
 
 .mobile-nav a span {
-    font-size: 20px;
-    line-height: 22px;
+    font-size: 22px;
+    line-height: 24px;
 }
 
 .mobile-nav a small {
     margin-top: 3px;
 
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
 }
 
@@ -427,9 +450,76 @@ li{
 
 /* 避免底部內容被導航列遮住 */
 body {
-    padding-bottom: 85px;
+    padding-bottom: 95px;
 }
-   
+
+/* =========================
+   推薦餐廳專區
+   ========================= */
+
+.restaurant-section {
+    margin-top: 35px;
+    background: white;
+    border-radius: 18px;
+    padding: 20px 18px;
+    box-shadow: 0 4px 18px rgba(80,70,50,.08);
+}
+
+.restaurant-section h2 {
+    margin: 0 0 6px;
+    font-size: 26px;
+    color: #4d5748;
+}
+
+.restaurant-section .sub {
+    color: #8a8a7a;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.restaurant-item {
+    background: #f8f5ed;
+    border-radius: 14px;
+    padding: 14px 14px;
+}
+
+.restaurant-item .name {
+    font-weight: 700;
+    font-size: 17px;
+    color: #3f3933;
+}
+
+.restaurant-item .feature {
+    font-size: 15px;
+    color: #8a715c;
+    margin-top: 2px;
+}
+
+.restaurant-item .addr {
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+@media (max-width: 500px) {
+    .restaurant-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .restaurant-section h2 {
+        font-size: 22px;
+    }
+
+    .restaurant-item .name {
+        font-size: 16px;
+    }
+}
 </style>
 
 </head>
@@ -471,6 +561,7 @@ body {
     <button onclick="goSpot('南京城牆')">🧱 南京城牆</button>
     <button onclick="goSpot('頤和路')">🌳 頤和路</button>
     <button onclick="goSpot('甘熙故居')">🏡 甘熙故居</button>
+    <button onclick="goSpot('南京大屠殺紀念館')">🕊️ 南京大屠殺紀念館</button>
     <button onclick="goSpot('高淳老街')">🏮 高淳老街</button>
     <button onclick="goSpot('漆橋古村')">🌿 漆橋古村</button>
 
@@ -511,17 +602,20 @@ body {
 <div class="info"><strong>📍 地址</strong><span>中山東路321號</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡⚡</span>
+    <span class="hint">館區大，需步行 2-3 小時，但有冷氣、多座位</span>
+</div>
 </div>
 
 <div class="section">
 <h3>💡 導遊建議</h3>
-<p>務必提前7天通過官方小程序預約，門票免費但名額極其搶手。建議預留3小時，可租借講解器（租金20元）。部分團友可以參加專業講解團，其他人則可按自己興趣自由參觀。</p>
+<p>務必提前7天通過官方小程序預約，門票免費但名額極其搶手。建議預留3小時，可租借講解器（租金20元）。部分團友可以參加專業講解團，其他人可按自己興趣自由參觀。</p>
 </div>
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=南京博物院">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -560,7 +654,11 @@ body {
 <div class="info"><strong>🚌 建議</strong><span>善用景區觀光車（¥10/程）</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡⚡⚡</span>
+    <span class="hint">景區極大，雖可坐觀光車，但石象路仍需步行</span>
+</div>
 </div>
 
 <div class="section">
@@ -570,7 +668,6 @@ body {
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=明孝陵">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -608,7 +705,11 @@ body {
 <div class="info"><strong>📍 地址</strong><span>長江路292號</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡⚡</span>
+    <span class="hint">建築群較大，有室外園林步行，但有座位可休息</span>
+</div>
 </div>
 
 <div class="section">
@@ -618,7 +719,6 @@ body {
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=總統府">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -657,7 +757,11 @@ body {
 <div class="info"><strong>☔ 天氣適應</strong><span>★★★★★</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡</span>
+    <span class="hint">全地下、有冷氣、平坦、有座位，非常輕鬆</span>
+</div>
 </div>
 
 <div class="section">
@@ -667,7 +771,6 @@ body {
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=科舉博物館">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -704,12 +807,15 @@ body {
 <div class="info"><strong>📍 地址</strong><span>中山路18號德基廣場二期8樓</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡</span>
+    <span class="hint">商場內、全室內、有冷氣、可隨時坐低</span>
+</div>
 </div>
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=德基藝術博物館">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -738,12 +844,15 @@ body {
 <div class="info"><strong>📍 地址</strong><span>長江路302號（總統府旁）</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡</span>
+    <span class="hint">展館不大、全室內、有冷氣、有座位</span>
+</div>
 </div>
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=六朝博物館">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -780,12 +889,15 @@ body {
 <div class="info"><strong>📍 地址</strong><span>大石壩街150號</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡</span>
+    <span class="hint">極小、30分鐘行完、平坦、有座位</span>
+</div>
 </div>
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=李香君故居">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -820,12 +932,15 @@ body {
 <div class="info"><strong>🚕 酒店距離</strong><span>約 1.2 公里（步行15分鐘）</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡⚡</span>
+    <span class="hint">露天街區，步行約 1-2 小時，有凳可休息</span>
+</div>
 </div>
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=老門東">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -852,12 +967,15 @@ body {
 <div class="info"><strong>🚕 酒店距離</strong><span>約 900 米（步行12分鐘）</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡</span>
+    <span class="hint">小巷步行約 1 小時，平坦、接地氣</span>
+</div>
 </div>
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=三七八巷">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -885,7 +1003,11 @@ body {
 <div class="info"><strong>🚕 酒店距離</strong><span>步行約 10 分鐘</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡⚡</span>
+    <span class="hint">園林有步道、有上落，但園區不大、多座位</span>
+</div>
 </div>
 
 <div class="section">
@@ -895,7 +1017,6 @@ body {
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=瞻園">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -931,7 +1052,11 @@ body {
 <div class="info"><strong>🚕 酒店車程</strong><span>約 20 分鐘</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡⚡</span>
+    <span class="hint">有斜坡及樓梯上塔，但可選擇唔上塔，只行寺院</span>
+</div>
 </div>
 
 <div class="section">
@@ -941,7 +1066,6 @@ body {
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=雞鳴寺">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -970,7 +1094,11 @@ body {
 <div class="info"><strong>🚌 建議</strong><span>乘坐觀光車（約¥30/圈）</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡⚡</span>
+    <span class="hint">範圍大，但可坐觀光車，輕鬆好多</span>
+</div>
 </div>
 
 <div class="section">
@@ -980,7 +1108,6 @@ body {
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=玄武湖">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -1008,7 +1135,11 @@ body {
 <div class="info"><strong>🚕 酒店車程</strong><span>約 5 分鐘</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡⚡</span>
+    <span class="hint">有上落城牆嘅樓梯，上面平坦，可慢慢行</span>
+</div>
 </div>
 
 <div class="section">
@@ -1018,7 +1149,6 @@ body {
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=南京城牆">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -1047,7 +1177,11 @@ body {
 <div class="info"><strong>🚶 步行難度</strong><span>低</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡</span>
+    <span class="hint">平地散步，冇上落，可隨時停低休息</span>
+</div>
 </div>
 
 <div class="section">
@@ -1057,7 +1191,6 @@ body {
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=頤和路">🗺️ 查看地圖</a>
 </div>
 </div>
@@ -1086,22 +1219,67 @@ body {
 <div class="info"><strong>📍 地址</strong><span>中山南路400號熙南里街區</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡</span>
+    <span class="hint">室內為主、平坦、有座位、範圍不大</span>
+</div>
 </div>
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=甘熙故居">🗺️ 查看地圖</a>
 </div>
 </div>
 </div>
 
 
-<!-- 16. 高淳老街 -->
+<!-- 16. 南京大屠殺紀念館 -->
 <div class="spot">
 <div class="spot-title">
-<h2>16. 高淳老街</h2>
+<h2>16. 侵華日軍南京大屠殺遇難同胞紀念館</h2>
+<div class="subtitle">銘記歷史 · 珍愛和平</div>
+</div>
+
+<div class="section">
+<h3>📖 歷史背景</h3>
+<p>記錄民族傷痛的嚴肅場所，建於江東門集體屠殺及遺址之上。展陳以大量史料、證物、影像詳實記錄了1937年12月至1938年1月的歷史，具有極強的教育意義與震撼力。</p>
+</div>
+
+<div class="section">
+<h3>🎫 導遊攻略</h3>
+<div class="info-grid">
+<div class="info"><strong>⏱ 建議時間</strong><span>2–3 小時</span></div>
+<div class="info"><strong>🎫 門票</strong><span>免費，務必提前1-7天預約</span></div>
+<div class="info"><strong>🕐 開放</strong><span>週二至週日 8:30–17:30（週一閉館）</span></div>
+<div class="info"><strong>🚕 酒店車程</strong><span>約 25 分鐘</span></div>
+<div class="info"><strong>📍 地址</strong><span>水西門大街418號</span></div>
+</div>
+<br>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡⚡</span>
+    <span class="hint">室內展館、平坦、有座位，但主題沉重</span>
+</div>
+</div>
+
+<div class="section">
+<h3>⚠️ 特別提醒</h3>
+<p>請務必評估長輩的心理承受能力，主題沉重，不建議與其他玩樂景點混合安排。建議單獨預留半天時間，之後安排輕鬆的休息時段。</p>
+</div>
+
+<div class="section">
+<div class="buttons">
+<a class="btn map" href="map.html?spot=南京大屠殺紀念館">🗺️ 查看地圖</a>
+</div>
+</div>
+</div>
+
+
+<!-- 17. 高淳老街 -->
+<div class="spot">
+<div class="spot-title">
+<h2>17. 高淳老街</h2>
 <div class="subtitle">金陵第一古街 · 900年歷史</div>
 </div>
 
@@ -1126,22 +1304,25 @@ body {
 <div class="info"><strong>🚕 酒店車程</strong><span>約 1–1.5 小時</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡⚡</span>
+    <span class="hint">露天步行約 1-2 小時，平坦、有凳可休息</span>
+</div>
 </div>
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=高淳老街">🗺️ 查看地圖</a>
 </div>
 </div>
 </div>
 
 
-<!-- 17. 漆橋古村 -->
+<!-- 18. 漆橋古村 -->
 <div class="spot">
 <div class="spot-title">
-<h2>17. 漆橋古村</h2>
+<h2>18. 漆橋古村</h2>
 <div class="subtitle">江南孔子第一村 · 原生態古村</div>
 </div>
 
@@ -1158,20 +1339,109 @@ body {
 <div class="info"><strong>🚕 酒店車程</strong><span>約 1.5 小時</span></div>
 </div>
 <br>
-<div class="mood"><span class="mood-title">🌿 漫遊程度</span><span>🌿🌿🌿</span></div>
+<div class="energy">
+    <span class="energy-title">💪 活力需求</span>
+    <span class="bolts">⚡⚡⚡</span>
+    <span class="hint">露天步行約 1 小時，平坦、原生態</span>
+</div>
 </div>
 
 <div class="section">
 <div class="buttons">
-<a class="btn search" href="spots.html">📖 景點導遊</a>
 <a class="btn map" href="map.html?spot=漆橋古村">🗺️ 查看地圖</a>
 </div>
 </div>
 </div>
 
 
+<!-- =========================
+     推薦餐廳專區
+     ========================= -->
+
+<div class="restaurant-section">
+    <h2>🍽️ 推薦餐廳</h2>
+    <div class="sub">在地美食 · 方便團友搵食</div>
+
+    <div class="restaurant-grid">
+
+        <div class="restaurant-item">
+            <div class="name">天圓樓·老南京菜</div>
+            <div class="feature">30年老字號 · 金陵烤鴨</div>
+            <div class="addr">📍 夫子廟大石壩街75號</div>
+        </div>
+
+        <div class="restaurant-item">
+            <div class="name">碳山河·茶湯火鍋</div>
+            <div class="feature">龍井茉莉茶湯 + 鮮切吊龍</div>
+            <div class="addr">📍 金陵天地5樓L551</div>
+        </div>
+
+        <div class="restaurant-item">
+            <div class="name">南京大牌檔</div>
+            <div class="feature">金陵小吃全集</div>
+            <div class="addr">📍 夫子廟平江府店</div>
+        </div>
+
+        <div class="restaurant-item">
+            <div class="name">奇芳閣</div>
+            <div class="feature">鴨油酥燒餅 · 素菜包</div>
+            <div class="addr">📍 夫子廟貢院街</div>
+        </div>
+
+        <div class="restaurant-item">
+            <div class="name">韓復興板鴨店</div>
+            <div class="feature">鹽水鴨 · 鴨油燒餅（1866年）</div>
+            <div class="addr">📍 夫子廟石壩街126號</div>
+        </div>
+
+        <div class="restaurant-item">
+            <div class="name">金宏興鴨子店</div>
+            <div class="feature">烤鴨 · 鹽水鴨</div>
+            <div class="addr">📍 明瓦廊5號105室（新街口）</div>
+        </div>
+
+        <div class="restaurant-item">
+            <div class="name">李記清真館</div>
+            <div class="feature">牛肉鍋貼（百年老字號）</div>
+            <div class="addr">📍 秦淮區打釘巷1號</div>
+        </div>
+
+        <div class="restaurant-item">
+            <div class="name">蔣有記</div>
+            <div class="feature">牛肉鍋貼（1922年創立）</div>
+            <div class="addr">📍 老門東三條營49-3號</div>
+        </div>
+
+        <div class="restaurant-item">
+            <div class="name">雞鳴湯包</div>
+            <div class="feature">雞汁湯包</div>
+            <div class="addr">📍 玄武區太平門街10號</div>
+        </div>
+
+        <div class="restaurant-item">
+            <div class="name">小潘記鴨血粉絲湯</div>
+            <div class="feature">鴨血粉絲湯</div>
+            <div class="addr">📍 玄武區珠江路275-3號</div>
+        </div>
+
+        <div class="restaurant-item">
+            <div class="name">回味鴨血粉絲湯</div>
+            <div class="feature">連鎖老字號</div>
+            <div class="addr">📍 夫子廟站4號口店</div>
+        </div>
+
+        <div class="restaurant-item">
+            <div class="name">小廚娘淮揚菜</div>
+            <div class="feature">淮揚菜（29年本地品牌）</div>
+            <div class="addr">📍 新街口艾尚天地B座3樓</div>
+        </div>
+
+    </div>
+</div>
+
+
 <div class="top">
-<a href="#">↑ 返回頁頂</a>
+    <a href="#">↑ 返回頁頂</a>
 </div>
 
 </div>
