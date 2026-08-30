@@ -17,7 +17,7 @@
     right: 0;
     bottom: 0;
 
-    height: 64px;
+    height: 70px;
 
     display: flex;
     justify-content: space-around;
@@ -37,7 +37,7 @@
 .mobile-nav a {
     flex: 1;
 
-    height: 64px;
+    height: 70px;
 
     display: flex;
     flex-direction: column;
@@ -52,14 +52,14 @@
 }
 
 .mobile-nav a span {
-    font-size: 20px;
-    line-height: 22px;
+    font-size: 22px;
+    line-height: 24px;
 }
 
 .mobile-nav a small {
     margin-top: 3px;
 
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
 }
 
@@ -72,7 +72,7 @@
 }
 
 body {
-    padding-bottom: 85px;
+    padding-bottom: 95px;
 }
 *{
     box-sizing:border-box;
@@ -90,6 +90,7 @@ body{
     background:#f7f3eb;
     color:#3f3933;
     line-height:1.8;
+    font-size:18px;
 }
 
 /* ===== Hero ===== */
@@ -134,7 +135,7 @@ body{
 .hero h1{
     margin:0;
 
-    font-size:42px;
+    font-size:46px;
 
     letter-spacing:4px;
 
@@ -145,14 +146,14 @@ body{
 
     margin:10px 0 4px;
 
-    font-size:21px;
+    font-size:24px;
 
     letter-spacing:2px;
 }
 
 .hero-date{
 
-    font-size:16px;
+    font-size:18px;
 
     letter-spacing:2px;
 
@@ -178,7 +179,7 @@ body{
 
     border-radius:20px;
 
-    padding:25px 22px;
+    padding:28px 24px;
 
     margin-bottom:25px;
 
@@ -190,18 +191,22 @@ body{
 
 .intro h2{
 
-    margin:0 0 10px;
+    margin:0 0 12px;
 
     color:#667967;
 
-    font-size:25px;
+    font-size:28px;
 }
 
 .intro p{
 
-    margin:0;
+    margin:0 0 8px;
 
-    font-size:16px;
+    font-size:18px;
+}
+
+.intro p:last-child {
+    margin-bottom:0;
 }
 
 /* ===== Hotel ===== */
@@ -210,20 +215,20 @@ body{
 
     margin-top:20px;
 
-    padding:16px;
+    padding:18px;
 
     background:#f1eee6;
 
     border-radius:14px;
 
-    font-size:15px;
+    font-size:17px;
 }
 
 .hotel strong{
 
     display:block;
 
-    font-size:17px;
+    font-size:19px;
 
     margin-bottom:4px;
 }
@@ -234,7 +239,7 @@ body{
 
     margin:35px 0 18px;
 
-    font-size:26px;
+    font-size:28px;
 
     color:#596b5d;
 }
@@ -270,7 +275,7 @@ body{
 
 .day-number{
 
-    font-size:14px;
+    font-size:16px;
 
     color:#81927f;
 
@@ -279,7 +284,7 @@ body{
 
 .day-title{
 
-    font-size:20px;
+    font-size:22px;
 
     font-weight:bold;
 
@@ -288,7 +293,7 @@ body{
 
 .day-desc{
 
-    font-size:15px;
+    font-size:17px;
 
     color:#756e66;
 }
@@ -301,7 +306,7 @@ body{
 
     grid-template-columns:repeat(3,1fr);
 
-    gap:12px;
+    gap:14px;
 
     margin-top:15px;
 }
@@ -316,14 +321,14 @@ body{
 
     border-radius:16px;
 
-    padding:18px 10px;
+    padding:20px 10px;
 
     text-align:center;
 
     box-shadow:
         0 4px 15px rgba(80,70,50,.08);
 
-    font-size:15px;
+    font-size:17px;
 
     font-weight:bold;
 
@@ -344,131 +349,69 @@ body{
 
     display:block;
 
-    font-size:27px;
+    font-size:30px;
 
-    margin-bottom:5px;
+    margin-bottom:6px;
 }
 
-/* ===== Weather Modal ===== */
+/* ===== Weather Block ===== */
 
-.weather-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 10000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    backdrop-filter: blur(4px);
-}
-
-.weather-overlay.open {
+.weather-block {
+    background: linear-gradient(135deg, #e8efe6, #dce4d9);
+    border-radius: 18px;
+    padding: 22px 24px;
+    margin-top: 25px;
+    box-shadow: 0 4px 15px rgba(80,70,50,.08);
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
-.weather-modal {
-    background: white;
-    border-radius: 28px;
-    max-width: 400px;
-    width: 100%;
-    padding: 30px 25px 25px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    position: relative;
-    animation: modalIn 0.3s ease;
-}
-
-@keyframes modalIn {
-    from {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.weather-modal .close-btn {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 28px;
-    background: none;
-    border: none;
-    color: #999;
-    cursor: pointer;
-    padding: 4px 8px;
-}
-
-.weather-modal .city {
-    font-size: 22px;
-    font-weight: bold;
-    color: #3f3933;
-    margin-bottom: 2px;
-}
-
-.weather-modal .date {
-    font-size: 14px;
-    color: #999;
-    margin-bottom: 16px;
-}
-
-.weather-modal .main {
+.weather-block .left {
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-bottom: 16px;
 }
 
-.weather-modal .main .icon {
-    font-size: 56px;
-}
-
-.weather-modal .main .temp {
+.weather-block .icon {
     font-size: 48px;
+}
+
+.weather-block .temp {
+    font-size: 38px;
     font-weight: 700;
     color: #3f3933;
 }
 
-.weather-modal .main .desc {
+.weather-block .desc {
     font-size: 18px;
-    color: #666;
+    color: #5a6b5a;
 }
 
-.weather-modal .details {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 12px;
+.weather-block .details {
+    display: flex;
+    gap: 18px;
+    font-size: 16px;
+    color: #5a6b5a;
 }
 
-.weather-modal .details .item {
-    background: #f5f2ec;
-    border-radius: 14px;
-    padding: 12px 10px;
-    text-align: center;
+.weather-block .details span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
-.weather-modal .details .item .label {
-    font-size: 12px;
-    color: #999;
-}
-
-.weather-modal .details .item .value {
+.weather-block .loading {
     font-size: 18px;
-    font-weight: 600;
-    color: #3f3933;
+    color: #888;
+    padding: 6px 0;
 }
 
-.weather-modal .loading {
-    text-align: center;
-    padding: 30px 0;
-    font-size: 18px;
-    color: #999;
+.weather-block .error {
+    font-size: 16px;
+    color: #b07a6a;
 }
 
 /* ===== Philosophy ===== */
@@ -491,13 +434,19 @@ body{
     margin:0 0 10px;
 
     color:#596b5d;
+
+    font-size:22px;
 }
 
 .philosophy p{
 
-    margin:0;
+    margin:0 0 6px;
 
-    font-size:15px;
+    font-size:17px;
+}
+
+.philosophy p:last-child {
+    margin-bottom:0;
 }
 
 /* ===== Footer ===== */
@@ -510,7 +459,7 @@ footer{
 
     color:#888;
 
-    font-size:13px;
+    font-size:15px;
 }
 
 /* ===== Mobile ===== */
@@ -519,7 +468,7 @@ footer{
 
     .hero{
 
-        min-height:450px;
+        min-height:400px;
 
         padding-bottom:42px;
 
@@ -528,19 +477,19 @@ footer{
 
     .hero h1{
 
-        font-size:34px;
+        font-size:36px;
 
         letter-spacing:3px;
     }
 
     .hero-subtitle{
 
-        font-size:18px;
+        font-size:20px;
     }
 
     .hero-date{
 
-        font-size:14px;
+        font-size:16px;
     }
 
     .tools{
@@ -548,14 +497,42 @@ footer{
         grid-template-columns:1fr 1fr 1fr;
     }
 
-    .weather-modal {
-        padding: 22px 18px 20px;
+    .weather-block {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        padding: 18px 16px;
     }
 
-    .weather-modal .main .temp {
-        font-size: 38px;
+    .weather-block .left {
+        justify-content: center;
     }
 
+    .weather-block .details {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px 16px;
+    }
+
+    .weather-block .temp {
+        font-size: 32px;
+    }
+
+    .intro h2 {
+        font-size: 24px;
+    }
+
+    .intro p {
+        font-size: 17px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .day-title {
+        font-size: 20px;
+    }
 }
 
 </style>
@@ -757,10 +734,21 @@ footer{
         景點百科
     </a>
 
-    <button class="tool" id="weatherBtn">
-        <span class="tool-icon">🌤️</span>
-        天氣
-    </button>
+    <a href="map.html" class="tool">
+        <span class="tool-icon">🗺️</span>
+        查看地圖
+    </a>
+
+</div>
+
+
+<!-- =========================
+     WEATHER BLOCK
+========================= -->
+
+<div class="weather-block" id="weatherBlock">
+
+    <div class="loading">🌤️ 讀取天氣中...</div>
 
 </div>
 
@@ -790,27 +778,6 @@ footer{
 
 
 </main>
-
-
-<!-- =========================
-     WEATHER MODAL
-========================= -->
-
-<div class="weather-overlay" id="weatherOverlay">
-
-    <div class="weather-modal">
-
-        <button class="close-btn" id="weatherClose">✕</button>
-
-        <div id="weatherContent">
-
-            <div class="loading">🌤️ 讀取天氣中...</div>
-
-        </div>
-
-    </div>
-
-</div>
 
 
 <!-- =========================
@@ -850,13 +817,10 @@ const API_KEY = '236796fae33215243c53c1a42b345773';
 const CITY = 'Nanjing';
 const UNITS = 'metric';
 
-const overlay = document.getElementById('weatherOverlay');
-const content = document.getElementById('weatherContent');
-const openBtn = document.getElementById('weatherBtn');
-const closeBtn = document.getElementById('weatherClose');
+const weatherBlock = document.getElementById('weatherBlock');
 
 function getWeather() {
-    content.innerHTML = '<div class="loading">🌤️ 讀取天氣中...</div>';
+    weatherBlock.innerHTML = '<div class="loading">🌤️ 讀取天氣中...</div>';
 
     const url =
         `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&units=${UNITS}&appid=${API_KEY}`;
@@ -870,7 +834,7 @@ function getWeather() {
             const temp = Math.round(data.main.temp);
             const feelsLike = Math.round(data.main.feels_like);
             const humidity = data.main.humidity;
-            const wind = Math.round(data.wind.speed * 3.6); // m/s → km/h
+            const wind = Math.round(data.wind.speed * 3.6);
             const desc = data.weather[0].description;
             const icon = getWeatherIcon(data.weather[0].icon);
             const date = new Date().toLocaleDateString('zh-HK', {
@@ -880,10 +844,8 @@ function getWeather() {
                 weekday: 'short'
             });
 
-            content.innerHTML = `
-                <div class="city">📍 南京</div>
-                <div class="date">${date}</div>
-                <div class="main">
+            weatherBlock.innerHTML = `
+                <div class="left">
                     <div class="icon">${icon}</div>
                     <div>
                         <div class="temp">${temp}°C</div>
@@ -891,31 +853,16 @@ function getWeather() {
                     </div>
                 </div>
                 <div class="details">
-                    <div class="item">
-                        <div class="label">體感溫度</div>
-                        <div class="value">${feelsLike}°C</div>
-                    </div>
-                    <div class="item">
-                        <div class="label">濕度</div>
-                        <div class="value">${humidity}%</div>
-                    </div>
-                    <div class="item">
-                        <div class="label">風速</div>
-                        <div class="value">${wind} km/h</div>
-                    </div>
-                    <div class="item">
-                        <div class="label">天氣</div>
-                        <div class="value">${desc}</div>
-                    </div>
+                    <span>🌡️ 體感 ${feelsLike}°C</span>
+                    <span>💧 濕度 ${humidity}%</span>
+                    <span>💨 ${wind} km/h</span>
+                    <span>📅 ${date}</span>
                 </div>
             `;
         })
         .catch(err => {
-            content.innerHTML = `
-                <div style="text-align:center;padding:20px 0;color:#999;">
-                    ⚠️ 無法載入天氣資料<br>
-                    <small style="font-size:13px;">請稍後再試</small>
-                </div>
+            weatherBlock.innerHTML = `
+                <div class="error">⚠️ 無法載入天氣資料，請稍後再試</div>
             `;
             console.warn('Weather API error:', err);
         });
@@ -923,46 +870,21 @@ function getWeather() {
 
 function getWeatherIcon(iconCode) {
     const map = {
-        '01d': '☀️',
-        '01n': '🌙',
-        '02d': '⛅',
-        '02n': '☁️',
-        '03d': '☁️',
-        '03n': '☁️',
-        '04d': '☁️',
-        '04n': '☁️',
-        '09d': '🌧️',
-        '09n': '🌧️',
-        '10d': '🌦️',
-        '10n': '🌧️',
-        '11d': '⛈️',
-        '11n': '⛈️',
-        '13d': '❄️',
-        '13n': '❄️',
-        '50d': '🌫️',
-        '50n': '🌫️'
+        '01d': '☀️', '01n': '🌙',
+        '02d': '⛅', '02n': '☁️',
+        '03d': '☁️', '03n': '☁️',
+        '04d': '☁️', '04n': '☁️',
+        '09d': '🌧️', '09n': '🌧️',
+        '10d': '🌦️', '10n': '🌧️',
+        '11d': '⛈️', '11n': '⛈️',
+        '13d': '❄️', '13n': '❄️',
+        '50d': '🌫️', '50n': '🌫️'
     };
     return map[iconCode] || '🌤️';
 }
 
-// 打開 modal
-openBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    overlay.classList.add('open');
-    getWeather();
-});
-
-// 關閉 modal
-closeBtn.addEventListener('click', function() {
-    overlay.classList.remove('open');
-});
-
-// 點擊背景關閉
-overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) {
-        overlay.classList.remove('open');
-    }
-});
+// 頁面載入後自動獲取天氣
+getWeather();
 
 </script>
 
