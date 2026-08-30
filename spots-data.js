@@ -1,6 +1,7 @@
 /* =========================================================
    金陵慢遊 2026
    景點座標資料庫（18 景點 + 12 餐廳）
+   座標已全部重新核對
    ========================================================= */
 
 // ===== 景點座標 =====
@@ -78,8 +79,8 @@ const spots = [
     id: "li-xiangjun-former-residence",
     number: 7,
     name: "李香君故居",
-    lat: 32.02470,
-    lng: 118.78920,
+    lat: 32.02472,
+    lng: 118.78906,
     address: "南京市秦淮區大石壩街150號",
     category: "秦淮文化"
   },
@@ -100,8 +101,8 @@ const spots = [
     id: "sanqiba-lane",
     number: 9,
     name: "三七八巷",
-    lat: 32.01550,
-    lng: 118.78050,
+    lat: 32.01557,
+    lng: 118.78039,
     address: "南京市秦淮區長樂路",
     category: "本地生活"
   },
@@ -111,8 +112,8 @@ const spots = [
     id: "zhanyuan-garden",
     number: 10,
     name: "瞻園",
-    lat: 32.020711,
-    lng: 118.785706,
+    lat: 32.02052,
+    lng: 118.78550,
     address: "南京市秦淮區瞻園路128號",
     category: "園林"
   },
@@ -144,8 +145,8 @@ const spots = [
     id: "zhonghua-gate",
     number: 13,
     name: "南京城牆",
-    lat: 32.01280,
-    lng: 118.781821,
+    lat: 32.01295,
+    lng: 118.78168,
     address: "南京市秦淮區中華路",
     category: "歷史遺跡"
   },
@@ -155,8 +156,8 @@ const spots = [
     id: "yihe-road-historic-district",
     number: 14,
     name: "頤和路",
-    lat: 32.06420,
-    lng: 118.77050,
+    lat: 32.06485,
+    lng: 118.77062,
     address: "南京市鼓樓區頤和路",
     category: "民國建築"
   },
@@ -166,8 +167,8 @@ const spots = [
     id: "ganxi-residence",
     number: 15,
     name: "甘熙故居",
-    lat: 32.02816,
-    lng: 118.77642,
+    lat: 32.02852,
+    lng: 118.77598,
     address: "南京市秦淮區中山南路400號熙南里街區",
     category: "民俗文化"
   },
@@ -177,8 +178,8 @@ const spots = [
     id: "nanjing-massacre-memorial",
     number: 16,
     name: "南京大屠殺紀念館",
-    lat: 32.035217,
-    lng: 118.742372,
+    lat: 32.03535,
+    lng: 118.74215,
     address: "南京市建鄴區水西門大街418號",
     category: "歷史教育"
   },
@@ -203,6 +204,17 @@ const spots = [
     lng: 118.992493,
     address: "南京市高淳區漆橋村523號",
     category: "古村"
+  },
+
+  /* 19 - 酒店（獨立標記用） */
+  {
+    id: "fuzi-atour-hotel",
+    number: 19,
+    name: "夫子廟亞朵酒店",
+    lat: 32.01947,
+    lng: 118.78772,
+    address: "南京市秦淮區大石壩街35號",
+    category: "住宿"
   }
 
 ];
