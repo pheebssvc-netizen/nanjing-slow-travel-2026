@@ -56,8 +56,8 @@
 }
 
 .spot-list button {
-  min-height: 64px;
-  padding: 12px 10px;
+  min-height: 58px;
+  padding: 10px 12px;
 
   border: 1px solid #e1ded5;
   border-radius: 16px;
@@ -65,7 +65,7 @@
   background: #ffffff;
   color: #4f6256;
 
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
 
   cursor: pointer;
@@ -157,12 +157,13 @@
 @media (max-width: 500px) {
 
   .spot-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .spot-list button {
-    min-height: 60px;
-    font-size: 19px;
+    min-height: 54px;
+    font-size: 16px;
+    padding: 8px 10px;
   }
 
   .restaurant-list {
@@ -180,6 +181,10 @@
 }
 
 @media (max-width: 380px) {
+  .spot-list {
+    grid-template-columns: 1fr;
+  }
+
   .restaurant-list {
     grid-template-columns: 1fr;
   }
@@ -429,8 +434,8 @@ li{
     }
 
     .spot-list button {
-        font-size:17px;
-        min-height:58px;
+        font-size:16px;
+        min-height:54px;
     }
 
     .energy .bolts {
@@ -632,30 +637,30 @@ body {
 
   <div class="spot-list">
 
-    <button onclick="goSpot('南京博物院')">🏛️ 南京博物院</button>
-    <button onclick="goSpot('明孝陵')">🍂 明孝陵</button>
-    <button onclick="goSpot('總統府')">🏛️ 總統府</button>
-    <button onclick="goSpot('科舉博物館')">📜 科舉博物館</button>
-    <button onclick="goSpot('德基藝術博物館')">🎨 德基藝術博物館</button>
-    <button onclick="goSpot('六朝博物館')">🏛️ 六朝博物館</button>
-    <button onclick="goSpot('李香君故居')">🏮 李香君故居</button>
-    <button onclick="goSpot('老門東')">🏘️ 老門東</button>
-    <button onclick="goSpot('三七八巷')">🛍️ 三七八巷</button>
-    <button onclick="goSpot('瞻園')">🌿 瞻園</button>
-    <button onclick="goSpot('雞鳴寺')">⛩️ 雞鳴寺</button>
-    <button onclick="goSpot('玄武湖')">🌿 玄武湖</button>
-    <button onclick="goSpot('南京城牆')">🧱 南京城牆</button>
-    <button onclick="goSpot('頤和路')">🌳 頤和路</button>
-    <button onclick="goSpot('甘熙故居')">🏡 甘熙故居</button>
-    <button onclick="goSpot('南京大屠殺紀念館')">🕊️ 南京大屠殺紀念館</button>
-    <button onclick="goSpot('高淳老街')">🏮 高淳老街</button>
-    <button onclick="goSpot('漆橋古村')">🌿 漆橋古村</button>
+    <button onclick="goSpot('南京博物院')">1. 南京博物院</button>
+    <button onclick="goSpot('明孝陵')">2. 明孝陵</button>
+    <button onclick="goSpot('總統府')">3. 總統府</button>
+    <button onclick="goSpot('科舉博物館')">4. 科舉博物館</button>
+    <button onclick="goSpot('德基藝術博物館')">5. 德基藝術博物館</button>
+    <button onclick="goSpot('六朝博物館')">6. 六朝博物館</button>
+    <button onclick="goSpot('李香君故居')">7. 李香君故居</button>
+    <button onclick="goSpot('老門東')">8. 老門東</button>
+    <button onclick="goSpot('三七八巷')">9. 三七八巷</button>
+    <button onclick="goSpot('瞻園')">10. 瞻園</button>
+    <button onclick="goSpot('雞鳴寺')">11. 雞鳴寺</button>
+    <button onclick="goSpot('玄武湖')">12. 玄武湖</button>
+    <button onclick="goSpot('南京城牆')">13. 南京城牆</button>
+    <button onclick="goSpot('頤和路')">14. 頤和路</button>
+    <button onclick="goSpot('甘熙故居')">15. 甘熙故居</button>
+    <button onclick="goSpot('南京大屠殺紀念館')">16. 南京大屠殺紀念館</button>
+    <button onclick="goSpot('高淳老街')">17. 高淳老街</button>
+    <button onclick="goSpot('漆橋古村')">18. 漆橋古村</button>
 
   </div>
 
 </section>
 
-<!-- ===== 推薦餐廳快速方塊（新增） ===== -->
+<!-- 推薦餐廳快速方塊 -->
 <section class="restaurant-index">
 
   <div class="restaurant-index-title">
@@ -1661,4 +1666,4 @@ function goToRestaurant(name) {
 </nav>
 
 </body>
-</html>
+   </html>
