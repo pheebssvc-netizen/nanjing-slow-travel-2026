@@ -90,14 +90,14 @@
 
         .map-header h1 {
             margin: 0;
-            font-size: 22px;
+            font-size: 24px;
             letter-spacing: 1px;
         }
 
         .map-header .back-btn {
             color: white;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 17px;
             background: rgba(255,255,255,0.2);
             padding: 8px 16px;
             border-radius: 20px;
@@ -109,36 +109,32 @@
             transform: scale(0.95);
         }
 
-        /* 圖例 */
+        /* ===== 圖例（字體放大） ===== */
         .legend {
             position: absolute;
-            bottom: 120px;
-            left: 12px;
+            bottom: 130px;
+            left: 14px;
             background: rgba(255,255,255,0.92);
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 14px;
+            padding: 14px 18px;
+            border-radius: 14px;
+            font-size: 17px;
             box-shadow: 0 3px 12px rgba(0,0,0,0.15);
             z-index: 1000;
             pointer-events: none;
             backdrop-filter: blur(4px);
+            line-height: 1.8;
         }
 
         .legend .row {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 4px;
-        }
-
-        .legend .row:last-child {
-            margin-bottom: 0;
+            gap: 12px;
         }
 
         .legend .dot {
             display: inline-block;
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             flex-shrink: 0;
         }
@@ -155,25 +151,50 @@
             background: #e07b5a;
         }
 
-        /* ===== 免責聲明 ===== */
+        /* ===== 免責聲明（字體放大） ===== */
         .disclaimer {
             position: absolute;
-            bottom: 80px;
-            left: 12px;
+            bottom: 85px;
+            left: 14px;
             background: rgba(0,0,0,0.55);
-            color: rgba(255,255,255,0.8);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+            padding: 8px 18px;
+            border-radius: 24px;
+            font-size: 16px;
             z-index: 1000;
             pointer-events: none;
             backdrop-filter: blur(4px);
             letter-spacing: 0.5px;
+            font-weight: 500;
         }
 
-        /* 自訂標記 */
+        /* ===== 自訂標記 ===== */
         .marker-green {
             background: #657b6d;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* 酒店標記 - 用 🏨 emoji */
+        .marker-hotel {
+            background: #c49a6c;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .marker-food {
+            background: #e07b5a;
             border: 2px solid white;
             border-radius: 50%;
             width: 18px;
@@ -181,51 +202,28 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
-        .marker-hotel {
-            background: #c49a6c;
-            border: 2px solid white;
-            border-radius: 50%;
-            width: 22px;
-            height: 22px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: white;
-        }
-
-        .marker-food {
-            background: #e07b5a;
-            border: 2px solid white;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-
-        /* Leaflet 彈窗優化 */
+        /* ===== Leaflet 彈窗（字體放大） ===== */
         .leaflet-popup-content {
-            font-size: 16px;
-            line-height: 1.7;
-            min-width: 180px;
+            font-size: 17px;
+            line-height: 1.8;
+            min-width: 200px;
         }
 
         .leaflet-popup-content strong {
             color: #4d5748;
-            font-size: 18px;
+            font-size: 19px;
         }
 
         .leaflet-popup-content .addr {
             color: #888;
-            font-size: 14px;
+            font-size: 15px;
             margin-top: 4px;
         }
 
         .leaflet-popup-content .tag {
             display: inline-block;
-            font-size: 12px;
-            padding: 2px 10px;
+            font-size: 13px;
+            padding: 2px 12px;
             border-radius: 20px;
             margin-top: 6px;
             color: white;
@@ -246,12 +244,12 @@
         .leaflet-popup-content .btn-locate {
             display: inline-block;
             margin-top: 8px;
-            padding: 6px 16px;
+            padding: 8px 18px;
             background: #c49a6c;
             color: white;
             border-radius: 20px;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             border: none;
             cursor: pointer;
@@ -261,7 +259,7 @@
             transform: scale(0.95);
         }
 
-        /* 載入中 */
+        /* ===== 載入中 ===== */
         .loading-map {
             display: flex;
             justify-content: center;
@@ -273,30 +271,7 @@
             background: #f7f3eb;
         }
 
-        /* 重置視野按鈕 */
-        .reset-view-btn {
-            position: absolute;
-            bottom: 190px;
-            right: 12px;
-            background: white;
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            font-size: 22px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
-            cursor: pointer;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-        }
-
-        .reset-view-btn:active {
-            transform: scale(0.92);
-        }
-
+        /* ===== 手機 ===== */
         @media (max-width: 600px) {
             #map {
                 height: calc(100vh - 60px - 95px);
@@ -304,31 +279,40 @@
             }
 
             .map-header h1 {
-                font-size: 19px;
+                font-size: 20px;
             }
 
             .legend {
-                font-size: 13px;
+                font-size: 15px;
                 padding: 10px 14px;
-                bottom: 110px;
+                bottom: 115px;
+                left: 10px;
             }
 
-            .reset-view-btn {
-                bottom: 180px;
-                width: 42px;
-                height: 42px;
-                font-size: 19px;
+            .legend .dot {
+                width: 14px;
+                height: 14px;
+            }
+
+            .disclaimer {
+                font-size: 14px;
+                bottom: 78px;
+                left: 10px;
+                padding: 6px 14px;
             }
 
             .leaflet-popup-content {
                 font-size: 15px;
             }
 
-            .disclaimer {
-                font-size: 11px;
-                bottom: 75px;
-                left: 12px;
-                padding: 4px 12px;
+            .leaflet-popup-content strong {
+                font-size: 17px;
+            }
+
+            .marker-hotel {
+                width: 28px;
+                height: 28px;
+                font-size: 16px;
             }
         }
     </style>
@@ -344,18 +328,15 @@
 <!-- 地圖容器 -->
 <div id="map"></div>
 
-<!-- 圖例 -->
+<!-- 圖例（字體已放大） -->
 <div class="legend">
     <div class="row"><span class="dot green"></span> 景點</div>
     <div class="row"><span class="dot hotel"></span> 🏨 酒店（連住5晚）</div>
     <div class="row"><span class="dot food"></span> 🍴 推薦餐廳</div>
 </div>
 
-<!-- 免責聲明 -->
+<!-- 免責聲明（字體已放大） -->
 <div class="disclaimer">📍 本地圖只顯示大概位置供參考</div>
-
-<!-- 重置視野按鈕 -->
-<button class="reset-view-btn" id="resetViewBtn" title="顯示所有景點">📍</button>
 
 <!-- 手機底部導航 -->
 <nav class="mobile-nav">
@@ -406,23 +387,23 @@
     // 景點標記（綠色）
     const greenIcon = L.divIcon({
         className: 'marker-green',
-        iconSize: [18, 18],
-        popupAnchor: [0, -10]
+        iconSize: [20, 20],
+        popupAnchor: [0, -12]
     });
 
-    // 酒店標記（啡色 · 較大）
+    // 酒店標記（用 🏨 emoji）
     const hotelIcon = L.divIcon({
         className: 'marker-hotel',
-        iconSize: [22, 22],
-        popupAnchor: [0, -12],
+        iconSize: [32, 32],
+        popupAnchor: [0, -18],
         html: '🏨'
     });
 
-    // 餐廳標記（橙色 · 較小）
+    // 餐廳標記（橙色）
     const foodIcon = L.divIcon({
         className: 'marker-food',
-        iconSize: [16, 16],
-        popupAnchor: [0, -8]
+        iconSize: [18, 18],
+        popupAnchor: [0, -10]
     });
 
     // ============================================================
@@ -434,8 +415,10 @@
     let hotelMarkerObj = null;
     const restaurantMarkers = [];
 
-    // 3a. 景點標記
+    // 3a. 景點標記（過濾掉酒店，酒店另外處理）
     spots.forEach(spot => {
+        if (spot.category === '住宿') return; // 酒店另外處理
+
         const marker = L.marker([spot.lat, spot.lng], { icon: greenIcon })
             .addTo(map)
             .bindPopup(`
@@ -451,16 +434,16 @@
         spotMap[spot.name] = marker;
     });
 
-    // 3b. 酒店標記（從 spots 中搵出酒店）
-    const hotelData = spots.find(s => s.name === '夫子廟亞朵酒店');
+    // 3b. 酒店標記（用 🏨 圖標）
+    const hotelData = spots.find(s => s.category === '住宿');
     if (hotelData) {
         const marker = L.marker([hotelData.lat, hotelData.lng], { icon: hotelIcon })
             .addTo(map)
             .bindPopup(`
-                <strong>🏨 夫子廟亞朵酒店</strong>
+                <strong>🏨 ${hotelData.name}</strong>
                 <div class="addr">📍 ${hotelData.address}</div>
                 <div><span class="tag hotel-tag">🏠 連住5晚</span></div>
-                <div style="margin-top:4px;font-size:14px;color:#666;">步行3分鐘到夫子廟核心區</div>
+                <div style="margin-top:4px;font-size:15px;color:#666;">步行3分鐘到夫子廟核心區</div>
                 <div style="margin-top:6px;">
                     <button class="btn-locate" onclick="zoomToHotel()">📍 查看酒店位置</button>
                 </div>
@@ -468,16 +451,17 @@
 
         allMarkers.push(marker);
         hotelMarkerObj = marker;
+        spotMap[hotelData.name] = marker;
     }
 
-    // 3c. 餐廳標記（使用 restaurants 陣列）
+    // 3c. 餐廳標記
     if (typeof restaurants !== 'undefined') {
         restaurants.forEach(r => {
             const marker = L.marker([r.lat, r.lng], { icon: foodIcon })
                 .addTo(map)
                 .bindPopup(`
                     <strong>🍴 ${r.name}</strong>
-                    <div style="font-size:14px;color:#8a715c;">${r.feature}</div>
+                    <div style="font-size:15px;color:#8a715c;">${r.feature}</div>
                     <div class="addr">📍 ${r.address}</div>
                     <div><span class="tag food-tag">🍽️ 推薦餐廳</span></div>
                 `);
@@ -488,7 +472,7 @@
     }
 
     // ============================================================
-    // 4. 縮放到酒店（供按鈕呼叫）
+    // 4. 縮放到酒店
     // ============================================================
 
     function zoomToHotel() {
@@ -514,7 +498,6 @@
     function zoomToSpot(spotName) {
         if (!spotName) return;
 
-        // 先嘗試搵景點
         let marker = spotMap[spotName];
         if (!marker) {
             for (const [name, m] of Object.entries(spotMap)) {
@@ -525,7 +508,6 @@
             }
         }
 
-        // 如果搵唔到景點，試吓搵餐廳
         if (!marker && typeof restaurants !== 'undefined') {
             for (const r of restaurants) {
                 if (r.name.includes(spotName) || spotName.includes(r.name)) {
@@ -550,7 +532,6 @@
         }
     }
 
-    // 執行縮放
     const spotParam = getQueryParam('spot');
     if (spotParam) {
         setTimeout(() => {
@@ -559,31 +540,7 @@
     }
 
     // ============================================================
-    // 6. 重置視野按鈕
-    // ============================================================
-
-    document.getElementById('resetViewBtn').addEventListener('click', function() {
-        if (allMarkers.length === 0) return;
-
-        const group = L.featureGroup(allMarkers);
-        const bounds = group.getBounds();
-
-        if (allMarkers.length === 1) {
-            map.setView(allMarkers[0].getLatLng(), 14, { animate: true });
-            allMarkers[0].openPopup();
-            return;
-        }
-
-        map.fitBounds(bounds, {
-            padding: [50, 50],
-            maxZoom: 14,
-            animate: true,
-            duration: 0.6
-        });
-    });
-
-    // ============================================================
-    // 7. 響應式處理
+    // 6. 響應式處理
     // ============================================================
 
     setTimeout(() => {
@@ -595,8 +552,8 @@
     });
 
     console.log('🗺️ 南京地圖已載入：' +
-        spots.length + ' 個景點 + ' +
-        (hotelMarkerObj ? '1 間酒店 + ' : '') +
+        spots.filter(s => s.category !== '住宿').length + ' 個景點 + ' +
+        '1 間酒店 + ' +
         (typeof restaurants !== 'undefined' ? restaurants.length : 0) + ' 間餐廳');
 </script>
 
