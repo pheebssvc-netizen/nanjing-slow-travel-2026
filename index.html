@@ -357,7 +357,7 @@ body{
 /* ===== Weather Block ===== */
 
 .weather-block {
-    background: linear-gradient(135deg, #e8efe6, #dce4d9);
+    background: #ece8e0;
     border-radius: 18px;
     padding: 22px 24px;
     margin-top: 25px;
@@ -395,12 +395,20 @@ body{
     gap: 18px;
     font-size: 16px;
     color: #5a6b5a;
+    flex-wrap: wrap;
 }
 
 .weather-block .details span {
     display: flex;
     align-items: center;
     gap: 4px;
+}
+
+.weather-block .city-name {
+    font-size: 16px;
+    color: #8a8a7a;
+    font-weight: 600;
+    margin-right: 4px;
 }
 
 .weather-block .loading {
@@ -510,7 +518,6 @@ footer{
 
     .weather-block .details {
         justify-content: center;
-        flex-wrap: wrap;
         gap: 10px 16px;
     }
 
@@ -848,6 +855,7 @@ function getWeather() {
                 <div class="left">
                     <div class="icon">${icon}</div>
                     <div>
+                        <div class="city-name">📍 南京</div>
                         <div class="temp">${temp}°C</div>
                         <div class="desc">${desc}</div>
                     </div>
