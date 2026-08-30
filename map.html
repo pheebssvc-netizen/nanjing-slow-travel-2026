@@ -155,6 +155,22 @@
             background: #e07b5a;
         }
 
+        /* ===== 免責聲明 ===== */
+        .disclaimer {
+            position: absolute;
+            bottom: 80px;
+            left: 12px;
+            background: rgba(0,0,0,0.55);
+            color: rgba(255,255,255,0.8);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            z-index: 1000;
+            pointer-events: none;
+            backdrop-filter: blur(4px);
+            letter-spacing: 0.5px;
+        }
+
         /* 自訂標記 */
         .marker-green {
             background: #657b6d;
@@ -227,6 +243,24 @@
             background: #e07b5a;
         }
 
+        .leaflet-popup-content .btn-locate {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 6px 16px;
+            background: #c49a6c;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        .leaflet-popup-content .btn-locate:active {
+            transform: scale(0.95);
+        }
+
         /* 載入中 */
         .loading-map {
             display: flex;
@@ -289,6 +323,13 @@
             .leaflet-popup-content {
                 font-size: 15px;
             }
+
+            .disclaimer {
+                font-size: 11px;
+                bottom: 75px;
+                left: 12px;
+                padding: 4px 12px;
+            }
         }
     </style>
 </head>
@@ -309,6 +350,9 @@
     <div class="row"><span class="dot hotel"></span> 🏨 酒店（連住5晚）</div>
     <div class="row"><span class="dot food"></span> 🍴 推薦餐廳</div>
 </div>
+
+<!-- 免責聲明 -->
+<div class="disclaimer">📍 本地圖只顯示大概位置供參考</div>
 
 <!-- 重置視野按鈕 -->
 <button class="reset-view-btn" id="resetViewBtn" title="顯示所有景點">📍</button>
@@ -387,7 +431,7 @@
 
     const allMarkers = [];
     const spotMap = {};
-    const hotelMarker = {};
+    let hotelMarkerObj = null;
     const restaurantMarkers = [];
 
     // 3a. 景點標記
@@ -417,10 +461,13 @@
                 <div class="addr">📍 ${hotelData.address}</div>
                 <div><span class="tag hotel-tag">🏠 連住5晚</span></div>
                 <div style="margin-top:4px;font-size:14px;color:#666;">步行3分鐘到夫子廟核心區</div>
+                <div style="margin-top:6px;">
+                    <button class="btn-locate" onclick="zoomToHotel()">📍 查看酒店位置</button>
+                </div>
             `);
 
         allMarkers.push(marker);
-        hotelMarker.marker = marker;
+        hotelMarkerObj = marker;
     }
 
     // 3c. 餐廳標記（使用 restaurants 陣列）
@@ -441,7 +488,22 @@
     }
 
     // ============================================================
-    // 4. 從 URL 參數讀取景點名稱並縮放
+    // 4. 縮放到酒店（供按鈕呼叫）
+    // ============================================================
+
+    function zoomToHotel() {
+        if (hotelMarkerObj) {
+            const latlng = hotelMarkerObj.getLatLng();
+            map.setView(latlng, 17, {
+                animate: true,
+                duration: 0.8
+            });
+            hotelMarkerObj.openPopup();
+        }
+    }
+
+    // ============================================================
+    // 5. 從 URL 參數讀取景點名稱並縮放
     // ============================================================
 
     function getQueryParam(param) {
@@ -467,7 +529,6 @@
         if (!marker && typeof restaurants !== 'undefined') {
             for (const r of restaurants) {
                 if (r.name.includes(spotName) || spotName.includes(r.name)) {
-                    // 搵返對應嘅 marker
                     const idx = restaurants.indexOf(r);
                     if (idx >= 0 && idx < restaurantMarkers.length) {
                         marker = restaurantMarkers[idx];
@@ -498,7 +559,7 @@
     }
 
     // ============================================================
-    // 5. 重置視野按鈕
+    // 6. 重置視野按鈕
     // ============================================================
 
     document.getElementById('resetViewBtn').addEventListener('click', function() {
@@ -522,7 +583,7 @@
     });
 
     // ============================================================
-    // 6. 響應式處理
+    // 7. 響應式處理
     // ============================================================
 
     setTimeout(() => {
@@ -535,7 +596,7 @@
 
     console.log('🗺️ 南京地圖已載入：' +
         spots.length + ' 個景點 + ' +
-        (hotelMarker.marker ? '1 間酒店 + ' : '') +
+        (hotelMarkerObj ? '1 間酒店 + ' : '') +
         (typeof restaurants !== 'undefined' ? restaurants.length : 0) + ' 間餐廳');
 </script>
 
