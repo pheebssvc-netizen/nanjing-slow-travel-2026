@@ -354,100 +354,63 @@ body{
     margin-bottom:6px;
 }
 
-/* ===== Weather Block（重新設計） ===== */
+/* ===== Weather Block（極簡版 · 參考雲南頁面） ===== */
 
 .weather-block {
     background: #e9eee8;
     border-radius: 18px;
-    padding: 20px 22px;
+    padding: 20px 24px;
     margin-top: 25px;
     box-shadow: 0 4px 15px rgba(80,70,50,.08);
-}
-
-.weather-block .weather-row {
     display: flex;
     align-items: center;
+    gap: 20px;
+}
+
+.weather-block .weather-icon {
+    font-size: 48px;
+    flex-shrink: 0;
+}
+
+.weather-block .weather-info {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
     flex-wrap: wrap;
-    gap: 8px 16px;
 }
 
-.weather-block .weather-row:first-child {
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(80,70,50,0.10);
-}
-
-.weather-block .icon-area {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.weather-block .icon-area .emoji {
-    font-size: 34px;
-}
-
-.weather-block .icon-area .city {
-    font-weight: 700;
+.weather-block .weather-info .city {
     font-size: 18px;
+    font-weight: 600;
     color: #4d5748;
 }
 
-.weather-block .temp-area {
-    display: flex;
-    align-items: baseline;
-    gap: 4px;
-}
-
-.weather-block .temp-area .temp {
-    font-size: 32px;
+.weather-block .weather-info .temp {
+    font-size: 38px;
     font-weight: 700;
     color: #3f3933;
 }
 
-.weather-block .temp-area .unit {
-    font-size: 16px;
-    color: #8a8a7a;
-}
-
-.weather-block .details-area {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 16px;
-    margin-left: auto;
-}
-
-.weather-block .details-area .item {
-    font-size: 15px;
+.weather-block .weather-info .humidity {
+    font-size: 18px;
     color: #5a6b5a;
 }
 
-.weather-block .details-area .item .label {
-    color: #8a8a7a;
-    font-size: 13px;
-}
-
-.weather-block .desc-row {
-    font-size: 16px;
+.weather-block .weather-info .desc {
+    font-size: 18px;
     color: #5a6b5a;
-}
-
-.weather-block .desc-row .desc-text {
-    font-weight: 500;
 }
 
 .weather-block .loading {
-    text-align: center;
-    font-size: 18px;
+    font-size: 20px;
     color: #888;
-    padding: 12px 0;
+    padding: 6px 0;
 }
 
 .weather-block .error {
-    text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     color: #b07a6a;
-    padding: 12px 0;
+    padding: 6px 0;
 }
 
 /* ===== Philosophy ===== */
@@ -534,38 +497,26 @@ footer{
     }
 
     .weather-block {
-        padding: 16px 16px;
+        padding: 16px 18px;
+        gap: 14px;
+        flex-wrap: wrap;
     }
 
-    .weather-block .weather-row {
-        gap: 6px 12px;
+    .weather-block .weather-icon {
+        font-size: 38px;
     }
 
-    .weather-block .weather-row:first-child {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 6px;
+    .weather-block .weather-info .temp {
+        font-size: 32px;
     }
 
-    .weather-block .details-area {
-        margin-left: 0;
-        gap: 4px 12px;
-    }
-
-    .weather-block .temp-area .temp {
-        font-size: 28px;
-    }
-
-    .weather-block .icon-area .emoji {
-        font-size: 28px;
-    }
-
-    .weather-block .icon-area .city {
+    .weather-block .weather-info .city {
         font-size: 16px;
     }
 
-    .weather-block .details-area .item {
-        font-size: 14px;
+    .weather-block .weather-info .humidity,
+    .weather-block .weather-info .desc {
+        font-size: 16px;
     }
 
     .intro h2 {
@@ -793,7 +744,7 @@ footer{
 
 
 <!-- =========================
-     WEATHER BLOCK（重新設計）
+     WEATHER BLOCK（極簡版）
 ========================= -->
 
 <div class="weather-block" id="weatherBlock">
@@ -882,37 +833,17 @@ function getWeather() {
         })
         .then(data => {
             const temp = Math.round(data.main.temp);
-            const feelsLike = Math.round(data.main.feels_like);
             const humidity = data.main.humidity;
-            const wind = Math.round(data.wind.speed * 3.6);
             const desc = data.weather[0].description;
             const icon = getWeatherIcon(data.weather[0].icon);
-            const date = new Date().toLocaleDateString('zh-HK', {
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-                weekday: 'short'
-            });
 
             weatherBlock.innerHTML = `
-                <div class="weather-row">
-                    <div class="icon-area">
-                        <span class="emoji">${icon}</span>
-                        <span class="city">📍 南京</span>
-                    </div>
-                    <div class="temp-area">
-                        <span class="temp">${temp}</span>
-                        <span class="unit">°C</span>
-                    </div>
-                    <div class="details-area">
-                        <span class="item">🌡️ 體感 <strong>${feelsLike}°C</strong></span>
-                        <span class="item">💧 <strong>${humidity}%</strong></span>
-                        <span class="item">💨 <strong>${wind}</strong> km/h</span>
-                        <span class="item">📅 ${date}</span>
-                    </div>
-                </div>
-                <div class="desc-row">
-                    🏙️ 今日天氣：<span class="desc-text">${desc}</span>
+                <div class="weather-icon">${icon}</div>
+                <div class="weather-info">
+                    <span class="city">📍 南京天氣</span>
+                    <span class="temp">${temp}°C</span>
+                    <span class="humidity">💧 濕度 ${humidity}%</span>
+                    <span class="desc">${desc}</span>
                 </div>
             `;
         })
