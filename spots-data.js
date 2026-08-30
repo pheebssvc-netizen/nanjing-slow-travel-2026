@@ -1,7 +1,9 @@
 /* =========================================================
    金陵慢遊 2026
-   景點座標資料庫（17 景點）
+   景點座標資料庫（18 景點 + 12 餐廳）
    ========================================================= */
+
+// ===== 景點座標 =====
 
 const spots = [
 
@@ -172,8 +174,19 @@ const spots = [
 
   /* 16 */
   {
-    id: "gaochun-old-street",
+    id: "nanjing-massacre-memorial",
     number: 16,
+    name: "南京大屠殺紀念館",
+    lat: 32.035217,
+    lng: 118.742372,
+    address: "南京市建鄴區水西門大街418號",
+    category: "歷史教育"
+  },
+
+  /* 17 */
+  {
+    id: "gaochun-old-street",
+    number: 17,
     name: "高淳老街",
     lat: 31.32018,
     lng: 118.86773,
@@ -181,15 +194,119 @@ const spots = [
     category: "古街"
   },
 
-  /* 17 */
+  /* 18 */
   {
     id: "qiqiao-ancient-village",
-    number: 17,
+    number: 18,
     name: "漆橋古村",
     lat: 31.37593,
     lng: 118.992493,
     address: "南京市高淳區漆橋村523號",
     category: "古村"
+  }
+
+];
+
+
+// ===== 餐廳座標 =====
+
+const restaurants = [
+
+  {
+    id: "tianyuan-lou",
+    name: "天圓樓·老南京菜",
+    lat: 32.01985,
+    lng: 118.78780,
+    address: "夫子廟大石壩街75號",
+    feature: "30年老字號 · 金陵烤鴨"
+  },
+  {
+    id: "tan-shan-he",
+    name: "碳山河·茶湯火鍋",
+    lat: 32.05050,
+    lng: 118.78620,
+    address: "金陵天地5樓L551",
+    feature: "龍井茉莉茶湯 + 鮮切吊龍"
+  },
+  {
+    id: "nanjing-da-pai-dang",
+    name: "南京大牌檔",
+    lat: 32.01850,
+    lng: 118.78650,
+    address: "夫子廟平江府店",
+    feature: "金陵小吃全集"
+  },
+  {
+    id: "qi-fang-ge",
+    name: "奇芳閣",
+    lat: 32.02020,
+    lng: 118.78700,
+    address: "夫子廟貢院街",
+    feature: "鴨油酥燒餅 · 素菜包"
+  },
+  {
+    id: "han-fu-xing",
+    name: "韓復興板鴨店",
+    lat: 32.01920,
+    lng: 118.78850,
+    address: "夫子廟石壩街126號",
+    feature: "鹽水鴨 · 鴨油燒餅（1866年）"
+  },
+  {
+    id: "jin-hong-xing",
+    name: "金宏興鴨子店",
+    lat: 32.04500,
+    lng: 118.78350,
+    address: "明瓦廊5號105室（新街口）",
+    feature: "烤鴨 · 鹽水鴨"
+  },
+  {
+    id: "li-ji-qing-zhen",
+    name: "李記清真館",
+    lat: 32.02680,
+    lng: 118.77680,
+    address: "秦淮區打釘巷1號",
+    feature: "牛肉鍋貼（百年老字號）"
+  },
+  {
+    id: "jiang-you-ji",
+    name: "蔣有記",
+    lat: 32.01120,
+    lng: 118.78750,
+    address: "老門東三條營49-3號",
+    feature: "牛肉鍋貼（1922年創立）"
+  },
+  {
+    id: "ji-ming-tang-bao",
+    name: "雞鳴湯包",
+    lat: 32.05650,
+    lng: 118.79850,
+    address: "玄武區太平門街10號",
+    feature: "雞汁湯包"
+  },
+  {
+    id: "xiao-pan-ji",
+    name: "小潘記鴨血粉絲湯",
+    lat: 32.04900,
+    lng: 118.79550,
+    address: "玄武區珠江路275-3號",
+    feature: "鴨血粉絲湯"
+  },
+  {
+    id: "hui-wei",
+    name: "回味鴨血粉絲湯",
+    lat: 32.01650,
+    lng: 118.78650,
+    address: "夫子廟站4號口店",
+    feature: "連鎖老字號"
+  },
+  {
+    id: "xiao-chu-niang",
+    name: "小廚娘淮揚菜",
+    lat: 32.04550,
+    lng: 118.78550,
+    address: "新街口艾尚天地B座3樓",
+    feature: "淮揚菜（29年本地品牌）"
   }
 
 ];
@@ -209,4 +326,12 @@ function getSpotByName(name) {
 
 function getSpotByNumber(number) {
   return spots.find(spot => spot.number === number);
+}
+
+function getRestaurantById(id) {
+  return restaurants.find(r => r.id === id);
+}
+
+function getRestaurantByName(name) {
+  return restaurants.find(r => r.name === name);
 }
