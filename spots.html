@@ -86,8 +86,75 @@
   background: #f2f5f1;
 }
 
+/* =========================
+   推薦餐廳快速方塊
+   ========================= */
+
+.restaurant-index {
+  margin: 20px 16px 30px;
+  padding: 20px 16px;
+  background: #fdf8f0;
+  border-radius: 22px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+  border: 1px solid #efe8dc;
+}
+
+.restaurant-index-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #8a6e4b;
+  margin-bottom: 5px;
+}
+
+.restaurant-index-subtitle {
+  font-size: 16px;
+  color: #8b897f;
+  margin-bottom: 16px;
+}
+
+.restaurant-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.restaurant-list button {
+  min-height: 56px;
+  padding: 10px 8px;
+
+  border: 1px solid #e8ddd0;
+  border-radius: 14px;
+
+  background: #ffffff;
+  color: #6a5a4a;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.restaurant-list button:active {
+  transform: scale(0.97);
+  background: #f8f0e6;
+}
+
+.restaurant-list button .sub {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: #b09a88;
+  margin-top: 2px;
+}
+
 /* 手機細螢幕 */
-@media (max-width: 380px) {
+@media (max-width: 500px) {
 
   .spot-list {
     grid-template-columns: 1fr;
@@ -98,7 +165,26 @@
     font-size: 19px;
   }
 
+  .restaurant-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .restaurant-list button {
+    min-height: 52px;
+    font-size: 14px;
+  }
+
+  .restaurant-index-title {
+    font-size: 22px;
+  }
 }
+
+@media (max-width: 380px) {
+  .restaurant-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 *{
     box-sizing:border-box;
 }
@@ -454,7 +540,7 @@ body {
 }
 
 /* =========================
-   推薦餐廳專區
+   推薦餐廳專區（底部完整版）
    ========================= */
 
 .restaurant-section {
@@ -564,6 +650,83 @@ body {
     <button onclick="goSpot('南京大屠殺紀念館')">🕊️ 南京大屠殺紀念館</button>
     <button onclick="goSpot('高淳老街')">🏮 高淳老街</button>
     <button onclick="goSpot('漆橋古村')">🌿 漆橋古村</button>
+
+  </div>
+
+</section>
+
+<!-- ===== 推薦餐廳快速方塊（新增） ===== -->
+<section class="restaurant-index">
+
+  <div class="restaurant-index-title">
+    🍽️ 推薦餐廳
+  </div>
+
+  <div class="restaurant-index-subtitle">
+    點選餐廳，查看地圖位置
+  </div>
+
+  <div class="restaurant-list">
+
+    <button onclick="goToRestaurant('天圓樓·老南京菜')">
+      天圓樓
+      <span class="sub">金陵烤鴨</span>
+    </button>
+
+    <button onclick="goToRestaurant('碳山河·茶湯火鍋')">
+      碳山河
+      <span class="sub">茶湯火鍋</span>
+    </button>
+
+    <button onclick="goToRestaurant('南京大牌檔')">
+      南京大牌檔
+      <span class="sub">小吃全集</span>
+    </button>
+
+    <button onclick="goToRestaurant('奇芳閣')">
+      奇芳閣
+      <span class="sub">鴨油酥燒餅</span>
+    </button>
+
+    <button onclick="goToRestaurant('韓復興板鴨店')">
+      韓復興
+      <span class="sub">鹽水鴨</span>
+    </button>
+
+    <button onclick="goToRestaurant('金宏興鴨子店')">
+      金宏興
+      <span class="sub">烤鴨</span>
+    </button>
+
+    <button onclick="goToRestaurant('李記清真館')">
+      李記清真
+      <span class="sub">牛肉鍋貼</span>
+    </button>
+
+    <button onclick="goToRestaurant('蔣有記')">
+      蔣有記
+      <span class="sub">牛肉鍋貼</span>
+    </button>
+
+    <button onclick="goToRestaurant('雞鳴湯包')">
+      雞鳴湯包
+      <span class="sub">雞汁湯包</span>
+    </button>
+
+    <button onclick="goToRestaurant('小潘記鴨血粉絲湯')">
+      小潘記
+      <span class="sub">鴨血粉絲湯</span>
+    </button>
+
+    <button onclick="goToRestaurant('回味鴨血粉絲湯')">
+      回味
+      <span class="sub">鴨血粉絲湯</span>
+    </button>
+
+    <button onclick="goToRestaurant('小廚娘淮揚菜')">
+      小廚娘
+      <span class="sub">淮揚菜</span>
+    </button>
 
   </div>
 
@@ -882,616 +1045,4 @@ body {
 <div class="section">
 <h3>🎫 導遊攻略</h3>
 <div class="info-grid">
-<div class="info"><strong>⏱ 建議時間</strong><span>約 30 分鐘</span></div>
-<div class="info"><strong>🎫 門票</strong><span>約 ¥10（60歲以上免票）</span></div>
-<div class="info"><strong>🕐 開放</strong><span>約 9:00–22:00</span></div>
-<div class="info"><strong>🚕 酒店距離</strong><span>步行約 5 分鐘</span></div>
-<div class="info"><strong>📍 地址</strong><span>大石壩街150號</span></div>
-</div>
-<br>
-<div class="energy">
-    <span class="energy-title">💪 活力需求</span>
-    <span class="bolts">⚡</span>
-    <span class="hint">極小、30分鐘行完、平坦、有座位</span>
-</div>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=李香君故居">🗺️ 查看地圖</a>
-</div>
-</div>
-</div>
-
-
-<!-- 8. 老門東 -->
-<div class="spot">
-<div class="spot-title">
-<h2>8. 老門東歷史街區</h2>
-<div class="subtitle">明清街巷 · 南京傳統小吃集中地</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>老門東保存大量明清風格街巷及傳統建築，是了解南京城市生活與飲食文化的好地方。相比大型景區，這裡更適合隨意行走、買手信及感受氣氛。</p>
-</div>
-
-<div class="section">
-<h3>✨ 不可錯過</h3>
-<ul>
-<li>蔣有記鍋貼、陸氏梅花糕、藍老大糖芋苗等南京小吃</li>
-<li>明清風格街巷與傳統店舖</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
-<div class="info-grid">
-<div class="info"><strong>⏱ 建議時間</strong><span>1–2 小時</span></div>
-<div class="info"><strong>🎫 門票</strong><span>免費</span></div>
-<div class="info"><strong>🚕 酒店距離</strong><span>約 1.2 公里（步行15分鐘）</span></div>
-</div>
-<br>
-<div class="energy">
-    <span class="energy-title">💪 活力需求</span>
-    <span class="bolts">⚡⚡⚡</span>
-    <span class="hint">露天街區，步行約 1-2 小時，有凳可休息</span>
-</div>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=老門東">🗺️ 查看地圖</a>
-</div>
-</div>
-</div>
-
-
-<!-- 9. 三七八巷 -->
-<div class="spot">
-<div class="spot-title">
-<h2>9. 三七八巷</h2>
-<div class="subtitle">藏在居民樓下的地道菜市場</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>藏在居民樓下的地道菜市場，充滿老南京煙火氣。可品嚐剛出爐的燒餅、現炸油條、蒸兒糕。環境接地氣，適合喜歡體驗本地生活的長輩。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
-<div class="info-grid">
-<div class="info"><strong>⏱ 建議時間</strong><span>1 小時</span></div>
-<div class="info"><strong>🎫 門票</strong><span>免費</span></div>
-<div class="info"><strong>🚕 酒店距離</strong><span>約 900 米（步行12分鐘）</span></div>
-</div>
-<br>
-<div class="energy">
-    <span class="energy-title">💪 活力需求</span>
-    <span class="bolts">⚡⚡</span>
-    <span class="hint">小巷步行約 1 小時，平坦、接地氣</span>
-</div>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=三七八巷">🗺️ 查看地圖</a>
-</div>
-</div>
-</div>
-
-
-<!-- 10. 瞻園 -->
-<div class="spot">
-<div class="spot-title">
-<h2>10. 瞻園</h2>
-<div class="subtitle">金陵第一園 · 太平天國歷史博物館</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>瞻園是南京現存歷史最悠久的明代古典園林，已有600餘年歷史，與蘇州拙政園、上海豫園等並稱為「江南四大名園」。明初為中山王徐達府邸花園，清代為布政使衙署。園內同時設有太平天國歷史博物館。87版《紅樓夢》和《新白娘子傳奇》都曾在此取景。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
-<div class="info-grid">
-<div class="info"><strong>⏱ 建議時間</strong><span>1.5–2 小時</span></div>
-<div class="info"><strong>🎫 門票</strong><span>日場約 ¥30（60-69歲半價）；夜場約 ¥50</span></div>
-<div class="info"><strong>🕐 開放</strong><span>日場約 8:00–17:00；夜場至 21:00</span></div>
-<div class="info"><strong>🚕 酒店距離</strong><span>步行約 10 分鐘</span></div>
-</div>
-<br>
-<div class="energy">
-    <span class="energy-title">💪 活力需求</span>
-    <span class="bolts">⚡⚡⚡</span>
-    <span class="hint">園林有步道、有上落，但園區不大、多座位</span>
-</div>
-</div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>秋季園內銀杏金黃，運氣好可遇見園中「喵星人」。若Day 4下午時間充裕，可在遊覽完科舉博物館和李香君故居後，直接步行前往。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=瞻園">🗺️ 查看地圖</a>
-</div>
-</div>
-</div>
-
-
-<!-- 11. 雞鳴寺 -->
-<div class="spot">
-<div class="spot-title">
-<h2>11. 雞鳴寺</h2>
-<div class="subtitle">南朝第一寺 · 千年古剎</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>南京最古老的梵剎之一，有「南朝第一寺」之稱，始建於西晉，已逾1700年歷史。秋季銀杏落滿黃牆，秋意濃郁。</p>
-</div>
-
-<div class="section">
-<h3>✨ 不可錯過的看點</h3>
-<ul>
-<li>古寺建築與黃牆景色</li>
-<li>登上藥師佛塔可北眺玄武湖全景，東望紫金山</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
-<div class="info-grid">
-<div class="info"><strong>⏱ 建議時間</strong><span>1–2 小時</span></div>
-<div class="info"><strong>🎫 門票</strong><span>約 ¥10（含三炷香，60歲以上半價）</span></div>
-<div class="info"><strong>🕐 開放</strong><span>7:30–17:00</span></div>
-<div class="info"><strong>🚕 酒店車程</strong><span>約 20 分鐘</span></div>
-</div>
-<br>
-<div class="energy">
-    <span class="energy-title">💪 活力需求</span>
-    <span class="bolts">⚡⚡⚡</span>
-    <span class="hint">有斜坡及樓梯上塔，但可選擇唔上塔，只行寺院</span>
-</div>
-</div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>可與玄武湖、台城城牆一併遊覽，安排在同一上午或下午。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=雞鳴寺">🗺️ 查看地圖</a>
-</div>
-</div>
-</div>
-
-
-<!-- 12. 玄武湖 -->
-<div class="spot">
-<div class="spot-title">
-<h2>12. 玄武湖</h2>
-<div class="subtitle">金陵明珠 · 皇家園林湖泊</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>江南現存最大的皇家園林湖泊，已有1600多年歷史。秋季梁洲銀杏大道一片金黃，菊花展亦在10月底至11月舉辦，是賞秋好去處。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
-<div class="info-grid">
-<div class="info"><strong>⏱ 建議時間</strong><span>1.5–3 小時</span></div>
-<div class="info"><strong>🎫 門票</strong><span>免費</span></div>
-<div class="info"><strong>🕐 開放</strong><span>6:00–21:00</span></div>
-<div class="info"><strong>🚕 酒店車程</strong><span>約 20 分鐘</span></div>
-<div class="info"><strong>🚌 建議</strong><span>乘坐觀光車（約¥30/圈）</span></div>
-</div>
-<br>
-<div class="energy">
-    <span class="energy-title">💪 活力需求</span>
-    <span class="bolts">⚡⚡⚡</span>
-    <span class="hint">範圍大，但可坐觀光車，輕鬆好多</span>
-</div>
-</div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>可與雞鳴寺、台城段城牆一併遊覽。乘觀光車遊覽輕鬆愜意。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=玄武湖">🗺️ 查看地圖</a>
-</div>
-</div>
-</div>
-
-
-<!-- 13. 南京城牆 -->
-<div class="spot">
-<div class="spot-title">
-<h2>13. 南京城牆（中華門甕城）</h2>
-<div class="subtitle">世界最長城垣 · 最大甕城</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>南京城牆是現存世界最長、規模最大的古代城垣，全長35.3公里。中華門甕城是我國現存規模最大的甕城，設有三道甕城、四道券門，城內有27個藏兵洞，可藏兵三千。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
-<div class="info-grid">
-<div class="info"><strong>⏱ 建議時間</strong><span>1–2 小時</span></div>
-<div class="info"><strong>🎫 門票</strong><span>約 ¥47</span></div>
-<div class="info"><strong>🕐 開放</strong><span>8:30–21:00</span></div>
-<div class="info"><strong>🚕 酒店車程</strong><span>約 5 分鐘</span></div>
-</div>
-<br>
-<div class="energy">
-    <span class="energy-title">💪 活力需求</span>
-    <span class="bolts">⚡⚡⚡</span>
-    <span class="hint">有上落城牆嘅樓梯，上面平坦，可慢慢行</span>
-</div>
-</div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>緊鄰老門東，可安排在一起遊覽。登上城牆可了解古代軍事防衛智慧，並眺望南京城景。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=南京城牆">🗺️ 查看地圖</a>
-</div>
-</div>
-</div>
-
-
-<!-- 14. 頤和路 -->
-<div class="spot">
-<div class="spot-title">
-<h2>14. 頤和路民國公館區</h2>
-<div class="subtitle">梧桐深處 · 半部民國史</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>被譽為「一條頤和路，半部民國史」。頤和路及周邊12個片區，聚集了上百棟民國時期使領館、名人公館，包括蔣介石、宋子文、汪精衛等故居。秋季梧桐葉黃，光影斑駁。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
-<div class="info-grid">
-<div class="info"><strong>⏱ 建議時間</strong><span>2–3 小時</span></div>
-<div class="info"><strong>🎫 門票</strong><span>免費</span></div>
-<div class="info"><strong>🕐 開放</strong><span>全天</span></div>
-<div class="info"><strong>🚕 酒店車程</strong><span>約 20 分鐘</span></div>
-<div class="info"><strong>🚶 步行難度</strong><span>低</span></div>
-</div>
-<br>
-<div class="energy">
-    <span class="energy-title">💪 活力需求</span>
-    <span class="bolts">⚡⚡</span>
-    <span class="hint">平地散步，冇上落，可隨時停低休息</span>
-</div>
-</div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>適合散步拍照，安排在上午或黃昏最佳。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=頤和路">🗺️ 查看地圖</a>
-</div>
-</div>
-</div>
-
-
-<!-- 15. 甘熙故居 -->
-<div class="spot">
-<div class="spot-title">
-<h2>15. 甘熙故居（南京民俗博物館）</h2>
-<div class="subtitle">九十九間半 · 江南最大私人民居</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>江南現存規模最大、保存最完整的私人民居，有「九十九間半」之稱。始建於清代，為甘熙家族宅第，融合徽派與蘇式建築風格。現為南京民俗博物館，展示南京傳統民居、婚嫁習俗、非遺技藝等。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
-<div class="info-grid">
-<div class="info"><strong>⏱ 建議時間</strong><span>1–2 小時</span></div>
-<div class="info"><strong>🎫 門票</strong><span>約 ¥20</span></div>
-<div class="info"><strong>🕐 開放</strong><span>9:00–17:30（週一閉館）</span></div>
-<div class="info"><strong>🚕 酒店距離</strong><span>步行約 15 分鐘</span></div>
-<div class="info"><strong>📍 地址</strong><span>中山南路400號熙南里街區</span></div>
-</div>
-<br>
-<div class="energy">
-    <span class="energy-title">💪 活力需求</span>
-    <span class="bolts">⚡⚡</span>
-    <span class="hint">室內為主、平坦、有座位、範圍不大</span>
-</div>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=甘熙故居">🗺️ 查看地圖</a>
-</div>
-</div>
-</div>
-
-
-<!-- 16. 南京大屠殺紀念館 -->
-<div class="spot">
-<div class="spot-title">
-<h2>16. 侵華日軍南京大屠殺遇難同胞紀念館</h2>
-<div class="subtitle">銘記歷史 · 珍愛和平</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>記錄民族傷痛的嚴肅場所，建於江東門集體屠殺及遺址之上。展陳以大量史料、證物、影像詳實記錄了1937年12月至1938年1月的歷史，具有極強的教育意義與震撼力。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
-<div class="info-grid">
-<div class="info"><strong>⏱ 建議時間</strong><span>2–3 小時</span></div>
-<div class="info"><strong>🎫 門票</strong><span>免費，務必提前1-7天預約</span></div>
-<div class="info"><strong>🕐 開放</strong><span>週二至週日 8:30–17:30（週一閉館）</span></div>
-<div class="info"><strong>🚕 酒店車程</strong><span>約 25 分鐘</span></div>
-<div class="info"><strong>📍 地址</strong><span>水西門大街418號</span></div>
-</div>
-<br>
-<div class="energy">
-    <span class="energy-title">💪 活力需求</span>
-    <span class="bolts">⚡⚡⚡</span>
-    <span class="hint">室內展館、平坦、有座位，但主題沉重</span>
-</div>
-</div>
-
-<div class="section">
-<h3>⚠️ 特別提醒</h3>
-<p>請務必評估長輩的心理承受能力，主題沉重，不建議與其他玩樂景點混合安排。建議單獨預留半天時間，之後安排輕鬆的休息時段。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=南京大屠殺紀念館">🗺️ 查看地圖</a>
-</div>
-</div>
-</div>
-
-
-<!-- 17. 高淳老街 -->
-<div class="spot">
-<div class="spot-title">
-<h2>17. 高淳老街</h2>
-<div class="subtitle">金陵第一古街 · 900年歷史</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>高淳老街擁有900多年歷史，是江蘇保存較完整的古建築街區之一。11月正值固城湖螃蟹最肥美季節。</p>
-</div>
-
-<div class="section">
-<h3>✨ 不可錯過的看點</h3>
-<ul>
-<li>明清建築、吳氏宗祠、楊廳、關王廟</li>
-<li>11月限定：固城湖螃蟹</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
-<div class="info-grid">
-<div class="info"><strong>⏱ 建議時間</strong><span>約 2 小時</span></div>
-<div class="info"><strong>🎫 門票</strong><span>街區免費，小景點聯票約 ¥60</span></div>
-<div class="info"><strong>🚕 酒店車程</strong><span>約 1–1.5 小時</span></div>
-</div>
-<br>
-<div class="energy">
-    <span class="energy-title">💪 活力需求</span>
-    <span class="bolts">⚡⚡⚡</span>
-    <span class="hint">露天步行約 1-2 小時，平坦、有凳可休息</span>
-</div>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=高淳老街">🗺️ 查看地圖</a>
-</div>
-</div>
-</div>
-
-
-<!-- 18. 漆橋古村 -->
-<div class="spot">
-<div class="spot-title">
-<h2>18. 漆橋古村</h2>
-<div class="subtitle">江南孔子第一村 · 原生態古村</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>漆橋古村擁有2000多年歷史，南宋時期孔子後裔遷居於此，是僅次於曲阜的孔子後裔第二大居住地。500米原生態青石板老街、古橋、古井保存完好。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
-<div class="info-grid">
-<div class="info"><strong>⏱ 建議時間</strong><span>1–1.5 小時</span></div>
-<div class="info"><strong>🎫 門票</strong><span>完全免費</span></div>
-<div class="info"><strong>🚕 酒店車程</strong><span>約 1.5 小時</span></div>
-</div>
-<br>
-<div class="energy">
-    <span class="energy-title">💪 活力需求</span>
-    <span class="bolts">⚡⚡⚡</span>
-    <span class="hint">露天步行約 1 小時，平坦、原生態</span>
-</div>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=漆橋古村">🗺️ 查看地圖</a>
-</div>
-</div>
-</div>
-
-
-<!-- =========================
-     推薦餐廳專區
-     ========================= -->
-
-<div class="restaurant-section">
-    <h2>🍽️ 推薦餐廳</h2>
-    <div class="sub">在地美食 · 方便團友搵食</div>
-
-    <div class="restaurant-grid">
-
-        <div class="restaurant-item">
-            <div class="name">天圓樓·老南京菜</div>
-            <div class="feature">30年老字號 · 金陵烤鴨</div>
-            <div class="addr">📍 夫子廟大石壩街75號</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">碳山河·茶湯火鍋</div>
-            <div class="feature">龍井茉莉茶湯 + 鮮切吊龍</div>
-            <div class="addr">📍 金陵天地5樓L551</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">南京大牌檔</div>
-            <div class="feature">金陵小吃全集</div>
-            <div class="addr">📍 夫子廟平江府店</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">奇芳閣</div>
-            <div class="feature">鴨油酥燒餅 · 素菜包</div>
-            <div class="addr">📍 夫子廟貢院街</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">韓復興板鴨店</div>
-            <div class="feature">鹽水鴨 · 鴨油燒餅（1866年）</div>
-            <div class="addr">📍 夫子廟石壩街126號</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">金宏興鴨子店</div>
-            <div class="feature">烤鴨 · 鹽水鴨</div>
-            <div class="addr">📍 明瓦廊5號105室（新街口）</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">李記清真館</div>
-            <div class="feature">牛肉鍋貼（百年老字號）</div>
-            <div class="addr">📍 秦淮區打釘巷1號</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">蔣有記</div>
-            <div class="feature">牛肉鍋貼（1922年創立）</div>
-            <div class="addr">📍 老門東三條營49-3號</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">雞鳴湯包</div>
-            <div class="feature">雞汁湯包</div>
-            <div class="addr">📍 玄武區太平門街10號</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">小潘記鴨血粉絲湯</div>
-            <div class="feature">鴨血粉絲湯</div>
-            <div class="addr">📍 玄武區珠江路275-3號</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">回味鴨血粉絲湯</div>
-            <div class="feature">連鎖老字號</div>
-            <div class="addr">📍 夫子廟站4號口店</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">小廚娘淮揚菜</div>
-            <div class="feature">淮揚菜（29年本地品牌）</div>
-            <div class="addr">📍 新街口艾尚天地B座3樓</div>
-        </div>
-
-    </div>
-</div>
-
-
-<div class="top">
-    <a href="#">↑ 返回頁頂</a>
-</div>
-
-</div>
-
-<script>
-function goSpot(name) {
-    const spots = document.querySelectorAll('.spot');
-
-    for (const spot of spots) {
-        const title = spot.querySelector('.spot-title h2');
-
-        if (title && title.textContent.includes(name)) {
-            spot.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-
-            setTimeout(() => {
-                spot.classList.add('spot-highlight');
-                setTimeout(() => {
-                    spot.classList.remove('spot-highlight');
-                }, 1500);
-            }, 400);
-            return;
-        }
-    }
-    alert('暫時找不到「' + name + '」的景點資料');
-}
-</script>
-
-<!-- 返回景點目錄 -->
-<button id="backToSpots" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-    ↑ 景點目錄
-</button>
-
-<!-- 手機底部導航 -->
-<nav class="mobile-nav">
-  <a href="index.html">
-    <span>🏠</span>
-    <small>首頁</small>
-  </a>
-  <a href="itinerary.html">
-    <span>📅</span>
-    <small>六日行程</small>
-  </a>
-  <a href="spots.html" class="active">
-    <span>📚</span>
-    <small>景點百科</small>
-  </a>
-</nav>
-
-</body>
-</html>
+<div class="info"><strong>⏱ 
