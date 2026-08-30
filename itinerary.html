@@ -662,4 +662,220 @@ title: "午餐",
 note: "榮華樓或六朝居，品嚐固城湖螃蟹（11月最肥美）"
 },
 {
-time
+time: "13:30–14:00",
+title: "前往漆橋古村",
+note: "車程約25分鐘"
+},
+{
+time: "14:00–15:30",
+title: "遊覽漆橋古村",
+note: "500米原生態青石板老街、孔氏宗祠遺址、漢代古橋、宋代古井",
+core: true,
+spot: "漆橋古村"
+},
+{
+time: "15:30–17:00",
+title: "包車返回酒店",
+note: "車程約1-1.5小時"
+},
+{
+time: "18:00",
+title: "晚餐",
+note: "酒店附近自理"
+}
+]
+},
+
+{
+day: 6,
+date: "2026-11-07",
+weekday: "星期六",
+title: "從容告別金陵",
+events: [
+{
+time: "08:00–09:00",
+title: "酒店早餐",
+note: "悠閒享受最後一個早晨"
+},
+{
+time: "09:00–10:30",
+title: "老門東／三七八巷",
+note: "購買伴手禮：韓復興鹽水鴨、蔣有記鍋貼、藍老大糖芋苗",
+core: true,
+spot: "老門東"
+},
+{
+time: "10:30–11:30",
+title: "返回酒店收拾行李、退房",
+note: ""
+},
+{
+time: "11:30–12:00",
+title: "午餐",
+note: "酒店附近簡餐"
+},
+{
+time: "12:00–13:00",
+title: "打車前往祿口機場",
+note: "車程約50分鐘，車費約¥150"
+},
+{
+time: "14:15",
+title: "國泰航空 CX357 起飛",
+note: "空中巴士 A330-300"
+},
+{
+time: "17:10",
+title: "抵達香港國際機場 T1",
+note: "旅程圓滿結束 🎉"
+}
+]
+}
+
+];
+
+
+/* =====================================
+   日期判斷
+===================================== */
+
+function getTodayDay() {
+
+    const now = new Date();
+    const current = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const start = new Date(2026, 10, 2);
+    const end = new Date(2026, 10, 7);
+
+    if (current < start) return 1;
+    if (current > end) return 6;
+
+    for (let i = 0; i < days.length; i++) {
+        const d = new Date(days[i].date);
+        if (current.getTime() === d.getTime()) return days[i].day;
+    }
+    return 1;
+}
+
+
+/* =====================================
+   顯示 Day 按鈕
+===================================== */
+
+function renderDayButtons(selectedDay) {
+
+    const box = document.getElementById("daySelector");
+    box.innerHTML = "";
+
+    days.forEach(day => {
+        const button = document.createElement("button");
+        button.className = "day-btn";
+        if (day.day === selectedDay) button.classList.add("active");
+        button.textContent = "Day " + day.day;
+        button.onclick = function() { renderDay(day.day); };
+        box.appendChild(button);
+    });
+}
+
+
+/* =====================================
+   顯示行程
+===================================== */
+
+function renderDay(dayNumber) {
+
+    const day = days.find(d => d.day === dayNumber);
+    if (!day) return;
+
+    renderDayButtons(dayNumber);
+
+    document.getElementById("todayDate").textContent =
+        day.date.replaceAll("-", "/") + " · " + day.weekday;
+
+    document.getElementById("todayTitle").textContent =
+        "Day " + day.day + " · " + day.title;
+
+    const container = document.getElementById("itinerary");
+    container.innerHTML = "";
+
+    const heading = document.createElement("div");
+    heading.className = "day-heading";
+    heading.textContent = "Day " + day.day + "｜" + day.title;
+
+    const theme = document.createElement("div");
+    theme.className = "day-theme";
+    theme.textContent = day.date + "　" + day.weekday;
+
+    const timeline = document.createElement("div");
+    timeline.className = "timeline";
+
+    day.events.forEach(event => {
+
+        const card = document.createElement("div");
+        card.className = "event";
+
+        if (event.core) card.classList.add("core");
+        if (event.afternoon) card.classList.add("afternoon");
+
+        let html = "";
+
+        if (event.afternoon) {
+            html += `<div class="afternoon-label">🌿 下午彈性</div>`;
+        }
+
+        html += `<div class="time">${event.time}</div>`;
+        html += `<div class="event-title">${event.title}</div>`;
+
+        if (event.note) {
+            html += `<div class="event-note">${event.note}</div>`;
+        }
+
+        if (event.spot) {
+            html += `
+                <div class="buttons">
+                    <a class="spot-btn" href="spots.html">📖 導遊資料</a>
+                    <a class="map-btn" href="map.html?spot=${encodeURIComponent(event.spot)}">🗺️ 查看地圖</a>
+                </div>
+            `;
+        }
+
+        card.innerHTML = html;
+        timeline.appendChild(card);
+    });
+
+    container.appendChild(heading);
+    container.appendChild(theme);
+    container.appendChild(timeline);
+}
+
+
+/* =====================================
+   啟動
+===================================== */
+
+const todayDay = getTodayDay();
+renderDay(todayDay);
+
+</script>
+
+<!-- 手機底部導航 -->
+<nav class="mobile-nav">
+
+  <a href="index.html">
+    <span>🏠</span>
+    <small>首頁</small>
+  </a>
+
+  <a href="itinerary.html" class="active">
+    <span>📅</span>
+    <small>六日行程</small>
+  </a>
+
+  <a href="spots.html">
+    <span>📚</span>
+    <small>景點百科</small>
+  </a>
+
+</nav>
+
+</body>
+</html>
