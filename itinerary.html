@@ -21,7 +21,7 @@ content="width=device-width, initial-scale=1.0">
     right: 0;
     bottom: 0;
 
-    height: 64px;
+    height: 70px;
 
     display: flex;
     justify-content: space-around;
@@ -41,7 +41,7 @@ content="width=device-width, initial-scale=1.0">
 .mobile-nav a {
     flex: 1;
 
-    height: 64px;
+    height: 70px;
 
     display: flex;
     flex-direction: column;
@@ -56,14 +56,14 @@ content="width=device-width, initial-scale=1.0">
 }
 
 .mobile-nav a span {
-    font-size: 20px;
-    line-height: 22px;
+    font-size: 22px;
+    line-height: 24px;
 }
 
 .mobile-nav a small {
     margin-top: 3px;
 
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
 }
 
@@ -76,7 +76,7 @@ content="width=device-width, initial-scale=1.0">
 }
 
 body {
-    padding-bottom: 85px;
+    padding-bottom: 95px;
 }
 * {
     box-sizing: border-box;
@@ -93,6 +93,7 @@ body {
         "Microsoft JhengHei",
         sans-serif;
     line-height: 1.7;
+    font-size: 18px;
 }
 
 header {
@@ -109,13 +110,13 @@ header {
 
 header h1 {
     margin: 0;
-    font-size: 28px;
+    font-size: 30px;
     letter-spacing: 2px;
 }
 
 header p {
     margin: 7px 0 0;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .container {
@@ -137,19 +138,19 @@ header p {
 }
 
 .today-date {
-    font-size: 14px;
+    font-size: 16px;
     color: #777;
 }
 
 .today-title {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
     margin-top: 4px;
 }
 
 .hotel {
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 16px;
     color: #6c665f;
 }
 
@@ -170,9 +171,9 @@ header p {
     background: white;
     color: #514b45;
     border-radius: 12px;
-    padding: 9px 13px;
+    padding: 10px 15px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .day-btn.active {
@@ -185,14 +186,14 @@ header p {
 /* 行程 */
 
 .day-heading {
-    font-size: 23px;
+    font-size: 25px;
     font-weight: bold;
     margin: 10px 0 4px;
 }
 
 .day-theme {
     color: #827a72;
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 18px;
 }
 
@@ -229,19 +230,19 @@ header p {
 }
 
 .time {
-    font-size: 13px;
+    font-size: 15px;
     color: #657b6d;
     font-weight: bold;
 }
 
 .event-title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     margin: 3px 0;
 }
 
 .event-note {
-    font-size: 14px;
+    font-size: 16px;
     color: #706961;
 }
 
@@ -265,7 +266,7 @@ header p {
     color: #826a43;
     padding: 3px 9px;
     border-radius: 15px;
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 5px;
 }
 
@@ -284,7 +285,7 @@ header p {
     text-decoration: none;
     padding: 8px 6px;
     border-radius: 9px;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .map-btn {
@@ -305,7 +306,7 @@ header p {
     border-radius: 15px;
     padding: 15px;
     margin-top: 20px;
-    font-size: 13px;
+    font-size: 15px;
     color: #686159;
 }
 
@@ -318,26 +319,77 @@ header p {
     margin-top: 28px;
     color: #657b6d;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 16px;
+}
+
+
+/* ===== 回到頂部按鈕 ===== */
+
+#backToTop {
+    position: fixed;
+    right: 16px;
+    bottom: 100px;
+    z-index: 9999;
+
+    border: none;
+    border-radius: 999px;
+
+    padding: 14px 18px;
+
+    background: rgba(108, 126, 111, 0.92);
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+#backToTop:active {
+    transform: scale(0.95);
 }
 
 
 @media (max-width:600px) {
 
     header h1 {
-        font-size: 24px;
+        font-size: 26px;
     }
 
     .today-title {
-        font-size: 21px;
+        font-size: 22px;
     }
 
     .day-heading {
-        font-size: 21px;
+        font-size: 22px;
     }
 
     .event-title {
-        font-size: 17px;
+        font-size: 19px;
+    }
+
+    .time {
+        font-size: 14px;
+    }
+
+    .event-note {
+        font-size: 15px;
+    }
+
+    .day-btn {
+        font-size: 14px;
+        padding: 9px 12px;
+    }
+
+    #backToTop {
+        padding: 12px 15px;
+        font-size: 15px;
+        bottom: 90px;
+        right: 12px;
     }
 
 }
@@ -402,6 +454,10 @@ header p {
 
 </div>
 
+<!-- 回到頂部按鈕 -->
+<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    ↑ 回到頂部
+</button>
 
 <script>
 
