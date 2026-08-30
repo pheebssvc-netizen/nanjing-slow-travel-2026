@@ -403,702 +403,263 @@ header p {
 </div>
 
 
-
 <script>
 
 
 /* =====================================
-   六日行程資料
+   六日行程資料（2026.11.02 - 11.07）
 ===================================== */
 
 const days = [
 
 {
-
 day: 1,
-
 date: "2026-11-02",
-
 weekday: "星期一",
-
 title: "抵達金陵 · 夜泊秦淮",
-
 events: [
-
+{
+time: "08:30",
+title: "前往香港國際機場 T1",
+note: "建議起飛前2小時到達"
+},
 {
 time: "10:25",
-title: "香港國際機場 T1",
-note: "國泰航空 CX356 起飛。"
+title: "國泰航空 CX356 起飛",
+note: "空中巴士 A330-300"
 },
-
 {
 time: "13:00",
 title: "抵達南京祿口國際機場 T2",
-note: "抵達後前往酒店。"
+note: "提取行李、辦理入境"
 },
-
 {
 time: "13:30–14:30",
-title: "前往酒店",
-note: "打車約40–50分鐘。"
+title: "打車前往酒店",
+note: "車程約40-50分鐘，車費約¥150"
 },
-
 {
 time: "14:30–15:30",
-title: "入住酒店",
-note: "南京夫子廟秦淮遊船碼頭亞朵酒店。"
+title: "辦理入住、稍作休息",
+note: "秦淮區大石壩街35號，步行至夫子廟約3分鐘"
 },
-
 {
 time: "15:30–17:30",
-title: "酒店休息 · 熟悉周邊",
-note: "長途飛行後建議充分休息。"
+title: "酒店內休息",
+note: "長途飛行後充電，熟悉周邊環境"
 },
-
 {
 time: "17:30–18:30",
 title: "晚餐：天圓樓·老南京菜",
-note: "酒店附近，大石壩街75號。"
+note: "30年老字號，推薦：金陵烤鴨、秦淮八絕（大石壩街75號，步行5分鐘）"
 },
-
 {
 time: "18:30–20:30",
-title: "夫子廟 · 烏衣巷 · 江南貢院",
-note: "晚上沿秦淮河慢步，感受金陵夜色。"
+title: "夜遊夫子廟步行街",
+note: "逛烏衣巷、江南貢院牌坊、天下文樞，夜間燈火璀璨"
 }
-
 ]
-
 },
 
-
 {
-
 day: 2,
-
 date: "2026-11-03",
-
 weekday: "星期二",
-
-title: "南京博物院 · 深入認識金陵",
-
+title: "南京博物院 · 穿越六朝",
 events: [
-
 {
 time: "08:00–08:30",
 title: "酒店早餐",
-note: "早餐後準備出發。"
+note: ""
 },
-
 {
 time: "08:30–09:00",
-title: "前往南京博物院",
-note: "打車約15分鐘。"
+title: "打車前往南京博物院",
+note: "車程約15分鐘，車費約¥20"
 },
-
 {
 time: "09:00–12:00",
 title: "南京博物院",
-note: "今日上午核心行程。部分團友參加導遊講解，其他團友自由參觀。",
+note: "歷史館（銀縷玉衣、竹林七賢磚畫）、民國館（復原民國街景）、數字館（南都繁會圖）",
 core: true,
-spot: true
+spot: "南京博物院"
 },
-
 {
 time: "12:00–13:30",
 title: "午餐",
-note: "可選南博附近餐廳，或返回夫子廟。"
+note: "清心素食（南博附近）或返回夫子廟"
 },
-
 {
 time: "13:30–15:30",
-title: "返回酒店休息",
-note: "建議安排午休，避免下午過度疲勞。",
+title: "下午彈性時光",
+note: "可返回酒店午休、逛夫子廟周邊，或按體力自行決定",
 afternoon: true
 },
-
 {
 time: "15:30–17:00",
-title: "下午彈性時間",
-note: "可選景點、夫子廟自由活動，或留在酒店休息。",
+title: "繼續彈性探索",
+note: "可選：瞻園、李香君故居、科舉博物館（均在步行範圍）",
 afternoon: true
 },
-
 {
 time: "18:00",
 title: "晚餐",
-note: "夫子廟附近自理。"
+note: "夫子廟附近自理"
 }
-
 ]
-
 },
 
-
 {
-
 day: 3,
-
 date: "2026-11-04",
-
 weekday: "星期三",
-
-title: "明孝陵 · 南京秋色",
-
+title: "明孝陵 · 秋色金陵",
 events: [
-
 {
 time: "07:30–08:00",
 title: "酒店早餐",
 note: ""
 },
-
 {
 time: "08:00–08:30",
-title: "前往明孝陵",
-note: "打車約30分鐘。"
+title: "打車前往明孝陵（苜蓿園站）",
+note: "車程約30分鐘，車費約¥35"
 },
-
 {
-time: "08:30–11:00",
-title: "明孝陵",
-note: "石象路、翁仲路神道、方城明樓。上午核心行程。",
-core: true,
-spot: true
+time: "08:30–08:45",
+title: "換乘景區觀光車",
+note: "前往石象路，觀光車¥10/程"
 },
-
+{
+time: "08:45–11:00",
+title: "遊覽明孝陵",
+note: "石象路「南京最美600米」（銀杏金黃、紅楓似火）、翁仲路、方城明樓",
+core: true,
+spot: "明孝陵"
+},
 {
 time: "11:00–11:30",
-title: "景區觀光車",
-note: "建議乘車下山，減少步行。"
+title: "乘觀光車下山",
+note: "觀光車¥10/程"
 },
-
 {
 time: "11:30–13:00",
 title: "午餐",
-note: "可選中山陵商業街或新街口。"
+note: "中山陵商業街或新街口商圈"
 },
-
 {
 time: "13:30–16:00",
-title: "下午彈性安排",
-note: "A：返回酒店午休；B：德基藝術博物館。",
+title: "下午彈性時光",
+note: "可選：德基藝術博物館、返回酒店午休，或按體力自行決定",
 afternoon: true
 },
-
 {
 time: "16:00–17:00",
-title: "新街口自由活動",
-note: "按大家體力決定是否逛街。",
+title: "新街口自由探索",
+note: "如有體力可逛逛，或直接回酒店",
 afternoon: true
 },
-
 {
 time: "18:00",
 title: "晚餐",
-note: "可選茶湯火鍋或返回夫子廟。"
+note: "可選碳山河·茶湯火鍋（金陵天地5樓L551）或返回夫子廟"
 }
-
 ]
-
 },
 
-
 {
-
 day: 4,
-
 date: "2026-11-05",
-
 weekday: "星期四",
-
 title: "總統府 · 科舉文化 · 夜遊秦淮",
-
 events: [
-
 {
 time: "08:00–08:30",
 title: "酒店早餐",
 note: ""
 },
-
 {
 time: "08:30–09:00",
-title: "前往總統府",
-note: "打車約10分鐘。"
+title: "打車前往總統府",
+note: "車程約10分鐘，車費約¥15"
 },
-
 {
 time: "09:00–11:30",
-title: "總統府",
-note: "今日上午核心行程。",
+title: "遊覽總統府",
+note: "孫中山臨時大總統辦公室、西花園（煦園）、太平天國天王府遺址",
 core: true,
-spot: true
+spot: "總統府"
 },
-
 {
 time: "11:30–13:00",
 title: "午餐",
-note: "1912街區或返回夫子廟。"
+note: "1912街區或返回夫子廟"
 },
-
 {
 time: "13:00–14:30",
 title: "返回酒店午休",
-note: "建議休息。",
+note: "建議休息，為下午儲備體力",
 afternoon: true
 },
-
 {
 time: "14:30–16:00",
 title: "科舉博物館",
-note: "全地下室內，非常適合午後參觀。",
+note: "全地下室、恆溫空調，非常適合午後參觀（步行約5分鐘）",
 afternoon: true,
-spot: true
+spot: "科舉博物館"
 },
-
 {
 time: "16:15–17:00",
 title: "李香君故居",
-note: "媚香樓，參觀約30分鐘。",
+note: "媚香樓，參觀約30分鐘（步行約5分鐘）",
 afternoon: true,
-spot: true
+spot: "李香君故居"
 },
-
 {
 time: "17:30–18:30",
 title: "晚餐",
-note: "夫子廟附近。"
+note: "夫子廟附近"
 },
-
 {
 time: "19:00–20:00",
 title: "夜遊秦淮河",
-note: "乘坐畫舫，欣賞秦淮夜景。"
+note: "乘坐畫舫，欣賞槳聲燈影裡的秦淮夜色（船票約¥100/人）"
 }
-
 ]
-
 },
 
-
 {
-
 day: 5,
-
 date: "2026-11-06",
-
 weekday: "星期五",
-
-title: "彈性探索日",
-
+title: "高淳老街 · 漆橋古村",
 events: [
-
 {
 time: "08:00–08:30",
 title: "酒店早餐",
 note: ""
 },
-
 {
 time: "08:30–09:00",
-title: "包車接駁",
-note: "如選高淳方案，建議提前預訂包車。"
+title: "包車司機酒店接駁",
+note: "建議提前預訂包車，約¥500-800/天"
 },
-
 {
 time: "09:00–10:15",
-title: "前往高淳",
-note: "車程約1–1.5小時。"
+title: "前往高淳老街",
+note: "車程約1-1.5小時"
 },
-
 {
 time: "10:15–12:30",
-title: "高淳老街",
-note: "900餘年歷史古街。",
+title: "遊覽高淳老街",
+note: "900年歷史古街，吳氏宗祠、關王廟、乾隆古井",
 core: true,
-spot: true
+spot: "高淳老街"
 },
-
 {
 time: "12:30–13:30",
 title: "午餐",
-note: "可品嚐固城湖螃蟹。"
+note: "榮華樓或六朝居，品嚐固城湖螃蟹（11月最肥美）"
 },
-
 {
-time: "13:30–14:00",
-title: "前往漆橋古村",
-note: "車程約25分鐘。"
-},
-
-{
-time: "14:00–15:30",
-title: "漆橋古村",
-note: "江南孔子第一村。",
-core: true,
-spot: true
-},
-
-{
-time: "15:30–17:00",
-title: "返回南京",
-note: "如選市區方案，則按體力自由安排。",
-afternoon: true
-}
-
-]
-
-},
-
-
-{
-
-day: 6,
-
-date: "2026-11-07",
-
-weekday: "星期六",
-
-title: "從容告別金陵",
-
-events: [
-
-{
-time: "08:00–09:00",
-title: "酒店早餐",
-note: "悠閒享受最後一個早晨。"
-},
-
-{
-time: "09:00–10:30",
-title: "老門東／三七八巷",
-note: "購買伴手禮、感受老南京生活。",
-core: true
-},
-
-{
-time: "10:30–11:30",
-title: "返回酒店",
-note: "收拾行李、退房。"
-},
-
-{
-time: "11:30–12:00",
-title: "簡單午餐",
-note: "酒店附近。"
-},
-
-{
-time: "12:00–13:00",
-title: "前往南京祿口機場",
-note: "車程約50分鐘。"
-},
-
-{
-time: "14:15",
-title: "國泰航空 CX357 起飛",
-note: "南京 → 香港。"
-},
-
-{
-time: "17:10",
-title: "抵達香港國際機場 T1",
-note: "旅程圓滿結束。"
-}
-
-]
-
-}
-
-];
-
-
-/* =====================================
-   日期判斷
-===================================== */
-
-function getTodayDay() {
-
-    const now = new Date();
-
-    const current =
-        new Date(
-            now.getFullYear(),
-            now.getMonth(),
-            now.getDate()
-        );
-
-    const start =
-        new Date(2026, 10, 2);
-
-    const end =
-        new Date(2026, 10, 7);
-
-
-    /* 旅行開始前 → Day 1 */
-
-    if (current < start) {
-        return 1;
-    }
-
-
-    /* 旅行結束後 → Day 6 */
-
-    if (current > end) {
-        return 6;
-    }
-
-
-    /* 旅行期間 */
-
-    for (let i = 0; i < days.length; i++) {
-
-        const d =
-            new Date(days[i].date);
-
-        if (
-            current.getTime() === d.getTime()
-        ) {
-            return days[i].day;
-        }
-
-    }
-
-    return 1;
-}
-
-
-/* =====================================
-   顯示 Day 按鈕
-===================================== */
-
-function renderDayButtons(selectedDay) {
-
-    const box =
-        document.getElementById("daySelector");
-
-    box.innerHTML = "";
-
-    days.forEach(day => {
-
-        const button =
-            document.createElement("button");
-
-        button.className = "day-btn";
-
-        if (day.day === selectedDay) {
-            button.classList.add("active");
-        }
-
-        button.textContent =
-            "Day " + day.day;
-
-        button.onclick = function() {
-
-            renderDay(day.day);
-
-        };
-
-        box.appendChild(button);
-
-    });
-
-}
-
-
-/* =====================================
-   顯示行程
-===================================== */
-
-function renderDay(dayNumber) {
-
-    const day =
-        days.find(
-            d => d.day === dayNumber
-        );
-
-    if (!day) return;
-
-
-    renderDayButtons(dayNumber);
-
-
-    document.getElementById("todayDate")
-        .textContent =
-        day.date.replaceAll("-", "/")
-        + " · "
-        + day.weekday;
-
-
-    document.getElementById("todayTitle")
-        .textContent =
-        "Day "
-        + day.day
-        + " · "
-        + day.title;
-
-
-    const container =
-        document.getElementById("itinerary");
-
-    container.innerHTML = "";
-
-
-    const heading =
-        document.createElement("div");
-
-    heading.className = "day-heading";
-
-    heading.textContent =
-        "Day "
-        + day.day
-        + "｜"
-        + day.title;
-
-
-    const theme =
-        document.createElement("div");
-
-    theme.className = "day-theme";
-
-    theme.textContent =
-        day.date
-        + "　"
-        + day.weekday;
-
-
-    const timeline =
-        document.createElement("div");
-
-    timeline.className = "timeline";
-
-
-    day.events.forEach(event => {
-
-        const card =
-            document.createElement("div");
-
-        card.className = "event";
-
-
-        if (event.core) {
-            card.classList.add("core");
-        }
-
-        if (event.afternoon) {
-            card.classList.add("afternoon");
-        }
-
-
-        let html = "";
-
-
-        if (event.afternoon) {
-
-            html +=
-            `<div class="afternoon-label">
-                🌿 下午彈性
-            </div>`;
-
-        }
-
-
-        html +=
-        `<div class="time">
-            ${event.time}
-        </div>`;
-
-
-        html +=
-        `<div class="event-title">
-            ${event.title}
-        </div>`;
-
-
-        if (event.note) {
-
-            html +=
-            `<div class="event-note">
-                ${event.note}
-            </div>`;
-
-        }
-
-
-        if (event.spot) {
-
-            html +=
-            `<div class="buttons">
-
-                <a
-                    class="spot-btn"
-                    href="spots.html">
-                    📖 導遊資料
-                </a>
-
-                <a
-                    class="map-btn"
-                    target="_blank"
-                    href="https://uri.amap.com/search?keyword=${encodeURIComponent(event.title)}">
-                    🗺️ 高德導航
-                </a>
-
-            </div>`;
-
-        }
-
-
-        card.innerHTML = html;
-
-        timeline.appendChild(card);
-
-    });
-
-
-    container.appendChild(heading);
-
-    container.appendChild(theme);
-
-    container.appendChild(timeline);
-
-}
-
-
-/* =====================================
-   啟動
-===================================== */
-
-const todayDay =
-    getTodayDay();
-
-renderDay(todayDay);
-
-</script>
-<nav class="mobile-nav">
-
-  <a href="index.html">
-    <span>🏠</span>
-    <small>首頁</small>
-  </a>
-
-  <a href="itinerary.html" class="active">
-    <span>📅</span>
-    <small>六日行程</small>
-  </a>
-
-  <a href="spots.html">
-    <span>📚</span>
-    <small>景點百科</small>
-  </a>
-
-  <a href="afternoon.html">
-    <span>🌿</span>
-    <small>下午漫遊</small>
-  </a>
-
-</nav>
-
-</body>
-
-</html>
+time
