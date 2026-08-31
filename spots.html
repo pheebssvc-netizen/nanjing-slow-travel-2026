@@ -652,7 +652,7 @@ body {
     <button onclick="goSpot('南京城牆')">13. 南京城牆</button>
     <button onclick="goSpot('頤和路')">14. 頤和路</button>
     <button onclick="goSpot('甘熙故居')">15. 甘熙故居</button>
-    <button onclick="goSpot('南京大屠殺紀念館')">16. 南京大屠殺紀念館</button>
+    <button onclick="goSpotById('nanjing-massacre-memorial')">16. 南京大屠殺紀念館</button>
     <button onclick="goSpot('高淳老街')">17. 高淳老街</button>
     <button onclick="goSpot('漆橋古村')">18. 漆橋古村</button>
 
@@ -1638,7 +1638,32 @@ function goSpot(name) {
     }
     alert('暫時找不到「' + name + '」的景點資料');
 }
+function goSpotById(id) {
+    // 先喺 spots-data.js 入面搵景點
+    const spot = getSpotById(id);
+    if (!spot) {
+        alert('暫時找不到這個景點資料');
+        return;
+    }
 
+    const name = spot.name;
+    const spots = document.querySelectorAll('.spot');
+
+    for (const s of spots) {
+        const title = s.querySelector('.spot-title h2');
+        if (title && title.textContent.includes(name)) {
+            s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => {
+                s.classList.add('spot-highlight');
+                setTimeout(() => {
+                    s.classList.remove('spot-highlight');
+                }, 1500);
+            }, 400);
+            return;
+        }
+    }
+    alert('暫時找不到「' + name + '」的景點資料');
+}
 function goToRestaurant(name) {
     window.location.href = 'map.html?spot=' + encodeURIComponent(name);
 }
