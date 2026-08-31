@@ -591,7 +591,8 @@ time: "08:45–11:00",
 title: "遊覽明孝陵",
 note: "石象路「南京最美600米」（銀杏金黃、紅楓似火）、翁仲路、方城明樓",
 core: true,
-spot: "明孝陵"
+spot: "明孝陵",
+spotLink: "mingxiaoling-guide.html"   // 新增呢行
 },
 {
 time: "11:00–11:30",
@@ -910,12 +911,13 @@ function renderDay(dayNumber) {
         }
 
         if (event.spot) {
-            html += `
-                <div class="buttons">
-                    <a class="spot-btn" href="spots.html">📖 導遊資料</a>
-                    <a class="map-btn" href="map.html?spot=${encodeURIComponent(event.spot)}">🗺️ 查看地圖</a>
-                </div>
-            `;
+    const guideLink = event.spotLink || 'spots.html';
+    html += `
+        <div class="buttons">
+            <a class="spot-btn" href="${guideLink}" style="background:#b89a68; color:white;">🎧 自助講解</a>
+            <a class="map-btn" href="map.html?spot=${encodeURIComponent(event.spot)}">🗺️ 查看地圖</a>
+        </div>
+    `;
         }
 
         card.innerHTML = html;
