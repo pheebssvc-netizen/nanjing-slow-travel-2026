@@ -911,11 +911,33 @@ function renderDay(dayNumber) {
         }
 
         if (event.spot) {
-    const guideLink = event.spotLink || 'spots.html';
+    const guideLink = event.spotLink || null;
+    const hasGuideLink = guideLink !== null;
+    const buttonCount = hasGuideLink ? 3 : 2;
+    const gridCols = hasGuideLink ? '1fr 1fr 1fr' : '1fr 1fr';
+
+    let buttonsHtml = '';
+
+    // 自助講解（如果有）
+    if (hasGuideLink) {
+        buttonsHtml += `
+            <a class="spot-btn" href="${guideLink}" style="background:#b89a68; color:white; border-radius:9px; padding:8px 6px; text-align:center; text-decoration:none; font-size:13px; font-weight:bold;">🎧 自助講解</a>
+        `;
+    }
+
+    // 導遊資料（保留）
+    buttonsHtml += `
+        <a class="spot-btn" href="spots.html" style="background:#eee8df; color:#514b45; border-radius:9px; padding:8px 6px; text-align:center; text-decoration:none; font-size:13px; font-weight:bold;">📖 導遊資料</a>
+    `;
+
+    // 查看地圖（保留）
+    buttonsHtml += `
+        <a class="map-btn" href="map.html?spot=${encodeURIComponent(event.spot)}" style="background:#657b6d; color:white; border-radius:9px; padding:8px 6px; text-align:center; text-decoration:none; font-size:13px; font-weight:bold;">🗺️ 查看地圖</a>
+    `;
+
     html += `
-        <div class="buttons">
-            <a class="spot-btn" href="${guideLink}" style="background:#b89a68; color:white;">🎧 自助講解</a>
-            <a class="map-btn" href="map.html?spot=${encodeURIComponent(event.spot)}">🗺️ 查看地圖</a>
+        <div class="buttons" style="display: grid; grid-template-columns: ${gridCols}; gap: 8px; margin-top: 10px;">
+            ${buttonsHtml}
         </div>
     `;
         }
