@@ -589,6 +589,44 @@ footer{
     }
 }
 
+/* 回到頂部按鈕 */
+#backToTop {
+    position: fixed;
+    right: 16px;
+    bottom: 100px;
+    z-index: 9999;
+
+    border: none;
+    border-radius: 999px;
+
+    padding: 14px 18px;
+
+    background: rgba(108, 126, 111, 0.92);
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+#backToTop:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 600px) {
+    #backToTop {
+        padding: 12px 15px;
+        font-size: 15px;
+        bottom: 90px;
+        right: 12px;
+    }
+}
+   
 </style>
 </head>
 
@@ -936,5 +974,10 @@ getWeather();
 
 </script>
 
+<!-- 回到頂部按鈕 -->
+<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    ↑ 回到頂部
+</button>
+   
 </body>
 </html>
