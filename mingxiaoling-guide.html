@@ -286,6 +286,43 @@
         margin-top: 20px;
         border-top: 1px solid #e8e5dc;
     }
+    /* 回到頂部按鈕 */
+#backToTop {
+    position: fixed;
+    right: 16px;
+    bottom: 100px;
+    z-index: 9999;
+
+    border: none;
+    border-radius: 999px;
+
+    padding: 14px 18px;
+
+    background: rgba(108, 126, 111, 0.92);
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+#backToTop:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 600px) {
+    #backToTop {
+        padding: 12px 15px;
+        font-size: 15px;
+        bottom: 90px;
+        right: 12px;
+    }
+}
     </style>
 </head>
 <body>
@@ -488,25 +525,71 @@
     </div>
 </details>
 
-    <!-- 卡片 2：翁仲路 -->
-    <details>
-        <summary><span class="num">2</span> 翁仲路（文武官像）</summary>
-        <div class="card-body">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Ming_Xiaoling_Wengzhong_Road_02.jpg/800px-Ming_Xiaoling_Wengzhong_Road_02.jpg" alt="翁仲路">
-            <div class="desc">
-                <strong>一句話精華：</strong> 八尊文武官像守護神道，文官持笏、武將佩劍。
-            </div>
-            <div class="knee-index">
-                <span class="item">🚶 步行度：<span class="stars">★★★★</span><span class="stars empty">★</span></span>
-                <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">☆☆☆☆</span></span>
-                <span class="item">⏱ 停留時間：約 10-15 分鐘</span>
-            </div>
-            <div class="tips">
-                <span class="icon">💡</span>
-                <div>平路好行，有長椅可以坐低慢慢睇。</div>
+    <!-- 卡片 2：翁仲路（文武官像） -->
+<details>
+    <summary><span class="num">2</span> 翁仲路（文武官像）</summary>
+    <div class="card-body">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Ming_Xiaoling_Wengzhong_Road_02.jpg/800px-Ming_Xiaoling_Wengzhong_Road_02.jpg" alt="翁仲路">
+        <div class="desc">
+            <strong>一句話精華：</strong> 八尊文武官像守護神道，文官持笏、武將佩劍，係明代石刻藝術嘅精品。
+        </div>
+
+        <!-- 文武官像詳細講解 -->
+        <div style="margin-top:14px; background:#f0f2ec; border-radius:12px; padding:14px 16px;">
+            <div style="font-size:18px; font-weight:700; color:#4d5748; margin-bottom:10px;">⚔️ 文武官像逐尊睇</div>
+
+            <!-- 武將（兩對） -->
+            <details style="background:white; border-radius:10px; margin-bottom:8px; border:1px solid #e8e0d5;">
+                <summary style="padding:10px 14px; font-size:17px; font-weight:600; cursor:pointer; list-style:none; display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:20px;">⚔️</span> 武將（兩對）
+                    <span style="font-size:13px; font-weight:400; color:#8a8a7a; margin-left:auto;">佩劍守護 · 威武莊嚴</span>
+                </summary>
+                <div style="padding:8px 16px 14px; font-size:17px; color:#5a5a4a; border-top:1px solid #e8e0d5;">
+                    <p style="margin:0 0 6px;">兩對武將，身披甲冑、手持寶劍，神情威武莊嚴。佢哋象徵皇陵嘅軍事守護力量。</p>
+                    <p style="margin:0; font-size:15px; color:#8a8a7a;">💡 武將嘅甲冑紋理細緻，劍鞘、腰帶等細節都雕刻得非常精細，反映明代石刻工藝嘅高超水準。</p>
+                </div>
+            </details>
+
+            <!-- 文臣（兩對） -->
+            <details style="background:white; border-radius:10px; margin-bottom:8px; border:1px solid #e8e0d5;">
+                <summary style="padding:10px 14px; font-size:17px; font-weight:600; cursor:pointer; list-style:none; display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:20px;">📜</span> 文臣（兩對）
+                    <span style="font-size:13px; font-weight:400; color:#8a8a7a; margin-left:auto;">持笏恭敬 · 文質彬彬</span>
+                </summary>
+                <div style="padding:8px 16px 14px; font-size:17px; color:#5a5a4a; border-top:1px solid #e8e0d5;">
+                    <p style="margin:0 0 6px;">兩對文臣，手持笏板（朝見皇帝時所用嘅手板），神情恭敬文雅。佢哋象徵文治與禮儀。</p>
+                    <p style="margin:0; font-size:15px; color:#8a8a7a;">💡 文臣嘅官服、帽冠、笏板都雕刻得細緻入微，展現明代官員嘅服飾制度。</p>
+                </div>
+            </details>
+
+            <!-- 名稱由來 -->
+            <details style="background:white; border-radius:10px; margin-bottom:0; border:1px solid #e8e0d5;">
+                <summary style="padding:10px 14px; font-size:17px; font-weight:600; cursor:pointer; list-style:none; display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:20px;">📖</span> 名稱由來
+                    <span style="font-size:13px; font-weight:400; color:#8a8a7a; margin-left:auto;">秦將阮翁仲</span>
+                </summary>
+                <div style="padding:8px 16px 14px; font-size:17px; color:#5a5a4a; border-top:1px solid #e8e0d5;">
+                    <p style="margin:0 0 6px;">「翁仲」原本係秦朝一位將領嘅名字，名叫阮翁仲。相傳他身高一丈三尺（約3米），驍勇善戰，威震匈奴。佢死後，秦始皇下令鑄造佢嘅銅像立在宮門前，以震懾四方。</p>
+                    <p style="margin:0; font-size:15px; color:#8a8a7a;">💡 後來「翁仲」就成為守護陵墓嘅石人像嘅代名詞。明孝陵嘅翁仲路，就係因呢八尊文武官像而得名。</p>
+                </div>
+            </details>
+
+            <div style="font-size:15px; color:#8a8a7a; margin-top:8px; padding:8px 12px; background:#f0f0ea; border-radius:8px;">
+                📌 <strong>排列順序：</strong> 由南往北依次為 — 武將 → 文臣 → 武將 → 文臣（兩對兩對咁排列）
             </div>
         </div>
-    </details>
+
+        <div class="knee-index" style="margin-top:14px;">
+            <span class="item">🚶 步行度：<span class="stars">★★★★</span><span class="stars empty">★</span></span>
+            <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">☆☆☆☆</span></span>
+            <span class="item">⏱ 停留時間：約 15-20 分鐘</span>
+        </div>
+        <div class="tips">
+            <span class="icon">💡</span>
+            <div>平路好行，有長椅可以坐低慢慢欣賞石刻細節。</div>
+        </div>
+    </div>
+</details>
 
     <!-- 卡片 3：四方城（功德碑） -->
 <details>
@@ -634,5 +717,10 @@
 
     </div>
 
+<!-- 回到頂部按鈕 -->
+<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    ↑ 回到頂部
+</button>
+    
 </body>
 </html>
