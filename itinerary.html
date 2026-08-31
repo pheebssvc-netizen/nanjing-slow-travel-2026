@@ -792,11 +792,29 @@ note: "旅程圓滿結束 🎉"
 
 
 /* =====================================
-   日期判斷
+   URL 參數讀取 + 日期判斷
 ===================================== */
 
-function getTodayDay() {
+function getDayFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const dayParam = params.get('day');
+    if (dayParam) {
+        const dayNum = parseInt(dayParam);
+        if (dayNum >= 1 && dayNum <= 6) {
+            return dayNum;
+        }
+    }
+    return null;
+}
 
+function getTodayDay() {
+    // 優先使用 URL 參數
+    const urlDay = getDayFromURL();
+    if (urlDay !== null) {
+        return urlDay;
+    }
+
+    // 否則自動判斷日期
     const now = new Date();
     const current = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const start = new Date(2026, 10, 2);
@@ -827,7 +845,13 @@ function renderDayButtons(selectedDay) {
         button.className = "day-btn";
         if (day.day === selectedDay) button.classList.add("active");
         button.textContent = "Day " + day.day;
-        button.onclick = function() { renderDay(day.day); };
+        button.onclick = function() {
+            // 點擊按鈕時同時更新 URL（方便分享）
+            const url = new URL(window.location);
+            url.searchParams.set('day', day.day);
+            window.history.pushState({}, '', url);
+            renderDay(day.day);
+        };
         box.appendChild(button);
     });
 }
