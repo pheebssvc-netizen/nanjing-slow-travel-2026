@@ -4,11 +4,509 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>明孝陵導覽</title>
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: -apple-system, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+        background: #f7f3eb;
+        color: #3f3933;
+        font-size: 20px;
+        line-height: 1.8;
+        padding: 20px 16px 40px;
+    }
+
+    h1 {
+        font-size: 28px;
+        color: #4d5748;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: auto;
+    }
+
+    /* 路線圖 */
+    .route {
+        background: white;
+        border-radius: 20px;
+        padding: 24px 18px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 18px rgba(80, 70, 50, 0.08);
+    }
+
+    .route-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #4d5748;
+        text-align: center;
+        margin-bottom: 6px;
+    }
+
+    .route-title small {
+        display: block;
+        font-size: 16px;
+        font-weight: 400;
+        color: #8a8a7a;
+    }
+
+    /* 打車提示 */
+    .taxi-tip {
+        background: #f0f5ee;
+        border-radius: 14px;
+        padding: 14px 18px;
+        margin-bottom: 20px;
+        border-left: 5px solid #657b6d;
+        display: flex;
+        gap: 12px;
+        font-size: 17px;
+    }
+
+    .taxi-tip .icon {
+        font-size: 28px;
+        flex-shrink: 0;
+    }
+
+    .taxi-tip strong {
+        color: #4d5748;
+    }
+
+    /* 路線節點 */
+    .route-line {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 4px;
+    }
+
+    .route-node {
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+        gap: 14px;
+        padding: 10px 0;
+    }
+
+    .route-node .marker {
+        flex-shrink: 0;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: 700;
+        color: white;
+        margin-top: 2px;
+    }
+
+    .marker.entry { background: #4a8a5a; }
+    .marker.spot { background: #8a9b8a; }
+    .marker.highlight { background: #b89a68; }
+    .marker.exit { background: #c07a5a; }
+    .marker.car { background: #e07b5a; }
+
+    .route-node .info .name {
+        font-size: 19px;
+        font-weight: 700;
+        color: #3f3933;
+    }
+
+    .route-node .info .time {
+        font-size: 15px;
+        color: #8a8a7a;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .badge {
+        display: inline-block;
+        font-size: 12px;
+        padding: 2px 10px;
+        border-radius: 20px;
+        font-weight: 600;
+    }
+
+    .badge.easy { background: #e0ece0; color: #4a7a4a; }
+    .badge.hard { background: #f0d8d0; color: #b05a4a; }
+    .badge.rest-badge { background: #d8e4ee; color: #4a6a8a; }
+    .badge.car-badge { background: #f0dcd0; color: #b06a4a; }
+    .badge.exit-badge { background: #f0d0c8; color: #a05a4a; }
+
+    .route-connector {
+        width: 2px;
+        height: 20px;
+        background: #c9d0c9;
+        flex-shrink: 0;
+    }
+
+    /* 摺疊卡片 */
+    details {
+        background: white;
+        border-radius: 16px;
+        margin-bottom: 14px;
+        border: 1px solid #eee9e0;
+        overflow: hidden;
+    }
+
+    details summary {
+        padding: 16px 18px;
+        font-size: 19px;
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    details summary::-webkit-details-marker {
+        display: none;
+    }
+
+    details summary::after {
+        content: "▾";
+        margin-left: auto;
+        font-size: 20px;
+        color: #b0a898;
+        transition: transform 0.3s;
+    }
+
+    details[open] summary::after {
+        transform: rotate(180deg);
+    }
+
+    details summary .num {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #657b6d;
+        color: white;
+        text-align: center;
+        line-height: 32px;
+        font-size: 15px;
+        flex-shrink: 0;
+    }
+
+    details .card-body {
+        padding: 0 18px 18px;
+    }
+
+    details .card-body img {
+        width: 100%;
+        border-radius: 14px;
+        margin-bottom: 12px;
+        background: #eee9e0;
+    }
+
+    details .card-body .desc {
+        font-size: 18px;
+        color: #5a5a4a;
+        margin-bottom: 12px;
+    }
+
+    /* 膝頭哥指數 */
+    .knee-index {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 20px;
+        background: #f5f5f0;
+        padding: 12px 16px;
+        border-radius: 12px;
+        margin: 12px 0;
+    }
+
+    .knee-index .item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 17px;
+    }
+
+    .knee-index .stars {
+        color: #b89a68;
+        letter-spacing: 2px;
+    }
+
+    .knee-index .stars.empty {
+        color: #ddd;
+    }
+
+    .tips {
+        background: #e8f0e8;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 17px;
+        display: flex;
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    .tips .icon {
+        font-size: 22px;
+        flex-shrink: 0;
+    }
+
+    /* 綜合提示 */
+    .summary-box {
+        background: #e9eee8;
+        border-radius: 16px;
+        padding: 18px 20px;
+        margin-top: 24px;
+    }
+
+    .summary-box h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+        color: #4d5748;
+    }
+
+    .summary-box ul {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 17px;
+    }
+
+    .summary-box ul li {
+        margin-bottom: 6px;
+    }
+
+    .footer-note {
+        text-align: center;
+        color: #8a8a7a;
+        font-size: 16px;
+        padding: 20px 0 10px;
+        margin-top: 20px;
+        border-top: 1px solid #e8e5dc;
+    }
+    </style>
 </head>
 <body>
+<h1>明孝陵導覽</h1>
+    <div class="container">
 
-    <h1>明孝陵導覽</h1>
-    <p>測試用，睇吓出唔出到字</p>
+    <!-- 路線圖 -->
+    <div class="route">
+        <div class="route-title">
+            🗺️ 打車遊覽路線
+            <small>由落車到離開 · 單程約 2.5 公里</small>
+        </div>
+
+        <!-- 打車提示 -->
+        <div class="taxi-tip">
+            <span class="icon">🚗</span>
+            <div>
+                <strong>打車落車點：</strong> 叫司機停喺 <strong>「明孝陵（苜蓿園站）1號口」</strong> 或 <strong>「明孝陵3號門」</strong><br>
+                📍 呢個位最近石象路入口，唔使行冤枉路
+            </div>
+        </div>
+
+        <div class="route-line">
+
+            <div class="route-node">
+                <div class="marker entry">入</div>
+                <div class="info">
+                    <div class="name">🚪 3號門（石象路入口）</div>
+                    <div class="time">🎫 售票處 · 🚻 洗手間 · 從呢度入 <span class="badge easy">平路</span></div>
+                </div>
+            </div>
+
+            <div class="route-connector"></div>
+
+            <div class="route-node">
+                <div class="marker highlight">1</div>
+                <div class="info">
+                    <div class="name">🍂 石象路（神道）</div>
+                    <div class="time">🚶 步行 5 分鐘 · 615 米平路 <span class="badge easy">好行</span> <span class="badge rest-badge">🪑 有長椅</span></div>
+                </div>
+            </div>
+
+            <div class="route-connector"></div>
+
+            <div class="route-node">
+                <div class="marker spot">2</div>
+                <div class="info">
+                    <div class="name">翁仲路（文武官像）</div>
+                    <div class="time">🚶 步行 8 分鐘 · 平路 <span class="badge easy">好行</span> <span class="badge rest-badge">🪑 有長椅</span></div>
+                </div>
+            </div>
+
+            <div class="route-connector"></div>
+
+            <div class="route-node">
+                <div class="marker exit">3</div>
+                <div class="info">
+                    <div class="name">🌳 四方城（功德碑）</div>
+                    <div class="time">🚶 步行 5 分鐘 · 平路 <span class="badge easy">好行</span> <span class="badge rest-badge">🚻 洗手間</span> <span class="badge car-badge">🚌 觀光車站</span> <span class="badge exit-badge">🚪 可離開</span></div>
+                </div>
+            </div>
+
+            <div class="route-connector"></div>
+
+            <div class="route-node">
+                <div class="marker spot">4</div>
+                <div class="info">
+                    <div class="name">🏛️ 享殿（祭祀大殿）</div>
+                    <div class="time">🚶 步行 6 分鐘 · 平路 <span class="badge easy">好行</span> <span class="badge rest-badge">🪑 有長椅</span></div>
+                </div>
+            </div>
+
+            <div class="route-connector"></div>
+
+            <div class="route-node">
+                <div class="marker highlight">5</div>
+                <div class="info">
+                    <div class="name">🏛️ 方城明樓（終點）</div>
+                    <div class="time">🚶 步行 6 分鐘 · ⚠️ 有石階 <span class="badge hard">有樓梯</span> <span class="badge rest-badge">🚻 洗手間</span> <span class="badge car-badge">🚌 觀光車站</span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 撤退提示 -->
+        <div style="background:#f8f0e6; border-radius:14px; padding:14px 18px; margin-top:18px; border-left:5px solid #c07a5a;">
+            <div style="display:flex; gap:12px;">
+                <span style="font-size:28px;">🚪</span>
+                <div style="font-size:17px;">
+                    <strong>撤退／離開點：</strong><br>
+                    • <strong>四方城</strong> — 可去 <strong>7號門出口</strong> 離開，或搭觀光車<br>
+                    • <strong>方城明樓</strong> — 可搭觀光車（¥10/程）返入口
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 景點卡片 ===== -->
+    <h2 style="font-size:22px; color:#4d5748;">📖 景點詳細講解</h2>
+
+    <!-- 卡片 1：石象路 -->
+    <details>
+        <summary><span class="num">1</span> 🍂 石象路（神道）</summary>
+        <div class="card-body">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Ming_Xiaoling_Stone_Animals_01.jpg/800px-Ming_Xiaoling_Stone_Animals_01.jpg" alt="石象路秋色">
+            <div class="desc">
+                <strong>一句話精華：</strong> 南京秋天最美嘅600米！11月銀杏金黃、紅楓似火。
+            </div>
+            <div class="knee-index">
+                <span class="item">🚶 步行度：<span class="stars">★★★★</span><span class="stars empty">★</span></span>
+                <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">☆☆☆☆</span></span>
+                <span class="item">⏱ 停留時間：約 30 分鐘</span>
+            </div>
+            <div class="tips">
+                <span class="icon">💡</span>
+                <div>全段平路，沿途有長椅可以休息。</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- 卡片 2：翁仲路 -->
+    <details>
+        <summary><span class="num">2</span> 翁仲路（文武官像）</summary>
+        <div class="card-body">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Ming_Xiaoling_Wengzhong_Road_02.jpg/800px-Ming_Xiaoling_Wengzhong_Road_02.jpg" alt="翁仲路">
+            <div class="desc">
+                <strong>一句話精華：</strong> 八尊文武官像守護神道，文官持笏、武將佩劍。
+            </div>
+            <div class="knee-index">
+                <span class="item">🚶 步行度：<span class="stars">★★★★</span><span class="stars empty">★</span></span>
+                <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">☆☆☆☆</span></span>
+                <span class="item">⏱ 停留時間：約 10-15 分鐘</span>
+            </div>
+            <div class="tips">
+                <span class="icon">💡</span>
+                <div>平路好行，有長椅可以坐低慢慢睇。</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- 卡片 3：四方城 -->
+    <details>
+        <summary><span class="num">3</span> 🌳 四方城（功德碑）</summary>
+        <div class="card-body">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Ming_Xiaoling_Stele_Pavilion_02.jpg/800px-Ming_Xiaoling_Stele_Pavilion_02.jpg" alt="四方城">
+            <div class="desc">
+                <strong>一句話精華：</strong> 朱元璋嘅功德碑，由巨型石龜馱住。
+            </div>
+            <div class="highlight-text" style="background:#f5f0e8; padding:10px 14px; border-radius:12px; border-left:4px solid #b89a68; margin-bottom:12px;">
+                📌 <strong>🚌 觀光車上車點</strong> · <strong>🚪 7號門出口</strong>
+            </div>
+            <div class="knee-index">
+                <span class="item">🚶 步行度：<span class="stars">★★★</span><span class="stars empty">★★</span></span>
+                <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">☆☆☆☆</span></span>
+                <span class="item">⏱ 停留時間：約 15 分鐘</span>
+            </div>
+            <div class="tips">
+                <span class="icon">💡</span>
+                <div>有洗手間、觀光車站同出口。行到攰可以喺度撤退。</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- 卡片 4：享殿 -->
+    <details>
+        <summary><span class="num">4</span> 🏛️ 享殿（祭祀大殿）</summary>
+        <div class="card-body">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Ming_Xiaoling_Xiangdian_01.jpg/800px-Ming_Xiaoling_Xiangdian_01.jpg" alt="享殿">
+            <div class="desc">
+                <strong>一句話精華：</strong> 明孝陵嘅祭祀主殿，感受明代皇家氣勢。
+            </div>
+            <div class="knee-index">
+                <span class="item">🚶 步行度：<span class="stars">★★★</span><span class="stars empty">★★</span></span>
+                <span class="item">🧗 階梯度：<span class="stars">★★</span><span class="stars empty">☆☆☆</span></span>
+                <span class="item">⏱ 停留時間：約 10-15 分鐘</span>
+            </div>
+            <div class="tips">
+                <span class="icon">💡</span>
+                <div>附近有長椅同樹蔭，可以歇歇腳。</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- 卡片 5：方城明樓 -->
+    <details>
+        <summary><span class="num">5</span> 🏛️ 方城明樓（終點）</summary>
+        <div class="card-body">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ming_Xiaoling_Tower_01.jpg/800px-Ming_Xiaoling_Tower_01.jpg" alt="方城明樓">
+            <div class="desc">
+                <strong>一句話精華：</strong> 明太祖朱元璋嘅陵寢，登樓可遠眺紫金山全景。
+            </div>
+            <div class="knee-index">
+                <span class="item">🚶 步行度：<span class="stars">★★★★</span><span class="stars empty">★</span></span>
+                <span class="item">🧗 階梯度：<span class="stars">★★★★★</span> ⚠️ 較多石階</span>
+                <span class="item">⏱ 停留時間：約 20 分鐘</span>
+            </div>
+            <div class="tips">
+                <span class="icon">💡</span>
+                <div>⚠️ 明樓有石階，膝頭哥唔好可以喺樓下影相休息。有洗手間同觀光車返入口。</div>
+            </div>
+        </div>
+    </details>
+
+    <!-- ===== 綜合提示 ===== -->
+    <div class="summary-box">
+        <h3>📌 長者貼心提示</h3>
+        <ul>
+            <li>👟 一定要著 <strong>最舒服嘅波鞋</strong>，園區好大</li>
+            <li>🎫 門票 ¥70（60-69歲半價 ¥35）</li>
+            <li>🚻 洗手間：入口、四方城、方城明樓</li>
+            <li>🪑 休息椅：石象路沿途、翁仲路、享殿、方城明樓</li>
+            <li>🚌 觀光車：四方城、方城明樓有上車點（¥10/程）</li>
+            <li>🚪 離開點：四方城（7號門）可提早離開</li>
+        </ul>
+    </div>
+
+    <div class="footer-note">
+        🍂 祝你有個愉快嘅明孝陵賞秋之旅！
+    </div>
+
+    </div>
 
 </body>
 </html>
