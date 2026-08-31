@@ -1620,7 +1620,6 @@ function goSpot(name) {
 
     for (const spot of spots) {
         const title = spot.querySelector('.spot-title h2');
-
         if (title && title.textContent.includes(name)) {
             spot.scrollIntoView({
                 behavior: 'smooth',
@@ -1638,6 +1637,7 @@ function goSpot(name) {
     }
     alert('暫時找不到「' + name + '」的景點資料');
 }
+
 function goSpotById(id) {
     // 先喺 spots-data.js 入面搵景點
     const spot = getSpotById(id);
@@ -1664,6 +1664,7 @@ function goSpotById(id) {
     }
     alert('暫時找不到「' + name + '」的景點資料');
 }
+
 function goToRestaurant(name) {
     window.location.href = 'map.html?spot=' + encodeURIComponent(name);
 }
