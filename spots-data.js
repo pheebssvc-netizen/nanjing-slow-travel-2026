@@ -322,7 +322,7 @@ const restaurants = [
   },
   {
     id: "nanjing-da-pai-dang-1912",
-    name: "南京大牌檔（1912街區店）",
+    name: "南京大牌檔（1912街區店）",   // ← 呢個名要同 itinerary 入面一樣
     lat: 32.04450,
     lng: 118.79920,
     address: "玄武區長江路288號1912街區",
