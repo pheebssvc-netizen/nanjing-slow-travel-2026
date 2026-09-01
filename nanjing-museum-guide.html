@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南京博物院導覽｜金陵慢遊</title>
+
+    <style>
+        /* ===== 基本設定 ===== */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            background: #f7f3eb;
+            color: #3f3933;
+            font-size: 20px;
+            line-height: 1.8;
+            padding-bottom: 95px;
+        }
+
+        /* ===== 頂部標題欄 ===== */
+        .header {
+            background: linear-gradient(135deg, #657b6d, #879889);
+            color: white;
+            padding: 20px 18px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header .back-btn {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        .header .back-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+
+        .header .sub {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        /* ===== 主容器 ===== */
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 18px 16px 40px;
+        }
+
+        /* ===== 路線圖 ===== */
+        .route {
+            background: white;
+            border-radius: 20px;
+            padding: 24px 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 18px rgba(80, 70, 50, 0.08);
+        }
+
+        .route-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #4d5748;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .route-title small {
+            display: block;
+            font-size: 16px;
+            font-weight: 400;
+            color: #8a8a7a;
+        }
+
+        .route-line {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 4px;
+        }
+
+        .route-node {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            gap: 14px;
+            padding: 10px 0;
+        }
+
+        .route-node .marker {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            margin-top: 2px;
+        }
+
+        .marker.entry { background: #4a8a5a; }
+        .marker.spot { background: #8a9b8a; }
+        .marker.highlight { background: #b89a68; }
+        .marker.exit { background: #c07a5a; }
+
+        .route-node .info .name {
+            font-size: 19px;
+            font-weight: 700;
+            color: #3f3933;
+        }
+
+        .route-node .info .time {
+            font-size: 15px;
+            color: #8a8a7a;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .badge.easy { background: #e0ece0; color: #4a7a4a; }
+        .badge.rest-badge { background: #d8e4ee; color: #4a6a8a; }
+        .badge.cool { background: #d8e8f0; color: #2a6a8a; }
+
+        .route-connector {
+            width: 2px;
+            height: 20px;
+            background: #c9d0c9;
+            flex-shrink: 0;
+        }
+
+        /* ===== 摺疊卡片 ===== */
+        details {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 14px;
+            border: 1px solid #eee9e0;
+            overflow: hidden;
+        }
+
+        details summary {
+            padding: 16px 18px;
+            font-size: 19px;
+            font-weight: 700;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details summary::after {
+            content: "▾";
+            margin-left: auto;
+            font-size: 20px;
+            color: #b0a898;
+            transition: transform 0.3s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        details summary .num {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #657b6d;
+            color: white;
+            text-align: center;
+            line-height: 32px;
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        details .card-body {
+            padding: 0 18px 18px;
+        }
+
+        details .card-body img {
+            width: 100%;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            background: #eee9e0;
+            border: 1px solid #e8e0d5;
+        }
+
+        details .card-body .desc {
+            font-size: 18px;
+            color: #5a5a4a;
+            margin-bottom: 12px;
+        }
+
+        /* ===== 睇咩？清單 ===== */
+        .what-to-see {
+            background: #f5f0e8;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+        }
+
+        .what-to-see .label {
+            font-weight: 700;
+            font-size: 16px;
+            color: #4d5748;
+        }
+
+        .what-to-see ul {
+            margin: 4px 0 0 0;
+            padding-left: 18px;
+            font-size: 16px;
+            color: #5a5a4a;
+        }
+
+        .what-to-see ul li {
+            margin-bottom: 4px;
+        }
+
+        /* ===== 鎮館之寶卡片（圖片+描述） ===== */
+        .treasure-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 12px 0;
+        }
+
+        .treasure-item {
+            background: #faf8f3;
+            border-radius: 12px;
+            padding: 12px 14px;
+            border-left: 4px solid #b89a68;
+        }
+
+        .treasure-item .treasure-name {
+            font-weight: 700;
+            font-size: 17px;
+            color: #4d5748;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .treasure-item .treasure-name .tag {
+            font-size: 12px;
+            font-weight: 600;
+            background: #c07a5a;
+            color: white;
+            padding: 1px 10px;
+            border-radius: 20px;
+        }
+
+        .treasure-item .treasure-name .tag.never-export {
+            background: #b89a68;
+        }
+
+        .treasure-item .treasure-detail {
+            font-size: 16px;
+            color: #5a5a4a;
+            margin-top: 4px;
+        }
+
+        .treasure-item .treasure-detail .highlight {
+            font-weight: 600;
+            color: #4d5748;
+        }
+
+        /* ===== 體力指數 ===== */
+        .knee-index {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            background: #f5f5f0;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin: 12px 0;
+        }
+
+        .knee-index .item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 17px;
+        }
+
+        .knee-index .stars {
+            color: #b89a68;
+            letter-spacing: 2px;
+        }
+
+        .knee-index .stars.empty {
+            color: #ddd;
+        }
+
+        .tips {
+            background: #e8f0e8;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 17px;
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .tips .icon {
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        /* ===== 知多啲 ===== */
+        .trivia-box {
+            background: #f0f2ec;
+            border-radius: 14px;
+            margin: 16px 0 18px 0;
+            border: 1px solid #e0e5dd;
+            overflow: hidden;
+        }
+
+        .trivia-box summary {
+            padding: 12px 16px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #4d5748;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trivia-box summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .trivia-box summary::after {
+            content: "▾";
+            margin-left: auto;
+            font-size: 18px;
+            color: #b0a898;
+            transition: transform 0.3s;
+        }
+
+        .trivia-box[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .trivia-box .trivia-body {
+            padding: 0 16px 16px;
+        }
+
+        .trivia-item {
+            background: white;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            border-left: 4px solid #657b6d;
+        }
+
+        .trivia-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .trivia-item .title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #4d5748;
+        }
+
+        .trivia-item .content {
+            font-size: 16px;
+            color: #5a5a4a;
+            margin-top: 3px;
+        }
+
+        /* ===== 貼心提示 ===== */
+        .summary-box {
+            background: #e9eee8;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-top: 24px;
+        }
+
+        .summary-box h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #4d5748;
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 17px;
+        }
+
+        .summary-box ul li {
+            margin-bottom: 6px;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #8a8a7a;
+            font-size: 16px;
+            padding: 20px 0 10px;
+            margin-top: 20px;
+            border-top: 1px solid #e8e5dc;
+        }
+
+        /* ===== 回到頂部 ===== */
+        #backToTop {
+            position: fixed;
+            right: 16px;
+            bottom: 100px;
+            z-index: 9999;
+            border: none;
+            border-radius: 999px;
+            padding: 14px 18px;
+            background: rgba(108, 126, 111, 0.92);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #backToTop:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 600px) {
+            #backToTop {
+                padding: 12px 15px;
+                font-size: 15px;
+                bottom: 90px;
+                right: 12px;
+            }
+        }
+
+        /* ===== 手機底部導航 ===== */
+        .mobile-nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.96);
+            border-top: 1px solid #e8e5dc;
+            box-shadow: 0 -3px 15px rgba(0,0,0,0.08);
+            z-index: 9998;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .mobile-nav a {
+            flex: 1;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #88877f;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-nav a span {
+            font-size: 22px;
+            line-height: 24px;
+        }
+
+        .mobile-nav a small {
+            margin-top: 3px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .mobile-nav a.active {
+            color: #607667;
+        }
+
+        .mobile-nav a:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== 手機 ===== */
+        @media (max-width: 600px) {
+            body {
+                font-size: 18px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .route-node .info .name {
+                font-size: 17px;
+            }
+
+            .route-node .marker {
+                width: 38px;
+                height: 38px;
+                font-size: 14px;
+            }
+
+            details summary {
+                font-size: 17px;
+                padding: 14px 14px;
+            }
+
+            details .card-body .desc {
+                font-size: 17px;
+            }
+
+            .knee-index .item {
+                font-size: 16px;
+            }
+
+            .tips {
+                font-size: 16px;
+            }
+
+            .summary-box ul {
+                font-size: 16px;
+            }
+
+            .trivia-item .title {
+                font-size: 15px;
+            }
+            .trivia-item .content {
+                font-size: 15px;
+            }
+
+            .treasure-item .treasure-name {
+                font-size: 15px;
+            }
+            .treasure-item .treasure-detail {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== 頂部標題欄 ===== -->
+    <div class="header">
+        <a href="itinerary.html?day=2" class="back-btn">← 返回</a>
+        <h1>🏛️ 南京博物院導覽</h1>
+        <div class="sub">中國三大博物館之一 · 江蘇五千年文明</div>
+    </div>
+
+    <!-- ===== 主容器 ===== -->
+    <div class="container">
+
+        <!-- ===== 路線圖 ===== -->
+        <div class="route">
+            <div class="route-title">
+                🗺️ 展館攻略
+                <small>歷史館 → 民國館 → 數字館 → 特展館 · 全程約 3 小時</small>
+            </div>
+
+            <!-- 入口提示 -->
+            <div style="background:#f0f5ee; border-radius:14px; padding:14px 18px; margin-bottom:20px; border-left:5px solid #657b6d; display:flex; gap:12px; font-size:17px;">
+                <span style="font-size:28px; flex-shrink:0;">🚪</span>
+                <div>
+                    <strong>入口：</strong> 正門入，過安檢後上二樓<br>
+                    📍 打車可直接叫司機停正門落車
+                </div>
+            </div>
+
+            <div class="route-line">
+
+                <!-- 歷史館 -->
+                <div class="route-node">
+                    <div class="marker highlight">1</div>
+                    <div class="info">
+                        <div class="name">📜 歷史館（從遠古到明清）</div>
+                        <div class="time">
+                            銀縷玉衣 · 竹林七賢磚畫
+                            <span class="badge easy">平路</span>
+                            <span class="badge rest-badge">🪑 有座位</span>
+                            <span class="badge cool">❄️ 有冷氣</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="route-connector"></div>
+
+                <!-- 民國館 -->
+                <div class="route-node">
+                    <div class="marker spot">2</div>
+                    <div class="info">
+                        <div class="name">🏙️ 民國館（穿越時空）</div>
+                        <div class="time">
+                            民國街景 · 小火車 · 旗袍店
+                            <span class="badge easy">平路</span>
+                            <span class="badge rest-badge">🪑 有座位</span>
+                            <span class="badge cool">❄️ 有冷氣</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="route-connector"></div>
+
+                <!-- 數字館 -->
+                <div class="route-node">
+                    <div class="marker spot">3</div>
+                    <div class="info">
+                        <div class="name">💻 數字館（互動體驗）</div>
+                        <div class="time">
+                            南都繁會圖 · 韓熙載夜宴圖
+                            <span class="badge easy">平路</span>
+                            <span class="badge cool">❄️ 有冷氣</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="route-connector"></div>
+
+                <!-- 特展館 -->
+                <div class="route-node">
+                    <div class="marker highlight">4</div>
+                    <div class="info">
+                        <div class="name">🏛️ 特展館（鎮館之寶）</div>
+                        <div class="time">
+                            西漢金獸 · 金蟬玉葉 · 釉裡紅梅瓶
+                            <span class="badge easy">平路</span>
+                            <span class="badge rest-badge">🪑 有座位</span>
+                            <span class="badge cool">❄️ 有冷氣</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 撤退提示 -->
+            <div style="background:#f8f0e6; border-radius:14px; padding:14px 18px; margin-top:18px; border-left:5px solid #c07a5a;">
+                <div style="display:flex; gap:12px;">
+                    <span style="font-size:28px;">🪑</span>
+                    <div style="font-size:17px;">
+                        <strong>休息點：</strong><br>
+                        • <strong>歷史館中段</strong> — 有座位可以小歇<br>
+                        • <strong>民國館</strong> — 有座位可以坐低感受民國氛圍<br>
+                        • <strong>特展館大堂</strong> — 有大量座位同咖啡店
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 景點卡片 ===== -->
+        <h2 style="font-size:22px; color:#4d5748;">📖 展館詳細講解</h2>
+
+        <!-- 卡片 1：歷史館 -->
+        <details>
+            <summary><span class="num">1</span> 📜 歷史館（從遠古到明清）</summary>
+            <div class="card-body">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Nanjing_Museum_History_Hall.jpg/800px-Nanjing_Museum_History_Hall.jpg" alt="南京博物院歷史館">
+
+                <div class="desc">
+                    <strong>一句話精華：</strong> 行走其中如同漫步江蘇上下五千年文明。
+                </div>
+
+                <div class="what-to-see">
+                    <div class="label">👀 必睇展品</div>
+                    <ul>
+                        <li><strong>銀縷玉衣：</strong> 東漢時期，用 2600 幾塊玉片編織而成，係目前中國發現最完整嘅銀縷玉衣之一</li>
+                        <li><strong>竹林七賢與榮啟期磚畫：</strong> 南北朝時期嘅磚雕，描繪魏晉名士嘅風采，係南博最具代表性嘅文物之一</li>
+                        <li><strong>大報恩寺琉璃塔構件：</strong> 明代琉璃塔嘅殘件，色彩鮮艷，工藝精湛</li>
+                    </ul>
+                </div>
+
+                <div class="knee-index">
+                    <span class="item">🚶 步行度：<span class="stars">★★★</span><span class="stars empty">★★</span></span>
+                    <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">★★★★</span></span>
+                    <span class="item">⏱ 停留時間：約 45–60 分鐘</span>
+                </div>
+
+                <div class="tips">
+                    <span class="icon">💡</span>
+                    <div>展館較大，建議按時代順序慢慢行，中間有座位可以休息。</div>
+                </div>
+            </div>
+        </details>
+
+        <!-- 卡片 2：民國館 -->
+        <details>
+            <summary><span class="num">2</span> 🏙️ 民國館（穿越時空）</summary>
+            <div class="card-body">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Nanjing_Museum_Republic_of_China_Street.jpg/800px-Nanjing_Museum_Republic_of_China_Street.jpg" alt="南京博物院民國館">
+
+                <div class="desc">
+                    <strong>一句話精華：</strong> 踏進展館瞬間穿越返 100 年前嘅南京，係全館最受歡迎嘅展區。
+                </div>
+
+                <div class="what-to-see">
+                    <div class="label">👀 必睇</div>
+                    <ul>
+                        <li><strong>民國街道：</strong> 1:1 復原，石板路、街燈、招牌全部跟足民國時期</li>
+                        <li><strong>小火車：</strong> 陳列喺展館入面嘅民國小火車，係當時嘅交通工具</li>
+                        <li><strong>旗袍店：</strong> 真係有旗袍賣，可以慢慢睇</li>
+                        <li><strong>郵局：</strong> 真係賣民國風格郵票，可以買嚟做紀念</li>
+                    </ul>
+                </div>
+
+                <div class="knee-index">
+                    <span class="item">🚶 步行度：<span class="stars">★★</span><span class="stars empty">★★★</span></span>
+                    <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">★★★★</span></span>
+                    <span class="item">⏱ 停留時間：約 30–40 分鐘</span>
+                </div>
+
+                <div class="tips">
+                    <span class="icon">💡</span>
+                    <div>呢度係全館最舒服嘅展區！有座位可以坐低感受民國氛圍。</div>
+                </div>
+            </div>
+        </details>
+
+        <!-- 卡片 3：數字館 -->
+        <details>
+            <summary><span class="num">3</span> 💻 數字館（互動體驗）</summary>
+            <div class="card-body">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Nanjing_Museum_Digital_Hall.jpg/800px-Nanjing_Museum_Digital_Hall.jpg" alt="南京博物院數字館">
+
+                <div class="desc">
+                    <strong>一句話精華：</strong> 用多媒體技術將古代名畫「復活」，互動性高，輕鬆有趣。
+                </div>
+
+                <div class="what-to-see">
+                    <div class="label">👀 必睇</div>
+                    <ul>
+                        <li><strong>《南都繁會景物圖卷》：</strong> 動態呈現明代南京嘅繁華景象，堪稱江南版《清明上河圖》</li>
+                        <li><strong>《韓熙載夜宴圖》：</strong> 沿弧形牆面行走，如同走進畫中</li>
+                    </ul>
+                </div>
+
+                <div class="knee-index">
+                    <span class="item">🚶 步行度：<span class="stars">★</span><span class="stars empty">★★★★</span></span>
+                    <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">★★★★</span></span>
+                    <span class="item">⏱ 停留時間：約 20–30 分鐘</span>
+                </div>
+
+                <div class="tips">
+                    <span class="icon">💡</span>
+                    <div>全程企喺度睇，但時間唔長，好輕鬆。</div>
+                </div>
+            </div>
+        </details>
+
+        <!-- 卡片 4：特展館（鎮館之寶） -->
+        <details>
+            <summary><span class="num">4</span> 🏛️ 特展館（鎮館之寶）</summary>
+            <div class="card-body">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Nanjing_Museum_Treasure_Hall.jpg/800px-Nanjing_Museum_Treasure_Hall.jpg" alt="南京博物院特展館">
+
+                <div class="desc">
+                    <strong>一句話精華：</strong> 鎮館之寶集中地，南博最珍貴嘅文物都喺呢度。11 月去，常設展品一定睇得到！
+                </div>
+
+                <!-- 鎮館之寶詳細列表 -->
+                <div style="margin-top:12px;">
+                    <div style="font-size:17px; font-weight:700; color:#4d5748; margin-bottom:10px;">🏛️ 鎮館之寶（8 件必睇）</div>
+
+                    <div class="treasure-grid">
+
+                        <!-- 1. 西漢金獸 -->
+                        <div class="treasure-item">
+                            <div class="treasure-name">
+                                🥇 西漢金獸
+                                <span class="tag never-export">永不出國</span>
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Golden_Beast_of_the_Western_Han_Dynasty.jpg/800px-Golden_Beast_of_the_Western_Han_Dynasty.jpg" alt="西漢金獸" style="width:100%; border-radius:10px; margin:6px 0;">
+                            <div class="treasure-detail">
+                                <span class="highlight">重量：</span>9100 克（9.1 公斤），含金量 99%<br>
+                                <span class="highlight">年代：</span>西漢（約 2000 年前）<br>
+                                <span class="highlight">特點：</span>中國考古發現最重嘅黃金鑄器，全身捶飾圓形斑紋，頸部戴三輪項圈
+                            </div>
+                        </div>
+
+                        <!-- 2. 金蟬玉葉 -->
+                        <div class="treasure-item">
+                            <div class="treasure-name">
+                                🍂 金蟬玉葉
+                                <span class="tag never-export">永不出國</span>
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Golden_Cicada_and_Jade_Leaf.jpg/800px-Golden_Cicada_and_Jade_Leaf.jpg" alt="金蟬玉葉" style="width:100%; border-radius:10px; margin:6px 0;">
+                            <div class="treasure-detail">
+                                <span class="highlight">尺寸：</span>蟬長 5.3 厘米，玉葉長 5.2 厘米，共重 4.65 克<br>
+                                <span class="highlight">年代：</span>明代中期（約 15 世紀下半葉）<br>
+                                <span class="highlight">特點：</span>國內出土嘅 <strong>唯一一件</strong> 金蟬玉葉，諧音「金枝玉葉」
+                            </div>
+                        </div>
+
+                        <!-- 3. 釉裡紅歲寒三友梅瓶 -->
+                        <div class="treasure-item">
+                            <div class="treasure-name">
+                                🏺 釉裡紅歲寒三友梅瓶
+                                <span class="tag never-export">永不出國</span>
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Underglaze_Red_Meiping_with_Three_Friends_of_Winter.jpg/800px-Underglaze_Red_Meiping_with_Three_Friends_of_Winter.jpg" alt="釉裡紅歲寒三友梅瓶" style="width:100%; border-radius:10px; margin:6px 0;">
+                            <div class="treasure-detail">
+                                <span class="highlight">尺寸：</span>高 41.7 厘米，完整帶蓋<br>
+                                <span class="highlight">年代：</span>明洪武年間（1368–1398）<br>
+                                <span class="highlight">特點：</span>世界上 <strong>唯一一件帶蓋且保存完整</strong> 嘅洪武釉裡紅梅瓶
+                            </div>
+                        </div>
+
+                        <!-- 4. 銀縷玉衣 -->
+                        <div class="treasure-item">
+                            <div class="treasure-name">
+                                👘 銀縷玉衣
+                                <span class="tag never-export">永不出國</span>
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Silver_Thread_Jade_Suit.jpg/800px-Silver_Thread_Jade_Suit.jpg" alt="銀縷玉衣" style="width:100%; border-radius:10px; margin:6px 0;">
+                            <div class="treasure-detail">
+                                <span class="highlight">尺寸：</span>全長 170 厘米，用 2600 多片玉片 + 800 克銀絲編成<br>
+                                <span class="highlight">年代：</span>東漢（約 1800 年前）<br>
+                                <span class="highlight">特點：</span>目前中國 <strong>唯一一件科學復原、品相完好</strong> 嘅銀縷玉衣
+                            </div>
+                        </div>
+
+                        <!-- 5. 竹林七賢與榮啟期磚畫 -->
+                        <div class="treasure-item">
+                            <div class="treasure-name">
+                                🎨 竹林七賢與榮啟期磚畫
+                                <span class="tag never-export">永不出國</span>
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Bamboo_Grove_Seven_Sages_Brick_Relief.jpg/800px-Bamboo_Grove_Seven_Sages_Brick_Relief.jpg" alt="竹林七賢與榮啟期磚畫" style="width:100%; border-radius:10px; margin:6px 0;">
+                            <div class="treasure-detail">
+                                <span class="highlight">尺寸：</span>高約 78 厘米，長約 240 厘米，由 648 塊青磚拼成<br>
+                                <span class="highlight">年代：</span>南朝（約 1500 年前）<br>
+                                <span class="highlight">特點：</span>填補咗六朝繪畫真迹空白，<strong>首批禁止出國展覽文物</strong>
+                            </div>
+                        </div>
+
+                        <!-- 6. 錯銀銅牛燈 -->
+                        <div class="treasure-item">
+                            <div class="treasure-name">
+                                🐂 錯銀銅牛燈
+                                <span class="tag never-export">永不出國</span>
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gilded_Bronze_Ox_Lamp.jpg/800px-Gilded_Bronze_Ox_Lamp.jpg" alt="錯銀銅牛燈" style="width:100%; border-radius:10px; margin:6px 0;">
+                            <div class="treasure-detail">
+                                <span class="highlight">尺寸：</span>通高 46.2 厘米，身長 36.4 厘米<br>
+                                <span class="highlight">年代：</span>東漢（約 1800 年前）<br>
+                                <span class="highlight">特點：</span>漢代青銅工藝巔峰，牛腹中空可裝水淨化燈煙，<strong>比西方早 1000 多年</strong>
+                            </div>
+                        </div>
+
+                        <!-- 7. 大報恩寺琉璃塔拱門 -->
+                        <div class="treasure-item">
+                            <div class="treasure-name">
+                                🏯 大報恩寺琉璃塔拱門
+                                <span class="tag never-export">永不出國</span>
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Glazed_Arch_of_the_Porcelain_Tower.jpg/800px-Glazed_Arch_of_the_Porcelain_Tower.jpg" alt="大報恩寺琉璃塔拱門" style="width:100%; border-radius:10px; margin:6px 0;">
+                            <div class="treasure-detail">
+                                <span class="highlight">年代：</span>明代永樂年間<br>
+                                <span class="highlight">特點：</span>大報恩寺琉璃塔被稱為「天下第一塔」，呢套拱門係 <strong>目前唯一一套完整嘅琉璃拱門</strong>
+                            </div>
+                        </div>
+
+                        <!-- 8. 青銅雲紋大鼎 -->
+                        <div class="treasure-item">
+                            <div class="treasure-name">
+                                🔱 青銅雲紋大鼎
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Bronze_Tripod_with_Cloud_Pattern.jpg/800px-Bronze_Tripod_with_Cloud_Pattern.jpg" alt="青銅雲紋大鼎" style="width:100%; border-radius:10px; margin:6px 0;">
+                            <div class="treasure-detail">
+                                <span class="highlight">年代：</span>春秋晚期（約 2500 年前）<br>
+                                <span class="highlight">特點：</span>江蘇出土最大嘅青銅鼎，紋飾精美，代表春秋時期青銅鑄造工藝嘅最高水準
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div style="background:#f5f0e8; border-radius:10px; padding:10px 14px; margin-top:8px; font-size:15px; color:#8a8a7a;">
+                    📌 <strong>溫馨提示：</strong> 部分鎮館之寶會輪流展出，出發前可上官網查詢最新展覽情況。但上面介紹嘅全部都係常設展品，11 月去一定睇到！
+                </div>
+
+                <div class="knee-index" style="margin-top:14px;">
+                    <span class="item">🚶 步行度：<span class="stars">★★</span><span class="stars empty">★★★</span></span>
+                    <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">★★★★</span></span>
+                    <span class="item">⏱ 停留時間：約 30–40 分鐘</span>
+                </div>
+
+                <div class="tips">
+                    <span class="icon">💡</span>
+                    <div>展品數量唔多但件件都係精品，建議慢慢睇。特展館大堂有咖啡店同座位可以休息。</div>
+                </div>
+            </div>
+        </details>
+
+        <!-- ===== 南博知多啲 ===== -->
+        <details class="trivia-box" style="margin-top: 20px;">
+            <summary>
+                <span style="font-size: 22px;">📜</span> 南博知多啲
+                <span style="font-size: 13px; font-weight: 400; color: #8a8a7a; margin-left: auto;">㩒我展開 · 3 個冷知識</span>
+            </summary>
+            <div class="trivia-body">
+
+                <div class="trivia-item">
+                    <div class="title">🏛️ 點解叫「博物院」而唔係「博物館」？</div>
+                    <div class="content">全國大部分叫「博物館」，但南京偏偏叫「博物院」。原因係佢嘅定位唔止係展覽，仲包括考古研究、文物修復同學術交流，係一個綜合性嘅「院」級機構。同故宮博物院、台北故宮博物院齊名，係中國三大博物院之一。</div>
+                </div>
+
+                <div class="trivia-item">
+                    <div class="title">🏙️ 民國館點解咁受歡迎？</div>
+                    <div class="content">民國館唔係普通展廳，佢係 <strong>1:1 復原咗成條民國街道</strong>！郵局真係賣郵票、服裝店真係賣旗袍、仲有民國小火車可以睇。行入去瞬間穿越返 100 年前嘅南京，難怪係全館最受歡迎嘅展區。</div>
+                </div>
+
+                <div class="trivia-item">
+                    <div class="title">👑 鎮館之寶有邊幾件？</div>
+                    <div class="content">南博有 42 萬件藏品，其中 <strong>18 件被列為「鎮院之寶」</strong>。上面特展館介紹嘅 8 件全部都係必睇，包括西漢金獸、金蟬玉葉、釉裡紅歲寒三友梅瓶、銀縷玉衣等，部分更係 <strong>「永不出國」</strong> 嘅國寶級文物。</div>
+                </div>
+
+            </div>
+        </details>
+
+        <!-- ===== 貼心提示 ===== -->
+        <div class="summary-box">
+            <h3>📌 漫遊貼心提示</h3>
+            <ul>
+                <li>🎫 <strong>門票：免費，但必須提前預約！</strong> — 微信搜「南京博物院」小程序，每天 18:00 放 7 天後門票，名額極搶手</li>
+                <li>🧥 <strong>冷氣強勁：</strong> 館內冷氣開得好大，建議 <strong>帶多件外套</strong></li>
+                <li>♿ <strong>輪椅借用：</strong> 入口處有輪椅可供借用，先到先得</li>
+                <li>🎒 <strong>行李寄存：</strong> 入口處有免費寄存服務</li>
+                <li>🍽️ <strong>餐廳位置：</strong> 特展館大堂有咖啡店同輕食</li>
+                <li>🪑 <strong>休息區：</strong> 歷史館中段、民國館、特展館大堂有大量座位</li>
+                <li>🚻 <strong>洗手間：</strong> 每個展館都有洗手間</li>
+                <li>📱 <strong>語音導覽：</strong> 可租借講解器（租金 ¥20），或用手機掃碼聽講解</li>
+                <li>🏛️ <strong>鎮館之寶輪展：</strong> 部分鎮院之寶會輪流展出，出發前可上官網查詢最新展覽情況</li>
+                <li>⏱ <strong>最少預留時間：</strong> 3 小時</li>
+            </ul>
+        </div>
+
+        <div class="footer-note">
+            🏛️ 祝你有個愉快嘅南京博物院文化之旅！
+        </div>
+
+    </div>
+
+    <!-- ===== 回到頂部 ===== -->
+    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑ 回到頂部
+    </button>
+
+    <!-- ===== 手機底部導航 ===== -->
+    <nav class="mobile-nav">
+        <a href="index.html">
+            <span>🏠</span>
+            <small>首頁</small>
+        </a>
+        <a href="itinerary.html">
+            <span>📅</span>
+            <small>六日行程</small>
+        </a>
+        <a href="spots.html">
+            <span>📚</span>
+            <small>景點百科</small>
+        </a>
+    </nav>
+
+</body>
+</html>
