@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>總統府導覽｜金陵慢遊</title>
+
+    <style>
+        /* ===== 基本設定 ===== */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            background: #f7f3eb;
+            color: #3f3933;
+            font-size: 20px;
+            line-height: 1.8;
+            padding-bottom: 95px;
+        }
+
+        /* ===== 頂部標題欄 ===== */
+        .header {
+            background: linear-gradient(135deg, #657b6d, #879889);
+            color: white;
+            padding: 20px 18px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header .back-btn {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        .header .back-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+
+        .header .sub {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        /* ===== 主容器 ===== */
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 18px 16px 40px;
+        }
+
+        /* ===== 路線圖 ===== */
+        .route {
+            background: white;
+            border-radius: 20px;
+            padding: 24px 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 18px rgba(80, 70, 50, 0.08);
+        }
+
+        .route-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #4d5748;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .route-title small {
+            display: block;
+            font-size: 16px;
+            font-weight: 400;
+            color: #8a8a7a;
+        }
+
+        .route-line {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 4px;
+        }
+
+        .route-node {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            gap: 14px;
+            padding: 10px 0;
+        }
+
+        .route-node .marker {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            margin-top: 2px;
+        }
+
+        .marker.entry { background: #4a8a5a; }
+        .marker.spot { background: #8a9b8a; }
+        .marker.highlight { background: #b89a68; }
+        .marker.exit { background: #c07a5a; }
+        .marker.car { background: #e07b5a; }
+
+        .route-node .info .name {
+            font-size: 19px;
+            font-weight: 700;
+            color: #3f3933;
+        }
+
+        .route-node .info .time {
+            font-size: 15px;
+            color: #8a8a7a;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .badge.easy { background: #e0ece0; color: #4a7a4a; }
+        .badge.hard { background: #f0d8d0; color: #b05a4a; }
+        .badge.rest-badge { background: #d8e4ee; color: #4a6a8a; }
+        .badge.car-badge { background: #f0dcd0; color: #b06a4a; }
+        .badge.exit-badge { background: #f0d0c8; color: #a05a4a; }
+
+        .route-connector {
+            width: 2px;
+            height: 20px;
+            background: #c9d0c9;
+            flex-shrink: 0;
+        }
+
+        /* ===== 摺疊卡片 ===== */
+        details {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 14px;
+            border: 1px solid #eee9e0;
+            overflow: hidden;
+        }
+
+        details summary {
+            padding: 16px 18px;
+            font-size: 19px;
+            font-weight: 700;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details summary::after {
+            content: "▾";
+            margin-left: auto;
+            font-size: 20px;
+            color: #b0a898;
+            transition: transform 0.3s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        details summary .num {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #657b6d;
+            color: white;
+            text-align: center;
+            line-height: 32px;
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        details .card-body {
+            padding: 0 18px 18px;
+        }
+
+        details .card-body img {
+            width: 100%;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            background: #eee9e0;
+        }
+
+        details .card-body .desc {
+            font-size: 18px;
+            color: #5a5a4a;
+            margin-bottom: 12px;
+        }
+
+        /* ===== 睇咩？清單 ===== */
+        .what-to-see {
+            background: #f5f0e8;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+        }
+
+        .what-to-see .label {
+            font-weight: 700;
+            font-size: 16px;
+            color: #4d5748;
+        }
+
+        .what-to-see ul {
+            margin: 4px 0 0 0;
+            padding-left: 18px;
+            font-size: 16px;
+            color: #5a5a4a;
+        }
+
+        .what-to-see ul li {
+            margin-bottom: 4px;
+        }
+
+        /* ===== 體力指數 ===== */
+        .knee-index {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            background: #f5f5f0;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin: 12px 0;
+        }
+
+        .knee-index .item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 17px;
+        }
+
+        .knee-index .stars {
+            color: #b89a68;
+            letter-spacing: 2px;
+        }
+
+        .knee-index .stars.empty {
+            color: #ddd;
+        }
+
+        .tips {
+            background: #e8f0e8;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 17px;
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .tips .icon {
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        /* ===== 知多啲 ===== */
+        .trivia-box {
+            background: #f0f2ec;
+            border-radius: 14px;
+            margin: 16px 0 18px 0;
+            border: 1px solid #e0e5dd;
+            overflow: hidden;
+        }
+
+        .trivia-box summary {
+            padding: 12px 16px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #4d5748;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trivia-box summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .trivia-box summary::after {
+            content: "▾";
+            margin-left: auto;
+            font-size: 18px;
+            color: #b0a898;
+            transition: transform 0.3s;
+        }
+
+        .trivia-box[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .trivia-box .trivia-body {
+            padding: 0 16px 16px;
+        }
+
+        .trivia-item {
+            background: white;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            border-left: 4px solid #657b6d;
+        }
+
+        .trivia-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .trivia-item .title {
+            font-weight: 700;
+            font-size: 16px;
+            color: #4d5748;
+        }
+
+        .trivia-item .content {
+            font-size: 16px;
+            color: #5a5a4a;
+            margin-top: 3px;
+        }
+
+        /* ===== 貼心提示 ===== */
+        .summary-box {
+            background: #e9eee8;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-top: 24px;
+        }
+
+        .summary-box h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #4d5748;
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 17px;
+        }
+
+        .summary-box ul li {
+            margin-bottom: 6px;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #8a8a7a;
+            font-size: 16px;
+            padding: 20px 0 10px;
+            margin-top: 20px;
+            border-top: 1px solid #e8e5dc;
+        }
+
+        /* ===== 回到頂部 ===== */
+        #backToTop {
+            position: fixed;
+            right: 16px;
+            bottom: 100px;
+            z-index: 9999;
+            border: none;
+            border-radius: 999px;
+            padding: 14px 18px;
+            background: rgba(108, 126, 111, 0.92);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #backToTop:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 600px) {
+            #backToTop {
+                padding: 12px 15px;
+                font-size: 15px;
+                bottom: 90px;
+                right: 12px;
+            }
+        }
+
+        /* ===== 手機底部導航 ===== */
+        .mobile-nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.96);
+            border-top: 1px solid #e8e5dc;
+            box-shadow: 0 -3px 15px rgba(0,0,0,0.08);
+            z-index: 9998;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .mobile-nav a {
+            flex: 1;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #88877f;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-nav a span {
+            font-size: 22px;
+            line-height: 24px;
+        }
+
+        .mobile-nav a small {
+            margin-top: 3px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .mobile-nav a.active {
+            color: #607667;
+        }
+
+        .mobile-nav a:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== 手機 ===== */
+        @media (max-width: 600px) {
+            body {
+                font-size: 18px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .route-node .info .name {
+                font-size: 17px;
+            }
+
+            .route-node .marker {
+                width: 38px;
+                height: 38px;
+                font-size: 14px;
+            }
+
+            details summary {
+                font-size: 17px;
+                padding: 14px 14px;
+            }
+
+            details .card-body .desc {
+                font-size: 17px;
+            }
+
+            .knee-index .item {
+                font-size: 16px;
+            }
+
+            .tips {
+                font-size: 16px;
+            }
+
+            .summary-box ul {
+                font-size: 16px;
+            }
+
+            .trivia-item .title {
+                font-size: 15px;
+            }
+            .trivia-item .content {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== 頂部標題欄 ===== -->
+    <div class="header">
+        <a href="itinerary.html?day=4" class="back-btn">← 返回</a>
+        <h1>🏛️ 總統府導覽</h1>
+        <div class="sub">中國近代史縮影 · 六百年建築群</div>
+    </div>
+
+    <!-- ===== 主容器 ===== -->
+    <div class="container">
+
+        <!-- ===== 路線圖 ===== -->
+        <div class="route">
+            <div class="route-title">
+                🗺️ 三條軸線遊覽路線
+                <small>正門 → 中軸線 → 西區 → 東區 → 出口 · 全程約 1 小時</small>
+            </div>
+
+            <!-- 入口提示 -->
+            <div style="background:#f0f5ee; border-radius:14px; padding:14px 18px; margin-bottom:20px; border-left:5px solid #657b6d; display:flex; gap:12px; font-size:17px;">
+                <span style="font-size:28px; flex-shrink:0;">🚪</span>
+                <div>
+                    <strong>入口：</strong> 正門（長江路292號）<br>
+                    📍 打車可直接叫司機停正門落車
+                </div>
+            </div>
+
+            <div class="route-line">
+
+                <!-- 中軸線 -->
+                <div class="route-node">
+                    <div class="marker highlight">中</div>
+                    <div class="info">
+                        <div class="name">🏛️ 中軸線（政治權力核心）</div>
+                        <div class="time">
+                            門樓 → 大堂 → 子超樓
+                            <span class="badge easy">平路</span>
+                            <span class="badge rest-badge">🪑 有座位</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="route-connector"></div>
+
+                <!-- 西區 -->
+                <div class="route-node">
+                    <div class="marker spot">西</div>
+                    <div class="info">
+                        <div class="name">🌿 煦園（江南名園）</div>
+                        <div class="time">
+                            石舫 → 位育堂 → 漪瀾閣
+                            <span class="badge easy">平路</span>
+                            <span class="badge rest-badge">🪑 大量長凳</span>
+                            <span class="badge hard">⚠️ 石橋有小階梯</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="route-connector"></div>
+
+                <!-- 東區 -->
+                <div class="route-node">
+                    <div class="marker spot">東</div>
+                    <div class="info">
+                        <div class="name">📦 東區（行政院 · 馬廄）</div>
+                        <div class="time">
+                            行政院 → 舊馬廄
+                            <span class="badge easy">平路</span>
+                            <span class="badge rest-badge">🪑 有座位</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 撤退提示 -->
+            <div style="background:#f8f0e6; border-radius:14px; padding:14px 18px; margin-top:18px; border-left:5px solid #c07a5a;">
+                <div style="display:flex; gap:12px;">
+                    <span style="font-size:28px;">🚪</span>
+                    <div style="font-size:17px;">
+                        <strong>撤退／休息點：</strong><br>
+                        • <strong>煦園（西區）</strong> — 全園最舒服嘅地方！長廊同亭台有大量長凳，可以坐低飲水、吹風、睇池塘風景<br>
+                        • <strong>出口</strong> — 遊覽完可以直接離開園區
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 景點卡片 ===== -->
+        <h2 style="font-size:22px; color:#4d5748;">📖 景點詳細講解</h2>
+
+        <!-- 卡片 1：中軸線 -->
+        <details>
+            <summary><span class="num">1</span> 🏛️ 中軸線（政治權力核心）</summary>
+            <div class="card-body">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Presidential_Palace_Nanjing_2012-07.JPG/800px-Presidential_Palace_Nanjing_2012-07.JPG" alt="總統府中軸線">
+
+                <div class="desc">
+                    <strong>一句話精華：</strong> 由清代兩江總督署到民國總統府，呢條軸線見證咗中國近代史嘅權力交替。
+                </div>
+
+                <div class="what-to-see">
+                    <div class="label">👀 睇咩？</div>
+                    <ul>
+                        <li><strong>門樓（正門）：</strong> 經典巴洛克風格建築，1929年重建。大家最熟悉嘅民國歷史照片地標，先喺度影張合照！</li>
+                        <li><strong>大堂：</strong> 歷史層次最厚嘅地方。清朝係兩江總督接聖旨嘅主殿；太平天國時期洪秀全喺度上朝；民國時期孫中山就職典禮喺度舉行。頭頂嘅 <strong>「天下為公」</strong> 係孫中山真跡復刻。</li>
+                        <li><strong>子超樓：</strong> 總統府最高、最重要嘅一棟樓。二樓朝南嘅房間就係 <strong>蔣介石辦公室</strong>，枱斜放係保安習慣——坐喺度可以同時睇到門口、窗戶同走廊。旁邊有 <strong>李宗仁副總統辦公室</strong>，同埋當年嘅 <strong>手搖電梯</strong>。</li>
+                        <li><strong>二堂、穿堂過道：</strong> 以前嘅「內部通道」，清朝官員見總督、民國官員見總統，全部行呢條道。</li>
+                    </ul>
+                </div>
+
+                <div class="knee-index">
+                    <span class="item">🚶 步行度：<span class="stars">★★★</span><span class="stars empty">★★</span></span>
+                    <span class="item">🧗 階梯度：<span class="stars">★★★</span><span class="stars empty">★★</span></span>
+                    <span class="item">⏱ 停留時間：約 25 分鐘</span>
+                </div>
+
+                <div class="tips">
+                    <span class="icon">💡</span>
+                    <div>子超樓有幾層樓梯要爬，如果腳骨力一般，可以喺一樓參觀主要展廳，或喺中庭綠蔭下嘅長椅坐低歇息，欣賞兩旁嘅百年古樹。</div>
+                </div>
+            </div>
+        </details>
+
+        <!-- 卡片 2：西區 · 煦園 -->
+        <details>
+            <summary><span class="num">2</span> 🌿 煦園（江南名園歇腳區）</summary>
+            <div class="card-body">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Xuyuan_Garden_2012-07.JPG/800px-Xuyuan_Garden_2012-07.JPG" alt="煦園">
+
+                <div class="desc">
+                    <strong>一句話精華：</strong> 江南園林同民國歷史交匯，全園最舒服嘅區域。
+                </div>
+
+                <div class="what-to-see">
+                    <div class="label">👀 睇咩？</div>
+                    <ul>
+                        <li><strong>石舫（不系舟）：</strong> 正宗明朝古蹟，乾隆皇帝下江南時極之喜愛，親自賜名 <strong>「不系舟」</strong>，寓意江山穩固。太平天國時期係洪秀全嘅御花園。</li>
+                        <li><strong>位育堂與漪瀾閣：</strong> 水榭亭台，池塘裡面有好多錦鯉，環境清幽。</li>
+                        <li><strong>孫中山臨時大總統辦公室：</strong> 1912年所有建國政令都喺呢間小平房簽發，入面擺設按1912年原樣復原。</li>
+                        <li><strong>先鋒書店：</strong> 全國獨一無二開喺百年官衙入面嘅書店，喺夕佳樓入面。</li>
+                    </ul>
+                </div>
+
+                <div class="knee-index">
+                    <span class="item">🚶 步行度：<span class="stars">★</span><span class="stars empty">★★★★</span></span>
+                    <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">★★★★</span></span>
+                    <span class="item">⏱ 停留時間：約 20 分鐘</span>
+                </div>
+
+                <div class="tips">
+                    <span class="icon">💡</span>
+                    <div>🌿 呢度係成個總統府 <strong>最舒服嘅地方</strong>！亭台樓閣都有迴廊同長凳，可以坐低飲水、吹風、睇池塘風景，體力完全恢復。池塘有好多錦鯉，可以慢慢欣賞。</div>
+                </div>
+            </div>
+        </details>
+
+        <!-- 卡片 3：東區 -->
+        <details>
+            <summary><span class="num">3</span> 📦 東區（行政院 · 馬廄）</summary>
+            <div class="card-body">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Nanjing_Presidential_Palace_2012-07.JPG/800px-Nanjing_Presidential_Palace_2012-07.JPG" alt="總統府東區">
+
+                <div class="desc">
+                    <strong>一句話精華：</strong> 中西合璧嘅建築，人流較少，環境幽靜，輕鬆收尾。
+                </div>
+
+                <div class="what-to-see">
+                    <div class="label">👀 睇咩？</div>
+                    <ul>
+                        <li><strong>行政院辦公廳：</strong> 當年國民政府行政院，民國內政部、財政部、交通部核心部門全部喺呢一帶。</li>
+                        <li><strong>舊馬廄：</strong> 經過復原嘅馬廄，建築風格中西合璧。</li>
+                    </ul>
+                </div>
+
+                <div class="knee-index">
+                    <span class="item">🚶 步行度：<span class="stars">★★</span><span class="stars empty">★★★</span></span>
+                    <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">★★★★</span></span>
+                    <span class="item">⏱ 停留時間：約 15 分鐘</span>
+                </div>
+
+                <div class="tips">
+                    <span class="icon">💡</span>
+                    <div>沿東區一路向南走，剛好順路返回正門附近嘅出口，完全唔使走回頭路。</div>
+                </div>
+            </div>
+        </details>
+
+        <!-- ===== 總統府知多啲 ===== -->
+        <details class="trivia-box" style="margin-top: 20px;">
+            <summary>
+                <span style="font-size: 22px;">📜</span> 總統府知多啲
+                <span style="font-size: 13px; font-weight: 400; color: #8a8a7a; margin-left: auto;">㩒我展開 · 3 個冷知識</span>
+            </summary>
+            <div class="trivia-body">
+
+                <div class="trivia-item">
+                    <div class="title">🏛️ 一座總統府，六百年權力中樞</div>
+                    <div class="content">由明代王府、清代兩江總督署、太平天國天王府，到民國總統府，六百年從未斷檔，全國僅此一處。康熙、乾隆下江南唔住別處，就住呢度，所以南京有個地名叫做「大行宮」。</div>
+                </div>
+
+                <div class="trivia-item">
+                    <div class="title">🪑 蔣介石嘅辦公桌點解斜放？</div>
+                    <div class="content">子超樓入面，蔣介石張枱係斜嘅。唔係風水，係保安考慮——佢坐喺度可以同時睇到門口、窗戶同走廊，任何人靠近都第一時間見到，係佢多年嚟養成嘅安全習慣。</div>
+                </div>
+
+                <div class="trivia-item">
+                    <div class="title">📖 紅樓夢同總統府有關係？</div>
+                    <div class="content">曹雪芹家族世代任職江寧織造，就住喺呢一帶。煦園嘅園林結構，相傳係佢寫《紅樓夢》大觀園嘅參考原型之一。</div>
+                </div>
+
+            </div>
+        </details>
+
+        <!-- ===== 貼心提示 ===== -->
+        <div class="summary-box">
+            <h3>📌 漫遊貼心提示</h3>
+            <ul>
+                <li>🎫 <strong>門票：</strong> ¥35（60-69歲半價 ¥17.5），<strong>只能線上預約，現場唔賣飛</strong></li>
+                <li>🪪 <strong>實名制過閘：</strong> 入場必須出示 <strong>回鄉證原件</strong>，請隨身放好</li>
+                <li>🎒 <strong>行李寄存：</strong> 入口處有寄存服務，帶咗大背包可以寄放，輕鬆遊覽</li>
+                <li>👟 園區佔地廣，建議著 <strong>舒服嘅波鞋</strong></li>
+                <li>🚻 洗手間：入口、煦園附近、東軸線展覽館旁</li>
+                <li>🪑 休息區：煦園長廊（大量長凳）、中軸線大堂、中庭綠蔭長椅</li>
+                <li>🧗 階梯較多位置：子超樓（有幾層樓梯）、煦園石橋（可繞平路）</li>
+                <li>♿ <strong>無障礙路線：</strong> 中軸線主要大堂設有無障礙坡道；西區園林部分小橋有階梯，行平路繞過即可</li>
+                <li>📸 <strong>最佳拍照點：</strong> 11月銀杏同梧桐開始變黃，喺 <strong>「煦園石舫」</strong> 旁同 <strong>「子超樓」</strong> 前影相最出片！</li>
+                <li>⏱ 最少預留 <strong>1 小時</strong>（精華路線）至 <strong>3 小時</strong>（詳細參觀）</li>
+            </ul>
+        </div>
+
+        <div class="footer-note">
+            🏛️ 祝你有個愉快嘅總統府歷史之旅！
+        </div>
+
+    </div>
+
+    <!-- ===== 回到頂部 ===== -->
+    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑ 回到頂部
+    </button>
+
+    <!-- ===== 手機底部導航 ===== -->
+    <nav class="mobile-nav">
+        <a href="index.html">
+            <span>🏠</span>
+            <small>首頁</small>
+        </a>
+        <a href="itinerary.html">
+            <span>📅</span>
+            <small>六日行程</small>
+        </a>
+        <a href="spots.html">
+            <span>📚</span>
+            <small>景點百科</small>
+        </a>
+    </nav>
+
+</body>
+</html>
