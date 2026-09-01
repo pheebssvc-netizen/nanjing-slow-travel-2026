@@ -319,7 +319,7 @@ const restaurants = [
     lng: 118.78550,
     address: "新街口艾尚天地B座3樓",
     feature: "淮揚菜（29年本地品牌）"
-  }
+  },
   {
     id: "nanjing-da-pai-dang-1912",
     name: "南京大牌檔（1912街區店）",
