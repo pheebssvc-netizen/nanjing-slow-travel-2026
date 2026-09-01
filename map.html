@@ -496,40 +496,57 @@
     }
 
     function zoomToSpot(spotName) {
-        if (!spotName) return;
+    if (!spotName) return;
 
-        let marker = spotMap[spotName];
-        if (!marker) {
-            for (const [name, m] of Object.entries(spotMap)) {
-                if (name.includes(spotName) || spotName.includes(name)) {
-                    marker = m;
-                    break;
-                }
+    // 先試 id match（新加）
+    let marker = null;
+    if (typeof spots !== 'undefined') {
+        const spotById = spots.find(s => s.id === spotName);
+        if (spotById) {
+            marker = spotMap[spotById.name];
+        }
+    }
+    if (!marker && typeof restaurants !== 'undefined') {
+        const restaurantById = restaurants.find(r => r.id === spotName);
+        if (restaurantById) {
+            const idx = restaurants.indexOf(restaurantById);
+            if (idx >= 0 && idx < restaurantMarkers.length) {
+                marker = restaurantMarkers[idx];
             }
         }
+    }
 
-        if (!marker && typeof restaurants !== 'undefined') {
-            for (const r of restaurants) {
-                if (r.name.includes(spotName) || spotName.includes(r.name)) {
-                    const idx = restaurants.indexOf(r);
-                    if (idx >= 0 && idx < restaurantMarkers.length) {
-                        marker = restaurantMarkers[idx];
-                    }
-                    break;
-                }
+    // 如果搵唔到，再試 name match
+    if (!marker) {
+        marker = spotMap[spotName];
+    }
+    if (!marker) {
+        for (const [name, m] of Object.entries(spotMap)) {
+            if (name.includes(spotName) || spotName.includes(name)) {
+                marker = m;
+                break;
             }
         }
-
-        if (marker) {
-            const latlng = marker.getLatLng();
-            map.setView(latlng, 16, {
-                animate: true,
-                duration: 0.8
-            });
-            marker.openPopup();
-        } else {
-            map.setView([32.06, 118.78], 13);
+    }
+    if (!marker && typeof restaurants !== 'undefined') {
+        for (const r of restaurants) {
+            if (r.name.includes(spotName) || spotName.includes(r.name)) {
+                const idx = restaurants.indexOf(r);
+                if (idx >= 0 && idx < restaurantMarkers.length) {
+                    marker = restaurantMarkers[idx];
+                }
+                break;
+            }
         }
+    }
+
+    if (marker) {
+        const latlng = marker.getLatLng();
+        map.setView(latlng, 16, { animate: true, duration: 0.8 });
+        marker.openPopup();
+    } else {
+        map.setView([32.06, 118.78], 13);
+    }
     }
 
     const spotParam = getQueryParam('spot');
