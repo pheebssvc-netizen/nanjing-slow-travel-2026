@@ -249,7 +249,7 @@
             margin-bottom: 4px;
         }
 
-        /* ===== 鎮館之寶卡片（圖片+描述） ===== */
+        /* ===== 鎮館之寶卡片 ===== */
         .treasure-grid {
             display: flex;
             flex-direction: column;
@@ -277,14 +277,14 @@
         .treasure-item .treasure-name .tag {
             font-size: 12px;
             font-weight: 600;
-            background: #c07a5a;
+            background: #b89a68;
             color: white;
             padding: 1px 10px;
             border-radius: 20px;
         }
 
         .treasure-item .treasure-name .tag.never-export {
-            background: #b89a68;
+            background: #c07a5a;
         }
 
         .treasure-item .treasure-detail {
@@ -296,6 +296,16 @@
         .treasure-item .treasure-detail .highlight {
             font-weight: 600;
             color: #4d5748;
+        }
+
+        .treasure-item .treasure-note {
+            font-size: 14px;
+            color: #b07a5a;
+            margin-top: 4px;
+            background: #fdf6f0;
+            padding: 4px 10px;
+            border-radius: 8px;
+            display: inline-block;
         }
 
         /* ===== 體力指數 ===== */
@@ -427,6 +437,16 @@
 
         .summary-box ul li {
             margin-bottom: 6px;
+        }
+
+        .summary-box .quote {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #d0d8d0;
+            font-size: 17px;
+            font-style: italic;
+            color: #5a6a5a;
+            text-align: center;
         }
 
         .footer-note {
@@ -591,7 +611,7 @@
         <div class="route">
             <div class="route-title">
                 🗺️ 展館攻略
-                <small>歷史館 → 民國館 → 數字館 → 特展館 · 全程約 3 小時</small>
+                <small>歷史館 → 民國館 → 數字館 → 特展館 → 藝術館 · 全程約 3–3.5 小時</small>
             </div>
 
             <!-- 入口提示 -->
@@ -611,7 +631,7 @@
                     <div class="info">
                         <div class="name">📜 歷史館（從遠古到明清）</div>
                         <div class="time">
-                            銀縷玉衣 · 竹林七賢磚畫
+                            竹林七賢磚畫 · 銀縷玉衣
                             <span class="badge easy">平路</span>
                             <span class="badge rest-badge">🪑 有座位</span>
                             <span class="badge cool">❄️ 有冷氣</span>
@@ -666,9 +686,25 @@
                     </div>
                 </div>
 
+                <div class="route-connector"></div>
+
+                <!-- 藝術館 -->
+                <div class="route-node">
+                    <div class="marker spot">5</div>
+                    <div class="info">
+                        <div class="name">🎨 藝術館（書畫 · 精品）</div>
+                        <div class="time">
+                            徐渭《雜花圖卷》· 利瑪竇《坤輿萬國全圖》
+                            <span class="badge easy">平路</span>
+                            <span class="badge rest-badge">🪑 有座位</span>
+                            <span class="badge cool">❄️ 有冷氣</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- 撤退提示 -->
+            <!-- 休息提示 -->
             <div style="background:#f8f0e6; border-radius:14px; padding:14px 18px; margin-top:18px; border-left:5px solid #c07a5a;">
                 <div style="display:flex; gap:12px;">
                     <span style="font-size:28px;">🪑</span>
@@ -698,8 +734,9 @@
                 <div class="what-to-see">
                     <div class="label">👀 必睇展品</div>
                     <ul>
-                        <li><strong>銀縷玉衣：</strong> 東漢時期，用 2600 幾塊玉片編織而成，係目前中國發現最完整嘅銀縷玉衣之一</li>
-                        <li><strong>竹林七賢與榮啟期磚畫：</strong> 南北朝時期嘅磚雕，描繪魏晉名士嘅風采，係南博最具代表性嘅文物之一</li>
+                        <li><strong>竹林七賢與榮啟期磚畫：</strong> 南朝磚雕，由近 300 塊青磚拼成，刻畫嵇康、阮籍等八位名士。填補咗六朝繪畫真迹空白，係 <strong>首批禁止出國展覽文物</strong>。⚠️ 常設展出，但可能因保養輪換</li>
+                        <li><strong>銀縷玉衣：</strong> 東漢時期，用 2600 多片玉片 + 800 克銀絲編成，係目前中國發現最完整嘅銀縷玉衣之一。⚠️ 常設展出，但可能因保養輪換</li>
+                        <li><strong>廣陵王璽金印：</strong> 東漢廣陵王嘅金印，縱橫各 2.3 厘米，上方作龜钮。漢代諸侯王用金印、龜钮，係研究漢代封爵制度嘅重要證據。⚠️ 常設展出，但可能因保養輪換</li>
                         <li><strong>大報恩寺琉璃塔構件：</strong> 明代琉璃塔嘅殘件，色彩鮮艷，工藝精湛</li>
                     </ul>
                 </div>
@@ -781,19 +818,19 @@
             </div>
         </details>
 
-        <!-- 卡片 4：特展館（鎮館之寶） -->
+        <!-- 卡片 4：特展館 -->
         <details>
             <summary><span class="num">4</span> 🏛️ 特展館（鎮館之寶）</summary>
             <div class="card-body">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Nanjing_Museum_Treasure_Hall.jpg/800px-Nanjing_Museum_Treasure_Hall.jpg" alt="南京博物院特展館">
 
                 <div class="desc">
-                    <strong>一句話精華：</strong> 鎮館之寶集中地，南博最珍貴嘅文物都喺呢度。11 月去，常設展品一定睇得到！
+                    <strong>一句話精華：</strong> 鎮館之寶集中地！特展館 2 樓同 3 樓嘅固定展廳，全年常設展出南博最珍貴嘅文物。
                 </div>
 
                 <!-- 鎮館之寶詳細列表 -->
                 <div style="margin-top:12px;">
-                    <div style="font-size:17px; font-weight:700; color:#4d5748; margin-bottom:10px;">🏛️ 鎮館之寶（8 件必睇）</div>
+                    <div style="font-size:17px; font-weight:700; color:#4d5748; margin-bottom:10px;">🏛️ 鎮館之寶（7 件常設展出）</div>
 
                     <div class="treasure-grid">
 
@@ -806,9 +843,10 @@
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Golden_Beast_of_the_Western_Han_Dynasty.jpg/800px-Golden_Beast_of_the_Western_Han_Dynasty.jpg" alt="西漢金獸" style="width:100%; border-radius:10px; margin:6px 0;">
                             <div class="treasure-detail">
                                 <span class="highlight">重量：</span>9100 克（9.1 公斤），含金量 99%<br>
-                                <span class="highlight">年代：</span>西漢（約 2000 年前）<br>
-                                <span class="highlight">特點：</span>中國考古發現最重嘅黃金鑄器，全身捶飾圓形斑紋，頸部戴三輪項圈
+                                <span class="highlight">年代：</span>西漢<br>
+                                <span class="highlight">特點：</span>中國考古發現最重嘅黃金鑄器。金獸先以澆鑄成形，再喺表面錘出密集圓斑。頭部警覺，四肢收攏，身體厚重安穩，至今用途仍未有定論。
                             </div>
+                            <div class="treasure-note">⚠️ 常設展出，但可能因保養輪換</div>
                         </div>
 
                         <!-- 2. 金蟬玉葉 -->
@@ -819,10 +857,11 @@
                             </div>
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Golden_Cicada_and_Jade_Leaf.jpg/800px-Golden_Cicada_and_Jade_Leaf.jpg" alt="金蟬玉葉" style="width:100%; border-radius:10px; margin:6px 0;">
                             <div class="treasure-detail">
-                                <span class="highlight">尺寸：</span>蟬長 5.3 厘米，玉葉長 5.2 厘米，共重 4.65 克<br>
-                                <span class="highlight">年代：</span>明代中期（約 15 世紀下半葉）<br>
-                                <span class="highlight">特點：</span>國內出土嘅 <strong>唯一一件</strong> 金蟬玉葉，諧音「金枝玉葉」
+                                <span class="highlight">尺寸：</span>蟬長 5.3 厘米，玉葉長 5.2 厘米<br>
+                                <span class="highlight">年代：</span>明代中期<br>
+                                <span class="highlight">特點：</span>金蟬側身伏喺白玉葉片上，翅膀微張，三對足有起有落。金與玉嘅結合輕巧自然，冇被貴重材料壓得笨重。國內出土嘅 <strong>唯一一件</strong> 金蟬玉葉，諧音「金枝玉葉」。
                             </div>
+                            <div class="treasure-note">⚠️ 常設展出，但可能因保養輪換</div>
                         </div>
 
                         <!-- 3. 釉裡紅歲寒三友梅瓶 -->
@@ -833,41 +872,14 @@
                             </div>
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Underglaze_Red_Meiping_with_Three_Friends_of_Winter.jpg/800px-Underglaze_Red_Meiping_with_Three_Friends_of_Winter.jpg" alt="釉裡紅歲寒三友梅瓶" style="width:100%; border-radius:10px; margin:6px 0;">
                             <div class="treasure-detail">
-                                <span class="highlight">尺寸：</span>高 41.7 厘米，完整帶蓋<br>
-                                <span class="highlight">年代：</span>明洪武年間（1368–1398）<br>
-                                <span class="highlight">特點：</span>世界上 <strong>唯一一件帶蓋且保存完整</strong> 嘅洪武釉裡紅梅瓶
+                                <span class="highlight">尺寸：</span>高 41.6 厘米，完整帶蓋<br>
+                                <span class="highlight">年代：</span>明洪武年間<br>
+                                <span class="highlight">特點：</span>世界上 <strong>唯一一件帶蓋且保存完整</strong> 嘅洪武釉裡紅梅瓶。銅紅料燒成難度高，畫面中有些部分發暗甚至近黑，反而留下鮮明嘅時代特徵。
                             </div>
+                            <div class="treasure-note">⚠️ 常設展出，但可能因保養輪換</div>
                         </div>
 
-                        <!-- 4. 銀縷玉衣 -->
-                        <div class="treasure-item">
-                            <div class="treasure-name">
-                                👘 銀縷玉衣
-                                <span class="tag never-export">永不出國</span>
-                            </div>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Silver_Thread_Jade_Suit.jpg/800px-Silver_Thread_Jade_Suit.jpg" alt="銀縷玉衣" style="width:100%; border-radius:10px; margin:6px 0;">
-                            <div class="treasure-detail">
-                                <span class="highlight">尺寸：</span>全長 170 厘米，用 2600 多片玉片 + 800 克銀絲編成<br>
-                                <span class="highlight">年代：</span>東漢（約 1800 年前）<br>
-                                <span class="highlight">特點：</span>目前中國 <strong>唯一一件科學復原、品相完好</strong> 嘅銀縷玉衣
-                            </div>
-                        </div>
-
-                        <!-- 5. 竹林七賢與榮啟期磚畫 -->
-                        <div class="treasure-item">
-                            <div class="treasure-name">
-                                🎨 竹林七賢與榮啟期磚畫
-                                <span class="tag never-export">永不出國</span>
-                            </div>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Bamboo_Grove_Seven_Sages_Brick_Relief.jpg/800px-Bamboo_Grove_Seven_Sages_Brick_Relief.jpg" alt="竹林七賢與榮啟期磚畫" style="width:100%; border-radius:10px; margin:6px 0;">
-                            <div class="treasure-detail">
-                                <span class="highlight">尺寸：</span>高約 78 厘米，長約 240 厘米，由 648 塊青磚拼成<br>
-                                <span class="highlight">年代：</span>南朝（約 1500 年前）<br>
-                                <span class="highlight">特點：</span>填補咗六朝繪畫真迹空白，<strong>首批禁止出國展覽文物</strong>
-                            </div>
-                        </div>
-
-                        <!-- 6. 錯銀銅牛燈 -->
+                        <!-- 4. 錯銀銅牛燈 -->
                         <div class="treasure-item">
                             <div class="treasure-name">
                                 🐂 錯銀銅牛燈
@@ -875,45 +887,96 @@
                             </div>
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gilded_Bronze_Ox_Lamp.jpg/800px-Gilded_Bronze_Ox_Lamp.jpg" alt="錯銀銅牛燈" style="width:100%; border-radius:10px; margin:6px 0;">
                             <div class="treasure-detail">
-                                <span class="highlight">尺寸：</span>通高 46.2 厘米，身長 36.4 厘米<br>
-                                <span class="highlight">年代：</span>東漢（約 1800 年前）<br>
-                                <span class="highlight">特點：</span>漢代青銅工藝巔峰，牛腹中空可裝水淨化燈煙，<strong>比西方早 1000 多年</strong>
+                                <span class="highlight">尺寸：</span>通高 46.2 厘米<br>
+                                <span class="highlight">年代：</span>東漢<br>
+                                <span class="highlight">特點：</span>點燈後，煙氣沿上方彎管進入中空牛腹，再由腹中嘅水吸附煙塵。燈罩可以轉動調節光線，各部分仲可以拆落嚟清洗。漢代工匠用心處理咗室內燃燈產生嘅煙氣，係古代環保設計嘅見證。
                             </div>
+                            <div class="treasure-note">⚠️ 常設展出，但可能因保養輪換</div>
                         </div>
 
-                        <!-- 7. 大報恩寺琉璃塔拱門 -->
-                        <div class="treasure-item">
-                            <div class="treasure-name">
-                                🏯 大報恩寺琉璃塔拱門
-                                <span class="tag never-export">永不出國</span>
-                            </div>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Glazed_Arch_of_the_Porcelain_Tower.jpg/800px-Glazed_Arch_of_the_Porcelain_Tower.jpg" alt="大報恩寺琉璃塔拱門" style="width:100%; border-radius:10px; margin:6px 0;">
-                            <div class="treasure-detail">
-                                <span class="highlight">年代：</span>明代永樂年間<br>
-                                <span class="highlight">特點：</span>大報恩寺琉璃塔被稱為「天下第一塔」，呢套拱門係 <strong>目前唯一一套完整嘅琉璃拱門</strong>
-                            </div>
-                        </div>
-
-                        <!-- 8. 青銅雲紋大鼎 -->
+                        <!-- 5. 青銅雲紋大鼎 -->
                         <div class="treasure-item">
                             <div class="treasure-name">
                                 🔱 青銅雲紋大鼎
                             </div>
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Bronze_Tripod_with_Cloud_Pattern.jpg/800px-Bronze_Tripod_with_Cloud_Pattern.jpg" alt="青銅雲紋大鼎" style="width:100%; border-radius:10px; margin:6px 0;">
                             <div class="treasure-detail">
-                                <span class="highlight">年代：</span>春秋晚期（約 2500 年前）<br>
-                                <span class="highlight">特點：</span>江蘇出土最大嘅青銅鼎，紋飾精美，代表春秋時期青銅鑄造工藝嘅最高水準
+                                <span class="highlight">年代：</span>春秋晚期<br>
+                                <span class="highlight">特點：</span>江蘇出土最大嘅青銅鼎，紋飾精美，代表春秋時期青銅鑄造工藝嘅最高水準。
                             </div>
+                            <div class="treasure-note">⚠️ 常設展出，但可能因保養輪換</div>
+                        </div>
+
+                        <!-- 6. 西晉青瓷神獸尊 -->
+                        <div class="treasure-item">
+                            <div class="treasure-name">
+                                🐉 西晉青瓷神獸尊
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Western_Jin_Celadon_Beast_Zun.jpg/800px-Western_Jin_Celadon_Beast_Zun.jpg" alt="西晉青瓷神獸尊" style="width:100%; border-radius:10px; margin:6px 0;">
+                            <div class="treasure-detail">
+                                <span class="highlight">尺寸：</span>高 27.9 厘米<br>
+                                <span class="highlight">年代：</span>西晉<br>
+                                <span class="highlight">特點：</span>雙眼上翻，鼻孔朝天，口含圓珠，前爪舉喺胸前，表情有幾分詼諧。西晉青瓷常以簡潔沉靜見長，呢件卻以堆塑、刻劃同釉色塑造出一隻有面孔有性格嘅神獸。
+                            </div>
+                            <div class="treasure-note">⚠️ 常設展出，但可能因保養輪換</div>
+                        </div>
+
+                        <!-- 7. 清乾隆行圍圖旋轉瓶 -->
+                        <div class="treasure-item">
+                            <div class="treasure-name">
+                                🏺 清乾隆行圍圖旋轉瓶
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Qing_Qianlong_Hunting_Revolving_Vase.jpg/800px-Qing_Qianlong_Hunting_Revolving_Vase.jpg" alt="清乾隆行圍圖旋轉瓶" style="width:100%; border-radius:10px; margin:6px 0;">
+                            <div class="treasure-detail">
+                                <span class="highlight">年代：</span>清乾隆年間<br>
+                                <span class="highlight">特點：</span>一件展品佔一間房！瓶身可以旋轉，展現乾隆時期宮廷畫師嘅精湛技藝同景德鎮御窯廠嘅工藝巔峰。
+                            </div>
+                            <div class="treasure-note">⚠️ 常設展出，但可能因保養輪換</div>
                         </div>
 
                     </div>
                 </div>
 
                 <div style="background:#f5f0e8; border-radius:10px; padding:10px 14px; margin-top:8px; font-size:15px; color:#8a8a7a;">
-                    📌 <strong>溫馨提示：</strong> 部分鎮館之寶會輪流展出，出發前可上官網查詢最新展覽情況。但上面介紹嘅全部都係常設展品，11 月去一定睇到！
+                    📌 <strong>溫馨提示：</strong> 以上 7 件鎮館之寶全部係特展館常設展品，但可能因保養輪換而短暫休息。出發前可上官網查詢最新展覽情況。
                 </div>
 
                 <div class="knee-index" style="margin-top:14px;">
+                    <span class="item">🚶 步行度：<span class="stars">★★</span><span class="stars empty">★★★</span></span>
+                    <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">★★★★</span></span>
+                    <span class="item">⏱ 停留時間：約 40–50 分鐘</span>
+                </div>
+
+                <div class="tips">
+                    <span class="icon">💡</span>
+                    <div>展品數量唔多但件件都係精品，建議慢慢睇。特展館大堂有咖啡店同大量座位可以休息。</div>
+                </div>
+            </div>
+        </details>
+
+        <!-- 卡片 5：藝術館 -->
+        <details>
+            <summary><span class="num">5</span> 🎨 藝術館（書畫 · 精品）</summary>
+            <div class="card-body">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Nanjing_Museum_Art_Hall.jpg/800px-Nanjing_Museum_Art_Hall.jpg" alt="南京博物院藝術館">
+
+                <div class="desc">
+                    <strong>一句話精華：</strong> 按藝術品分類展陳館藏精品，書畫愛好者必到！
+                </div>
+
+                <div class="what-to-see">
+                    <div class="label">👀 必睇展品（書畫類輪換展出）</div>
+                    <ul>
+                        <li><strong>徐渭《雜花圖卷》：</strong> 縱 30 厘米、橫 1053.5 厘米，一口氣畫下十三種植物。徐渭冇將佢哋畫成孤立嘅小品，濃墨、淡墨、枯筆同水分沿十幾米紙面交替出現，觀看節奏忽快忽慢，係南博 18 件鎮院之寶中 <strong>唯一一件繪畫作品</strong>。⚠️ 書畫類藏品輪換展出</li>
+                        <li><strong>利瑪竇《坤輿萬國全圖》：</strong> 明萬曆三十六年（1608 年）宮廷彩色摹繪本。地圖以橢圓形展開世界，用唔同顏色區分大洲，海上畫著帆船與海獸，歐洲、亞洲、大西洋等譯名都係經呢類地圖進入中文。記錄咗西方地理知識進入明代中國後嘅翻譯與調整。⚠️ 書畫類藏品輪換展出</li>
+                    </ul>
+                </div>
+
+                <div style="background:#f8f0e6; border-radius:10px; padding:10px 14px; margin-bottom:12px; font-size:15px; border-left:4px solid #c07a5a;">
+                    📌 <strong>重要提醒：</strong> 書畫類藏品對保存環境要求極高，<strong>並非全年常設展出</strong>。出發前請上官網查詢「藝術館」最新展覽資訊，確認心儀展品是否在展。
+                </div>
+
+                <div class="knee-index">
                     <span class="item">🚶 步行度：<span class="stars">★★</span><span class="stars empty">★★★</span></span>
                     <span class="item">🧗 階梯度：<span class="stars">★</span><span class="stars empty">★★★★</span></span>
                     <span class="item">⏱ 停留時間：約 30–40 分鐘</span>
@@ -921,7 +984,7 @@
 
                 <div class="tips">
                     <span class="icon">💡</span>
-                    <div>展品數量唔多但件件都係精品，建議慢慢睇。特展館大堂有咖啡店同座位可以休息。</div>
+                    <div>藝術館展品按分類陳列，建議跟住指示牌慢慢行。書畫類展品會輪換，每次去可能有驚喜。</div>
                 </div>
             </div>
         </details>
@@ -945,8 +1008,8 @@
                 </div>
 
                 <div class="trivia-item">
-                    <div class="title">👑 鎮館之寶有邊幾件？</div>
-                    <div class="content">南博有 42 萬件藏品，其中 <strong>18 件被列為「鎮院之寶」</strong>。上面特展館介紹嘅 8 件全部都係必睇，包括西漢金獸、金蟬玉葉、釉裡紅歲寒三友梅瓶、銀縷玉衣等，部分更係 <strong>「永不出國」</strong> 嘅國寶級文物。</div>
+                    <div class="title">👑 南博有幾多件鎮院之寶？</div>
+                    <div class="content">南博官方公佈嘅 <strong>「鎮院之寶」</strong> 共有 <strong>18 件</strong>，包括上面介紹嘅竹林七賢磚畫、西漢金獸、金蟬玉葉等。當中部分更被列為 <strong>「永不出國」</strong> 嘅國寶級文物，禁止出境展覽。</div>
                 </div>
 
             </div>
@@ -964,9 +1027,12 @@
                 <li>🪑 <strong>休息區：</strong> 歷史館中段、民國館、特展館大堂有大量座位</li>
                 <li>🚻 <strong>洗手間：</strong> 每個展館都有洗手間</li>
                 <li>📱 <strong>語音導覽：</strong> 可租借講解器（租金 ¥20），或用手機掃碼聽講解</li>
-                <li>🏛️ <strong>鎮館之寶輪展：</strong> 部分鎮院之寶會輪流展出，出發前可上官網查詢最新展覽情況</li>
-                <li>⏱ <strong>最少預留時間：</strong> 3 小時</li>
+                <li>🏛️ <strong>鎮館之寶輪展：</strong> 部分展品會因保養輪換展出，出發前可上官網查詢最新展覽情況</li>
+                <li>⏱ <strong>最少預留時間：</strong> 3–3.5 小時</li>
             </ul>
+            <div class="quote">
+                「博物館最值得睇嘅，往往係原本冇列喺清單入面嘅嗰一件。」
+            </div>
         </div>
 
         <div class="footer-note">
