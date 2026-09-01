@@ -656,10 +656,11 @@ afternoon: true,
 spot: "南京大牌檔（1912街區店）"
 },
 {
-time: "13:00–14:30",
-title: "返回酒店午休",
-note: "建議休息，為下午儲備體力",
-afternoon: true
+time: "11:30–13:00",
+title: "午餐 · 順路歇腳",
+note: "由總統府出口行過對面就係1912街區（步行約3分鐘），建議兩個選擇：① 南京大牌檔（1912街區店）— 鹽水鴨、鴨血粉絲湯，老金陵風味；② 1912街區咖啡/茶館 — 飲杯熱茶歇歇腳。兩個選擇都係出口過馬路就到，完全唔使行遠路。",
+afternoon: true,
+customMap: "南京大牌檔（1912街區店）"   // 用自訂屬性，唔用 spot
 },
 {
 time: "14:30–16:00",
@@ -944,7 +945,14 @@ function renderDay(dayNumber) {
         </div>
     `;
         }
-
+// 處理自訂地圖按鈕（淨係顯示「查看地圖」，冇「導遊資料」）
+if (event.customMap) {
+    html += `
+        <div class="buttons" style="display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 10px;">
+            <a class="map-btn" href="map.html?spot=${encodeURIComponent(event.customMap)}" style="background:#657b6d; color:white; border-radius:9px; padding:8px 6px; text-align:center; text-decoration:none; font-size:13px; font-weight:bold;">🗺️ 查看地圖</a>
+        </div>
+    `;
+}
         card.innerHTML = html;
         timeline.appendChild(card);
     });
