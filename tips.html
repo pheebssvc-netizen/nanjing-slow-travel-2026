@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金陵慢遊・10個趣味錦囊</title>
+
+    <style>
+        /* ===== 基本設定 ===== */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            background: #f7f3eb;
+            color: #3f3933;
+            font-size: 20px;
+            line-height: 1.8;
+            padding-bottom: 95px;
+        }
+
+        /* ===== 頂部標題欄 ===== */
+        .header {
+            background: linear-gradient(135deg, #657b6d, #879889);
+            color: white;
+            padding: 20px 18px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header .back-btn {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        .header .back-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            letter-spacing: 2px;
+        }
+
+        .header .sub {
+            font-size: 15px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        /* ===== 主容器 ===== */
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 18px 16px 40px;
+        }
+
+        /* ===== 歷史小百科（摺疊卡片） ===== */
+        .history-box {
+            background: #f0f2ec;
+            border-radius: 16px;
+            margin-bottom: 28px;
+            border: 1px solid #e0e5dd;
+            overflow: hidden;
+        }
+
+        .history-box summary {
+            padding: 14px 18px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #4d5748;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .history-box summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .history-box summary::after {
+            content: "▾";
+            margin-left: auto;
+            font-size: 18px;
+            color: #b0a898;
+            transition: transform 0.3s;
+        }
+
+        .history-box[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .history-box .history-body {
+            padding: 0 18px 18px;
+        }
+
+        .history-box .history-body .section {
+            background: white;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            border-left: 4px solid #b89a68;
+        }
+
+        .history-box .history-body .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .history-box .history-body .section .title {
+            font-weight: 700;
+            font-size: 17px;
+            color: #4d5748;
+        }
+
+        .history-box .history-body .section .content {
+            font-size: 16px;
+            color: #5a5a4a;
+            margin-top: 3px;
+        }
+
+        .history-box .history-body .section .content .highlight {
+            font-weight: 600;
+            color: #4d5748;
+        }
+
+        /* ===== 錦囊卡片 ===== */
+        .tip-card {
+            background: white;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 3px 12px rgba(80, 70, 50, 0.06);
+            border-left: 5px solid #b89a68;
+            transition: 0.2s;
+        }
+
+        .tip-card:active {
+            transform: scale(0.98);
+        }
+
+        .tip-card .number {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+            background: #657b6d;
+            padding: 2px 12px;
+            border-radius: 20px;
+            margin-bottom: 6px;
+        }
+
+        .tip-card .title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #3f3933;
+        }
+
+        .tip-card .body {
+            font-size: 17px;
+            color: #5a5a4a;
+            margin-top: 6px;
+        }
+
+        .tip-card .body .highlight {
+            font-weight: 600;
+            color: #4d5748;
+        }
+
+        .tip-card .body .tag {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            background: #e8f0e8;
+            color: #4a7a4a;
+            padding: 1px 12px;
+            border-radius: 20px;
+            margin-right: 4px;
+        }
+
+        /* ===== 回到頂部 ===== */
+        #backToTop {
+            position: fixed;
+            right: 16px;
+            bottom: 100px;
+            z-index: 9999;
+            border: none;
+            border-radius: 999px;
+            padding: 14px 18px;
+            background: rgba(108, 126, 111, 0.92);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #backToTop:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 600px) {
+            #backToTop {
+                padding: 12px 15px;
+                font-size: 15px;
+                bottom: 90px;
+                right: 12px;
+            }
+        }
+
+        /* ===== 手機底部導航 ===== */
+        .mobile-nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.96);
+            border-top: 1px solid #e8e5dc;
+            box-shadow: 0 -3px 15px rgba(0,0,0,0.08);
+            z-index: 9998;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .mobile-nav a {
+            flex: 1;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #88877f;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-nav a span {
+            font-size: 22px;
+            line-height: 24px;
+        }
+
+        .mobile-nav a small {
+            margin-top: 3px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .mobile-nav a.active {
+            color: #607667;
+        }
+
+        .mobile-nav a:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== 手機 ===== */
+        @media (max-width: 600px) {
+            body {
+                font-size: 18px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .tip-card .title {
+                font-size: 18px;
+            }
+
+            .tip-card .body {
+                font-size: 16px;
+            }
+
+            .history-box summary {
+                font-size: 18px;
+            }
+
+            .history-box .history-body .section .content {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== 頂部標題欄 ===== -->
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回</a>
+        <h1>🏮 金陵慢遊・10個趣味錦囊</h1>
+        <div class="sub">出發前要知道嘅 10 件貼心小事</div>
+    </div>
+
+    <!-- ===== 主容器 ===== -->
+    <div class="container">
+
+        <!-- ===== 南京歷史小百科 ===== -->
+        <details class="history-box">
+            <summary>
+                <span style="font-size: 22px;">📖</span> 南京歷史小百科
+                <span style="font-size: 13px; font-weight: 400; color: #8a8a7a; margin-left: auto;">㩒我展開</span>
+            </summary>
+            <div class="history-body">
+
+                <div class="section">
+                    <div class="title">🏛️ 點解叫「金陵」？</div>
+                    <div class="content">
+                        「金陵」呢個名，有幾個講法。最可信嘅係 <span class="highlight">「因山立號」</span>——「金陵」原本係一座山嘅名，就係而家嘅 <span class="highlight">紫金山（鐘山）</span>。「金」指嘅係銅嘅顏色（古人稱銅為赤金），「陵」即係山陵。因為鐘山頂嘅岩石帶紫赤色，所以叫「金陵」，即係 <span class="highlight">「銅色嘅山」</span>。<br><br>
+                        公元前333年，楚威王大敗越國，喺石頭山（今清涼山）築城，用呢座山嘅名命名，稱為 <span class="highlight">「金陵邑」</span>。從此，「金陵」就成為呢座城嘅名，一直流傳到而家。<br><br>
+                        <span style="font-size: 15px; color: #8a8a7a;">💡 坊間流傳嘅「楚威王埋金鎮王氣」同「秦始皇埋金」嘅講法，其實都係後人穿鑿附會，並唔可信㗎。</span>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="title">👑 六朝古都係邊六朝？</div>
+                    <div class="content">
+                        南京有 <span class="highlight">「六朝古都」</span> 嘅美譽，所指嘅六朝係：
+                        <br><br>
+                        <span style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px 20px; font-size: 15px; margin-top: 4px;">
+                            <span>① <strong>東吳</strong>（229–280）— 孫權</span>
+                            <span>② <strong>東晉</strong>（317–420）— 司馬睿</span>
+                            <span>③ <strong>南朝・宋</strong>（420–479）— 劉裕</span>
+                            <span>④ <strong>南朝・齊</strong>（479–502）— 蕭道成</span>
+                            <span>⑤ <strong>南朝・梁</strong>（502–557）— 蕭衍</span>
+                            <span>⑥ <strong>南朝・陳</strong>（557–589）— 陳霸先</span>
+                        </span>
+                        <br>
+                        六朝定都南京嘅時間，加埋超過 <span class="highlight">330年</span>。所以南京有「六朝古都」之稱。如果計埋南唐、明朝、太平天國同中華民國，就係「十朝都會」喇。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="title">📜 南京仲有咩古稱？</div>
+                    <div class="content">
+                        南京歷史上嘅名多到數唔晒：<span class="highlight">金陵、秣陵、建業、建鄴、建康、蔣州、江寧、昇州、集慶、應天、天京</span>…… 每個名都代表一段歷史，真係一部活生生嘅中國史。
+                    </div>
+                </div>
+
+            </div>
+        </details>
+
+        <!-- ===== 錦囊 1 ===== -->
+        <div class="tip-card">
+            <div class="number">錦囊 1</div>
+            <div class="title">🍂 11月的南京，是「梧桐落葉」的天下</div>
+            <div class="body">
+                南京的秋天極美，但氣溫像「變臉」，早晚溫差可以相差10度以上。11月初平均氣溫大約 <span class="highlight">8℃ ~ 16℃</span>。<span class="highlight">洋蔥式穿法</span>最安全（內層薄衫、外層保暖風衣或輕羽絨），順便帶一把小傘。梧桐樹下散步，金黃落葉鋪滿地，最浪漫。
+            </div>
+        </div>
+
+        <!-- ===== 錦囊 2 ===== -->
+        <div class="tip-card">
+            <div class="number">錦囊 2</div>
+            <div class="title">🚗 打車嘅「景點上落客密碼」</div>
+            <div class="body">
+                南京打車好方便，但景區周邊（如紫金山、明孝陵、夫子廟）都有管制區，司機未必停到喺正門。認清導航建議嘅 <span class="highlight">「指定上客點」</span>，可以少行好幾百米冤枉路。用滴滴出行叫車時，可以留意App入面嘅「上車點」提示。
+            </div>
+        </div>
+
+        <!-- ===== 錦囊 3 ===== -->
+        <div class="tip-card">
+            <div class="number">錦囊 3</div>
+            <div class="title">🎫 60歲以上嘅「隱形福利」</div>
+            <div class="body">
+                內地好多景點對60歲以上長者有門票優惠：<br>
+                <span class="highlight">60 – 69歲</span>：憑回鄉證享 <span class="highlight">門票半價</span><br>
+                <span class="highlight">70歲或以上</span>：憑回鄉證 <span class="highlight">免費入場</span><br>
+                雖然網上預約時有時要行人工通道，但隨身帶住證件，隨時有驚喜。
+            </div>
+        </div>
+
+        <!-- ===== 錦囊 4 ===== -->
+        <div class="tip-card">
+            <div class="number">錦囊 4</div>
+            <div class="title">🏛️ 南京博物院的「搶票生死時速」</div>
+            <div class="body">
+                南博係全南京最難約嘅地方！免費入場，但每日限人數。<span class="highlight">提前7日</span>喺微信公眾號「南京博物院」小程序搶飛，<span class="highlight">每日傍晚6點（18:00）</span>放票。要好似搶演唱會飛咁，校定鬧鐘，守喺手機前面。約到嘅話，先算真正拎到南京旅遊嘅通行證！
+            </div>
+        </div>
+
+        <!-- ===== 錦囊 5 ===== -->
+        <div class="tip-card">
+            <div class="number">錦囊 5</div>
+            <div class="title">🦆 南京烤鴨的「滷汁派」</div>
+            <div class="body">
+                南京人一年食超過一億隻鴨！除咗去南京大牌檔，街頭巷尾隨處可見 <span class="highlight">「鹽水鴨」</span> 同 <span class="highlight">「烤鴨」</span>。同北京烤鴨點甜麵醬唔同，南京烤鴨係 <span class="highlight">「滷汁派」</span>——斬好嘅烤鴨會淋上秘製甜滷汁，皮酥肉嫩，記得試試。
+            </div>
+        </div>
+
+        <!-- ===== 錦囊 6 ===== -->
+        <div class="tip-card">
+            <div class="number">錦囊 6</div>
+            <div class="title">🌶️ 鴨血粉絲湯加「一勺在地香辣油」</div>
+            <div class="body">
+                即使唔太食得辣，南京嘅在地辣油係 <span class="highlight">香而不辣</span> 嘅。食鴨血粉絲湯或老鴨湯時，加半匙辣油同少許香醋，湯底味道即刻提升一個層次。呢個係南京人嘅「隱藏食法」！
+            </div>
+        </div>
+
+        <!-- ===== 錦囊 7 ===== -->
+        <div class="tip-card">
+            <div class="number">錦囊 7</div>
+            <div class="title">🧱 明城牆磚頭上的 600 年「工匠實名密碼」</div>
+            <div class="body">
+                南京城牆係世界最長嘅古城牆。明代建城牆時實施咗極嚴格嘅 <span class="highlight">「質量追溯制」</span>——每一塊磚上都刻咗 600 年前造磚工匠同官員嘅名。如果質量唔合格，係要 <span class="highlight">掉頭定罪</span> 㗎！行城牆時不妨湊近睇吓，邊行邊搵自己同姓嘅工匠名字，比單純行路好玩得多！
+            </div>
+        </div>
+
+        <!-- ===== 錦囊 8 ===== -->
+        <div class="tip-card">
+            <div class="number">錦囊 8</div>
+            <div class="title">🗣️ 南京話「聽落似吵架」的直爽熱情</div>
+            <div class="body">
+                南京方言聽起嚟比較硬、調子高，經典例句就係 <span class="highlight">「阿要辣油？」</span>（即「要不要辣油？」）。第一次聽可能會以為人哋喺度鬧交。其實佢哋性格直爽熱情，問路時會非常耐心咁指路，完全唔使驚。
+            </div>
+        </div>
+
+        <!-- ===== 錦囊 9 ===== -->
+        <div class="tip-card">
+            <div class="number">錦囊 9</div>
+            <div class="title">🥟 牛肉鍋貼與金陵吸汁「皮湯」</div>
+            <div class="body">
+                大家去南京淨係識食鴨血粉絲湯，但在地南京人最驕傲嘅其實係 <span class="highlight">「清真牛肉鍋貼」</span> 同 <span class="highlight">「皮湯」</span>！<br><br>
+                去七家灣或老門東附近嘅清真老字號（如李記清真館），一大鍋金黃色嘅牛肉鍋貼出爐，底脆多汁，咬開會噴汁，搭配一碗牛肉湯，極致享受。<br><br>
+                當地人食麵或粉絲時成日會加 <span class="highlight">「皮」</span>（即炸豬皮／皮花），吸滿濃郁湯汁之後口感綿軟，老人家牙口唔好食都完全冇壓力，超級入味！
+            </div>
+        </div>
+
+        <!-- ===== 錦囊 10 ===== -->
+        <div class="tip-card">
+            <div class="number">錦囊 10</div>
+            <div class="title">🚻 德基廣場的「千萬豪華洗手間」打卡體驗</div>
+            <div class="body">
+                南京最神奇嘅「景點」之一！德基廣場號稱有 <span class="highlight">「造價千萬嘅豪華洗手間」</span>，每一層都有唔同主題（夜店風、復古宮廷風、森林風……），就算唔買名牌，都一定要去「體驗」一次，順便打卡影相，包你話過癮！
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== 回到頂部 ===== -->
+    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑ 回到頂部
+    </button>
+
+    <!-- ===== 手機底部導航 ===== -->
+    <nav class="mobile-nav">
+        <a href="index.html">
+            <span>🏠</span>
+            <small>首頁</small>
+        </a>
+        <a href="itinerary.html">
+            <span>📅</span>
+            <small>六日行程</small>
+        </a>
+        <a href="spots.html">
+            <span>📚</span>
+            <small>景點百科</small>
+        </a>
+    </nav>
+
+</body>
+</html>
