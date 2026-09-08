@@ -915,7 +915,7 @@ footer{
 
 /* =========================================================
    天氣功能（OpenWeather API - Forecast）
-   修正版：確保顯示真正嘅日間 / 夜晚溫差
+   修正版：精準區分日間（06-18）與夜晚（18-06）溫差
    ========================================================= */
 
 const API_KEY = '236796fae33215243c53c1a42b345773';
@@ -925,10 +925,9 @@ const UNITS = 'metric';
 const weatherCard = document.getElementById('weatherCard');
 
 function getWeather() {
-    weatherCard.innerHTML = '<div class="weather-loading">🌤️ 讀取天氣中...</div>';
+    weatherCard.innerHTML = '<div class="weather-loading" style="text-align:center; padding:15px; color:#6a7a6a;">🌤️ 讀取天氣中...</div>';
 
-    const url =
-        `https://api.openweathermap.org/data/2.5/forecast?q=${CITY}&units=${UNITS}&appid=${API_KEY}`;
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${CITY}&units=${UNITS}&appid=${API_KEY}`;
 
     fetch(url)
         .then(res => {
@@ -936,97 +935,69 @@ function getWeather() {
             return res.json();
         })
         .then(data => {
-            // 1. 取得今日日期（UTC 時間）
-            const now = new Date();
-            const todayUTC = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+            // 取未來 24 小時（前 8 個數據點，每點 3 小時）
+            const next24h = data.list.slice(0, 8);
 
-            // 2. 過濾出今日嘅所有預測點（用 UTC 比較，避免時區問題）
-            const todayForecasts = data.list.filter(item => {
-                const itemDate = new Date(item.dt * 1000);
-                return itemDate >= todayUTC && itemDate < new Date(todayUTC.getTime() + 86400000);
-            });
+            let dayTemps = [];
+            let nightTemps = [];
 
-            // 如果今日冇數據，fallback 到全部數據
-            const forecasts = todayForecasts.length > 0 ? todayForecasts : data.list;
+            next24h.forEach(item => {
+                const date = new Date(item.dt * 1000);
+                const hour = date.getHours(); // 取得當地小時
+                const temp = item.main.temp;
 
-            // 3. 計算今日最高同最低溫度
-            let tempMax = -Infinity;
-            let tempMin = Infinity;
-            let currentTemp = null;
-            let humidity = null;
-            let description = '';
-            let iconCode = '';
-
-            forecasts.forEach(item => {
-                const t = item.main.temp;
-                if (t > tempMax) tempMax = t;
-                if (t < tempMin) tempMin = t;
-                // 用第一筆作為 current
-                if (currentTemp === null) {
-                    currentTemp = Math.round(t);
-                    humidity = item.main.humidity;
-                    description = item.weather[0].description;
-                    iconCode = item.weather[0].icon;
+                // 06:00 至 18:00 歸為日間，其餘歸為夜晚
+                if (hour >= 6 && hour < 18) {
+                    dayTemps.push(temp);
+                } else {
+                    nightTemps.push(temp);
                 }
             });
 
-            // 如果 still 冇數據，throw error
-            if (forecasts.length === 0) {
-                throw new Error('無法獲取天氣數據');
-            }
+            // 計算日間/夜晚最高或平均值（若無數據則 fallback 到全日數據）
+            const dayTemp = dayTemps.length > 0 
+                ? Math.round(Math.max(...dayTemps)) 
+                : Math.round(data.list[0].main.temp);
 
-            tempMax = Math.round(tempMax);
-            tempMin = Math.round(tempMin);
+            const nightTemp = nightTemps.length > 0 
+                ? Math.round(Math.min(...nightTemps)) 
+                : Math.round(data.list[1] ? data.list[1].main.temp : dayTemp);
 
-            // 如果 max 同 min 一樣（極端情況），顯示一個就得
-            const showTempRange = (tempMax !== tempMin);
-            const icon = getWeatherIcon(iconCode);
+            const humidity = data.list[0].main.humidity;
+            const currentTemp = Math.round(data.list[0].main.temp);
 
+            // 渲染直觀對比 UI
             weatherCard.innerHTML = `
-                <div class="weather-loc">
-                    <span class="city-name">📍 南京</span>
-                    <span class="weather-icon">${icon}</span>
-                </div>
-                <div class="weather-stats">
-                    <div class="stat-item">
-                        <span class="temp-val">${currentTemp}°C</span>
+                <div style="background:#FAF4EB; border:1.5px solid #C28E38; border-radius:16px; padding:16px; margin:10px 0;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                        <span style="font-weight:bold; font-size:1.1rem; color:#8C2424;">📍 南京即時天氣</span>
+                        <span style="font-size:0.9rem; color:#666;">現時 ${currentTemp}°C ｜ 濕度 ${humidity}%</span>
                     </div>
-                    <div class="divider"></div>
-                    <div class="stat-item">
-                        <span class="stat-label">💧 濕度</span>
-                        <span class="humidity-val">${humidity}%</span>
+                    
+                    <!-- 日夜卡片對比 -->
+                    <div style="display:flex; gap:10px; margin-bottom:10px;">
+                        <div style="flex:1; background:#FFF; border:1px solid #E6DFD3; border-radius:10px; padding:10px; text-align:center;">
+                            <div style="font-size:1.2rem;">☀️ 日間預測</div>
+                            <div style="font-size:1.5rem; font-weight:bold; color:#C28E38; margin:4px 0;">${dayTemp}°C</div>
+                        </div>
+                        <div style="flex:1; background:#2D3E50; border-radius:10px; padding:10px; text-align:center; color:#FFF;">
+                            <div style="font-size:1.2rem; color:#B0C4DE;">🌙 夜間預測</div>
+                            <div style="font-size:1.5rem; font-weight:bold; color:#7EC8E3; margin:4px 0;">${nightTemp}°C</div>
+                        </div>
+                    </div>
+
+                    <div style="font-size:0.85rem; color:#8C2424; background:#FFF; border-left:3px solid #8C2424; padding:6px 10px; border-radius:4px;">
+                        💡 溫差較大，早晚出門記得帶備保暖外衣/圍巾。
                     </div>
                 </div>
-                ${showTempRange ? `
-                <div style="width:100%; text-align:center; font-size:0.9rem; color:#6a7a6a; margin-top:4px; border-top:1px solid rgba(180,160,140,0.2); padding-top:6px;">
-                    🌡️ 日間 ${tempMax}°C ｜ 夜晚 ${tempMin}°C
-                </div>` : `
-                <div style="width:100%; text-align:center; font-size:0.9rem; color:#6a7a6a; margin-top:4px; border-top:1px solid rgba(180,160,140,0.2); padding-top:6px;">
-                    🌡️ 全日 ${tempMax}°C
-                </div>`}
             `;
         })
         .catch(err => {
             weatherCard.innerHTML = `
-                <div class="weather-error">⚠️ 無法載入天氣資料，請稍後再試</div>
+                <div style="text-align:center; padding:10px; color:#A83232; font-size:0.9rem;">⚠️ 無法載入天氣資料，請稍後再試</div>
             `;
             console.warn('Weather API error:', err);
         });
-}
-
-function getWeatherIcon(iconCode) {
-    const map = {
-        '01d': '☀️', '01n': '🌙',
-        '02d': '⛅', '02n': '☁️',
-        '03d': '☁️', '03n': '☁️',
-        '04d': '☁️', '04n': '☁️',
-        '09d': '🌧️', '09n': '🌧️',
-        '10d': '🌦️', '10n': '🌧️',
-        '11d': '⛈️', '11n': '⛈️',
-        '13d': '❄️', '13n': '❄️',
-        '50d': '🌫️', '50n': '🌫️'
-    };
-    return map[iconCode] || '🌤️';
 }
 
 // 頁面載入後自動獲取天氣
