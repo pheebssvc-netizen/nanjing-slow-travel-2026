@@ -943,7 +943,7 @@ function getWeather() {
             const icon = getWeatherIcon(data.weather[0].icon);
 
             // 如果 max/min 同 temp 差唔多（可能係同一點數據），就唔顯示溫差
-            const showTempRange = (tempMax !== tempMin);
+            const showTempRange = true;  // 暫時強制顯示
 
             weatherCard.innerHTML = `
                 <div class="weather-loc">
