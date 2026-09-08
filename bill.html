@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>公費 AA 結帳｜金陵慢遊</title>
+
+    <style>
+        /* ===== 基本重置 ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            background: #f5f2ec;
+            color: #3f3933;
+            font-size: 18px;
+            line-height: 1.6;
+            padding: 0 0 95px 0;
+            min-height: 100vh;
+        }
+
+        /* ===== 頂部標題欄 ===== */
+        .header {
+            background: linear-gradient(135deg, #657b6d, #879889);
+            color: white;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .back-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        .header .back-btn:active {
+            transform: scale(0.95);
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header .clear-btn {
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .header .clear-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== 主容器 ===== */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        /* ===== 快速入帳卡片 ===== */
+        .entry-card {
+            background: white;
+            border-radius: 18px;
+            padding: 18px 16px;
+            margin-bottom: 18px;
+            box-shadow: 0 3px 12px rgba(80, 70, 50, 0.07);
+        }
+
+        .entry-card .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8a8a7a;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        /* 日期 */
+        .date-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .date-row input[type="date"] {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #e0ddd5;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #faf8f5;
+            color: #3f3933;
+            font-family: inherit;
+        }
+
+        .date-row .today-btn {
+            padding: 8px 14px;
+            background: #e9eee8;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4d5748;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .date-row .today-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* 分類快捷鍵 */
+        .category-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .category-pill {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #e0ddd5;
+            background: white;
+            font-size: 14px;
+            font-weight: 500;
+            color: #6a6a5a;
+            cursor: pointer;
+            transition: 0.15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .category-pill:active {
+            transform: scale(0.94);
+        }
+
+        .category-pill.active {
+            background: #657b6d;
+            color: white;
+            border-color: #657b6d;
+        }
+
+        /* 描述 + 金額 + 付款人 */
+        .input-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .input-row .desc-input {
+            flex: 2;
+            min-width: 120px;
+            padding: 10px 14px;
+            border: 1px solid #e0ddd5;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #faf8f5;
+            font-family: inherit;
+            color: #3f3933;
+        }
+
+        .input-row .desc-input:focus {
+            outline: none;
+            border-color: #657b6d;
+        }
+
+        .input-row .amount-input {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 14px;
+            border: 1px solid #e0ddd5;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            background: #faf8f5;
+            text-align: right;
+            font-family: inherit;
+            color: #3f3933;
+        }
+
+        .input-row .amount-input:focus {
+            outline: none;
+            border-color: #657b6d;
+        }
+
+        /* 付款人 + 參與人 */
+        .payer-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px 12px;
+            margin-bottom: 12px;
+        }
+
+        .payer-row .label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #8a8a7a;
+        }
+
+        .payer-btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .payer-btn {
+            padding: 4px 14px;
+            border-radius: 16px;
+            border: 1px solid #e0ddd5;
+            background: white;
+            font-size: 14px;
+            font-weight: 500;
+            color: #6a6a5a;
+            cursor: pointer;
+            transition: 0.15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .payer-btn:active {
+            transform: scale(0.94);
+        }
+
+        .payer-btn.active {
+            background: #657b6d;
+            color: white;
+            border-color: #657b6d;
+        }
+
+        .participant-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px 12px;
+            margin-bottom: 14px;
+            padding-top: 6px;
+            border-top: 1px solid #f0ede6;
+        }
+
+        .participant-row .label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #8a8a7a;
+        }
+
+        .participant-btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .participant-btn {
+            padding: 4px 14px;
+            border-radius: 16px;
+            border: 1px solid #e0ddd5;
+            background: white;
+            font-size: 14px;
+            font-weight: 500;
+            color: #6a6a5a;
+            cursor: pointer;
+            transition: 0.15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .participant-btn:active {
+            transform: scale(0.94);
+        }
+
+        .participant-btn.active {
+            background: #b89a68;
+            color: white;
+            border-color: #b89a68;
+        }
+
+        /* 提交按鈕 */
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #657b6d;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.15s;
+            font-family: inherit;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.97);
+            background: #556b5d;
+        }
+
+        /* ===== 歷史消費明細 ===== */
+        .history-card {
+            background: white;
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 18px;
+            box-shadow: 0 3px 12px rgba(80, 70, 50, 0.07);
+        }
+
+        .history-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .history-header h2 {
+            font-size: 18px;
+            color: #4d5748;
+        }
+
+        .history-header .filter-badge {
+            font-size: 13px;
+            color: #8a8a7a;
+            background: #f5f2ec;
+            padding: 2px 12px;
+            border-radius: 20px;
+        }
+
+        /* 篩選列 */
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .filter-btn {
+            padding: 4px 12px;
+            border-radius: 16px;
+            border: 1px solid #e0ddd5;
+            background: white;
+            font-size: 13px;
+            font-weight: 500;
+            color: #6a6a5a;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .filter-btn:active {
+            transform: scale(0.94);
+        }
+
+        .filter-btn.active {
+            background: #657b6d;
+            color: white;
+            border-color: #657b6d;
+        }
+
+        /* 消費記錄列表 */
+        .bill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .bill-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #faf8f5;
+            border-radius: 12px;
+            border-left: 4px solid #b89a68;
+            transition: 0.15s;
+            position: relative;
+        }
+
+        .bill-item .info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .bill-item .info .top {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .bill-item .info .top .cat {
+            font-size: 12px;
+            font-weight: 600;
+            color: #657b6d;
+            background: #e9eee8;
+            padding: 0 8px;
+            border-radius: 12px;
+        }
+
+        .bill-item .info .top .desc {
+            font-size: 15px;
+            font-weight: 600;
+            color: #3f3933;
+            word-break: break-word;
+        }
+
+        .bill-item .info .bottom {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 12px;
+            font-size: 13px;
+            color: #8a8a7a;
+            margin-top: 2px;
+        }
+
+        .bill-item .info .bottom .payer {
+            font-weight: 500;
+            color: #4d5748;
+        }
+
+        .bill-item .info .bottom .participants {
+            display: flex;
+            gap: 2px;
+        }
+
+        .bill-item .info .bottom .participants span {
+            background: #edeae3;
+            padding: 0 6px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .bill-item .amount {
+            font-size: 18px;
+            font-weight: 700;
+            color: #3f3933;
+            white-space: nowrap;
+            margin-left: auto;
+            padding-left: 8px;
+        }
+
+        .bill-item .del-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #d0c8bc;
+            cursor: pointer;
+            padding: 4px 6px;
+            border-radius: 8px;
+            transition: 0.15s;
+        }
+
+        .bill-item .del-btn:active {
+            color: #b07a6a;
+            transform: scale(0.9);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px 10px;
+            color: #b0a898;
+            font-size: 16px;
+        }
+
+        /* ===== 結帳總覽 ===== */
+        .settlement-card {
+            background: white;
+            border-radius: 18px;
+            padding: 18px 16px;
+            box-shadow: 0 3px 12px rgba(80, 70, 50, 0.07);
+            border-top: 4px solid #b89a68;
+        }
+
+        .settlement-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 14px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #f0ede6;
+        }
+
+        .settlement-stats .stat {
+            text-align: center;
+        }
+
+        .settlement-stats .stat .num {
+            font-size: 24px;
+            font-weight: 700;
+            color: #3f3933;
+        }
+
+        .settlement-stats .stat .label {
+            font-size: 13px;
+            color: #8a8a7a;
+        }
+
+        .transfer-result {
+            background: #f5f8f0;
+            border-radius: 12px;
+            padding: 12px 16px;
+        }
+
+        .transfer-result .title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4d5748;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .transfer-result .title .count {
+            color: #b89a68;
+        }
+
+        .transfer-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .transfer-item .arrow {
+            color: #b89a68;
+            margin: 0 4px;
+        }
+
+        .transfer-item .amount {
+            font-weight: 700;
+            color: #3f3933;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .transfer-empty {
+            text-align: center;
+            color: #b0a898;
+            font-size: 15px;
+            padding: 8px 0;
+        }
+
+        /* ===== Toast 提示 ===== */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(60, 60, 50, 0.92);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* ===== 手機底部導航 ===== */
+        .mobile-nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.96);
+            border-top: 1px solid #e8e5dc;
+            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.06);
+            z-index: 9998;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .mobile-nav a {
+            flex: 1;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #88877f;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-nav a span {
+            font-size: 22px;
+            line-height: 24px;
+        }
+
+        .mobile-nav a small {
+            margin-top: 3px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .mobile-nav a.active {
+            color: #607667;
+        }
+
+        .mobile-nav a:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== 手機適配 ===== */
+        @media (max-width: 420px) {
+            .entry-card {
+                padding: 14px 12px;
+            }
+
+            .input-row .desc-input {
+                font-size: 15px;
+                padding: 8px 12px;
+            }
+
+            .input-row .amount-input {
+                font-size: 18px;
+                padding: 8px 12px;
+            }
+
+            .payer-btn,
+            .participant-btn {
+                font-size: 13px;
+                padding: 3px 10px;
+            }
+
+            .category-pill {
+                font-size: 13px;
+                padding: 5px 10px;
+            }
+
+            .bill-item .info .top .desc {
+                font-size: 14px;
+            }
+
+            .bill-item .amount {
+                font-size: 16px;
+            }
+
+            .settlement-stats .stat .num {
+                font-size: 20px;
+            }
+
+            .header h1 {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== 頂部標題欄 ===== -->
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回</a>
+        <h1>🧾 公費 AA 結帳</h1>
+        <button class="clear-btn" id="clearAllBtn">清空</button>
+    </div>
+
+    <!-- ===== Toast ===== -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ===== 主容器 ===== -->
+    <div class="container" id="app">
+
+        <!-- ===== 快速入帳卡片 ===== -->
+        <div class="entry-card">
+            <div class="date-row">
+                <input type="date" id="billDate">
+                <button class="today-btn" id="todayBtn">今天</button>
+            </div>
+
+            <div class="category-row" id="categoryGroup">
+                <button class="category-pill" data-cat="早餐">🍞 早餐</button>
+                <button class="category-pill" data-cat="午餐">🍱 午餐</button>
+                <button class="category-pill" data-cat="晚餐">🍷 晚餐</button>
+                <button class="category-pill" data-cat="咖啡小食">☕ 小食</button>
+                <button class="category-pill" data-cat="門票">🎟️ 門票</button>
+                <button class="category-pill" data-cat="交通">🚗 交通</button>
+                <button class="category-pill" data-cat="雜項">🛍️ 雜項</button>
+            </div>
+
+            <div class="input-row">
+                <input class="desc-input" id="descInput" placeholder="項目名稱（可手動改）" maxlength="30">
+                <input class="amount-input" id="amountInput" type="number" step="0.1" placeholder="0.00" inputmode="decimal">
+            </div>
+
+            <div class="payer-row">
+                <span class="label">付款人</span>
+                <div class="payer-btn-group" id="payerGroup">
+                    <!-- 由 JavaScript 生成 -->
+                </div>
+            </div>
+
+            <div class="participant-row">
+                <span class="label">參與人</span>
+                <div class="participant-btn-group" id="participantGroup">
+                    <!-- 由 JavaScript 生成 -->
+                </div>
+            </div>
+
+            <button class="submit-btn" id="submitBtn">➕ 記錄</button>
+        </div>
+
+        <!-- ===== 歷史消費明細 ===== -->
+        <div class="history-card">
+            <div class="history-header">
+                <h2>📋 消費明細</h2>
+                <span class="filter-badge" id="countBadge">0 筆</span>
+            </div>
+
+            <div class="filter-row">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="today">今天</button>
+                <button class="filter-btn" data-filter="week">本週</button>
+                <!-- 分類篩選由 JS 生成 -->
+            </div>
+
+            <div class="bill-list" id="billList">
+                <div class="empty-state">📭 尚未有消費記錄，開始記帳吧！</div>
+            </div>
+        </div>
+
+        <!-- ===== 結帳總覽 ===== -->
+        <div class="settlement-card" id="settlementCard">
+            <div class="settlement-stats">
+                <div class="stat">
+                    <div class="num" id="totalAmount">¥0</div>
+                    <div class="label">總支出</div>
+                </div>
+                <div class="stat">
+                    <div class="num" id="perPerson">¥0</div>
+                    <div class="label">人均</div>
+                </div>
+                <div class="stat">
+                    <div class="num" id="personCount">0 人</div>
+                    <div class="label">參與人數</div>
+                </div>
+            </div>
+
+            <div class="transfer-result">
+                <div class="title">
+                    <span>💰 最少轉帳</span>
+                    <span class="count" id="transferCount">0 次</span>
+                </div>
+                <div id="transferList">
+                    <div class="transfer-empty">未有帳目需要結算</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== 手機底部導航 ===== -->
+    <nav class="mobile-nav">
+        <a href="index.html">
+            <span>🏠</span>
+            <small>首頁</small>
+        </a>
+        <a href="itinerary.html">
+            <span>📅</span>
+            <small>六日行程</small>
+        </a>
+        <a href="spots.html">
+            <span>📚</span>
+            <small>景點百科</small>
+        </a>
+    </nav>
+
+    <script>
+        // ============================================================
+        // 設定
+        // ============================================================
+
+        const MEMBERS = ['Phoebe', 'Kenix', 'Peggy', 'Connie'];
+        const CATEGORY_COLORS = {
+            '早餐': '#e8d5b0',
+            '午餐': '#d4c8a8',
+            '晚餐': '#c4a88a',
+            '咖啡小食': '#d4c4b0',
+            '門票': '#b0c4b0',
+            '交通': '#b0b8c4',
+            '雜項': '#c4b8b0'
+        };
+        const STORAGE_KEY = 'nj_bill_data';
+
+        // ============================================================
+        // 資料管理
+        // ============================================================
+
+        let bills = [];
+        let currentFilter = 'all';
+        let currentCategoryFilter = null;
+
+        function loadData() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    bills = JSON.parse(raw);
+                    // 確保每筆都有 id
+                    bills = bills.filter(b => b.id);
+                    return;
+                }
+            } catch (e) { console.warn('Load data error', e); }
+            bills = [];
+        }
+
+        function saveData() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(bills));
+            } catch (e) { console.warn('Save data error', e); }
+        }
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substring(2, 6);
+        }
+
+        function getToday() {
+            const d = new Date();
+            return d.getFullYear() + '-' +
+                String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                String(d.getDate()).padStart(2, '0');
+        }
+
+        function isToday(dateStr) {
+            return dateStr === getToday();
+        }
+
+        function isThisWeek(dateStr) {
+            const today = new Date();
+            const target = new Date(dateStr);
+            const diff = (today - target) / (1000 * 60 * 60 * 24);
+            return diff >= 0 && diff <= 7;
+        }
+
+        // ============================================================
+        // 渲染：參與者 & 付款人
+        // ============================================================
+
+        function renderMemberButtons() {
+            // 付款人
+            const payerGroup = document.getElementById('payerGroup');
+            payerGroup.innerHTML = '';
+            MEMBERS.forEach((m, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'payer-btn' + (idx === 0 ? ' active' : '');
+                btn.dataset.member = m;
+                btn.textContent = m;
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.payer-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+                payerGroup.appendChild(btn);
+            });
+
+            // 參與人
+            const participantGroup = document.getElementById('participantGroup');
+            participantGroup.innerHTML = '';
+            MEMBERS.forEach(m => {
+                const btn = document.createElement('button');
+                btn.className = 'participant-btn active';
+                btn.dataset.member = m;
+                btn.textContent = m;
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+                participantGroup.appendChild(btn);
+            });
+        }
+
+        function getSelectedPayer() {
+            const active = document.querySelector('.payer-btn.active');
+            return active ? active.dataset.member : MEMBERS[0];
+        }
+
+        function getSelectedParticipants() {
+            const btns = document.querySelectorAll('.participant-btn.active');
+            return Array.from(btns).map(b => b.dataset.member);
+        }
+
+        function getSelectedCategory() {
+            const active = document.querySelector('.category-pill.active');
+            return active ? active.dataset.cat : null;
+        }
+
+        // ============================================================
+        // 渲染：分類快捷鍵
+        // ============================================================
+
+        function setupCategoryPills() {
+            const pills = document.querySelectorAll('.category-pill');
+            pills.forEach(pill => {
+                pill.addEventListener('click', function() {
+                    // toggle active
+                    const isActive = this.classList.contains('active');
+                    document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+                    if (!isActive) {
+                        this.classList.add('active');
+                        // 自動填入描述
+                        const desc = document.getElementById('descInput');
+                        if (desc.value === '' || desc.value === desc.placeholder) {
+                            desc.value = this.dataset.cat;
+                        }
+                    } else {
+                        // 如果取消選中，清空描述
+                        const desc = document.getElementById('descInput');
+                        if (desc.value === desc.dataset.lastCat || desc.value === '') {
+                            desc.value = '';
+                        }
+                    }
+                });
+            });
+        }
+
+        // ============================================================
+        // 核心：新增記錄
+        // ============================================================
+
+        function addBill() {
+            const date = document.getElementById('billDate').value || getToday();
+            const category = getSelectedCategory() || '雜項';
+            const desc = document.getElementById('descInput').value.trim() || category;
+            const payer = getSelectedPayer();
+            const participants = getSelectedParticipants();
+            const amount = parseFloat(document.getElementById('amountInput').value);
+
+            if (!amount || amount <= 0) {
+                showToast('⚠️ 請輸入有效金額');
+                return;
+            }
+
+            if (participants.length === 0) {
+                showToast('⚠️ 請選擇至少一位參與人');
+                return;
+            }
+
+            if (!participants.includes(payer)) {
+                showToast('⚠️ 付款人必須係參與人之一');
+                return;
+            }
+
+            const bill = {
+                id: generateId(),
+                date: date,
+                category: category,
+                description: desc,
+                payer: payer,
+                amount: Math.round(amount * 100) / 100,
+                participants: participants.slice()
+            };
+
+            bills.push(bill);
+            saveData();
+            renderAll();
+
+            // 重置表單
+            document.getElementById('amountInput').value = '';
+            document.getElementById('descInput').value = '';
+            document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+            // 默認全選參與人
+            document.querySelectorAll('.participant-btn').forEach(b => b.classList.add('active'));
+
+            showToast('✅ 已記錄：' + desc + ' ¥' + bill.amount.toFixed(1));
+
+            // 焦點回到金額
+            document.getElementById('amountInput').focus();
+        }
+
+        // ============================================================
+        // 核心：刪除記錄
+        // ============================================================
+
+        function deleteBill(id) {
+            if (!confirm('確定要刪除呢筆記錄嗎？')) return;
+            bills = bills.filter(b => b.id !== id);
+            saveData();
+            renderAll();
+            showToast('🗑️ 已刪除記錄');
+        }
+
+        // ============================================================
+        // 核心：清空所有
+        // ============================================================
+
+        function clearAll() {
+            if (bills.length === 0) {
+                showToast('📭 已經冇記錄');
+                return;
+            }
+            if (!confirm('⚠️ 確定要清空所有消費記錄嗎？')) return;
+            bills = [];
+            saveData();
+            renderAll();
+            showToast('🗑️ 已清空所有記錄');
+        }
+
+        // ============================================================
+        // 核心：結算算法（最少轉帳次數）
+        // ============================================================
+
+        function calculateSettlement(filteredBills) {
+            if (filteredBills.length === 0) {
+                return { total: 0, perPerson: 0, members: MEMBERS, transfers: [], balances: {} };
+            }
+
+            const balances = {};
+            MEMBERS.forEach(m => balances[m] = 0);
+
+            let totalAmount = 0;
+
+            filteredBills.forEach(bill => {
+                const participants = bill.participants.filter(p => MEMBERS.includes(p));
+                if (participants.length === 0) return;
+
+                const share = bill.amount / participants.length;
+                totalAmount += bill.amount;
+
+                // 付款人：支付金額
+                if (balances[bill.payer] !== undefined) {
+                    balances[bill.payer] += bill.amount;
+                }
+
+                // 所有參與人：分攤
+                participants.forEach(p => {
+                    if (balances[p] !== undefined) {
+                        balances[p] -= share;
+                    }
+                });
+            });
+
+            // 四捨五入到小數點後2位
+            MEMBERS.forEach(m => {
+                balances[m] = Math.round(balances[m] * 100) / 100;
+            });
+
+            // 計算參與人數（有參與過的人）
+            const activeMembers = MEMBERS.filter(m => Math.abs(balances[m]) > 0.01);
+            const personCount = activeMembers.length > 0 ? activeMembers.length : MEMBERS.length;
+            const perPerson = personCount > 0 ? Math.round((totalAmount / personCount) * 100) / 100 : 0;
+
+            // 計算轉帳方案（貪心算法）
+            const positive = MEMBERS.filter(m => balances[m] > 0.01).map(m => ({ name: m, amount: balances[m] }));
+            const negative = MEMBERS.filter(m => balances[m] < -0.01).map(m => ({ name: m, amount: Math.abs(balances[
+                m]) }));
+
+            // 按金額排序（大額優先）
+            positive.sort((a, b) => b.amount - a.amount);
+            negative.sort((a, b) => b.amount - a.amount);
+
+            const transfers = [];
+            let i = 0,
+                j = 0;
+            while (i < positive.length && j < negative.length) {
+                const p = positive[i];
+                const n = negative[j];
+                const amount = Math.round(Math.min(p.amount, n.amount) * 100) / 100;
+
+                if (amount > 0.01) {
+                    transfers.push({
+                        from: n.name,
+                        to: p.name,
+                        amount: amount
+                    });
+                }
+
+                p.amount -= amount;
+                n.amount -= amount;
+
+                if (p.amount < 0.01) i++;
+                if (n.amount < 0.01) j++;
+            }
+
+            return {
+                total: Math.round(totalAmount * 100) / 100,
+                perPerson: perPerson,
+                members: MEMBERS,
+                transfers: transfers,
+                balances: balances,
+                personCount: personCount
+            };
+        }
+
+        // ============================================================
+        // 渲染：主畫面
+        // ============================================================
+
+        function renderAll() {
+            const filtered = getFilteredBills();
+            renderBillList(filtered);
+            renderSettlement(filtered);
+            updateCountBadge(filtered.length);
+            renderFilterButtons();
+        }
+
+        function getFilteredBills() {
+            let result = [...bills];
+
+            // 日期篩選
+            if (currentFilter === 'today') {
+                result = result.filter(b => isToday(b.date));
+            } else if (currentFilter === 'week') {
+                result = result.filter(b => isThisWeek(b.date));
+            }
+
+            // 分類篩選
+            if (currentCategoryFilter) {
+                result = result.filter(b => b.category === currentCategoryFilter);
+            }
+
+            // 按日期倒序
+            result.sort((a, b) => {
+                if (a.date !== b.date) return b.date.localeCompare(a.date);
+                return b.id.localeCompare(a.id);
+            });
+
+            return result;
+        }
+
+        function renderBillList(filtered) {
+            const container = document.getElementById('billList');
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state">📭 沒有符合嘅記錄</div>';
+                return;
+            }
+
+            let html = '';
+            filtered.forEach(bill => {
+                const participantsStr = bill.participants.join('、');
+                const catColor = CATEGORY_COLORS[bill.category] || '#e0ddd5';
+                html += `
+                    <div class="bill-item" style="border-left-color: ${catColor}">
+                        <div class="info">
+                            <div class="top">
+                                <span class="cat">${bill.category}</span>
+                                <span class="desc">${bill.description}</span>
+                            </div>
+                            <div class="bottom">
+                                <span class="payer">💰 ${bill.payer}</span>
+                                <span>👥 ${participantsStr}</span>
+                                <span>📅 ${bill.date}</span>
+                            </div>
+                        </div>
+                        <div class="amount">¥${bill.amount.toFixed(1)}</div>
+                        <button class="del-btn" data-id="${bill.id}">✕</button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+
+            // 綁定刪除事件
+            container.querySelectorAll('.del-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    deleteBill(this.dataset.id);
+                });
+            });
+        }
+
+        function renderSettlement(filtered) {
+            const result = calculateSettlement(filtered);
+
+            document.getElementById('totalAmount').textContent = '¥' + result.total.toFixed(1);
+            document.getElementById('perPerson').textContent = '¥' + result.perPerson.toFixed(1);
+            document.getElementById('personCount').textContent = result.personCount + ' 人';
+
+            const transferList = document.getElementById('transferList');
+            const transferCount = document.getElementById('transferCount');
+
+            if (result.transfers.length === 0) {
+                transferList.innerHTML = '<div class="transfer-empty">✅ 帳目已平，冇人欠錢！</div>';
+                transferCount.textContent = '0 次';
+                return;
+            }
+
+            transferCount.textContent = result.transfers.length + ' 次';
+
+            let html = '';
+            result.transfers.forEach(t => {
+                html += `
+                    <div class="transfer-item">
+                        <span>👤 ${t.from}</span>
+                        <span class="arrow">➜</span>
+                        <span>👤 ${t.to}</span>
+                        <span class="amount">¥${t.amount.toFixed(1)}</span>
+                    </div>
+                `;
+            });
+            transferList.innerHTML = html;
+        }
+
+        function updateCountBadge(count) {
+            document.getElementById('countBadge').textContent = count + ' 筆';
+        }
+
+        function renderFilterButtons() {
+            const container = document.querySelector('.filter-row');
+            // 保留原有按鈕，只更新 active 狀態
+            container.querySelectorAll('.filter-btn').forEach(btn => {
+                const filter = btn.dataset.filter;
+                btn.classList.toggle('active', filter === currentFilter);
+            });
+
+            // 分類篩選按鈕（動態生成）
+            // 移除舊的分類篩選
+            container.querySelectorAll('.filter-cat').forEach(el => el.remove());
+
+            // 加入分類篩選
+            const categories = ['早餐', '午餐', '晚餐', '咖啡小食', '門票', '交通', '雜項'];
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn filter-cat' + (currentCategoryFilter === cat ? ' active' : '');
+                btn.textContent = cat;
+                btn.dataset.cat = cat;
+                btn.addEventListener('click', function() {
+                    if (currentCategoryFilter === cat) {
+                        currentCategoryFilter = null;
+                    } else {
+                        currentCategoryFilter = cat;
+                    }
+                    renderAll();
+                });
+                container.appendChild(btn);
+            });
+
+            // 加一個「清除分類篩選」
+            if (currentCategoryFilter) {
+                const clearBtn = document.createElement('button');
+                clearBtn.className = 'filter-btn filter-cat';
+                clearBtn.textContent = '✕ 清除';
+                clearBtn.style.borderColor = '#b07a6a';
+                clearBtn.style.color = '#b07a6a';
+                clearBtn.addEventListener('click', function() {
+                    currentCategoryFilter = null;
+                    renderAll();
+                });
+                container.appendChild(clearBtn);
+            }
+        }
+
+        // ============================================================
+        // Toast 提示
+        // ============================================================
+
+        let toastTimer = null;
+
+        function showToast(msg) {
+            const el = document.getElementById('toast');
+            el.textContent = msg;
+            el.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                el.classList.remove('show');
+            }, 2000);
+        }
+
+        // ============================================================
+        // 初始化
+        // ============================================================
+
+        function init() {
+            loadData();
+            renderMemberButtons();
+            setupCategoryPills();
+
+            // 日期預設為今天
+            document.getElementById('billDate').value = getToday();
+
+            // 今天按鈕
+            document.getElementById('todayBtn').addEventListener('click', function() {
+                document.getElementById('billDate').value = getToday();
+            });
+
+            // 提交按鈕
+            document.getElementById('submitBtn').addEventListener('click', addBill);
+
+            // Enter 快捷鍵
+            document.getElementById('amountInput').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addBill();
+                }
+            });
+            document.getElementById('descInput').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    document.getElementById('amountInput').focus();
+                }
+            });
+
+            // 清空全部
+            document.getElementById('clearAllBtn').addEventListener('click', clearAll);
+
+            // 日期篩選
+            document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    currentFilter = this.dataset.filter;
+                    renderAll();
+                });
+            });
+
+            // 渲染
+            renderAll();
+        }
+
+        // 頁面載入
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+
+</body>
+</html>
