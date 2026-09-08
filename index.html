@@ -914,7 +914,8 @@ footer{
 <script>
 
 /* =========================================================
-   天氣功能（OpenWeather API）
+   天氣功能（OpenWeather API - Forecast）
+   升級版：顯示真正嘅日間 / 夜晚溫差
    ========================================================= */
 
 const API_KEY = '236796fae33215243c53c1a42b345773';
@@ -926,8 +927,9 @@ const weatherCard = document.getElementById('weatherCard');
 function getWeather() {
     weatherCard.innerHTML = '<div class="weather-loading">🌤️ 讀取天氣中...</div>';
 
+    // 改用 Forecast API（5 日 / 每 3 小時）
     const url =
-        `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&units=${UNITS}&appid=${API_KEY}`;
+        `https://api.openweathermap.org/data/2.5/forecast?q=${CITY}&units=${UNITS}&appid=${API_KEY}`;
 
     fetch(url)
         .then(res => {
@@ -935,15 +937,55 @@ function getWeather() {
             return res.json();
         })
         .then(data => {
-            const temp = Math.round(data.main.temp);
-            const tempMax = Math.round(data.main.temp_max);
-            const tempMin = Math.round(data.main.temp_min);
-            const humidity = data.main.humidity;
-            const desc = data.weather[0].description;
-            const icon = getWeatherIcon(data.weather[0].icon);
+            // 1. 取得今日日期（當地時間，避免時區問題）
+            const now = new Date();
+            const todayStr = now.getFullYear() + '-' +
+                String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                String(now.getDate()).padStart(2, '0');
 
-            // 如果 max/min 同 temp 差唔多（可能係同一點數據），就唔顯示溫差
-            const showTempRange = true;  // 暫時強制顯示
+            // 2. 過濾出今日嘅所有預測點（每 3 小時一筆）
+            const todayForecasts = data.list.filter(item => {
+                const itemDate = new Date(item.dt * 1000);
+                const itemStr = itemDate.getFullYear() + '-' +
+                    String(itemDate.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(itemDate.getDate()).padStart(2, '0');
+                return itemStr === todayStr;
+            });
+
+            // 3. 計算今日最高同最低溫度
+            let tempMax = -Infinity;
+            let tempMin = Infinity;
+            let currentTemp = null;
+            let humidity = null;
+            let description = '';
+            let iconCode = '';
+
+            todayForecasts.forEach(item => {
+                const t = item.main.temp;
+                if (t > tempMax) tempMax = t;
+                if (t < tempMin) tempMin = t;
+                // 使用最接近而家時間嗰筆作為 current
+                // 簡單做法：用第一筆（或任意一筆）
+                if (currentTemp === null) {
+                    currentTemp = Math.round(t);
+                    humidity = item.main.humidity;
+                    description = item.weather[0].description;
+                    iconCode = item.weather[0].icon;
+                }
+            });
+
+            // 如果今日冇數據（例如API回傳有問題），fallback
+            if (todayForecasts.length === 0) {
+                throw new Error('無法獲取今日天氣數據');
+            }
+
+            // 四捨五入
+            tempMax = Math.round(tempMax);
+            tempMin = Math.round(tempMin);
+
+            // 如果 max 同 min 一樣，顯示一個就得
+            const showTempRange = (tempMax !== tempMin);
+            const icon = getWeatherIcon(iconCode);
 
             weatherCard.innerHTML = `
                 <div class="weather-loc">
@@ -952,7 +994,7 @@ function getWeather() {
                 </div>
                 <div class="weather-stats">
                     <div class="stat-item">
-                        <span class="temp-val">${temp}°C</span>
+                        <span class="temp-val">${currentTemp}°C</span>
                     </div>
                     <div class="divider"></div>
                     <div class="stat-item">
@@ -963,7 +1005,10 @@ function getWeather() {
                 ${showTempRange ? `
                 <div style="width:100%; text-align:center; font-size:0.9rem; color:#6a7a6a; margin-top:4px; border-top:1px solid rgba(180,160,140,0.2); padding-top:6px;">
                     🌡️ 日間 ${tempMax}°C ｜ 夜晚 ${tempMin}°C
-                </div>` : ''}
+                </div>` : `
+                <div style="width:100%; text-align:center; font-size:0.9rem; color:#6a7a6a; margin-top:4px; border-top:1px solid rgba(180,160,140,0.2); padding-top:6px;">
+                    🌡️ 全日 ${tempMax}°C
+                </div>`}
             `;
         })
         .catch(err => {
