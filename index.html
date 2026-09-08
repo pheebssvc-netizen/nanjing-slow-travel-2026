@@ -915,7 +915,7 @@ footer{
 
 /* =========================================================
    天氣功能（OpenWeather API - Forecast）
-   升級版：顯示真正嘅日間 / 夜晚溫差
+   修正版：確保顯示真正嘅日間 / 夜晚溫差
    ========================================================= */
 
 const API_KEY = '236796fae33215243c53c1a42b345773';
@@ -927,7 +927,6 @@ const weatherCard = document.getElementById('weatherCard');
 function getWeather() {
     weatherCard.innerHTML = '<div class="weather-loading">🌤️ 讀取天氣中...</div>';
 
-    // 改用 Forecast API（5 日 / 每 3 小時）
     const url =
         `https://api.openweathermap.org/data/2.5/forecast?q=${CITY}&units=${UNITS}&appid=${API_KEY}`;
 
@@ -937,20 +936,18 @@ function getWeather() {
             return res.json();
         })
         .then(data => {
-            // 1. 取得今日日期（當地時間，避免時區問題）
+            // 1. 取得今日日期（UTC 時間）
             const now = new Date();
-            const todayStr = now.getFullYear() + '-' +
-                String(now.getMonth() + 1).padStart(2, '0') + '-' +
-                String(now.getDate()).padStart(2, '0');
+            const todayUTC = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
 
-            // 2. 過濾出今日嘅所有預測點（每 3 小時一筆）
+            // 2. 過濾出今日嘅所有預測點（用 UTC 比較，避免時區問題）
             const todayForecasts = data.list.filter(item => {
                 const itemDate = new Date(item.dt * 1000);
-                const itemStr = itemDate.getFullYear() + '-' +
-                    String(itemDate.getMonth() + 1).padStart(2, '0') + '-' +
-                    String(itemDate.getDate()).padStart(2, '0');
-                return itemStr === todayStr;
+                return itemDate >= todayUTC && itemDate < new Date(todayUTC.getTime() + 86400000);
             });
+
+            // 如果今日冇數據，fallback 到全部數據
+            const forecasts = todayForecasts.length > 0 ? todayForecasts : data.list;
 
             // 3. 計算今日最高同最低溫度
             let tempMax = -Infinity;
@@ -960,12 +957,11 @@ function getWeather() {
             let description = '';
             let iconCode = '';
 
-            todayForecasts.forEach(item => {
+            forecasts.forEach(item => {
                 const t = item.main.temp;
                 if (t > tempMax) tempMax = t;
                 if (t < tempMin) tempMin = t;
-                // 使用最接近而家時間嗰筆作為 current
-                // 簡單做法：用第一筆（或任意一筆）
+                // 用第一筆作為 current
                 if (currentTemp === null) {
                     currentTemp = Math.round(t);
                     humidity = item.main.humidity;
@@ -974,16 +970,15 @@ function getWeather() {
                 }
             });
 
-            // 如果今日冇數據（例如API回傳有問題），fallback
-            if (todayForecasts.length === 0) {
-                throw new Error('無法獲取今日天氣數據');
+            // 如果 still 冇數據，throw error
+            if (forecasts.length === 0) {
+                throw new Error('無法獲取天氣數據');
             }
 
-            // 四捨五入
             tempMax = Math.round(tempMax);
             tempMin = Math.round(tempMin);
 
-            // 如果 max 同 min 一樣，顯示一個就得
+            // 如果 max 同 min 一樣（極端情況），顯示一個就得
             const showTempRange = (tempMax !== tempMin);
             const icon = getWeatherIcon(iconCode);
 
