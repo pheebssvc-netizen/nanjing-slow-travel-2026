@@ -1068,26 +1068,39 @@
         // ============================================================
 
         function setupCategoryPills() {
-            const pills = document.querySelectorAll('.category-pill');
-            pills.forEach(pill => {
-                pill.addEventListener('click', function() {
-                    const isActive = this.classList.contains('active');
-                    document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
-                    if (!isActive) {
-                        this.classList.add('active');
-                        const desc = document.getElementById('descInput');
-                        if (desc.value === '') {
-                            desc.value = this.dataset.cat;
-                        }
-                    } else {
-                        const desc = document.getElementById('descInput');
-                        if (desc.value === desc.dataset.lastCat || desc.value === '') {
-                            desc.value = '';
-                        }
-                    }
-                });
-            });
-        }
+    const pills = document.querySelectorAll('.category-pill');
+    let lastAutoFilled = ''; // 記錄上一次自動填入嘅分類名
+
+    pills.forEach(pill => {
+        pill.addEventListener('click', function() {
+            const isActive = this.classList.contains('active');
+            const cat = this.dataset.cat;
+            const desc = document.getElementById('descInput');
+
+            // 如果㩒同一個分類，就取消選中
+            if (isActive) {
+                this.classList.remove('active');
+                // 如果欄位內容等於呢個分類名，就清空
+                if (desc.value === cat || desc.value === lastAutoFilled) {
+                    desc.value = '';
+                    lastAutoFilled = '';
+                }
+                return;
+            }
+
+            // 取消其他分類嘅 active 狀態
+            document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+            this.classList.add('active');
+
+            // 如果欄位係空嘅，或者欄位內容等於上一次自動填入嘅名，就更新
+            if (desc.value === '' || desc.value === lastAutoFilled) {
+                desc.value = cat;
+                lastAutoFilled = cat;
+            }
+            // 否則（用戶手動輸入），保留用戶嘅文字，唔覆蓋
+        });
+    });
+}
 
         // ============================================================
         // 核心：新增記錄
