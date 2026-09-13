@@ -86,6 +86,39 @@
   background: #f2f5f1;
 }
 
+/* 確保父容器有相對定位，鴨子才能準確定位 */
+.spots-header {
+    position: relative;
+}
+
+/* 拿地圖的鴨子樣式 */
+.duck-map {
+    position: absolute;
+    
+    /* 定位調整（可根據實際情況微調） */
+    top: -10px;      /* 向上調整，讓它飛在標題與明孝陵上方 */
+    right: 15px;     /* 靠右對齊，與明孝陵按鈕的右邊界對齊 */
+    
+    /* 尺寸設定（與首頁差不多大） */
+    width: 85px;     
+    height: auto;
+    z-index: 10;
+    
+    /* 保留與首頁一樣的浮動動畫 */
+    animation: floatDuck 3s ease-in-out infinite;
+    transition: transform 0.2s ease;
+    
+    /* 防止鴨子遮擋點擊 */
+    pointer-events: none; 
+}
+
+/* 沿用首頁的浮動動畫 */
+@keyframes floatDuck {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
+}
+
 /* =========================
    推薦餐廳快速方塊
    ========================= */
@@ -634,6 +667,15 @@ body {
   <div class="spot-index-subtitle">
     點選景點，直接查看完整導遊資料
   </div>
+
+<div class="spots-header" style="position: relative;">
+    <!-- 放在右上角的拿地圖鴨子 -->
+    <img src="duck-map.png" alt="地圖導遊鴨" class="duck-map">
+    
+    <!-- 原本的標題（這裡只是示範，請保留你原本的代碼） -->
+    <h2 class="section-title">🗺️ 景點百科</h2>
+    <p>點選景點，直接查看完整導遊資料</p>
+</div>
 
   <div class="spot-list">
 
