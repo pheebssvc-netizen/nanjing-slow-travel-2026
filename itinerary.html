@@ -245,7 +245,34 @@ header p {
     font-size: 16px;
     color: #706961;
 }
+/* 尋找原有的 .event 區塊，並在裡面加入 position: relative; */
+.event {
+    position: relative; /* <--- 這行是新增的 */
+    background: white;
+    border-radius: 16px;
+    padding: 15px 16px;
+    margin-bottom: 15px;
+    box-shadow:
+    0 3px 10px rgba(0,0,0,0.05);
+}
+/* 新增：小導遊鴨子樣式 */
+.duck-corner {
+    position: absolute;
+    top: -15px;       /* 稍微向上突出，唔會遮擋文字 */
+    right: 10px;      /* 靠右對齊 */
+    width: 70px;      /* 大小，可自行調整 */
+    height: auto;
+    z-index: 10;
+    pointer-events: none; /* 唔阻擋點擊下面嘅按鈕 */
+    animation: floatDuck 3s ease-in-out infinite;
+}
 
+/* 新增：浮動動畫 */
+@keyframes floatDuck {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
 
 /* 上午核心 */
 
@@ -534,12 +561,13 @@ title: "打車前往南京博物院",
 note: "車程約15分鐘，車費約¥20"
 },
 {
-time: "09:00–12:00",
-title: "南京博物院",
-note: "歷史館（銀縷玉衣、竹林七賢磚畫）、民國館（復原民國街景）、數字館（南都繁會圖）",
-core: true,
-spot: "南京博物院",
-spotLink: "nanjing-museum-guide.html"   // 新增呢行
+    time: "09:00–12:00",
+    title: "南京博物院",
+    note: "歷史館（銀縷玉衣、竹林七賢磚畫）、民國館（復原民國街景）、數字館（南都繁會圖）",
+    core: true,
+    spot: "南京博物院",
+    spotLink: "nanjing-museum-guide.html",
+    duck: "duck-walk.gif"
 },
 {
 time: "12:00–13:30",
@@ -947,6 +975,9 @@ if (event.customMap) {
         </div>
     `;
 }
+if (event.duck) {
+            html += `<img src="${event.duck}" class="duck-corner" alt="小導遊鴨">`;
+        }
         card.innerHTML = html;
         timeline.appendChild(card);
     });
