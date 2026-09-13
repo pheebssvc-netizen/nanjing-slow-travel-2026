@@ -626,7 +626,38 @@ footer{
         right: 12px;
     }
 }
-   
+/* ===== 南京小導遊鴨（手機專屬） ===== */
+.duck-tool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important; /* 清除原本工具的內邊距 */
+    background: transparent; /* 透明背景，令鴨子更立體 */
+    box-shadow: none; /* 移除陰影，唔好搶走其他工具風頭 */
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.duck-img {
+    width: 75px; /* 手機版建議 70-80px 最啱位 */
+    height: auto;
+    object-fit: contain;
+    
+    /* 浮動動畫，令靜態圖都好似動態GIF咁生動 */
+    animation: floatDuck 3s ease-in-out infinite;
+    transition: transform 0.2s ease;
+}
+
+/* 觸摸時縮小，有按壓感 */
+.duck-tool:active .duck-img {
+    transform: scale(0.85);
+}
+
+@keyframes floatDuck {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
+}
 </style>
 </head>
 
@@ -845,7 +876,17 @@ footer{
     </a>
 
 </div>
+    <a href="bill.html" class="tool">
+        <span class="tool-icon">🧾</span>
+        神算醒
+    </a>
 
+    <!-- 新增：南京小導遊鴨 -->
+    <div class="tool duck-tool" onclick="duckSpeak()">
+        <img src="duck-guide.gif" alt="南京小導遊鴨" class="duck-img">
+    </div>
+
+</div>
 
 <!-- =========================
      精簡天氣卡片
@@ -1002,6 +1043,22 @@ function getWeather() {
 
 // 頁面載入後自動獲取天氣
 getWeather();
+
+// 南京小導遊鴨互動功能
+function duckSpeak() {
+    const messages = [
+        "🦆 你好！我係你嘅南京小導遊鴨！",
+        "📸 記得帶相機去明孝陵影石象路呀！",
+        "🍜 逛完記住去食碗熱辣辣嘅鴨血粉絲湯！",
+        "🏮 夜晚一定要去秦淮河坐畫舫！",
+        "🦀 11月去高淳記得食固城湖大閘蟹！",
+        "☂️ 南京早晚溫差大，記住帶件薄外套呀！"
+    ];
+    
+    // 隨機抽一句對白
+    const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+    alert(randomMsg);
+}
 
 </script>
 
