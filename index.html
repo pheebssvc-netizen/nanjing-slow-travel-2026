@@ -10,74 +10,53 @@
 /* =========================
    手機底部導航
    ========================= */
-
 .mobile-nav {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
-
     height: 70px;
-
     display: flex;
     justify-content: space-around;
     align-items: center;
-
     background: rgba(255, 255, 255, 0.96);
-
     border-top: 1px solid #e8e5dc;
-
     box-shadow: 0 -3px 15px rgba(0,0,0,0.08);
-
     z-index: 9998;
-
     padding-bottom: env(safe-area-inset-bottom);
 }
-
 .mobile-nav a {
     flex: 1;
-
     height: 70px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     text-decoration: none;
-
     color: #88877f;
-
     -webkit-tap-highlight-color: transparent;
 }
-
 .mobile-nav a span {
     font-size: 22px;
     line-height: 24px;
 }
-
 .mobile-nav a small {
     margin-top: 3px;
-
     font-size: 13px;
     font-weight: 600;
 }
-
 .mobile-nav a.active {
     color: #607667;
 }
-
 .mobile-nav a:active {
     transform: scale(0.95);
 }
-
 body {
     padding-bottom: 95px;
 }
 *{
     box-sizing:border-box;
 }
-
 body{
     margin:0;
     font-family:
@@ -86,7 +65,6 @@ body{
         "Noto Sans TC",
         "Microsoft JhengHei",
         sans-serif;
-
     background:#f7f3eb;
     color:#3f3933;
     line-height:1.8;
@@ -94,123 +72,77 @@ body{
 }
 
 /* ===== Hero ===== */
-
 .hero{
-
     min-height:480px;
-
     background-image:
         linear-gradient(
             rgba(35,45,38,.38),
             rgba(35,45,38,.48)
         ),
         url("hero-night.png");
-
     background-size:cover;
-
     background-position:center top;
-
     color:white;
-
     display:flex;
-
     align-items:flex-end;
-
     justify-content:center;
-
     text-align:center;
-
     padding:40px 20px 55px;
-
     position:relative;
 }
-
 .hero-content{
     max-width:760px;
-
     text-shadow:
         0 2px 8px rgba(0,0,0,.45);
 }
-
 .hero h1{
     margin:0;
-
     font-size:46px;
-
     letter-spacing:4px;
-
     font-weight:700;
 }
-
 .hero-subtitle{
-
     margin:10px 0 4px;
-
     font-size:24px;
-
     letter-spacing:2px;
 }
-
 .hero-date{
-
     font-size:18px;
-
     letter-spacing:2px;
-
     opacity:.95;
 }
 
 /* ===== Main ===== */
-
 .container{
-
     max-width:760px;
-
     margin:auto;
-
     padding:30px 16px 60px;
 }
 
 /* ===== Intro ===== */
-
 .intro{
-
     background:white;
-
     border-radius:20px;
-
     padding:28px 24px;
-
     margin-bottom:25px;
-
     box-shadow:
         0 5px 20px rgba(80,70,50,.08);
-
     text-align:center;
 }
-
 .intro h2{
-
     margin:0 0 12px;
-
     color:#667967;
-
     font-size:28px;
 }
-
 .intro p{
-
     margin:0 0 8px;
-
     font-size:18px;
 }
-
 .intro p:last-child {
     margin-bottom:0;
 }
 
 /* ===== Hotel（可點擊跳轉地圖） ===== */
-
 .hotel-link {
     display: block;
     text-decoration: none;
@@ -223,19 +155,16 @@ body{
     transition: 0.2s;
     -webkit-tap-highlight-color: transparent;
 }
-
 .hotel-link:active {
     transform: scale(0.98);
     background: #e8e4da;
 }
-
 .hotel-link strong {
     display: block;
     font-size: 19px;
     margin-bottom: 4px;
     color: #4d5748;
 }
-
 .hotel-link .hint {
     display: inline-block;
     margin-top: 6px;
@@ -247,128 +176,104 @@ body{
 }
 
 /* ===== Section title ===== */
-
 .section-title{
-
     margin:35px 0 18px;
-
     font-size:28px;
-
     color:#596b5d;
 }
 
 /* ===== Day cards ===== */
-
 .day-card{
-
     display:block;
-
     text-decoration:none;
-
     color:inherit;
-
     background:white;
-
     border-radius:18px;
-
     padding:20px;
-
     margin-bottom:15px;
-
     box-shadow:
         0 4px 15px rgba(80,70,50,.08);
-
     transition:.2s;
 }
-
 .day-card:active{
-
     transform:scale(.98);
 }
-
 .day-number{
-
     font-size:16px;
-
     color:#81927f;
-
     font-weight:bold;
 }
-
 .day-title{
-
     font-size:22px;
-
     font-weight:bold;
-
     margin:3px 0 7px;
 }
-
 .day-desc{
-
     font-size:17px;
-
     color:#756e66;
 }
 
 /* ===== Tools ===== */
-
 .tools{
-
     display:grid;
-
     grid-template-columns:repeat(5,1fr);
-
     gap:14px;
-
     margin-top:15px;
 }
-
 .tool{
-
     text-decoration:none;
-
     color:#4c5e51;
-
     background:#fff;
-
     border-radius:16px;
-
     padding:20px 10px;
-
     text-align:center;
-
     box-shadow:
         0 4px 15px rgba(80,70,50,.08);
-
     font-size:17px;
-
     font-weight:bold;
-
     cursor:pointer;
-
     border:none;
-
     font-family:inherit;
-
     -webkit-tap-highlight-color:transparent;
 }
-
 .tool:active{
     transform:scale(.96);
 }
-
 .tool-icon{
-
     display:block;
-
     font-size:30px;
-
     margin-bottom:6px;
 }
 
-/* ===== 精簡天氣卡片 ===== */
+/* ===== 新增：南京小導遊鴨 ===== */
+.duck-tool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+.duck-img {
+    width: 80px; /* 手機版最啱嘅尺寸 */
+    height: auto;
+    object-fit: contain;
+    /* 浮動動畫，令靜態圖都好似動態GIF咁生動 */
+    animation: floatDuck 3s ease-in-out infinite;
+    transition: transform 0.2s ease;
+}
+.duck-tool:active .duck-img {
+    transform: scale(0.85);
+}
+@keyframes floatDuck {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
+}
 
+/* ===== 精簡天氣卡片 ===== */
 .weather-compact {
     display: flex;
     align-items: center;
@@ -381,209 +286,151 @@ body{
     margin-top: 25px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
-
 .weather-loc {
     display: flex;
     align-items: center;
     gap: 10px;
 }
-
 .weather-loc .city-name {
     font-size: 1.2rem;
     font-weight: 600;
     color: #4d5748;
     letter-spacing: 0.5px;
 }
-
 .weather-loc .weather-icon {
     font-size: 1.8rem;
     line-height: 1;
 }
-
 .weather-stats {
     display: flex;
     align-items: center;
     gap: 16px;
 }
-
 .weather-stats .stat-item {
     display: flex;
     align-items: center;
     gap: 4px;
 }
-
 .weather-stats .temp-val {
     font-size: 1.5rem;
     font-weight: 700;
     color: #2c2c2c;
 }
-
 .weather-stats .divider {
     width: 1px;
     height: 20px;
     background-color: rgba(180, 160, 140, 0.25);
 }
-
 .weather-stats .stat-label {
     font-size: 0.9rem;
     color: #8c7b70;
 }
-
 .weather-stats .humidity-val {
     font-size: 1.2rem;
     font-weight: 600;
     color: #4a423a;
 }
-
 .weather-loading {
     font-size: 1.0rem;
     color: #8a8a7a;
     padding: 6px 0;
 }
-
 .weather-error {
     font-size: 1.0rem;
     color: #b07a6a;
     padding: 6px 0;
 }
-
-/* 手機版 */
 @media (max-width: 600px) {
     .weather-compact {
         flex-wrap: wrap;
         gap: 8px;
         padding: 12px 16px;
     }
-
     .weather-loc .city-name {
         font-size: 1.0rem;
     }
-
     .weather-loc .weather-icon {
         font-size: 1.5rem;
     }
-
     .weather-stats .temp-val {
         font-size: 1.3rem;
     }
-
     .weather-stats .humidity-val {
         font-size: 1.0rem;
     }
-
     .weather-stats .stat-label {
         font-size: 0.8rem;
     }
-
     .weather-stats {
         gap: 12px;
     }
 }
 
 /* ===== Philosophy ===== */
-
 .philosophy{
-
     margin-top:35px;
-
     padding:25px 20px;
-
     border-radius:18px;
-
     background:#e9eee8;
-
     text-align:center;
 }
-
 .philosophy h3{
-
     margin:0 0 10px;
-
     color:#596b5d;
-
     font-size:22px;
 }
-
 .philosophy p{
-
     margin:0 0 6px;
-
     font-size:17px;
 }
-
 .philosophy p:last-child {
     margin-bottom:0;
 }
 
 /* ===== Footer ===== */
-
 footer{
-
     text-align:center;
-
     padding:25px 15px 40px;
-
     color:#888;
-
     font-size:15px;
 }
 
 /* ===== Mobile ===== */
-
 @media(max-width:600px){
-
     .hero{
-
         min-height:400px;
-
         padding-bottom:42px;
-
         background-position:center top;
     }
-
     .hero h1{
-
         font-size:36px;
-
         letter-spacing:3px;
     }
-
     .hero-subtitle{
-
         font-size:20px;
     }
-
     .hero-date{
-
         font-size:16px;
     }
-
     .tools{
-
         grid-template-columns:1fr 1fr 1fr;
     }
-
     .intro h2 {
         font-size: 24px;
     }
-
     .intro p {
         font-size: 17px;
     }
-
     .section-title {
         font-size: 24px;
     }
-
     .day-title {
         font-size: 20px;
     }
-
     .hotel-link {
         padding: 14px 16px;
         font-size: 16px;
     }
-
     .hotel-link strong {
         font-size: 17px;
     }
@@ -595,29 +442,20 @@ footer{
     right: 16px;
     bottom: 100px;
     z-index: 9999;
-
     border: none;
     border-radius: 999px;
-
     padding: 14px 18px;
-
     background: rgba(108, 126, 111, 0.92);
     color: white;
-
     font-size: 16px;
     font-weight: 600;
-
     box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-
     cursor: pointer;
-
     -webkit-tap-highlight-color: transparent;
 }
-
 #backToTop:active {
     transform: scale(0.95);
 }
-
 @media (max-width: 600px) {
     #backToTop {
         padding: 12px 15px;
@@ -625,38 +463,6 @@ footer{
         bottom: 90px;
         right: 12px;
     }
-}
-/* ===== 南京小導遊鴨（手機專屬） ===== */
-.duck-tool {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 !important; /* 清除原本工具的內邊距 */
-    background: transparent; /* 透明背景，令鴨子更立體 */
-    box-shadow: none; /* 移除陰影，唔好搶走其他工具風頭 */
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.duck-img {
-    width: 75px; /* 手機版建議 70-80px 最啱位 */
-    height: auto;
-    object-fit: contain;
-    
-    /* 浮動動畫，令靜態圖都好似動態GIF咁生動 */
-    animation: floatDuck 3s ease-in-out infinite;
-    transition: transform 0.2s ease;
-}
-
-/* 觸摸時縮小，有按壓感 */
-.duck-tool:active .duck-img {
-    transform: scale(0.85);
-}
-
-@keyframes floatDuck {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-6px); }
-    100% { transform: translateY(0px); }
 }
 </style>
 </head>
@@ -666,41 +472,28 @@ footer{
 <!-- =========================
      HERO
 ========================= -->
-
 <header class="hero">
-
     <div class="hero-content">
-
         <h1>南京六日慢遊</h1>
-
         <div class="hero-subtitle">
             金陵古都・秦淮風雅
         </div>
-
         <div class="hero-date">
             2026.11.02 — 11.07
         </div>
-
     </div>
-
 </header>
 
-
 <main class="container">
-
 
 <!-- =========================
      INTRO
 ========================= -->
-
 <section class="intro">
-
     <h2>🌿 一趟從容的金陵之旅</h2>
-
     <p>
         這是一趟以「上午核心行程、下午彈性休息」為主的南京六日旅程。
     </p>
-
     <p>
         上午安排南京最值得一看的核心景點；
         下午則按照當日天氣、大家精神及興趣，
@@ -709,265 +502,209 @@ footer{
 
     <!-- 全程住宿：可點擊跳轉地圖 -->
     <a href="map.html?spot=夫子廟亞朵酒店" class="hotel-link">
-
         <strong>🏨 全程住宿</strong>
-
         南京夫子廟秦淮遊船碼頭亞朵酒店<br>
-
         秦淮區大石壩街35號｜連住5晚
-
         <span class="hint">🗺️ 點擊查看地圖位置</span>
-
     </a>
-
 </section>
-
 
 <!-- =========================
      SIX DAYS
 ========================= -->
-
 <h2 class="section-title">
     📅 六日行程
 </h2>
 
-
 <a href="itinerary.html?day=1" class="day-card">
-
     <div class="day-number">
         DAY 1 · 11月2日 星期一
     </div>
-
     <div class="day-title">
         抵達金陵 · 夜泊秦淮
     </div>
-
     <div class="day-desc">
         ✈️ 香港 → 南京 → 夫子廟<br>
         🌙 夫子廟・烏衣巷
     </div>
-
 </a>
 
-
 <a href="itinerary.html?day=2" class="day-card">
-
     <div class="day-number">
         DAY 2 · 11月3日 星期二
     </div>
-
     <div class="day-title">
         南京博物院
     </div>
-
     <div class="day-desc">
         🏛️ 六朝文脈・民國風情<br>
         🌿 下午自由休息
     </div>
-
 </a>
 
-
 <a href="itinerary.html?day=3" class="day-card">
-
     <div class="day-number">
         DAY 3 · 11月4日 星期三
     </div>
-
     <div class="day-title">
         明孝陵 · 秋色金陵
     </div>
-
     <div class="day-desc">
         🍂 世界文化遺產<br>
         🌿 德基藝術博物館／酒店休息
     </div>
-
 </a>
 
-
 <a href="itinerary.html?day=4" class="day-card">
-
     <div class="day-number">
         DAY 4 · 11月5日 星期四
     </div>
-
     <div class="day-title">
         總統府 · 科舉文化
     </div>
-
     <div class="day-desc">
         🏛️ 總統府<br>
         🌿 科舉博物館／李香君故居
     </div>
-
 </a>
 
-
 <a href="itinerary.html?day=5" class="day-card">
-
     <div class="day-number">
         DAY 5 · 11月6日 星期五
     </div>
-
     <div class="day-title">
         彈性探索日
     </div>
-
     <div class="day-desc">
         🌿 高淳老街＋漆橋古村<br>
         ☀️ 或市區自由探索
     </div>
-
 </a>
 
-
 <a href="itinerary.html?day=6" class="day-card">
-
     <div class="day-number">
         DAY 6 · 11月7日 星期六
     </div>
-
     <div class="day-title">
         從容告別金陵
     </div>
-
     <div class="day-desc">
         🛍️ 老門東／三七八巷
     </div>
-
 </a>
-
 
 <!-- =========================
      TOOLS
 ========================= -->
-
 <h2 class="section-title">
     🧭 旅行工具
 </h2>
 
-
 <div class="tools">
-
     <a href="itinerary.html" class="tool">
         <span class="tool-icon">📅</span>
         今日行程
     </a>
-
     <a href="spots.html" class="tool">
         <span class="tool-icon">📚</span>
         景點百科
     </a>
-
     <a href="map.html" class="tool">
         <span class="tool-icon">🗺️</span>
         查看地圖
     </a>
-
     <a href="tips.html" class="tool">
         <span class="tool-icon">🎒</span>
         趣味錦囊
     </a>
-
     <a href="bill.html" class="tool">
         <span class="tool-icon">🧾</span>
         神算醒
     </a>
-
-</div>
-    <a href="bill.html" class="tool">
-        <span class="tool-icon">🧾</span>
-        神算醒
-    </a>
-
-    <!-- 新增：南京小導遊鴨 -->
+    
+    <!-- 第 6 格：南京小導遊鴨 -->
     <div class="tool duck-tool" onclick="duckSpeak()">
         <img src="duck-guide.gif" alt="南京小導遊鴨" class="duck-img">
     </div>
-
 </div>
 
 <!-- =========================
      精簡天氣卡片
 ========================= -->
-
 <div class="weather-compact" id="weatherCard">
     <div class="weather-loading">🌤️ 讀取天氣中...</div>
 </div>
 
-
 <!-- =========================
      PHILOSOPHY
 ========================= -->
-
 <section class="philosophy">
-
     <h3>💡 本行程的玩法</h3>
-
     <p>
         上午是「核心行程」，盡量按計劃完成；
         下午則不追景點數量，
         按當日天氣、體力及興趣自由選擇。
     </p>
-
     <p>
         旅行不是比賽，
         留一點時間坐下來喝杯茶、
         看看秦淮河，
         也是南京慢遊的一部分。
     </p>
-
 </section>
 
-
 </main>
-
 
 <!-- =========================
      FOOTER
 ========================= -->
-
 <footer>
-
 </footer>
 
 <!-- 手機底部導航 -->
 <nav class="mobile-nav">
-
   <a href="index.html" class="active">
     <span>🏠</span>
     <small>首頁</small>
   </a>
-
   <a href="itinerary.html">
     <span>📅</span>
     <small>六日行程</small>
   </a>
-
   <a href="spots.html">
     <span>📚</span>
     <small>景點百科</small>
   </a>
-
 </nav>
 
 <script>
+/* =========================================================
+   鴨子小導遊講嘢功能
+   ========================================================= */
+function duckSpeak() {
+    const messages = [
+        "🦆 你好！我係你嘅南京小導遊鴨！",
+        "📸 記得帶相機去明孝陵影石象路呀！",
+        "🍜 逛完記住去食碗熱辣辣嘅鴨血粉絲湯！",
+        "🏮 夜晚一定要去秦淮河坐畫舫！",
+        "🦀 11月去高淳記得食固城湖大閘蟹！",
+        "☂️ 南京早晚溫差大，記住帶件薄外套呀！"
+    ];
+    const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+    alert(randomMsg);
+}
 
 /* =========================================================
    天氣功能（OpenWeather API - Forecast）
    修正版：精準區分日間（06-18）與夜晚（18-06）溫差
    ========================================================= */
-
 const API_KEY = '236796fae33215243c53c1a42b345773';
 const CITY = 'Nanjing';
 const UNITS = 'metric';
-
 const weatherCard = document.getElementById('weatherCard');
 
 function getWeather() {
     weatherCard.innerHTML = '<div class="weather-loading" style="text-align:center; padding:15px; color:#6a7a6a;">🌤️ 讀取天氣中...</div>';
-
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${CITY}&units=${UNITS}&appid=${API_KEY}`;
 
     fetch(url)
@@ -976,18 +713,14 @@ function getWeather() {
             return res.json();
         })
         .then(data => {
-            // 取未來 24 小時（前 8 個數據點，每點 3 小時）
             const next24h = data.list.slice(0, 8);
-
             let dayTemps = [];
             let nightTemps = [];
 
             next24h.forEach(item => {
                 const date = new Date(item.dt * 1000);
-                const hour = date.getHours(); // 取得當地小時
+                const hour = date.getHours();
                 const temp = item.main.temp;
-
-                // 06:00 至 18:00 歸為日間，其餘歸為夜晚
                 if (hour >= 6 && hour < 18) {
                     dayTemps.push(temp);
                 } else {
@@ -995,27 +728,22 @@ function getWeather() {
                 }
             });
 
-            // 計算日間/夜晚最高或平均值（若無數據則 fallback 到全日數據）
             const dayTemp = dayTemps.length > 0 
                 ? Math.round(Math.max(...dayTemps)) 
                 : Math.round(data.list[0].main.temp);
-
             const nightTemp = nightTemps.length > 0 
                 ? Math.round(Math.min(...nightTemps)) 
                 : Math.round(data.list[1] ? data.list[1].main.temp : dayTemp);
-
             const humidity = data.list[0].main.humidity;
             const currentTemp = Math.round(data.list[0].main.temp);
 
-            // 渲染直觀對比 UI
             weatherCard.innerHTML = `
-                <div style="background:#FAF4EB; border:1.5px solid #C28E38; border-radius:16px; padding:16px; margin:10px 0;">
+                <div style="background:#FAF4EB; border:1.5px solid #C28E38; border-radius:16px; padding:16px; margin:10px 0; width: 100%;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
                         <span style="font-weight:bold; font-size:1.1rem; color:#8C2424;">📍 南京即時天氣</span>
                         <span style="font-size:0.9rem; color:#666;">現時 ${currentTemp}°C ｜ 濕度 ${humidity}%</span>
                     </div>
                     
-                    <!-- 日夜卡片對比 -->
                     <div style="display:flex; gap:10px; margin-bottom:10px;">
                         <div style="flex:1; background:#FFF; border:1px solid #E6DFD3; border-radius:10px; padding:10px; text-align:center;">
                             <div style="font-size:1.2rem;">☀️ 日間預測</div>
@@ -1041,31 +769,13 @@ function getWeather() {
         });
 }
 
-// 頁面載入後自動獲取天氣
 getWeather();
-
-// 南京小導遊鴨互動功能
-function duckSpeak() {
-    const messages = [
-        "🦆 你好！我係你嘅南京小導遊鴨！",
-        "📸 記得帶相機去明孝陵影石象路呀！",
-        "🍜 逛完記住去食碗熱辣辣嘅鴨血粉絲湯！",
-        "🏮 夜晚一定要去秦淮河坐畫舫！",
-        "🦀 11月去高淳記得食固城湖大閘蟹！",
-        "☂️ 南京早晚溫差大，記住帶件薄外套呀！"
-    ];
-    
-    // 隨機抽一句對白
-    const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-    alert(randomMsg);
-}
-
 </script>
 
 <!-- 回到頂部按鈕 -->
 <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
     ↑ 回到頂部
 </button>
-   
+
 </body>
 </html>
