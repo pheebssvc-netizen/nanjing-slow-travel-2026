@@ -631,7 +631,37 @@
                 right: 12px;
             }
         }
+/* ===== 神算醒小導遊（懸浮右下角） ===== */
+.duck-bill {
+    position: fixed;
+    right: 15px;
+    bottom: 170px;       /* 高於「回到頂部」按鈕 (100px) 和底部導航 (70px) */
+    width: 85px;         /* 手機版適合的大小 */
+    height: auto;
+    z-index: 999;
+    
+    /* 讓點擊穿透鴨子，不影響下方按鈕操作 */
+    pointer-events: none;
+    
+    /* 浮動動畫 */
+    animation: floatDuck 3s ease-in-out infinite;
+}
 
+/* 浮動動畫（與其他頁面保持一致） */
+@keyframes floatDuck {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+/* 手機版微調：如果覺得太逼，可以再向上移一點 */
+@media (max-width: 600px) {
+    .duck-bill {
+        bottom: 160px; /* 稍微降低一點，避免擋到上方內容 */
+        right: 10px;
+        width: 80px;
+    }
+}
         /* ===== 手機底部導航 ===== */
         .mobile-nav {
             position: fixed;
@@ -858,7 +888,8 @@
         <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
             ↑ 回到頂部
         </button>
-
+<!-- 神算醒小導遊鴨 -->
+<img src="duck-abacus.gif" alt="神算醒鴨" class="duck-bill">
     </div>
 
     <!-- ===== 手機底部導航 ===== -->
