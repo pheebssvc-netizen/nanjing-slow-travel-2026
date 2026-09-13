@@ -247,7 +247,7 @@ header p {
 }
 /* 尋找原有的 .event 區塊，並在裡面加入 position: relative; */
 .event {
-    position: relative; /* <--- 這行是新增的 */
+    position: relative;
     background: white;
     border-radius: 16px;
     padding: 15px 16px;
@@ -258,12 +258,12 @@ header p {
 /* 新增：小導遊鴨子樣式 */
 .duck-corner {
     position: absolute;
-    top: -15px;       /* 稍微向上突出，唔會遮擋文字 */
-    right: 10px;      /* 靠右對齊 */
-    width: 70px;      /* 大小，可自行調整 */
+    top: -15px;
+    right: 10px;
+    width: 70px;
     height: auto;
     z-index: 10;
-    pointer-events: none; /* 唔阻擋點擊下面嘅按鈕 */
+    pointer-events: none;
     animation: floatDuck 3s ease-in-out infinite;
 }
 
@@ -561,13 +561,13 @@ title: "打車前往南京博物院",
 note: "車程約15分鐘，車費約¥20"
 },
 {
-    time: "09:00–12:00",
-    title: "南京博物院",
-    note: "歷史館（銀縷玉衣、竹林七賢磚畫）、民國館（復原民國街景）、數字館（南都繁會圖）",
-    core: true,
-    spot: "南京博物院",
-    spotLink: "nanjing-museum-guide.html",
-    duck: "duck-walk.gif"
+time: "09:00–12:00",
+title: "南京博物院",
+note: "歷史館（銀縷玉衣、竹林七賢磚畫）、民國館（復原民國街景）、數字館（南都繁會圖）",
+core: true,
+spot: "南京博物院",
+spotLink: "nanjing-museum-guide.html",
+duck: "duck-walk.gif"
 },
 {
 time: "12:00–13:30",
@@ -621,8 +621,8 @@ title: "遊覽明孝陵",
 note: "石象路「南京最美600米」（銀杏金黃、紅楓似火）、翁仲路、方城明樓",
 core: true,
 spot: "明孝陵",
-spotLink: "mingxiaoling-guide.html"   // 新增呢行
-duck: "duck-camera.gif"
+spotLink: "mingxiaoling-guide.html",
+duck: "duck-walk.gif"
 },
 {
 time: "11:00–11:30",
@@ -676,8 +676,8 @@ title: "遊覽總統府",
 note: "孫中山臨時大總統辦公室、西花園（煦園）、太平天國天王府遺址",
 core: true,
 spot: "總統府",
-spotLink: "zongtongfu-guide.html"   // 新增呢行
-duck: "duck-camera.gif"
+spotLink: "zongtongfu-guide.html",
+duck: "duck-guide.gif"
 },
 {
 time: "11:30–13:00",
@@ -739,7 +739,8 @@ time: "10:15–12:30",
 title: "遊覽高淳老街",
 note: "900年歷史古街，吳氏宗祠、關王廟、乾隆古井",
 core: true,
-spot: "高淳老街"
+spot: "高淳老街",
+duck: "duck-map.png"
 },
 {
 time: "12:30–13:30",
@@ -788,7 +789,6 @@ title: "老門東／三七八巷",
 note: "購買伴手禮：韓復興鹽水鴨、蔣有記鍋貼、藍老大糖芋苗",
 core: true,
 spot: "老門東"
-duck: "duck-walk.gif"
 },
 {
 time: "10:30–11:30",
@@ -940,47 +940,50 @@ function renderDay(dayNumber) {
         }
 
         if (event.spot) {
-    const guideLink = event.spotLink || null;
-    const hasGuideLink = guideLink !== null;
-    const buttonCount = hasGuideLink ? 3 : 2;
-    const gridCols = hasGuideLink ? '1fr 1fr 1fr' : '1fr 1fr';
+            const guideLink = event.spotLink || null;
+            const hasGuideLink = guideLink !== null;
+            const gridCols = hasGuideLink ? '1fr 1fr 1fr' : '1fr 1fr';
 
-    let buttonsHtml = '';
+            let buttonsHtml = '';
 
-    // 自助講解（如果有）
-    if (hasGuideLink) {
-        buttonsHtml += `
-            <a class="spot-btn" href="${guideLink}" style="background:#b89a68; color:white; border-radius:9px; padding:8px 6px; text-align:center; text-decoration:none; font-size:13px; font-weight:bold;">🎧 自助講解</a>
-        `;
-    }
+            // 自助講解（如果有）
+            if (hasGuideLink) {
+                buttonsHtml += `
+                    <a class="spot-btn" href="${guideLink}" style="background:#b89a68; color:white; border-radius:9px; padding:8px 6px; text-align:center; text-decoration:none; font-size:13px; font-weight:bold;">🎧 自助講解</a>
+                `;
+            }
 
-    // 導遊資料（保留）
-    buttonsHtml += `
-        <a class="spot-btn" href="spots.html" style="background:#eee8df; color:#514b45; border-radius:9px; padding:8px 6px; text-align:center; text-decoration:none; font-size:13px; font-weight:bold;">📖 導遊資料</a>
-    `;
+            // 導遊資料（保留）
+            buttonsHtml += `
+                <a class="spot-btn" href="spots.html" style="background:#eee8df; color:#514b45; border-radius:9px; padding:8px 6px; text-align:center; text-decoration:none; font-size:13px; font-weight:bold;">📖 導遊資料</a>
+            `;
 
-    // 查看地圖（保留）
-    buttonsHtml += `
-        <a class="map-btn" href="map.html?spot=${encodeURIComponent(event.spot)}" style="background:#657b6d; color:white; border-radius:9px; padding:8px 6px; text-align:center; text-decoration:none; font-size:13px; font-weight:bold;">🗺️ 查看地圖</a>
-    `;
+            // 查看地圖（保留）
+            buttonsHtml += `
+                <a class="map-btn" href="map.html?spot=${encodeURIComponent(event.spot)}" style="background:#657b6d; color:white; border-radius:9px; padding:8px 6px; text-align:center; text-decoration:none; font-size:13px; font-weight:bold;">🗺️ 查看地圖</a>
+            `;
 
-    html += `
-        <div class="buttons" style="display: grid; grid-template-columns: ${gridCols}; gap: 8px; margin-top: 10px;">
-            ${buttonsHtml}
-        </div>
-    `;
+            html += `
+                <div class="buttons" style="display: grid; grid-template-columns: ${gridCols}; gap: 8px; margin-top: 10px;">
+                    ${buttonsHtml}
+                </div>
+            `;
         }
-// 處理自訂地圖按鈕（淨係顯示「查看地圖」，冇「導遊資料」）
-if (event.customMap) {
-    html += `
-        <div class="buttons" style="display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 10px;">
-            <a class="map-btn" href="map.html?spot=${encodeURIComponent(event.customMap)}" style="background:#657b6d; color:white; border-radius:9px; padding:8px 6px; text-align:center; text-decoration:none; font-size:13px; font-weight:bold;">🗺️ 查看地圖</a>
-        </div>
-    `;
-}
-if (event.duck) {
+
+        // 處理自訂地圖按鈕（淨係顯示「查看地圖」）
+        if (event.customMap) {
+            html += `
+                <div class="buttons" style="display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 10px;">
+                    <a class="map-btn" href="map.html?spot=${encodeURIComponent(event.customMap)}" style="background:#657b6d; color:white; border-radius:9px; padding:8px 6px; text-align:center; text-decoration:none; font-size:13px; font-weight:bold;">🗺️ 查看地圖</a>
+                </div>
+            `;
+        }
+
+        // 處理鴨子圖片（放在最尾，確保浮在最上層）
+        if (event.duck) {
             html += `<img src="${event.duck}" class="duck-corner" alt="小導遊鴨">`;
         }
+
         card.innerHTML = html;
         timeline.appendChild(card);
     });
