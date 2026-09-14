@@ -657,11 +657,11 @@
             transform: scale(0.95);
         }
 
-        /* ===== 神算醒小導遊 ===== */
+        /* ===== 神算醒小導遊（右側中上） ===== */
         .duck-bill {
             position: fixed;
             right: 15px;
-            bottom: 170px;
+            top: 25%;
             width: 85px;
             height: auto;
             z-index: 999;
@@ -723,7 +723,7 @@
             .currency-btn { padding: 0 8px; font-size: 14px; }
             .member-btn { font-size: 15px; padding: 6px 14px; }
             .category-pill { font-size: 15px; padding: 6px 14px; }
-            .duck-bill { bottom: 160px; right: 10px; width: 80px; }
+            .duck-bill { top: 20%; right: 10px; width: 80px; }
             .personal-expenditure-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -761,7 +761,7 @@
 
             <div class="input-row">
                 <input class="desc-input" id="descInput" placeholder="項目名稱" maxlength="30">
-                
+
                 <div class="currency-switch">
                     <button type="button" class="currency-btn active" id="btnRMB" data-currency="RMB">¥ RMB</button>
                     <button type="button" class="currency-btn" id="btnHKD" data-currency="HKD">$ HKD</button>
@@ -786,7 +786,7 @@
         <div class="section-title">📊 結帳總覽</div>
 
         <div class="settlement-card" id="settlementCard">
-            
+
             <div class="personal-expenditure-box">
                 <div class="box-title">💳 各組別個人總消費額</div>
                 <div class="personal-expenditure-grid" id="personalExpenditureList">
@@ -883,11 +883,14 @@
         // 全局變數 & 設定
         // ============================================================
 
+        // 新增 M 和 T 兩組人
         const GROUPS = [
             { id: 'J', label: 'J', count: 2, icon: '👥' },
             { id: 'C', label: 'C', count: 2, icon: '👥' },
             { id: 'D', label: 'D', count: 2, icon: '👥' },
-            { id: 'S', label: 'S', count: 1, icon: '👤' }
+            { id: 'S', label: 'S', count: 1, icon: '👤' },
+            { id: 'M', label: 'M', count: 1, icon: '👤' },
+            { id: 'T', label: 'T', count: 1, icon: '👤' }
         ];
 
         const GROUP_MAP = Object.fromEntries(GROUPS.map(g => [g.id, g]));
