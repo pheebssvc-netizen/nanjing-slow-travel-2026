@@ -307,4 +307,1204 @@
         .submit-btn {
             width: 100%;
             padding: 16px;
-            background: #657
+            background: #657b6d;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.15s;
+            font-family: inherit;
+            margin-top: 4px;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.97);
+            background: #556b5d;
+        }
+
+        /* ===== 結帳總覽卡片 ===== */
+        .settlement-card {
+            background: white;
+            border-radius: 18px;
+            padding: 18px 16px;
+            box-shadow: 0 3px 12px rgba(80, 70, 50, 0.07);
+            border-top: 4px solid #b89a68;
+            margin-bottom: 20px;
+        }
+
+        .personal-expenditure-box {
+            background: #faf8f5;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 14px;
+            border: 1px solid #f0ede6;
+        }
+
+        .personal-expenditure-box .box-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #4d5748;
+            margin-bottom: 8px;
+        }
+
+        .personal-expenditure-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px 12px;
+        }
+
+        .personal-item {
+            font-size: 16px;
+            color: #3f3933;
+            display: flex;
+            justify-content: space-between;
+            background: #ffffff;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid #e8e5dc;
+        }
+
+        .personal-item .name {
+            font-weight: 600;
+            color: #657b6d;
+        }
+
+        .personal-item .val {
+            font-weight: 700;
+        }
+
+        .transfer-result {
+            background: #f5f8f0;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+        }
+
+        .transfer-result.hkd-result {
+            background: #f0f4f8;
+            margin-top: 10px;
+        }
+
+        .transfer-result .title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #4d5748;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .transfer-result .title .count {
+            color: #b89a68;
+        }
+
+        .transfer-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 0;
+            font-size: 18px;
+            font-weight: 500;
+            border-bottom: 1px dashed #e0ddd5;
+        }
+
+        .transfer-item:last-child {
+            border-bottom: none;
+        }
+
+        .transfer-item .arrow {
+            color: #b89a68;
+            margin: 0 6px;
+        }
+
+        .transfer-item .amount {
+            font-weight: 700;
+            color: #3f3933;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .transfer-empty {
+            text-align: center;
+            color: #b0a898;
+            font-size: 17px;
+            padding: 8px 0;
+        }
+
+        /* 一鍵複製 WhatsApp 按鈕 */
+        .copy-btn {
+            width: 100%;
+            padding: 14px;
+            background: #2D5A47;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.15s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.97);
+            background: #234738;
+        }
+
+        /* ===== 歷史消費明細 ===== */
+        .history-card {
+            background: white;
+            border-radius: 18px;
+            padding: 18px 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 12px rgba(80, 70, 50, 0.07);
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .filter-btn {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #e0ddd5;
+            background: white;
+            font-size: 15px;
+            font-weight: 500;
+            color: #6a6a5a;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .filter-btn:active {
+            transform: scale(0.94);
+        }
+
+        .filter-btn.active {
+            background: #657b6d;
+            color: white;
+            border-color: #657b6d;
+        }
+
+        .bill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 450px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .bill-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: #faf8f5;
+            border-radius: 12px;
+            border-left: 5px solid #b89a68;
+            transition: 0.15s;
+            position: relative;
+        }
+
+        .bill-item .info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .bill-item .info .top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .bill-item .info .top .cat {
+            font-size: 13px;
+            font-weight: 600;
+            color: #657b6d;
+            background: #e9eee8;
+            padding: 0 10px;
+            border-radius: 12px;
+        }
+
+        .bill-item .info .top .desc {
+            font-size: 17px;
+            font-weight: 600;
+            color: #3f3933;
+            word-break: break-word;
+        }
+
+        .bill-item .info .bottom {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 14px;
+            font-size: 15px;
+            color: #8a8a7a;
+            margin-top: 2px;
+        }
+
+        .bill-item .info .bottom .payer {
+            font-weight: 600;
+            color: #4d5748;
+        }
+
+        .bill-item .info .bottom .participants {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .bill-item .info .bottom .participants span {
+            background: #edeae3;
+            padding: 0 8px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        .bill-item .amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: #3f3933;
+            white-space: nowrap;
+            margin-left: auto;
+            padding-left: 8px;
+        }
+
+        .bill-item .del-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #d0c8bc;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: 0.15s;
+        }
+
+        .bill-item .del-btn:active {
+            color: #b07a6a;
+            transform: scale(0.9);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px 10px;
+            color: #b0a898;
+            font-size: 18px;
+        }
+
+        /* ===== 狀態提示（同步中/已同步） ===== */
+        .sync-status {
+            text-align: center;
+            font-size: 14px;
+            color: #8a8a7a;
+            padding: 4px 0 10px 0;
+        }
+
+        /* ===== Toast 提示 ===== */
+        .toast {
+            position: fixed;
+            bottom: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(60, 60, 50, 0.92);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-size: 17px;
+            font-weight: 500;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* ===== 回到頂部 ===== */
+        #backToTop {
+            position: fixed;
+            right: 16px;
+            bottom: 100px;
+            z-index: 9999;
+            border: none;
+            border-radius: 999px;
+            padding: 14px 18px;
+            background: rgba(108, 126, 111, 0.92);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #backToTop:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== 神算醒小導遊 ===== */
+        .duck-bill {
+            position: fixed;
+            right: 15px;
+            bottom: 170px;
+            width: 85px;
+            height: auto;
+            z-index: 999;
+            pointer-events: none;
+            animation: floatDuck 3s ease-in-out infinite;
+        }
+
+        @keyframes floatDuck {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* ===== 手機底部導航 ===== */
+        .mobile-nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.96);
+            border-top: 1px solid #e8e5dc;
+            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.06);
+            z-index: 9998;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .mobile-nav a {
+            flex: 1;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #88877f;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .mobile-nav a span {
+            font-size: 22px;
+            line-height: 24px;
+        }
+
+        .mobile-nav a small {
+            margin-top: 3px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 420px) {
+            .entry-card { padding: 16px 14px; }
+            .input-row .desc-input { font-size: 16px; padding: 10px; }
+            .input-row .amount-input { font-size: 20px; padding: 10px; }
+            .currency-switch { height: 48px; }
+            .currency-btn { padding: 0 8px; font-size: 14px; }
+            .member-btn { font-size: 15px; padding: 6px 14px; }
+            .category-pill { font-size: 15px; padding: 6px 14px; }
+            .duck-bill { bottom: 160px; right: 10px; width: 80px; }
+            .personal-expenditure-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回</a>
+        <h1>🧮 神算醒</h1>
+        <button class="clear-btn" id="clearAllBtn">清空</button>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <div class="container" id="app">
+
+        <div class="section-title">🧾 快速入帳</div>
+
+        <div class="entry-card">
+            <div class="date-row">
+                <input type="date" id="billDate">
+                <button class="today-btn" id="todayBtn">📅 今天</button>
+            </div>
+
+            <div class="category-row" id="categoryGroup">
+                <button class="category-pill" data-cat="早餐">🍞 早餐</button>
+                <button class="category-pill" data-cat="午餐">🍱 午餐</button>
+                <button class="category-pill" data-cat="晚餐">🍷 晚餐</button>
+                <button class="category-pill" data-cat="小食">☕ 小食</button>
+                <button class="category-pill" data-cat="門票">🎟️ 門票</button>
+                <button class="category-pill" data-cat="交通">🚗 交通</button>
+                <button class="category-pill" data-cat="雜項">🛍️ 雜項</button>
+            </div>
+
+            <div class="input-row">
+                <input class="desc-input" id="descInput" placeholder="項目名稱" maxlength="30">
+                
+                <div class="currency-switch">
+                    <button type="button" class="currency-btn active" id="btnRMB" data-currency="RMB">¥ RMB</button>
+                    <button type="button" class="currency-btn" id="btnHKD" data-currency="HKD">$ HKD</button>
+                </div>
+
+                <input class="amount-input" id="amountInput" type="number" step="0.1" placeholder="0" inputmode="decimal">
+            </div>
+
+            <div class="member-section">
+                <span class="label">💰 付款人</span>
+                <div class="member-btn-group" id="payerGroup"></div>
+            </div>
+
+            <div class="member-section">
+                <span class="label">👥 參與人</span>
+                <div class="member-btn-group" id="participantGroup"></div>
+            </div>
+
+            <button class="submit-btn" id="submitBtn">➕ 記錄</button>
+        </div>
+
+        <div class="section-title">📊 結帳總覽</div>
+
+        <div class="settlement-card" id="settlementCard">
+            
+            <div class="personal-expenditure-box">
+                <div class="box-title">💳 各組別個人總消費額</div>
+                <div class="personal-expenditure-grid" id="personalExpenditureList">
+                    </div>
+            </div>
+
+            <div class="transfer-result" id="rmbTransferResult">
+                <div class="title">
+                    <span>💰 人民幣結算 (RMB)</span>
+                    <span class="count" id="rmbTransferCount">0 次</span>
+                </div>
+                <div id="rmbTransferList">
+                    <div class="transfer-empty">未有帳目需要結算</div>
+                </div>
+            </div>
+
+            <div class="transfer-result hkd-result" id="hkdTransferResult" style="display: none;">
+                <div class="title">
+                    <span style="color:#2a52be;">🇭🇰 港幣結算 (HKD)</span>
+                    <span class="count" id="hkdTransferCount">0 次</span>
+                </div>
+                <div id="hkdTransferList">
+                    <div class="transfer-empty">未有帳目需要結算</div>
+                </div>
+            </div>
+
+            <button class="copy-btn" id="copyTextBtn">
+                📋 複製 WhatsApp / 微信 結帳清單
+            </button>
+        </div>
+
+        <div class="section-title">
+            📋 消費明細
+            <span class="badge" id="countBadge">0 筆</span>
+        </div>
+
+        <div class="history-card">
+            <div class="filter-row">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="today">今天</button>
+                <button class="filter-btn" data-filter="week">本週</button>
+            </div>
+
+            <div class="bill-list" id="billList">
+                <div class="empty-state">📭 未有消費記錄，開始記帳吧！</div>
+            </div>
+        </div>
+
+        <div class="sync-status" id="syncStatus">⏳ 連接中...</div>
+
+        <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            ↑ 回到頂部
+        </button>
+
+        <img src="duck-abacus.gif" alt="神算醒鴨" class="duck-bill">
+    </div>
+
+    <nav class="mobile-nav">
+        <a href="index.html">
+            <span>🏠</span>
+            <small>首頁</small>
+        </a>
+        <a href="itinerary.html">
+            <span>📅</span>
+            <small>六日行程</small>
+        </a>
+        <a href="spots.html">
+            <span>📚</span>
+            <small>景點百科</small>
+        </a>
+    </nav>
+
+    <script>
+        // ============================================================
+        // Firebase 設定
+        // ============================================================
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAtthBBNoHJkN6B_e8DVjzDpK_eB0wfExo",
+            authDomain: "yunnan-trip-d5626.firebaseapp.com",
+            databaseURL: "https://yunnan-trip-d5626-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "yunnan-trip-d5626",
+            storageBucket: "yunnan-trip-d5626.firebasestorage.app",
+            messagingSenderId: "956753515518",
+            appId: "1:956753515518:web:12586ad55c62ddc63426af",
+            measurementId: "G-KS61L3SC94"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const billsRef = database.ref('nanjing/bills');
+
+        // ============================================================
+        // 全局變數 & 設定
+        // ============================================================
+
+        const GROUPS = [
+            { id: 'J', label: 'J', count: 2, icon: '👥' },
+            { id: 'C', label: 'C', count: 2, icon: '👥' },
+            { id: 'D', label: 'D', count: 2, icon: '👥' },
+            { id: 'S', label: 'S', count: 1, icon: '👤' }
+        ];
+
+        const GROUP_MAP = Object.fromEntries(GROUPS.map(g => [g.id, g]));
+
+        const CATEGORY_COLORS = {
+            '早餐': '#e8d5b0',
+            '午餐': '#d4c8a8',
+            '晚餐': '#c4a88a',
+            '小食': '#d4c4b0',
+            '門票': '#b0c4b0',
+            '交通': '#b0b8c4',
+            '雜項': '#c4b8b0'
+        };
+
+        let bills = [];
+        let currentFilter = 'all';
+        let currentCurrency = 'RMB'; // 預設 RMB
+
+        // ============================================================
+        // Firebase 同步
+        // ============================================================
+
+        let isFirstLoad = true;
+
+        billsRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                bills = Object.keys(data).map(key => ({
+                    id: key,
+                    currency: 'RMB', // 舊資料預設為 RMB 兼容
+                    ...data[key]
+                }));
+                bills.sort((a, b) => {
+                    if (a.date !== b.date) return b.date.localeCompare(a.date);
+                    return b.id.localeCompare(a.id);
+                });
+            } else {
+                bills = [];
+            }
+            renderAll();
+            updateSyncStatus(true);
+
+            if (isFirstLoad) {
+                isFirstLoad = false;
+                showToast('✅ 已同步，共 ' + bills.length + ' 筆記錄');
+            }
+        }, (error) => {
+            console.warn('Firebase read error:', error);
+            updateSyncStatus(false);
+            showToast('⚠️ 同步失敗，請檢查網絡');
+        });
+
+        function updateSyncStatus(ok) {
+            const el = document.getElementById('syncStatus');
+            el.innerHTML = ok ? '✅ 已同步' : '⚠️ 離線模式';
+        }
+
+        function saveToFirebase(bill) {
+            const newRef = billsRef.push();
+            return newRef.set(bill);
+        }
+
+        function deleteFromFirebase(id) {
+            return billsRef.child(id).remove();
+        }
+
+        function clearAllFirebase() {
+            return billsRef.remove();
+        }
+
+        // ============================================================
+        // 工具函數
+        // ============================================================
+
+        function getToday() {
+            const d = new Date();
+            return d.getFullYear() + '-' +
+                String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                String(d.getDate()).padStart(2, '0');
+        }
+
+        function isToday(dateStr) {
+            return dateStr === getToday();
+        }
+
+        function isThisWeek(dateStr) {
+            const today = new Date();
+            const target = new Date(dateStr);
+            const diff = (today - target) / (1000 * 60 * 60 * 24);
+            return diff >= 0 && diff <= 7;
+        }
+
+        function showToast(msg) {
+            const el = document.getElementById('toast');
+            el.textContent = msg;
+            el.classList.add('show');
+            clearTimeout(window.toastTimer);
+            window.toastTimer = setTimeout(() => {
+                el.classList.remove('show');
+            }, 2500);
+        }
+
+        // ============================================================
+        // 介面渲染：成員與幣別
+        // ============================================================
+
+        function renderMemberButtons() {
+            // 付款人
+            const payerGroup = document.getElementById('payerGroup');
+            payerGroup.innerHTML = '';
+            GROUPS.forEach((g) => {
+                const btn = document.createElement('button');
+                btn.className = 'member-btn active-payer';
+                btn.dataset.member = g.id;
+                btn.innerHTML = `${g.icon} ${g.label} <span class="count">(${g.count}人)</span>`;
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#payerGroup .member-btn').forEach(b => b.classList.remove('active-payer'));
+                    this.classList.add('active-payer');
+                });
+                payerGroup.appendChild(btn);
+            });
+
+            // 參與人（預設全選）
+            const participantGroup = document.getElementById('participantGroup');
+            participantGroup.innerHTML = '';
+            GROUPS.forEach(g => {
+                const btn = document.createElement('button');
+                btn.className = 'member-btn active-participant';
+                btn.dataset.member = g.id;
+                btn.innerHTML = `${g.icon} ${g.label} <span class="count">(${g.count}人)</span>`;
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('active-participant');
+                });
+                participantGroup.appendChild(btn);
+            });
+        }
+
+        function setupCurrencySwitch() {
+            const btnRMB = document.getElementById('btnRMB');
+            const btnHKD = document.getElementById('btnHKD');
+
+            btnRMB.addEventListener('click', () => {
+                currentCurrency = 'RMB';
+                btnRMB.classList.add('active');
+                btnHKD.classList.remove('active');
+            });
+
+            btnHKD.addEventListener('click', () => {
+                currentCurrency = 'HKD';
+                btnHKD.classList.add('active');
+                btnRMB.classList.remove('active');
+            });
+        }
+
+        function getSelectedPayer() {
+            const active = document.querySelector('#payerGroup .member-btn.active-payer');
+            return active ? active.dataset.member : GROUPS[0].id;
+        }
+
+        function getSelectedParticipants() {
+            const btns = document.querySelectorAll('#participantGroup .member-btn.active-participant');
+            return Array.from(btns).map(b => b.dataset.member);
+        }
+
+        function getSelectedCategory() {
+            const active = document.querySelector('.category-pill.active');
+            return active ? active.dataset.cat : null;
+        }
+
+        function setupCategoryPills() {
+            const pills = document.querySelectorAll('.category-pill');
+            let lastAutoFilled = '';
+
+            pills.forEach(pill => {
+                pill.addEventListener('click', function() {
+                    const isActive = this.classList.contains('active');
+                    const cat = this.dataset.cat;
+                    const desc = document.getElementById('descInput');
+
+                    if (isActive) {
+                        this.classList.remove('active');
+                        if (desc.value === cat || desc.value === lastAutoFilled) {
+                            desc.value = '';
+                            lastAutoFilled = '';
+                        }
+                        return;
+                    }
+
+                    document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+
+                    if (desc.value === '' || desc.value === lastAutoFilled) {
+                        desc.value = cat;
+                        lastAutoFilled = cat;
+                    }
+                });
+            });
+        }
+
+        // ============================================================
+        // 核心：新增記錄
+        // ============================================================
+
+        function addBill() {
+            const date = document.getElementById('billDate').value || getToday();
+            const category = getSelectedCategory() || '雜項';
+            const desc = document.getElementById('descInput').value.trim() || category;
+            const payer = getSelectedPayer();
+            const participants = getSelectedParticipants();
+            const amount = parseFloat(document.getElementById('amountInput').value);
+
+            if (!amount || amount <= 0) {
+                showToast('⚠️ 請輸入有效金額');
+                return;
+            }
+
+            if (participants.length === 0) {
+                showToast('⚠️ 請選擇至少一組參與人');
+                return;
+            }
+
+            if (!participants.includes(payer)) {
+                showToast('⚠️ 付款人必須係參與人之一');
+                return;
+            }
+
+            const bill = {
+                date: date,
+                category: category,
+                description: desc,
+                payer: payer,
+                amount: Math.round(amount * 100) / 100,
+                currency: currentCurrency,
+                participants: participants.slice()
+            };
+
+            saveToFirebase(bill)
+                .then(() => {
+                    document.getElementById('amountInput').value = '';
+                    document.getElementById('descInput').value = '';
+                    document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+                    document.querySelectorAll('#participantGroup .member-btn').forEach(b => b.classList.add('active-participant'));
+
+                    const symbol = currentCurrency === 'RMB' ? '¥' : 'HK$';
+                    showToast('✅ 已記錄：' + desc + ' ' + symbol + bill.amount.toFixed(1));
+                    document.getElementById('amountInput').focus();
+                })
+                .catch((err) => {
+                    console.warn('Save error:', err);
+                    showToast('⚠️ 儲存失敗，請稍後再試');
+                });
+        }
+
+        function deleteBill(id) {
+            if (!confirm('確定要刪除呢筆記錄嗎？')) return;
+            deleteFromFirebase(id)
+                .then(() => showToast('🗑️ 已刪除記錄'))
+                .catch((err) => {
+                    console.warn('Delete error:', err);
+                    showToast('⚠️ 刪除失敗，請稍後再試');
+                });
+        }
+
+        function clearAll() {
+            if (bills.length === 0) {
+                showToast('📭 已經冇記錄');
+                return;
+            }
+            if (!confirm('⚠️ 確定要清空所有消費記錄嗎？')) return;
+            clearAllFirebase()
+                .then(() => showToast('🗑️ 已清空所有記錄'))
+                .catch((err) => {
+                    console.warn('Clear error:', err);
+                    showToast('⚠️ 清空失敗，請稍後再試');
+                });
+        }
+
+        // ============================================================
+        // 核心：雙貨幣 & 個人消費 結算演算法
+        // ============================================================
+
+        function calculateSettlement(filteredBills) {
+            // 1. 初始化各組別個人總消費額
+            let personalTotals = {};
+            GROUPS.forEach(g => {
+                personalTotals[g.id] = { RMB: 0, HKD: 0 };
+            });
+
+            // 2. 初始化淨額矩陣
+            let balances = {
+                RMB: {},
+                HKD: {}
+            };
+            GROUPS.forEach(g => {
+                balances.RMB[g.id] = 0;
+                balances.HKD[g.id] = 0;
+            });
+
+            let hasHKD = false;
+
+            filteredBills.forEach(bill => {
+                const cur = bill.currency || 'RMB';
+                if (cur === 'HKD') hasHKD = true;
+
+                const participants = bill.participants.filter(p => GROUPS.some(g => g.id === p));
+                if (participants.length === 0) return;
+
+                let totalPeople = 0;
+                participants.forEach(p => {
+                    const g = GROUP_MAP[p];
+                    if (g) totalPeople += g.count;
+                });
+                if (totalPeople === 0) return;
+
+                const sharePerPerson = bill.amount / totalPeople;
+
+                // 付款人增加應收額
+                balances[cur][bill.payer] += bill.amount;
+
+                // 參與人增加消費與扣減應付額
+                participants.forEach(p => {
+                    const g = GROUP_MAP[p];
+                    if (g) {
+                        const groupShare = sharePerPerson * g.count;
+                        personalTotals[p][cur] += groupShare;
+                        balances[cur][p] -= groupShare;
+                    }
+                });
+            });
+
+            // 四捨五入
+            GROUPS.forEach(g => {
+                personalTotals[g.id].RMB = Math.round(personalTotals[g.id].RMB * 100) / 100;
+                personalTotals[g.id].HKD = Math.round(personalTotals[g.id].HKD * 100) / 100;
+                balances.RMB[g.id] = Math.round(balances.RMB[g.id] * 100) / 100;
+                balances.HKD[g.id] = Math.round(balances.HKD[g.id] * 100) / 100;
+            });
+
+            // 計算轉帳清單
+            const rmbTransfers = computeSingleCurrencyTransfers(balances.RMB);
+            const hkdTransfers = computeSingleCurrencyTransfers(balances.HKD);
+
+            return { personalTotals, rmbTransfers, hkdTransfers, hasHKD };
+        }
+
+        // 單一貨幣貪心結算
+        function computeSingleCurrencyTransfers(balanceMap) {
+            const positive = GROUPS.filter(g => balanceMap[g.id] > 0.01)
+                .map(g => ({ name: g.id, amount: balanceMap[g.id] }));
+            const negative = GROUPS.filter(g => balanceMap[g.id] < -0.01)
+                .map(g => ({ name: g.id, amount: Math.abs(balanceMap[g.id]) }));
+
+            positive.sort((a, b) => b.amount - a.amount);
+            negative.sort((a, b) => b.amount - a.amount);
+
+            const transfers = [];
+            let i = 0, j = 0;
+            while (i < positive.length && j < negative.length) {
+                const p = positive[i];
+                const n = negative[j];
+                const amount = Math.round(Math.min(p.amount, n.amount) * 100) / 100;
+
+                if (amount > 0.01) {
+                    transfers.push({ from: n.name, to: p.name, amount: amount });
+                }
+
+                p.amount -= amount;
+                n.amount -= amount;
+
+                if (p.amount < 0.01) i++;
+                if (n.amount < 0.01) j++;
+            }
+            return transfers;
+        }
+
+        // ============================================================
+        // 渲染畫面
+        // ============================================================
+
+        function getFilteredBills() {
+            let result = [...bills];
+            if (currentFilter === 'today') {
+                result = result.filter(b => isToday(b.date));
+            } else if (currentFilter === 'week') {
+                result = result.filter(b => isThisWeek(b.date));
+            }
+            return result;
+        }
+
+        function renderAll() {
+            const filtered = getFilteredBills();
+            renderBillList(filtered);
+            renderSettlement(filtered);
+            document.getElementById('countBadge').textContent = filtered.length + ' 筆';
+            renderFilterButtons();
+        }
+
+        function renderBillList(filtered) {
+            const container = document.getElementById('billList');
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty-state">📭 沒有符合嘅記錄</div>';
+                return;
+            }
+
+            let html = '';
+            filtered.forEach(bill => {
+                const catColor = CATEGORY_COLORS[bill.category] || '#e0ddd5';
+                const participantsStr = bill.participants.join('、');
+                const symbol = bill.currency === 'HKD' ? 'HK$' : '¥';
+                html += `
+                    <div class="bill-item" style="border-left-color: ${catColor}">
+                        <div class="info">
+                            <div class="top">
+                                <span class="cat">${bill.category}</span>
+                                <span class="desc">${bill.description}</span>
+                            </div>
+                            <div class="bottom">
+                                <span class="payer">🍴 ${bill.payer}</span>
+                                <span class="participants">✌️ ${participantsStr}</span>
+                                <span>📅 ${bill.date}</span>
+                            </div>
+                        </div>
+                        <div class="amount">${symbol}${bill.amount.toFixed(1)}</div>
+                        <button class="del-btn" data-id="${bill.id}">✕</button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            container.querySelectorAll('.del-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    deleteBill(this.dataset.id);
+                });
+            });
+        }
+
+        function renderSettlement(filtered) {
+            const { personalTotals, rmbTransfers, hkdTransfers, hasHKD } = calculateSettlement(filtered);
+
+            // 1. 渲染個人總消費
+            const personalListEl = document.getElementById('personalExpenditureList');
+            let personalHtml = '';
+            GROUPS.forEach(g => {
+                const rmb = personalTotals[g.id].RMB;
+                const hkd = personalTotals[g.id].HKD;
+                let strArr = [];
+                if (rmb > 0 || hkd === 0) strArr.push(`¥${rmb.toFixed(1)}`);
+                if (hkd > 0) strArr.push(`HK$${hkd.toFixed(1)}`);
+
+                personalHtml += `
+                    <div class="personal-item">
+                        <span class="name">${g.icon} ${g.label}</span>
+                        <span class="val">${strArr.join(' + ')}</span>
+                    </div>
+                `;
+            });
+            personalListEl.innerHTML = personalHtml;
+
+            // 2. 渲染 RMB 轉帳
+            const rmbList = document.getElementById('rmbTransferList');
+            const rmbCount = document.getElementById('rmbTransferCount');
+            rmbCount.textContent = rmbTransfers.length + ' 次';
+            if (rmbTransfers.length === 0) {
+                rmbList.innerHTML = '<div class="transfer-empty">✅ 人民幣帳目已平</div>';
+            } else {
+                let html = '';
+                rmbTransfers.forEach(t => {
+                    html += `
+                        <div class="transfer-item">
+                            <span>👤 ${t.from}</span>
+                            <span class="arrow">➜</span>
+                            <span>👤 ${t.to}</span>
+                            <span class="amount">¥${t.amount.toFixed(1)}</span>
+                        </div>
+                    `;
+                });
+                rmbList.innerHTML = html;
+            }
+
+            // 3. 渲染 HKD 轉帳（僅在有 HKD 消費時顯示）
+            const hkdCard = document.getElementById('hkdTransferResult');
+            if (hasHKD) {
+                hkdCard.style.display = 'block';
+                const hkdList = document.getElementById('hkdTransferList');
+                const hkdCount = document.getElementById('hkdTransferCount');
+                hkdCount.textContent = hkdTransfers.length + ' 次';
+                if (hkdTransfers.length === 0) {
+                    hkdList.innerHTML = '<div class="transfer-empty">✅ 港幣帳目已平</div>';
+                } else {
+                    let html = '';
+                    hkdTransfers.forEach(t => {
+                        html += `
+                            <div class="transfer-item">
+                                <span>👤 ${t.from}</span>
+                                <span class="arrow">➜</span>
+                                <span>👤 ${t.to}</span>
+                                <span class="amount" style="color:#2a52be;">HK$${t.amount.toFixed(1)}</span>
+                            </div>
+                        `;
+                    });
+                    hkdList.innerHTML = html;
+                }
+            } else {
+                hkdCard.style.display = 'none';
+            }
+        }
+
+        function renderFilterButtons() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === currentFilter);
+            });
+        }
+
+        // ============================================================
+        // 提議 2：複製 WhatsApp / 微信 結帳單文字
+        // ============================================================
+
+        function copyWhatsAppSummary() {
+            const filtered = getFilteredBills();
+            if (filtered.length === 0) {
+                showToast('📭 目前未有消費記錄，無法複製');
+                return;
+            }
+
+            const { personalTotals, rmbTransfers, hkdTransfers, hasHKD } = calculateSettlement(filtered);
+
+            let text = "🧮 *南京慢遊・神算醒結帳單*\n";
+            text += "------------------------------\n";
+
+            text += "💳 *【個人總消費額】*\n";
+            GROUPS.forEach(g => {
+                const rmb = personalTotals[g.id].RMB;
+                const hkd = personalTotals[g.id].HKD;
+                let strArr = [];
+                if (rmb > 0 || hkd === 0) strArr.push(`¥${rmb.toFixed(1)}`);
+                if (hkd > 0) strArr.push(`HK$${hkd.toFixed(1)}`);
+                text += `• ${g.label} 組：${strArr.join(' + ')}\n`;
+            });
+
+            text += "------------------------------\n";
+
+            // RMB 結算
+            text += "💰 *【人民幣結算 (RMB)】*\n";
+            if (rmbTransfers.length === 0) {
+                text += "• 帳目已平，無需轉帳\n";
+            } else {
+                rmbTransfers.forEach(t => {
+                    text += `• ${t.from} 需付給 ${t.to}：¥${t.amount.toFixed(1)}\n`;
+                });
+            }
+
+            // HKD 結算
+            if (hasHKD) {
+                text += "\n🇭🇰 *【港幣結算 (HKD)】*\n";
+                if (hkdTransfers.length === 0) {
+                    text += "• 帳目已平，無需轉帳\n";
+                } else {
+                    hkdTransfers.forEach(t => {
+                        text += `• ${t.from} 需付給 ${t.to}：HK$${t.amount.toFixed(1)}\n`;
+                    });
+                }
+            }
+
+            text += "------------------------------\n";
+            text += "*(請大家確認後過數，辛苦晒！)*";
+
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('📋 已複製結帳單！可直接貼去 WhatsApp');
+            }).catch(err => {
+                console.error('Copy error:', err);
+                showToast('⚠️ 複製失敗，請手動截圖');
+            });
+        }
+
+        // ============================================================
+        // 初始化
+        // ============================================================
+
+        function init() {
+            renderMemberButtons();
+            setupCurrencySwitch();
+            setupCategoryPills();
+
+            document.getElementById('billDate').value = getToday();
+
+            document.getElementById('todayBtn').addEventListener('click', function() {
+                document.getElementById('billDate').value = getToday();
+            });
+
+            document.getElementById('submitBtn').addEventListener('click', addBill);
+
+            document.getElementById('amountInput').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addBill();
+                }
+            });
+            document.getElementById('descInput').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    document.getElementById('amountInput').focus();
+                }
+            });
+
+            document.getElementById('clearAllBtn').addEventListener('click', clearAll);
+            document.getElementById('copyTextBtn').addEventListener('click', copyWhatsAppSummary);
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    currentFilter = this.dataset.filter;
+                    renderAll();
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+
+</body>
+</html>
