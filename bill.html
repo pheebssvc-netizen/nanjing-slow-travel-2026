@@ -790,7 +790,7 @@
             <div class="personal-expenditure-box">
                 <div class="box-title">💳 各組別個人總消費額</div>
                 <div class="personal-expenditure-grid" id="personalExpenditureList">
-                    </div>
+                </div>
             </div>
 
             <div class="transfer-result" id="rmbTransferResult">
@@ -1109,10 +1109,7 @@
                 return;
             }
 
-            if (!participants.includes(payer)) {
-                showToast('⚠️ 付款人必須係參與人之一');
-                return;
-            }
+            // ★ 已移除：!participants.includes(payer) 驗證，取消限制 ★
 
             const bill = {
                 date: date,
@@ -1204,10 +1201,12 @@
 
                 const sharePerPerson = bill.amount / totalPeople;
 
-                // 付款人增加應收額
-                balances[cur][bill.payer] += bill.amount;
+                // 付款人增加應收額 (即使付款人不在參與名單內，依然能全額計入應收)
+                if (balances[cur][bill.payer] !== undefined) {
+                    balances[cur][bill.payer] += bill.amount;
+                }
 
-                // 參與人增加消費與扣減應付額
+                // 參與人增加個人消費額與扣減應付額
                 participants.forEach(p => {
                     const g = GROUP_MAP[p];
                     if (g) {
