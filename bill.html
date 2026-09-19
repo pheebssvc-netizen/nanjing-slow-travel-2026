@@ -1,1743 +1,548 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-HK">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>神算醒｜金陵慢遊</title>
-
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-
-    <style>
-        /* ===== 基本重置 ===== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-            background: #f5f2ec;
-            color: #3f3933;
-            font-size: 20px;
-            line-height: 1.7;
-            padding: 0 0 95px 0;
-            min-height: 100vh;
-        }
-
-        /* ===== 頂部標題欄 ===== */
-        .header {
-            background: linear-gradient(135deg, #657b6d, #879889);
-            color: white;
-            padding: 16px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header .back-btn {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 6px 14px;
-            border-radius: 20px;
-        }
-
-        .header .back-btn:active {
-            transform: scale(0.95);
-        }
-
-        .header h1 {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .header .clear-btn {
-            color: white;
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 15px;
-            cursor: pointer;
-        }
-
-        .header .clear-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* ===== 主容器 ===== */
-        .container {
-            max-width: 520px;
-            margin: 0 auto;
-            padding: 16px;
-        }
-
-        /* ===== 區域標題 ===== */
-        .section-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #4d5748;
-            margin-bottom: 10px;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .section-title .badge {
-            font-size: 15px;
-            font-weight: 400;
-            color: #8a8a7a;
-            background: #f5f2ec;
-            padding: 2px 14px;
-            border-radius: 20px;
-        }
-
-        /* ===== 快速入帳卡片 ===== */
-        .entry-card {
-            background: white;
-            border-radius: 18px;
-            padding: 20px 18px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 12px rgba(80, 70, 50, 0.07);
-        }
-
-        /* 日期 */
-        .date-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .date-row input[type="date"] {
-            flex: 1;
-            padding: 10px 14px;
-            border: 1px solid #e0ddd5;
-            border-radius: 10px;
-            font-size: 18px;
-            background: #faf8f5;
-            color: #3f3933;
-            font-family: inherit;
-        }
-
-        .date-row .today-btn {
-            padding: 10px 16px;
-            background: #e9eee8;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #4d5748;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .date-row .today-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* 分類快捷鍵 */
-        .category-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .category-pill {
-            padding: 8px 16px;
-            border-radius: 24px;
-            border: 1px solid #e0ddd5;
-            background: white;
-            font-size: 16px;
-            font-weight: 500;
-            color: #6a6a5a;
-            cursor: pointer;
-            transition: 0.15s;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .category-pill:active {
-            transform: scale(0.94);
-        }
-
-        .category-pill.active {
-            background: #657b6d;
-            color: white;
-            border-color: #657b6d;
-        }
-
-        /* 描述 + 幣別 + 金額 */
-        .input-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 14px;
-            align-items: center;
-        }
-
-        .input-row .desc-input {
-            flex: 2;
-            min-width: 130px;
-            padding: 12px 14px;
-            border: 1px solid #e0ddd5;
-            border-radius: 10px;
-            font-size: 18px;
-            background: #faf8f5;
-            font-family: inherit;
-            color: #3f3933;
-        }
-
-        .input-row .desc-input:focus {
-            outline: none;
-            border-color: #657b6d;
-        }
-
-        /* 幣別切換按鈕 */
-        .currency-switch {
-            display: flex;
-            background: #faf8f5;
-            border: 1px solid #e0ddd5;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 52px;
-        }
-
-        .currency-btn {
-            padding: 0 12px;
-            border: none;
-            background: transparent;
-            font-size: 16px;
-            font-weight: 700;
-            color: #8a8a7a;
-            cursor: pointer;
-            transition: 0.15s;
-        }
-
-        .currency-btn.active {
-            background: #b89a68;
-            color: white;
-        }
-
-        .input-row .amount-input {
-            flex: 1;
-            min-width: 100px;
-            padding: 12px 14px;
-            border: 1px solid #e0ddd5;
-            border-radius: 10px;
-            font-size: 22px;
-            font-weight: 700;
-            background: #faf8f5;
-            text-align: right;
-            font-family: inherit;
-            color: #3f3933;
-        }
-
-        .input-row .amount-input:focus {
-            outline: none;
-            border-color: #657b6d;
-        }
-
-        /* 付款人 + 參與人 */
-        .member-section {
-            margin-bottom: 14px;
-        }
-
-        .member-section .label-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6px;
-        }
-
-        .member-section .label {
-            font-size: 16px;
-            font-weight: 600;
-            color: #8a8a7a;
-        }
-
-        .shortcut-btns {
-            display: flex;
-            gap: 6px;
-        }
-
-        .btn-text-link {
-            background: none;
-            border: none;
-            color: #657b6d;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            padding: 2px 6px;
-            border-radius: 6px;
-            background: #e9eee8;
-        }
-
-        .btn-text-link:active {
-            transform: scale(0.95);
-        }
-
-        .member-btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .member-btn {
-            padding: 7px 14px;
-            border-radius: 24px;
-            border: 1px solid #e0ddd5;
-            background: white;
-            font-size: 16px;
-            font-weight: 500;
-            color: #6a6a5a;
-            cursor: pointer;
-            transition: 0.15s;
-            -webkit-tap-highlight-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .member-btn:active {
-            transform: scale(0.94);
-        }
-
-        .member-btn.active-payer {
-            background: #657b6d;
-            color: white;
-            border-color: #657b6d;
-        }
-
-        .member-btn.active-participant {
-            background: #b89a68;
-            color: white;
-            border-color: #b89a68;
-        }
-
-        /* 提交按鈕 */
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: #657b6d;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 20px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.15s;
-            font-family: inherit;
-            margin-top: 4px;
-        }
-
-        .submit-btn:active {
-            transform: scale(0.97);
-            background: #556b5d;
-        }
-
-        /* ===== 結帳總覽卡片 ===== */
-        .settlement-card {
-            background: white;
-            border-radius: 18px;
-            padding: 18px 16px;
-            box-shadow: 0 3px 12px rgba(80, 70, 50, 0.07);
-            border-top: 4px solid #b89a68;
-            margin-bottom: 20px;
-        }
-
-        .personal-expenditure-box {
-            background: #faf8f5;
-            border-radius: 12px;
-            padding: 14px 16px;
-            margin-bottom: 14px;
-            border: 1px solid #f0ede6;
-        }
-
-        .personal-expenditure-box .box-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #4d5748;
-            margin-bottom: 8px;
-        }
-
-        .personal-expenditure-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px 12px;
-        }
-
-        .personal-item {
-            font-size: 15px;
-            color: #3f3933;
-            display: flex;
-            justify-content: space-between;
-            background: #ffffff;
-            padding: 6px 10px;
-            border-radius: 8px;
-            border: 1px solid #e8e5dc;
-        }
-
-        .personal-item .name {
-            font-weight: 600;
-            color: #657b6d;
-        }
-
-        .personal-item .val {
-            font-weight: 700;
-        }
-
-        .transfer-result {
-            background: #f5f8f0;
-            border-radius: 12px;
-            padding: 14px 16px;
-            margin-bottom: 12px;
-        }
-
-        .transfer-result.hkd-result {
-            background: #f0f4f8;
-            margin-top: 10px;
-        }
-
-        .transfer-result .title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #4d5748;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .transfer-result .title .count {
-            color: #b89a68;
-        }
-
-        .transfer-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 0;
-            font-size: 17px;
-            font-weight: 500;
-            border-bottom: 1px dashed #e0ddd5;
-        }
-
-        .transfer-item:last-child {
-            border-bottom: none;
-        }
-
-        .transfer-item .arrow {
-            color: #b89a68;
-            margin: 0 4px;
-        }
-
-        .transfer-item .amount {
-            font-weight: 700;
-            color: #3f3933;
-            margin-left: auto;
-            white-space: nowrap;
-        }
-
-        .transfer-empty {
-            text-align: center;
-            color: #b0a898;
-            font-size: 16px;
-            padding: 8px 0;
-        }
-
-        /* 一鍵複製 WhatsApp 按鈕 */
-        .copy-btn {
-            width: 100%;
-            padding: 14px;
-            background: #2D5A47;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.15s;
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .copy-btn:active {
-            transform: scale(0.97);
-            background: #234738;
-        }
-
-        /* ===== 歷史消費明細 ===== */
-        .history-card {
-            background: white;
-            border-radius: 18px;
-            padding: 18px 16px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 12px rgba(80, 70, 50, 0.07);
-        }
-
-        .filter-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-
-        .filter-btn {
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid #e0ddd5;
-            background: white;
-            font-size: 15px;
-            font-weight: 500;
-            color: #6a6a5a;
-            cursor: pointer;
-            transition: 0.15s;
-        }
-
-        .filter-btn:active {
-            transform: scale(0.94);
-        }
-
-        .filter-btn.active {
-            background: #657b6d;
-            color: white;
-            border-color: #657b6d;
-        }
-
-        .bill-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-height: 450px;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .bill-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 14px;
-            background: #faf8f5;
-            border-radius: 12px;
-            border-left: 5px solid #b89a68;
-            transition: 0.15s;
-            position: relative;
-        }
-
-        .bill-item .info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .bill-item .info .top {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .bill-item .info .top .cat {
-            font-size: 13px;
-            font-weight: 600;
-            color: #657b6d;
-            background: #e9eee8;
-            padding: 0 10px;
-            border-radius: 12px;
-        }
-
-        .bill-item .info .top .desc {
-            font-size: 17px;
-            font-weight: 600;
-            color: #3f3933;
-            word-break: break-word;
-        }
-
-        .bill-item .info .bottom {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px 10px;
-            font-size: 14px;
-            color: #8a8a7a;
-            margin-top: 2px;
-        }
-
-        .bill-item .info .bottom .payer {
-            font-weight: 600;
-            color: #4d5748;
-        }
-
-        .bill-item .info .bottom .participants {
-            display: flex;
-            gap: 4px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .bill-item .info .bottom .participants span {
-            background: #edeae3;
-            padding: 0 6px;
-            border-radius: 8px;
-            font-size: 12px;
-        }
-
-        .bill-item .amount {
-            font-size: 20px;
-            font-weight: 700;
-            color: #3f3933;
-            white-space: nowrap;
-            margin-left: auto;
-            padding-left: 4px;
-        }
-
-        .bill-item .action-btns {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-
-        .bill-item .edit-btn,
-        .bill-item .del-btn {
-            background: none;
-            border: none;
-            font-size: 18px;
-            color: #d0c8bc;
-            cursor: pointer;
-            padding: 4px 6px;
-            border-radius: 8px;
-            transition: 0.15s;
-        }
-
-        .bill-item .edit-btn:active {
-            color: #657b6d;
-            transform: scale(0.9);
-        }
-
-        .bill-item .del-btn:active {
-            color: #b07a6a;
-            transform: scale(0.9);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 30px 10px;
-            color: #b0a898;
-            font-size: 18px;
-        }
-
-        /* ===== 狀態提示 ===== */
-        .sync-status {
-            text-align: center;
-            font-size: 14px;
-            color: #8a8a7a;
-            padding: 4px 0 10px 0;
-        }
-
-        /* ===== Toast 提示 ===== */
-        .toast {
-            position: fixed;
-            bottom: 110px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(60, 60, 50, 0.92);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 14px;
-            font-size: 17px;
-            font-weight: 500;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            max-width: 90%;
-            text-align: center;
-        }
-
-        .toast.show {
-            opacity: 1;
-        }
-
-        /* ===== 自訂確認彈窗 ===== */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.45);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            padding: 24px;
-        }
-        .modal-overlay.show {
-            display: flex;
-        }
-        .modal-card {
-            background: white;
-            border-radius: 20px;
-            padding: 26px 22px;
-            width: 100%;
-            max-width: 320px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            animation: modalIn 0.25s ease;
-        }
-        @keyframes modalIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        .modal-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #3f3933;
-            margin-bottom: 10px;
-        }
-        .modal-message {
-            font-size: 16px;
-            color: #6a6a5a;
-            margin-bottom: 22px;
-            line-height: 1.6;
-        }
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-        }
-        .modal-btn {
-            flex: 1;
-            padding: 13px;
-            border-radius: 12px;
-            border: none;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: inherit;
-            transition: 0.15s;
-        }
-        .modal-btn:active {
-            transform: scale(0.95);
-        }
-        .modal-btn.cancel {
-            background: #f0ede6;
-            color: #6a6a5a;
-        }
-        .modal-btn.confirm {
-            background: #b07a6a;
-            color: white;
-        }
-
-        /* ===== 回到頂部 ===== */
-        #backToTop {
-            position: fixed;
-            right: 16px;
-            bottom: 100px;
-            z-index: 9999;
-            border: none;
-            border-radius: 999px;
-            padding: 14px 18px;
-            background: rgba(108, 126, 111, 0.92);
-            color: white;
-            font-size: 18px;
-            font-weight: 600;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        #backToTop:active {
-            transform: scale(0.95);
-        }
-
-        /* ===== 神算醒小導遊 ===== */
-        .duck-bill {
-            position: fixed;
-            right: 15px;
-            top: 25%;
-            width: 85px;
-            height: auto;
-            z-index: 999;
-            pointer-events: none;
-            animation: floatDuck 3s ease-in-out infinite;
-        }
-
-        @keyframes floatDuck {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* ===== 手機底部導航 ===== */
-        .mobile-nav {
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 70px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.96);
-            border-top: 1px solid #e8e5dc;
-            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.06);
-            z-index: 9998;
-            padding-bottom: env(safe-area-inset-bottom);
-        }
-
-        .mobile-nav a {
-            flex: 1;
-            height: 70px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            color: #88877f;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .mobile-nav a span {
-            font-size: 22px;
-            line-height: 24px;
-        }
-
-        .mobile-nav a small {
-            margin-top: 3px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        @media (max-width: 420px) {
-            .entry-card { padding: 16px 14px; }
-            .input-row .desc-input { font-size: 16px; padding: 10px; }
-            .input-row .amount-input { font-size: 20px; padding: 10px; }
-            .currency-switch { height: 48px; }
-            .currency-btn { padding: 0 8px; font-size: 14px; }
-            .member-btn { font-size: 15px; padding: 6px 12px; }
-            .category-pill { font-size: 15px; padding: 6px 14px; }
-            .duck-bill { top: 20%; right: 10px; width: 80px; }
-            .personal-expenditure-grid { grid-template-columns: 1fr; }
-            .modal-card { padding: 20px 16px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>旅遊記帳與結算</title>
+  <style>
+    :root {
+      --bg-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --text-color: #333333;
+      --accent-color: #007aff;
+      --border-color: #e5e5ea;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    /* Collapsible Card */
+    .collapsible-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .collapsible-header::after {
+      content: '▼';
+      font-size: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .collapsible-header.active::after {
+      transform: rotate(180deg);
+    }
+
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      margin-top: 0;
+    }
+
+    .collapsible-content.open {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* Avatar Grid */
+    .avatar-grid {
+      display: flex;
+      gap: 12px;
+      justify-content: space-around;
+      margin-bottom: 16px;
+    }
+
+    .avatar-btn {
+      border: 2px solid transparent;
+      background: #f0f0f5;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .avatar-btn.selected {
+      border-color: var(--accent-color);
+      background: #e5f0ff;
+      transform: scale(1.1);
+    }
+
+    .avatar-label {
+      text-align: center;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    /* Form Controls */
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: #666;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    button.primary {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    button.primary:active {
+      opacity: 0.8;
+    }
+
+    /* Checkbox Group */
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #f0f0f5;
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .chip input {
+      width: auto;
+    }
+
+    /* Table/List styles */
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px dashed var(--border-color);
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .settlement-notice {
+      background: #eef6ff;
+      padding: 10px;
+      border-radius: 8px;
+      color: #0055b8;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .history-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .delete-btn {
+      background: #ff3b30;
+      color: white;
+      border: none;
+      width: auto;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
 
-    <div class="header">
-        <a href="index.html" class="back-btn">← 返回</a>
-        <h1>🧮 神算醒</h1>
-        <button class="clear-btn" id="clearAllBtn">清空</button>
+<div class="container">
+  <h1>旅遊記帳與結算</h1>
+
+  <!-- 設定匯率 -->
+  <div class="card">
+    <div class="form-group">
+      <label for="exchangeRate">匯率 (1 人民幣 = ? 港幣)</label>
+      <input type="number" id="exchangeRate" value="1.10" step="0.01" onchange="renderSummary()">
+    </div>
+  </div>
+
+  <!-- 新增消費 -->
+  <div class="card">
+    <h2>新增消費</h2>
+
+    <div class="form-group">
+      <label>付款人</label>
+      <div class="avatar-grid">
+        <div>
+          <button type="button" class="avatar-btn selected" onclick="selectPayer('📷J', this)">📷</button>
+          <div class="avatar-label">J</div>
+        </div>
+        <div>
+          <button type="button" class="avatar-btn" onclick="selectPayer('🪙C', this)">🪙</button>
+          <div class="avatar-label">C</div>
+        </div>
+        <div>
+          <button type="button" class="avatar-btn" onclick="selectPayer('🥐K', this)">🥐</button>
+          <div class="avatar-label">K</div>
+        </div>
+        <div>
+          <button type="button" class="avatar-btn" onclick="selectPayer('🍇Z', this)">🍇</button>
+          <div class="avatar-label">Z</div>
+        </div>
+      </div>
     </div>
 
-    <div class="toast" id="toast"></div>
-
-    <div class="container" id="app">
-
-        <div class="section-title">🧾 快速入帳</div>
-
-        <div class="entry-card">
-            <div class="date-row">
-                <input type="date" id="billDate">
-                <button class="today-btn" id="todayBtn">📅 今天</button>
-            </div>
-
-            <div class="category-row" id="categoryGroup">
-                <button class="category-pill" data-cat="早餐">🍞 早餐</button>
-                <button class="category-pill" data-cat="午餐">🍱 午餐</button>
-                <button class="category-pill" data-cat="晚餐">🍷 晚餐</button>
-                <button class="category-pill" data-cat="小食">☕ 小食</button>
-                <button class="category-pill" data-cat="門票">🎟️ 門票</button>
-                <button class="category-pill" data-cat="交通">🚗 交通</button>
-                <button class="category-pill" data-cat="雜項">🛍️ 雜項</button>
-            </div>
-
-            <div class="input-row">
-                <input class="desc-input" id="descInput" placeholder="項目名稱" maxlength="30">
-
-                <div class="currency-switch">
-                    <button type="button" class="currency-btn active" id="btnRMB" data-currency="RMB">¥ RMB</button>
-                    <button type="button" class="currency-btn" id="btnHKD" data-currency="HKD">$ HKD</button>
-                </div>
-
-                <input class="amount-input" id="amountInput" type="number" step="0.1" placeholder="0" inputmode="decimal">
-            </div>
-
-            <div class="member-section">
-                <div class="label-row">
-                    <span class="label">🤑 付款人 (單選)</span>
-                </div>
-                <div class="member-btn-group" id="payerGroup"></div>
-            </div>
-
-            <div class="member-section">
-                <div class="label-row">
-                    <span class="label">✌️ 參與人 (預設全選)</span>
-                    <div class="shortcut-btns">
-                        <button type="button" class="btn-text-link" onclick="toggleCouple('J&C')">🕺J&💃C</button>
-                        <button type="button" class="btn-text-link" onclick="toggleCouple('C&R')">🕺C&💃R</button>
-                        <button type="button" class="btn-text-link" onclick="toggleCouple('D&J')">🕺D&💃J</button>
-                        <button type="button" class="btn-text-link" onclick="selectAllParticipants(true)">全選</button>
-                        <button type="button" class="btn-text-link" onclick="selectAllParticipants(false)">清空</button>
-                    </div>
-                </div>
-                <div class="member-btn-group" id="participantGroup"></div>
-            </div>
-
-            <button class="submit-btn" id="submitBtn">➕ 記錄</button>
-        </div>
-
-        <div class="section-title">📊 結帳總覽</div>
-
-        <div class="settlement-card" id="settlementCard">
-
-            <div class="personal-expenditure-box">
-                <div class="box-title">💳 個人實質消費總額 (按個人計算)</div>
-                <div class="personal-expenditure-grid" id="personalExpenditureList">
-                </div>
-            </div>
-
-            <div class="transfer-result" id="rmbTransferResult">
-                <div class="title">
-                    <span>💰 人民幣結算 (RMB - 夫婦帳戶歸併)</span>
-                    <span class="count" id="rmbTransferCount">0 次</span>
-                </div>
-                <div id="rmbTransferList">
-                    <div class="transfer-empty">未有帳目需要結算</div>
-                </div>
-            </div>
-
-            <div class="transfer-result hkd-result" id="hkdTransferResult" style="display: none;">
-                <div class="title">
-                    <span style="color:#2a52be;">🇭🇰 港幣結算 (HKD - 夫婦帳戶歸併)</span>
-                    <span class="count" id="hkdTransferCount">0 次</span>
-                </div>
-                <div id="hkdTransferList">
-                    <div class="transfer-empty">未有帳目需要結算</div>
-                </div>
-            </div>
-
-            <button class="copy-btn" id="copyTextBtn">
-                📋 複製 WhatsApp / 微信 結帳清單
-            </button>
-        </div>
-
-        <div class="section-title">
-            📋 消費明細
-            <span class="badge" id="countBadge">0 筆</span>
-        </div>
-
-        <div class="history-card">
-            <div class="filter-row">
-                <button class="filter-btn active" data-filter="all">全部</button>
-                <button class="filter-btn" data-filter="today">今天</button>
-                <button class="filter-btn" data-filter="week">本週</button>
-            </div>
-
-            <div class="bill-list" id="billList">
-                <div class="empty-state">📭 未有消費記錄，開始記帳吧！</div>
-            </div>
-        </div>
-
-        <div class="sync-status" id="syncStatus">⏳ 連接中...</div>
-
-        <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-            ↑ 回到頂部
-        </button>
-
-        <img src="duck-abacus.gif" alt="神算醒鴨" class="duck-bill">
+    <div class="form-group">
+      <label for="itemDesc">項目說明</label>
+      <input type="text" id="itemDesc" placeholder="例如：午餐、車費">
     </div>
 
-    <div class="modal-overlay" id="confirmModal">
-        <div class="modal-card">
-            <div class="modal-title" id="modalTitle">確認操作</div>
-            <div class="modal-message" id="modalMessage">確定要執行此操作嗎？</div>
-            <div class="modal-actions">
-                <button class="modal-btn cancel" id="modalCancelBtn">取消</button>
-                <button class="modal-btn confirm" id="modalConfirmBtn">確認刪除</button>
-            </div>
-        </div>
+    <div class="form-group">
+      <label for="amount">金額</label>
+      <input type="number" id="amount" placeholder="0.00" step="0.01">
     </div>
 
-    <nav class="mobile-nav">
-        <a href="index.html">
-            <span>🏠</span>
-            <small>首頁</small>
-        </a>
-        <a href="itinerary.html">
-            <span>📅</span>
-            <small>六日行程</small>
-        </a>
-        <a href="spots.html">
-            <span>📚</span>
-            <small>景點百科</small>
-        </a>
-    </nav>
+    <div class="form-group">
+      <label for="currency">貨幣</label>
+      <select id="currency">
+        <option value="RMB">人民幣 (RMB)</option>
+        <option value="HKD">港幣 (HKD)</option>
+      </select>
+    </div>
 
-    <script>
-        // ============================================================
-        // Firebase 設定
-        // ============================================================
+    <div class="form-group">
+      <label>參與分攤者</label>
+      <div class="checkbox-group">
+        <label class="chip"><input type="checkbox" value="📷J" checked> 📷 J</label>
+        <label class="chip"><input type="checkbox" value="🪙C" checked> 🪙 C</label>
+        <label class="chip"><input type="checkbox" value="🥐K" checked> 🥐 K</label>
+        <label class="chip"><input type="checkbox" value="🍇Z" checked> 🍇 Z</label>
+      </div>
+    </div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyAtthBBNoHJkN6B_e8DVjzDpK_eB0wfExo",
-            authDomain: "yunnan-trip-d5626.firebaseapp.com",
-            databaseURL: "https://yunnan-trip-d5626-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "yunnan-trip-d5626",
-            storageBucket: "yunnan-trip-d5626.firebasestorage.app",
-            messagingSenderId: "956753515518",
-            appId: "1:956753515518:web:12586ad55c62ddc63426af",
-            measurementId: "G-KS61L3SC94"
-        };
+    <button type="button" class="primary" onclick="addExpense()">新增紀錄</button>
+  </div>
 
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-        const billsRef = database.ref('nanjing/bills');
+  <!-- 結帳總覽 (摺疊卡片區塊) -->
+  <h2>結帳總覽</h2>
 
-        // ============================================================
-        // 方案一：9 位個人標籤與 6 個主結算帳戶對應定義
-        // ============================================================
+  <!-- 卡片 1: 消費總額 -->
+  <div class="card">
+    <div class="collapsible-header" onclick="toggleCard(this)">
+      <span>總消費統計</span>
+    </div>
+    <div class="collapsible-content">
+      <div id="totalSpending"></div>
+    </div>
+  </div>
 
-        const INDIVIDUALS = [
-            { id: '🕺J', name: '🕺J', account: '🕺J & 💃C' },
-            { id: '💃C', name: '💃C', account: '🕺J & 💃C' },
-            { id: '🕺C', name: '🕺C', account: '🕺C & 💃R' },
-            { id: '💃R', name: '💃R', account: '🕺C & 💃R' },
-            { id: '🕺D', name: '🕺D', account: '🕺D & 💃J' },
-            { id: '💃J', name: '💃J', account: '🕺D & 💃J' },
-            { id: '🕺S', name: '🕺S', account: '🕺S' },
-            { id: '🕺M', name: '🕺M', account: '🕺M' },
-            { id: '🕺T', name: '🕺T', account: '🕺T' }
-        ];
+  <!-- 卡片 2: 人民幣結算 -->
+  <div class="card">
+    <div class="collapsible-header" onclick="toggleCard(this)">
+      <span>人民幣結算 (RMB)</span>
+    </div>
+    <div class="collapsible-content">
+      <div id="rmbSettlement"></div>
+    </div>
+  </div>
 
-        const ACCOUNTS = ['🕺J & 💃C', '🕺C & 💃R', '🕺D & 💃J', '🕺S', '🕺M', '🕺T'];
+  <!-- 卡片 3: 港幣結算 -->
+  <div class="card">
+    <div class="collapsible-header" onclick="toggleCard(this)">
+      <span>港幣結算 (HKD)</span>
+    </div>
+    <div class="collapsible-content">
+      <div id="hkdSettlement"></div>
+    </div>
+  </div>
 
-        const CATEGORY_COLORS = {
-            '早餐': '#e8d5b0',
-            '午餐': '#d4c8a8',
-            '晚餐': '#c4a88a',
-            '小食': '#d4c4b0',
-            '門票': '#b0c4b0',
-            '交通': '#b0b8c4',
-            '雜項': '#c4b8b0'
-        };
+  <!-- 消費歷史紀錄 -->
+  <div class="card">
+    <h2>消費紀錄</h2>
+    <ul class="history-list" id="historyList"></ul>
+  </div>
 
-        let bills = [];
-        let currentFilter = 'all';
-        let currentCurrency = 'RMB';
-        let editingBillId = null;
-        let pendingConfirmCallback = null;
+</div>
 
-        // ============================================================
-        // Firebase 同步
-        // ============================================================
+<script>
+  let selectedPayer = '📷J';
+  let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
-        let isFirstLoad = true;
+  const USERS = ['📷J', '🪙C', '🥐K', '🍇Z'];
+  const COUPLE = ['📷J', '🪙C']; // 夫婦主帳戶
 
-        billsRef.on('value', (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                bills = Object.keys(data).map(key => ({
-                    id: key,
-                    currency: 'RMB',
-                    ...data[key]
-                }));
-                bills.sort((a, b) => {
-                    if (a.date !== b.date) return b.date.localeCompare(a.date);
-                    return b.id.localeCompare(a.id);
-                });
-            } else {
-                bills = [];
-            }
-            renderAll();
-            updateSyncStatus(true);
+  function selectPayer(payer, btn) {
+    selectedPayer = payer;
+    document.querySelectorAll('.avatar-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
 
-            if (isFirstLoad) {
-                isFirstLoad = false;
-                showToast('✅ 已同步，共 ' + bills.length + ' 筆記錄');
-            }
-        }, (error) => {
-            console.warn('Firebase read error:', error);
-            updateSyncStatus(false);
-            showToast('⚠️ 同步失敗，請檢查網絡');
+  function toggleCard(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    if (content.classList.contains('open')) {
+      content.classList.remove('open');
+      content.style.maxHeight = null;
+    } else {
+      content.classList.add('open');
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  }
+
+  function addExpense() {
+    const desc = document.getElementById('itemDesc').value.trim() || '未命名項目';
+    const amount = parseFloat(document.getElementById('amount').value);
+    const currency = document.getElementById('currency').value;
+    
+    const participants = Array.from(document.querySelectorAll('.checkbox-group input:checked'))
+                              .map(cb => cb.value);
+
+    if (isNaN(amount) || amount <= 0) {
+      alert('請輸入有效金額');
+      return;
+    }
+
+    if (participants.length === 0) {
+      alert('請至少選擇一位參與分攤者');
+      return;
+    }
+
+    const expense = {
+      id: Date.now(),
+      payer: selectedPayer,
+      desc: desc,
+      amount: amount,
+      currency: currency,
+      participants: participants
+    };
+
+    expenses.push(expense);
+    saveAndRender();
+
+    // Reset Form
+    document.getElementById('itemDesc').value = '';
+    document.getElementById('amount').value = '';
+  }
+
+  function deleteExpense(id) {
+    expenses = expenses.filter(e => e.id !== id);
+    saveAndRender();
+  }
+
+  function saveAndRender() {
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+    renderHistory();
+    renderSummary();
+  }
+
+  function renderHistory() {
+    const list = document.getElementById('historyList');
+    list.innerHTML = '';
+
+    if (expenses.length === 0) {
+      list.innerHTML = '<li style="text-align:center; color:#8e8e93; padding:12px;">暫無消費紀錄</li>';
+      return;
+    }
+
+    expenses.slice().reverse().forEach(exp => {
+      const li = document.createElement('li');
+      li.className = 'history-item';
+      li.innerHTML = `
+        <div>
+          <strong>${exp.desc}</strong> (${exp.payer} 付款)<br>
+          <small style="color:#666;">分攤: ${exp.participants.join(', ')}</small>
+        </div>
+        <div style="text-align:right;">
+          <span style="font-weight:bold;">${exp.amount.toFixed(2)} ${exp.currency}</span><br>
+          <button class="delete-btn" onclick="deleteExpense(${exp.id})">刪除</button>
+        </div>
+      `;
+      list.appendChild(li);
+    });
+  }
+
+  function renderSummary() {
+    const rate = parseFloat(document.getElementById('exchangeRate').value) || 1.1;
+
+    // 初始化統計數據
+    let totalRMB = 0;
+    let totalHKD = 0;
+
+    let netRMB = { '📷J': 0, '🪙C': 0, '🥐K': 0, '🍇Z': 0 };
+    let netHKD = { '📷J': 0, '🪙C': 0, '🥐K': 0, '🍇Z': 0 };
+
+    let actualSpentRMB = { '📷J': 0, '🪙C': 0, '🥐K': 0, '🍇Z': 0 };
+    let actualSpentHKD = { '📷J': 0, '🪙C': 0, '🥐K': 0, '🍇Z': 0 };
+
+    expenses.forEach(exp => {
+      const splitAmount = exp.amount / exp.participants.length;
+
+      if (exp.currency === 'RMB') {
+        totalRMB += exp.amount;
+        netRMB[exp.payer] += exp.amount;
+        exp.participants.forEach(p => {
+          netRMB[p] -= splitAmount;
+          actualSpentRMB[p] += splitAmount;
         });
+      } else {
+        totalHKD += exp.amount;
+        netHKD[exp.payer] += exp.amount;
+        exp.participants.forEach(p => {
+          netHKD[p] -= splitAmount;
+          actualSpentHKD[p] += splitAmount;
+        });
+      }
+    });
 
-        function updateSyncStatus(ok) {
-            const el = document.getElementById('syncStatus');
-            el.innerHTML = ok ? '✅ 已同步' : '⚠️ 離線模式';
+    // 1. 渲染消費總額
+    let totalHTML = `
+      <div class="summary-item"><span>RMB 總消費：</span><strong>¥${totalRMB.toFixed(2)}</strong></div>
+      <div class="summary-item"><span>HKD 總消費：</span><strong>$${totalHKD.toFixed(2)}</strong></div>
+      <hr style="border:none; border-top:1px dashed var(--border-color); margin:8px 0;">
+      <div style="font-weight:bold; margin-bottom:6px;">個人實質消費總額 (以主帳戶夫婦共用結算)：</div>
+    `;
+
+    // 計算個人實質消費 (以主帳戶結算：J與C合併)
+    const coupleActualRMB = actualSpentRMB['📷J'] + actualSpentRMB['🪙C'];
+    const coupleActualHKD = actualSpentHKD['📷J'] + actualSpentHKD['🪙C'];
+    const coupleCombinedHKD = coupleActualHKD + (coupleActualRMB * rate);
+
+    totalHTML += `
+      <div class="summary-item">
+        <span>📷J & 🪙C (夫婦主帳戶)：</span>
+        <span>¥${coupleActualRMB.toFixed(2)} / $${coupleActualHKD.toFixed(2)} <br><small style="color:#666;">(折合 HKD $${coupleCombinedHKD.toFixed(2)})</small></span>
+      </div>
+    `;
+
+    ['🥐K', '🍇Z'].forEach(u => {
+      const combinedHKD = actualSpentHKD[u] + (actualSpentRMB[u] * rate);
+      totalHTML += `
+        <div class="summary-item">
+          <span>${u}：</span>
+          <span>¥${actualSpentRMB[u].toFixed(2)} / $${actualSpentHKD[u].toFixed(2)} <br><small style="color:#666;">(折合 HKD $${combinedHKD.toFixed(2)})</small></span>
+        </div>
+      `;
+    });
+
+    document.getElementById('totalSpending').innerHTML = totalHTML;
+
+    // 2. 渲染結算邏輯 (以夫婦主帳戶結算)
+    document.getElementById('rmbSettlement').innerHTML = calculateSettlement(netRMB, 'RMB');
+    document.getElementById('hkdSettlement').innerHTML = calculateSettlement(netHKD, 'HKD');
+
+    // 動態調整已展開卡片的高度，防止內容溢出
+    document.querySelectorAll('.collapsible-content.open').forEach(content => {
+      content.style.maxHeight = content.scrollHeight + "px";
+    });
+  }
+
+  function calculateSettlement(netBalances, currencySymbol) {
+    // 主帳戶合併：J 與 C 淨額相加，歸入 📷J (代表主帳戶)
+    let balances = {
+      '主帳戶 (📷J & 🪙C)': netBalances['📷J'] + netBalances['🪙C'],
+      '🥐K': netBalances['🥐K'],
+      '🍇Z': netBalances['🍇Z']
+    };
+
+    let debtors = [];
+    let creditors = [];
+
+    for (let user in balances) {
+      let amount = balances[user];
+      if (amount < -0.01) {
+        debtors.push({ name: user, amount: -amount });
+      } else if (amount > 0.01) {
+        creditors.push({ name: user, amount: amount });
+      }
+    }
+
+    let html = '';
+    
+    if (debtors.length === 0 && creditors.length === 0) {
+      return '<div style="color:#8e8e93; text-align:center;">此貨幣無須轉帳結算</div>';
+    }
+
+    debtors.forEach(d => {
+      creditors.forEach(c => {
+        if (d.amount > 0 && c.amount > 0) {
+          let payment = Math.min(d.amount, c.amount);
+          html += `<div class="summary-item"><span><strong>${d.name}</strong> 應付給 <strong>${c.name}</strong>：</span><strong>${payment.toFixed(2)} ${currencySymbol}</strong></div>`;
+          d.amount -= payment;
+          c.amount -= payment;
         }
+      });
+    });
 
-        function saveToFirebase(bill) {
-            if (editingBillId) {
-                return billsRef.child(editingBillId).update(bill);
-            } else {
-                const newRef = billsRef.push();
-                return newRef.set(bill);
-            }
-        }
+    html += `<div class="settlement-notice">💡 註：已自動將 📷J 與 🪙C 之帳目合併至「主帳戶」統一結算。</div>`;
 
-        function deleteFromFirebase(id) {
-            return billsRef.child(id).remove();
-        }
+    return html;
+  }
 
-        function clearAllFirebase() {
-            return billsRef.remove();
-        }
-
-        // ============================================================
-        // 工具函數
-        // ============================================================
-
-        function showConfirm(title, message, callback) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalMessage').textContent = message;
-            pendingConfirmCallback = callback;
-            document.getElementById('confirmModal').classList.add('show');
-        }
-
-        function hideConfirm() {
-            document.getElementById('confirmModal').classList.remove('show');
-            pendingConfirmCallback = null;
-        }
-
-        function getToday() {
-            const d = new Date();
-            return d.getFullYear() + '-' +
-                String(d.getMonth() + 1).padStart(2, '0') + '-' +
-                String(d.getDate()).padStart(2, '0');
-        }
-
-        function isToday(dateStr) {
-            return dateStr === getToday();
-        }
-
-        function isThisWeek(dateStr) {
-            const today = new Date();
-            const target = new Date(dateStr);
-            const diff = (today - target) / (1000 * 60 * 60 * 24);
-            return diff >= 0 && diff <= 7;
-        }
-
-        function showToast(msg) {
-            const el = document.getElementById('toast');
-            el.textContent = msg;
-            el.classList.add('show');
-            clearTimeout(window.toastTimer);
-            window.toastTimer = setTimeout(() => {
-                el.classList.remove('show');
-            }, 2500);
-        }
-
-        // ============================================================
-        // 介面渲染：9位個人成員與選擇
-        // ============================================================
-
-        function renderMemberButtons() {
-            // 付款人（單選）
-            const payerGroup = document.getElementById('payerGroup');
-            payerGroup.innerHTML = '';
-            INDIVIDUALS.forEach((person, idx) => {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'member-btn' + (idx === 4 ? ' active-payer' : ''); // 預設 🕺D 付款
-                btn.dataset.member = person.id;
-                btn.innerHTML = person.name;
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('#payerGroup .member-btn').forEach(b => b.classList.remove('active-payer'));
-                    this.classList.add('active-payer');
-                });
-                payerGroup.appendChild(btn);
-            });
-
-            // 參與人（預設全選 9 人）
-            const participantGroup = document.getElementById('participantGroup');
-            participantGroup.innerHTML = '';
-            INDIVIDUALS.forEach(person => {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'member-btn active-participant';
-                btn.dataset.member = person.id;
-                btn.innerHTML = person.name;
-                btn.addEventListener('click', function() {
-                    this.classList.toggle('active-participant');
-                });
-                participantGroup.appendChild(btn);
-            });
-        }
-
-        // 一鍵切換夫婦（快捷選取/取消）
-        function toggleCouple(coupleType) {
-            let targets = [];
-            if (coupleType === 'J&C') targets = ['🕺J', '💃C'];
-            if (coupleType === 'C&R') targets = ['🕺C', '💃R'];
-            if (coupleType === 'D&J') targets = ['🕺D', '💃J'];
-
-            const btns = document.querySelectorAll('#participantGroup .member-btn');
-            const targetBtns = Array.from(btns).filter(b => targets.includes(b.dataset.member));
-            const allActive = targetBtns.every(b => b.classList.contains('active-participant'));
-
-            targetBtns.forEach(b => {
-                b.classList.toggle('active-participant', !allActive);
-            });
-        }
-
-        function selectAllParticipants(status) {
-            document.querySelectorAll('#participantGroup .member-btn').forEach(b => {
-                b.classList.toggle('active-participant', status);
-            });
-        }
-
-        function setupCurrencySwitch() {
-            const btnRMB = document.getElementById('btnRMB');
-            const btnHKD = document.getElementById('btnHKD');
-
-            btnRMB.addEventListener('click', () => setCurrency('RMB'));
-            btnHKD.addEventListener('click', () => setCurrency('HKD'));
-        }
-
-        function setCurrency(curr) {
-            currentCurrency = curr;
-            document.getElementById('btnRMB').classList.toggle('active', curr === 'RMB');
-            document.getElementById('btnHKD').classList.toggle('active', curr === 'HKD');
-        }
-
-        function getSelectedPayer() {
-            const active = document.querySelector('#payerGroup .member-btn.active-payer');
-            return active ? active.dataset.member : INDIVIDUALS[0].id;
-        }
-
-        function getSelectedParticipants() {
-            const btns = document.querySelectorAll('#participantGroup .member-btn.active-participant');
-            return Array.from(btns).map(b => b.dataset.member);
-        }
-
-        function getSelectedCategory() {
-            const active = document.querySelector('.category-pill.active');
-            return active ? active.dataset.cat : null;
-        }
-
-        function setupCategoryPills() {
-            const pills = document.querySelectorAll('.category-pill');
-            let lastAutoFilled = '';
-
-            pills.forEach(pill => {
-                pill.addEventListener('click', function() {
-                    const isActive = this.classList.contains('active');
-                    const cat = this.dataset.cat;
-                    const desc = document.getElementById('descInput');
-
-                    if (isActive) {
-                        this.classList.remove('active');
-                        if (desc.value === cat || desc.value === lastAutoFilled) {
-                            desc.value = '';
-                            lastAutoFilled = '';
-                        }
-                        return;
-                    }
-
-                    document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
-                    this.classList.add('active');
-
-                    if (desc.value === '' || desc.value === lastAutoFilled) {
-                        desc.value = cat;
-                        lastAutoFilled = cat;
-                    }
-                });
-            });
-        }
-
-        // ============================================================
-        // 核心：新增 / 更新記錄
-        // ============================================================
-
-        function addBill() {
-            const date = document.getElementById('billDate').value || getToday();
-            const category = getSelectedCategory() || '雜項';
-            const desc = document.getElementById('descInput').value.trim() || category;
-            const payer = getSelectedPayer();
-            const participants = getSelectedParticipants();
-            const amount = parseFloat(document.getElementById('amountInput').value);
-
-            if (!amount || amount <= 0) {
-                showToast('⚠️ 請輸入有效金額');
-                return;
-            }
-
-            if (participants.length === 0) {
-                showToast('⚠️ 請選擇至少一位參與人');
-                return;
-            }
-
-            const bill = {
-                date: date,
-                category: category,
-                description: desc,
-                payer: payer,
-                amount: Math.round(amount * 100) / 100,
-                currency: currentCurrency,
-                participants: participants.slice()
-            };
-
-            const isEdit = !!editingBillId;
-
-            saveToFirebase(bill)
-                .then(() => {
-                    resetForm();
-                    const symbol = currentCurrency === 'RMB' ? '¥' : 'HK$';
-                    showToast(isEdit ? '💾 已更新：' + desc : '✅ 已記錄：' + desc + ' ' + symbol + bill.amount.toFixed(1));
-                })
-                .catch((err) => {
-                    console.warn('Save error:', err);
-                    showToast('⚠️ 儲存失敗，請稍後再試');
-                });
-        }
-
-        function resetForm() {
-            editingBillId = null;
-            document.getElementById('amountInput').value = '';
-            document.getElementById('descInput').value = '';
-            document.getElementById('submitBtn').textContent = '➕ 記錄';
-            document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
-            selectAllParticipants(true); // 預設全選
-            document.querySelectorAll('#payerGroup .member-btn').forEach(b => b.classList.remove('active-payer'));
-            const defaultPayer = document.querySelector('#payerGroup .member-btn[data-member="🕺D"]');
-            if (defaultPayer) defaultPayer.classList.add('active-payer');
-            setCurrency('RMB');
-            document.getElementById('billDate').value = getToday();
-        }
-
-        function editBill(id) {
-            const bill = bills.find(b => b.id === id);
-            if (!bill) return;
-
-            editingBillId = id;
-            document.getElementById('billDate').value = bill.date || getToday();
-
-            document.querySelectorAll('.category-pill').forEach(p => {
-                p.classList.toggle('active', p.dataset.cat === bill.category);
-            });
-
-            document.getElementById('descInput').value = bill.description || '';
-            document.getElementById('amountInput').value = bill.amount;
-            setCurrency(bill.currency || 'RMB');
-
-            document.querySelectorAll('#payerGroup .member-btn').forEach(b => {
-                b.classList.toggle('active-payer', b.dataset.member === bill.payer);
-            });
-
-            document.querySelectorAll('#participantGroup .member-btn').forEach(b => {
-                const isPart = bill.participants && bill.participants.includes(b.dataset.member);
-                b.classList.toggle('active-participant', isPart);
-            });
-
-            document.getElementById('submitBtn').textContent = '💾 更新記錄';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            showToast('✎ 正在編輯記錄，修改後請點「更新」');
-        }
-
-        function deleteBill(id) {
-            showConfirm('🗑️ 刪除記錄', '確定要刪除呢筆記錄嗎？刪除後無法恢復。', function() {
-                deleteFromFirebase(id)
-                    .then(() => {
-                        if (editingBillId === id) resetForm();
-                        showToast('🗑️ 已刪除記錄');
-                    })
-                    .catch((err) => {
-                        console.warn('Delete error:', err);
-                        showToast('⚠️ 刪除失敗，請稍後再試');
-                    });
-            });
-        }
-
-        function clearAll() {
-            if (bills.length === 0) {
-                showToast('📭 已經冇記錄');
-                return;
-            }
-            showConfirm('⚠️ 清空所有記錄', '確定要清空所有消費記錄嗎？此操作無法撤銷！', function() {
-                clearAllFirebase()
-                    .then(() => {
-                        resetForm();
-                        showToast('🗑️ 已清空所有記錄');
-                    })
-                    .catch((err) => {
-                        console.warn('Clear error:', err);
-                        showToast('⚠️ 清空失敗，請稍後再試');
-                    });
-            });
-        }
-
-        // ============================================================
-        // 方案一算法：按個人平分消費，結算時自動歸併至夫婦/組合帳戶
-        // ============================================================
-
-        function calculateSettlement(filteredBills) {
-            // 1. 初始化個人消費總額與個人收支餘額
-            let personalTotals = {};
-            let personalBalances = { RMB: {}, HKD: {} };
-
-            INDIVIDUALS.forEach(person => {
-                personalTotals[person.id] = { RMB: 0, HKD: 0 };
-                personalBalances.RMB[person.id] = 0;
-                personalBalances.HKD[person.id] = 0;
-            });
-
-            let hasHKD = false;
-
-            // 2. 逐筆計算（嚴格按個人 1人 為單位分擔）
-            filteredBills.forEach(bill => {
-                const cur = bill.currency || 'RMB';
-                if (cur === 'HKD') hasHKD = true;
-
-                const validParticipants = (bill.participants || []).filter(p => INDIVIDUALS.some(i => i.id === p));
-                if (validParticipants.length === 0) return;
-
-                const perPersonShare = bill.amount / validParticipants.length;
-
-                // 付款人墊付
-                if (personalBalances[cur][bill.payer] !== undefined) {
-                    personalBalances[cur][bill.payer] += bill.amount;
-                }
-
-                // 參與者扣減個人分擔額
-                validParticipants.forEach(p => {
-                    personalTotals[p][cur] += perPersonShare;
-                    personalBalances[cur][p] -= perPersonShare;
-                });
-            });
-
-            // 四捨五入個人金額
-            INDIVIDUALS.forEach(p => {
-                personalTotals[p.id].RMB = Math.round(personalTotals[p.id].RMB * 100) / 100;
-                personalTotals[p.id].HKD = Math.round(personalTotals[p.id].HKD * 100) / 100;
-                personalBalances.RMB[p.id] = Math.round(personalBalances.RMB[p.id] * 100) / 100;
-                personalBalances.HKD[p.id] = Math.round(personalBalances.HKD[p.id] * 100) / 100;
-            });
-
-            // 3. 自動歸併 (Roll-up Netting) 至 6 個主結算帳戶
-            let accountBalances = { RMB: {}, HKD: {} };
-            ACCOUNTS.forEach(acc => {
-                accountBalances.RMB[acc] = 0;
-                accountBalances.HKD[acc] = 0;
-            });
-
-            INDIVIDUALS.forEach(p => {
-                accountBalances.RMB[p.account] += personalBalances.RMB[p.id];
-                accountBalances.HKD[p.account] += personalBalances.HKD[p.id];
-            });
-
-            ACCOUNTS.forEach(acc => {
-                accountBalances.RMB[acc] = Math.round(accountBalances.RMB[acc] * 100) / 100;
-                accountBalances.HKD[acc] = Math.round(accountBalances.HKD[acc] * 100) / 100;
-            });
-
-            // 4. 計算主帳戶之間的清算對繳
-            const rmbTransfers = computeAccountTransfers(accountBalances.RMB);
-            const hkdTransfers = computeAccountTransfers(accountBalances.HKD);
-
-            return { personalTotals, rmbTransfers, hkdTransfers, hasHKD };
-        }
-
-        function computeAccountTransfers(accountBalanceMap) {
-            const positive = ACCOUNTS.filter(a => accountBalanceMap[a] > 0.01)
-                .map(a => ({ name: a, amount: accountBalanceMap[a] }));
-            const negative = ACCOUNTS.filter(a => accountBalanceMap[a] < -0.01)
-                .map(a => ({ name: a, amount: Math.abs(accountBalanceMap[a]) }));
-
-            positive.sort((a, b) => b.amount - a.amount);
-            negative.sort((a, b) => b.amount - a.amount);
-
-            const transfers = [];
-            let i = 0, j = 0;
-            while (i < positive.length && j < negative.length) {
-                const p = positive[i];
-                const n = negative[j];
-                const amount = Math.round(Math.min(p.amount, n.amount) * 100) / 100;
-
-                if (amount > 0.01) {
-                    transfers.push({ from: n.name, to: p.name, amount: amount });
-                }
-
-                p.amount -= amount;
-                n.amount -= amount;
-
-                if (p.amount < 0.01) i++;
-                if (n.amount < 0.01) j++;
-            }
-            return transfers;
-        }
-
-        // ============================================================
-        // 渲染畫面
-        // ============================================================
-
-        function getFilteredBills() {
-            let result = [...bills];
-            if (currentFilter === 'today') {
-                result = result.filter(b => isToday(b.date));
-            } else if (currentFilter === 'week') {
-                result = result.filter(b => isThisWeek(b.date));
-            }
-            return result;
-        }
-
-        function renderAll() {
-            const filtered = getFilteredBills();
-            renderBillList(filtered);
-            renderSettlement(filtered);
-            document.getElementById('countBadge').textContent = filtered.length + ' 筆';
-            renderFilterButtons();
-        }
-
-        function renderBillList(filtered) {
-            const container = document.getElementById('billList');
-            if (filtered.length === 0) {
-                container.innerHTML = '<div class="empty-state">📭 沒有符合嘅記錄</div>';
-                return;
-            }
-
-            let html = '';
-            filtered.forEach(bill => {
-                const catColor = CATEGORY_COLORS[bill.category] || '#e0ddd5';
-                const participantsStr = bill.participants ? bill.participants.join('、') : '';
-                const symbol = bill.currency === 'HKD' ? 'HK$' : '¥';
-                html += `
-                    <div class="bill-item" style="border-left-color: ${catColor}">
-                        <div class="info">
-                            <div class="top">
-                                <span class="cat">${bill.category}</span>
-                                <span class="desc">${bill.description}</span>
-                            </div>
-                            <div class="bottom">
-                                <span class="payer">🤑 ${bill.payer}</span>
-                                <span class="participants">✌️ (${bill.participants ? bill.participants.length : 0}人) ${participantsStr}</span>
-                                <span>📅 ${bill.date}</span>
-                            </div>
-                        </div>
-                        <div class="amount">${symbol}${bill.amount.toFixed(1)}</div>
-                        <div class="action-btns">
-                            <button class="edit-btn" data-id="${bill.id}" title="編輯">✎</button>
-                            <button class="del-btn" data-id="${bill.id}" title="刪除">✕</button>
-                        </div>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-
-            container.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.addEventListener('click', function() { editBill(this.dataset.id); });
-            });
-
-            container.querySelectorAll('.del-btn').forEach(btn => {
-                btn.addEventListener('click', function() { deleteBill(this.dataset.id); });
-            });
-        }
-
-        function renderSettlement(filtered) {
-            const { personalTotals, rmbTransfers, hkdTransfers, hasHKD } = calculateSettlement(filtered);
-
-            // 1. 渲染個人實質消費總額
-            const personalListEl = document.getElementById('personalExpenditureList');
-            let personalHtml = '';
-            INDIVIDUALS.forEach(p => {
-                const rmb = personalTotals[p.id].RMB;
-                const hkd = personalTotals[p.id].HKD;
-                let strArr = [];
-                if (rmb > 0 || hkd === 0) strArr.push(`¥${rmb.toFixed(1)}`);
-                if (hkd > 0) strArr.push(`HK$${hkd.toFixed(1)}`);
-
-                personalHtml += `
-                    <div class="personal-item">
-                        <span class="name">${p.name}</span>
-                        <span class="val">${strArr.join(' + ')}</span>
-                    </div>
-                `;
-            });
-            personalListEl.innerHTML = personalHtml;
-
-            // 2. 渲染 RMB 轉賬結果 (歸併夫婦帳戶)
-            const rmbList = document.getElementById('rmbTransferList');
-            const rmbCount = document.getElementById('rmbTransferCount');
-            rmbCount.textContent = rmbTransfers.length + ' 次';
-
-            if (rmbTransfers.length === 0) {
-                rmbList.innerHTML = '<div class="transfer-empty">✅ 人民幣帳目已平</div>';
-            } else {
-                let html = '';
-                rmbTransfers.forEach(t => {
-                    html += `
-                        <div class="transfer-item">
-                            <span>👥 ${t.from}</span>
-                            <span class="arrow">➜</span>
-                            <span>👥 ${t.to}</span>
-                            <span class="amount">¥${t.amount.toFixed(1)}</span>
-                        </div>
-                    `;
-                });
-                rmbList.innerHTML = html;
-            }
-
-            // 3. 渲染 HKD 轉賬結果
-            const hkdCard = document.getElementById('hkdTransferResult');
-            if (hasHKD) {
-                hkdCard.style.display = 'block';
-                const hkdList = document.getElementById('hkdTransferList');
-                const hkdCount = document.getElementById('hkdTransferCount');
-                hkdCount.textContent = hkdTransfers.length + ' 次';
-
-                if (hkdTransfers.length === 0) {
-                    hkdList.innerHTML = '<div class="transfer-empty">✅ 港幣帳目已平</div>';
-                } else {
-                    let html = '';
-                    hkdTransfers.forEach(t => {
-                        html += `
-                            <div class="transfer-item">
-                                <span>👥 ${t.from}</span>
-                                <span class="arrow">➜</span>
-                                <span>👥 ${t.to}</span>
-                                <span class="amount" style="color:#2a52be;">HK$${t.amount.toFixed(1)}</span>
-                            </div>
-                        `;
-                    });
-                    hkdList.innerHTML = html;
-                }
-            } else {
-                hkdCard.style.display = 'none';
-            }
-        }
-
-        function renderFilterButtons() {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.filter === currentFilter);
-            });
-        }
-
-        // ============================================================
-        // 複製 WhatsApp / 微信 結帳單文字
-        // ============================================================
-
-        function copyWhatsAppSummary() {
-            const filtered = getFilteredBills();
-            if (filtered.length === 0) {
-                showToast('📭 目前未有消費記錄，無法複製');
-                return;
-            }
-
-            const { personalTotals, rmbTransfers, hkdTransfers, hasHKD } = calculateSettlement(filtered);
-
-            let text = "🧮 *南京慢遊・神算醒結帳單*\n";
-            text += "------------------------------\n";
-
-            text += "💳 *【個人消費金額 (按人頭分擔)】*\n";
-            INDIVIDUALS.forEach(p => {
-                const rmb = personalTotals[p.id].RMB;
-                const hkd = personalTotals[p.id].HKD;
-                let strArr = [];
-                if (rmb > 0 || hkd === 0) strArr.push(`¥${rmb.toFixed(1)}`);
-                if (hkd > 0) strArr.push(`HK$${hkd.toFixed(1)}`);
-                text += `• ${p.name}：${strArr.join(' + ')}\n`;
-            });
-
-            text += "------------------------------\n";
-
-            text += "💰 *【人民幣結算 (夫婦帳戶歸併)】*\n";
-            if (rmbTransfers.length === 0) {
-                text += "• 帳目已平，無需轉帳\n";
-            } else {
-                rmbTransfers.forEach(t => {
-                    text += `• ${t.from} 需付給 ${t.to}：¥${t.amount.toFixed(1)}\n`;
-                });
-            }
-
-            if (hasHKD) {
-                text += "\n🇭🇰 *【港幣結算 (夫婦帳戶歸併)】*\n";
-                if (hkdTransfers.length === 0) {
-                    text += "• 帳目已平，無需轉帳\n";
-                } else {
-                    hkdTransfers.forEach(t => {
-                        text += `• ${t.from} 需付給 ${t.to}：HK$${t.amount.toFixed(1)}\n`;
-                    });
-                }
-            }
-
-            text += "------------------------------\n";
-            text += "*(請大家確認後過數，辛苦晒！)*";
-
-            navigator.clipboard.writeText(text).then(() => {
-                showToast('📋 已複製結帳單！可直接貼去 WhatsApp');
-            }).catch(err => {
-                console.error('Copy error:', err);
-                showToast('⚠️ 複製失敗，請手動截圖');
-            });
-        }
-
-        // ============================================================
-        // 初始化
-        // ============================================================
-
-        function init() {
-            renderMemberButtons();
-            setupCurrencySwitch();
-            setupCategoryPills();
-
-            document.getElementById('billDate').value = getToday();
-
-            document.getElementById('todayBtn').addEventListener('click', function() {
-                document.getElementById('billDate').value = getToday();
-            });
-
-            document.getElementById('submitBtn').addEventListener('click', addBill);
-
-            document.getElementById('amountInput').addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    addBill();
-                }
-            });
-            document.getElementById('descInput').addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    document.getElementById('amountInput').focus();
-                }
-            });
-
-            document.getElementById('clearAllBtn').addEventListener('click', clearAll);
-            document.getElementById('copyTextBtn').addEventListener('click', copyWhatsAppSummary);
-
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    currentFilter = this.dataset.filter;
-                    renderAll();
-                });
-            });
-
-            // 自訂確認彈窗事件
-            document.getElementById('modalCancelBtn').addEventListener('click', hideConfirm);
-            document.getElementById('modalConfirmBtn').addEventListener('click', function() {
-                if (pendingConfirmCallback) {
-                    pendingConfirmCallback();
-                }
-                hideConfirm();
-            });
-
-            document.getElementById('confirmModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    hideConfirm();
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
+  // 初始化載入
+  saveAndRender();
+</script>
 
 </body>
 </html>
