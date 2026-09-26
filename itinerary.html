@@ -376,6 +376,101 @@ header p {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* ===== 每日備註區 ===== */
+.day-note-box {
+    background: #fffdf7;
+    border: 1.5px dashed #d9c9a8;
+    border-radius: 18px;
+    padding: 16px 14px;
+    margin-top: 25px;
+}
+.day-note-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #8a6e4b;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.day-note-input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+.day-note-input-row input {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1px solid #e0ddd5;
+    border-radius: 10px;
+    font-size: 16px;
+    background: white;
+    font-family: inherit;
+    color: #3f3933;
+}
+.day-note-input-row input:focus {
+    outline: none;
+    border-color: #b89a68;
+}
+.day-note-input-row button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    background: #b89a68;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+.day-note-input-row button:active {
+    transform: scale(0.95);
+}
+.day-note-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.day-note-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: white;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 16px;
+    color: #4d5748;
+    box-shadow: 0 2px 6px rgba(80, 70, 50, 0.05);
+}
+.day-note-item .note-text {
+    flex: 1;
+    word-break: break-word;
+    line-height: 1.5;
+}
+.day-note-item .note-del {
+    background: none;
+    border: none;
+    color: #d0c8bc;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 6px;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+}
+.day-note-item .note-del:active {
+    color: #b07a6a;
+    transform: scale(0.9);
+}
+.day-note-empty {
+    text-align: center;
+    color: #b0a898;
+    font-size: 15px;
+    padding: 8px 0;
+}
+
 #backToTop:active {
     transform: scale(0.95);
 }
@@ -473,6 +568,17 @@ header p {
 
 </div>
 
+<!-- ===== 每日備註：行程更新 / 後備景點 ===== -->
+<div class="day-note-box">
+    <div class="day-note-title">📝 今日備註（行程更新 / 後備景點）</div>
+    <div class="day-note-input-row">
+        <input type="text" id="dayNoteInput" placeholder="例如：下午想加去先鋒書店…" maxlength="60">
+        <button id="addDayNoteBtn">➕ 加入</button>
+    </div>
+    <div class="day-note-list" id="dayNoteList">
+        <div class="day-note-empty">暫時未有備註，有任何行程更新都可以寫低㗎！</div>
+    </div>
+</div>
 
 <a href="index.html" class="back">
 ← 返回南京六日慢遊首頁
@@ -996,6 +1102,9 @@ function renderDay(dayNumber) {
     container.appendChild(timeline);
 }
 
+    // ⬇️ 加入呢兩行：每次切換日數時，重新渲染該日嘅備註
+    renderDayNotes(dayNumber);
+}
 
 /* =====================================
    啟動
@@ -1003,6 +1112,101 @@ function renderDay(dayNumber) {
 
 const todayDay = getTodayDay();
 renderDay(todayDay);
+
+/* ============================================================
+   每日備註功能（localStorage，按天數分開儲存）
+   ============================================================ */
+
+const DAY_NOTE_KEY_PREFIX = 'nanjing_day_note_';
+
+function getDayNoteKey(dayNumber) {
+    return DAY_NOTE_KEY_PREFIX + dayNumber;
+}
+
+function loadDayNotes(dayNumber) {
+    try {
+        const raw = localStorage.getItem(getDayNoteKey(dayNumber));
+        return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+        console.warn('讀取每日備註失敗:', e);
+        return [];
+    }
+}
+
+function saveDayNotes(dayNumber, notes) {
+    try {
+        localStorage.setItem(getDayNoteKey(dayNumber), JSON.stringify(notes));
+    } catch (e) {
+        console.warn('儲存每日備註失敗:', e);
+    }
+}
+
+function renderDayNotes(dayNumber) {
+    const notes = loadDayNotes(dayNumber);
+    const container = document.getElementById('dayNoteList');
+
+    if (notes.length === 0) {
+        container.innerHTML = '<div class="day-note-empty">暫時未有備註，有任何行程更新都可以寫低㗎！</div>';
+        return;
+    }
+
+    let html = '';
+    notes.forEach((note, index) => {
+        html += `
+            <div class="day-note-item">
+                <span class="note-text">📌 ${note}</span>
+                <button class="note-del" data-index="${index}">✕</button>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+
+    container.querySelectorAll('.note-del').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const idx = parseInt(this.dataset.index);
+            deleteDayNote(dayNumber, idx);
+        });
+    });
+}
+
+function addDayNote(dayNumber) {
+    const input = document.getElementById('dayNoteInput');
+    const text = input.value.trim();
+
+    if (!text) {
+        alert('請輸入備註內容');
+        return;
+    }
+
+    const notes = loadDayNotes(dayNumber);
+    notes.push(text);
+    saveDayNotes(dayNumber, notes);
+    input.value = '';
+    renderDayNotes(dayNumber);
+}
+
+function deleteDayNote(dayNumber, index) {
+    const notes = loadDayNotes(dayNumber);
+    if (index >= 0 && index < notes.length) {
+        notes.splice(index, 1);
+        saveDayNotes(dayNumber, notes);
+        renderDayNotes(dayNumber);
+    }
+}
+
+// 綁定事件（只綁一次）
+document.getElementById('addDayNoteBtn').addEventListener('click', function () {
+    const currentDay = getTodayDay();
+    addDayNote(currentDay);
+});
+
+document.getElementById('dayNoteInput').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        const currentDay = getTodayDay();
+        addDayNote(currentDay);
+    }
+});
 
 </script>
 
