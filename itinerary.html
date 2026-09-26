@@ -455,6 +455,21 @@ header p {
     color: #b07a6a;
     transform: scale(0.9);
 }
+.day-note-item .note-edit {
+    background: none;
+    border: none;
+    color: #d9c9a8;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 6px;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+}
+.day-note-item .note-edit:active {
+    color: #b89a68;
+    transform: scale(0.9);
+}
 .day-note-empty {
     text-align: center;
     color: #b0a898;
@@ -1139,6 +1154,7 @@ function renderDayNotes(dayNumber) {
         html += `
             <div class="day-note-item">
                 <span class="note-text">📌 ${note}</span>
+                <button class="note-edit" data-index="${index}">✏️</button>
                 <button class="note-del" data-index="${index}">✕</button>
             </div>
         `;
@@ -1151,6 +1167,33 @@ function renderDayNotes(dayNumber) {
             deleteDayNote(dayNumber, idx);
         });
     });
+
+    // 新增：編輯按鈕
+    container.querySelectorAll('.note-edit').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const idx = parseInt(this.dataset.index);
+            editDayNote(dayNumber, idx);
+        });
+    });
+}
+
+// 新增：編輯每日備註
+function editDayNote(dayNumber, index) {
+    const notes = loadDayNotes(dayNumber);
+    if (index < 0 || index >= notes.length) return;
+
+    const newText = prompt('編輯今日備註：', notes[index]);
+    if (newText === null) return; // 用戶取消
+
+    const trimmed = newText.trim();
+    if (!trimmed) {
+        alert('備註不能為空');
+        return;
+    }
+
+    notes[index] = trimmed;
+    saveDayNotes(dayNumber, notes);
+    renderDayNotes(dayNumber);
 }
 
 function addDayNote(dayNumber) {
