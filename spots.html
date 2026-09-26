@@ -58,7 +58,7 @@
 }
 
 /* =========================
-   推薦餐廳快速方塊
+   推薦餐廳（合併展開式）
    ========================= */
 .restaurant-index {
   margin: 20px 16px 30px;
@@ -71,21 +71,7 @@
 .restaurant-index-title { font-size: 26px; font-weight: 700; color: #8a6e4b; margin-bottom: 5px; }
 .restaurant-index-subtitle { font-size: 16px; color: #8b897f; margin-bottom: 16px; }
 
-.restaurant-list { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-.restaurant-list button {
-  min-height: 56px; padding: 10px 8px;
-  border: 1px solid #e8ddd0; border-radius: 14px;
-  background: #ffffff; color: #6a5a4a;
-  font-size: 15px; font-weight: 600;
-  cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.04);
-  transition: transform 0.15s ease, background 0.15s ease;
-}
-.restaurant-list button:active { transform: scale(0.97); background: #f8f0e6; }
-.restaurant-list button .sub { display: block; font-size: 11px; font-weight: 400; color: #b09a88; margin-top: 2px; }
-
-/* =========================
-   篩選按鈕
-   ========================= */
+/* 篩選按鈕 */
 .filter-row {
   display: flex;
   flex-wrap: wrap;
@@ -107,6 +93,120 @@
 }
 .filter-btn:active { transform: scale(0.94); }
 .filter-btn.active { background: #657b6d; color: white; border-color: #657b6d; }
+
+/* 展開式餐廳卡片 */
+.acc-list { display: flex; flex-direction: column; gap: 10px; }
+
+.acc-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    border-left: 5px solid #e0ddd5;
+    box-shadow: 0 2px 8px rgba(80,70,50,.06);
+}
+.acc-card.dining { border-left-color: #1E3A8A; }
+.acc-card.snack { border-left-color: #D97706; }
+
+/* 點擊標題列 */
+.acc-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s;
+}
+.acc-header:active { background: #faf8f5; }
+
+.acc-badge {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+.acc-badge.dining { background: #e8edf5; color: #1E3A8A; }
+.acc-badge.snack { background: #fef3e2; color: #D97706; }
+
+.acc-name {
+    flex: 1;
+    font-size: 17px;
+    font-weight: 700;
+    color: #3f3933;
+    line-height: 1.4;
+}
+.acc-arrow {
+    font-size: 14px;
+    color: #b0a898;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+}
+.acc-card.open .acc-arrow { transform: rotate(180deg); }
+
+/* 展開內容 */
+.acc-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+.acc-card.open .acc-body {
+    max-height: 800px;
+}
+.acc-inner {
+    padding: 0 16px 16px 16px;
+    border-top: 1px dashed #eee9e0;
+    padding-top: 12px;
+}
+
+.acc-desc {
+    font-size: 15px;
+    color: #756e66;
+    margin-bottom: 10px;
+}
+.acc-signature {
+    background: #faf8f5;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #4d5748;
+}
+.acc-signature strong {
+    display: block;
+    font-size: 13px;
+    color: #8a8a7a;
+    margin-bottom: 4px;
+}
+.acc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    font-size: 14px;
+    color: #8a8a7a;
+    margin-bottom: 10px;
+}
+.acc-tip {
+    background: #fff8e6;
+    border-left: 3px solid #D97706;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #8a6e2a;
+    margin-bottom: 10px;
+}
+.acc-actions a {
+    display: block;
+    text-align: center;
+    padding: 10px 6px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    background: #657b6d;
+    color: white;
+}
+.acc-actions a:active { transform: scale(0.97); }
 
 /* =========================
    備註區
@@ -159,13 +259,11 @@
 @media (max-width: 500px) {
   .spot-list { grid-template-columns: 1fr 1fr; }
   .spot-list button { min-height: 54px; font-size: 16px; padding: 8px 10px; }
-  .restaurant-list { grid-template-columns: 1fr 1fr; }
-  .restaurant-list button { min-height: 52px; font-size: 14px; }
   .restaurant-index-title { font-size: 22px; }
+  .acc-name { font-size: 16px; }
 }
 @media (max-width: 380px) {
   .spot-list { grid-template-columns: 1fr; }
-  .restaurant-list { grid-template-columns: 1fr; }
 }
 
 *{ box-sizing:border-box; }
@@ -294,84 +392,6 @@ li{ margin-bottom:8px; font-size:18px; }
 
 /* 避免底部內容被導航列遮住 */
 body { padding-bottom: 95px; }
-
-/* =========================
-   推薦餐廳詳情卡片
-   ========================= */
-.restaurant-section {
-    margin-top: 35px;
-    background: white;
-    border-radius: 18px;
-    padding: 20px 18px;
-    box-shadow: 0 4px 18px rgba(80,70,50,.08);
-}
-.restaurant-section h2 { margin: 0 0 6px; font-size: 26px; color: #4d5748; }
-.restaurant-section .sub { color: #8a8a7a; font-size: 16px; margin-bottom: 16px; }
-
-.restaurant-grid { display: flex; flex-direction: column; gap: 12px; }
-
-.restaurant-card {
-    background: #faf8f5;
-    border-radius: 14px;
-    padding: 16px 14px;
-    border-left: 5px solid #e0ddd5;
-}
-.restaurant-card.dining { border-left-color: #1E3A8A; }
-.restaurant-card.snack { border-left-color: #D97706; }
-
-.restaurant-card .badge {
-    display: inline-block;
-    font-size: 13px; font-weight: 700;
-    padding: 3px 12px; border-radius: 20px;
-    margin-bottom: 8px;
-}
-.restaurant-card .badge.dining { background: #e8edf5; color: #1E3A8A; }
-.restaurant-card .badge.snack { background: #fef3e2; color: #D97706; }
-
-.restaurant-card .rc-name {
-    font-size: 19px; font-weight: 700;
-    color: #3f3933; margin-bottom: 4px;
-}
-.restaurant-card .rc-desc {
-    font-size: 15px; color: #756e66; margin-bottom: 10px;
-}
-.restaurant-card .rc-signature {
-    background: #ffffff; border-radius: 10px;
-    padding: 10px 12px; margin-bottom: 10px;
-    font-size: 15px; color: #4d5748;
-}
-.restaurant-card .rc-signature strong {
-    display: block; font-size: 13px;
-    color: #8a8a7a; margin-bottom: 4px;
-}
-.restaurant-card .rc-meta {
-    display: flex; flex-wrap: wrap;
-    gap: 6px 14px; font-size: 14px;
-    color: #8a8a7a; margin-bottom: 10px;
-}
-.restaurant-card .rc-tip {
-    background: #fff8e6;
-    border-left: 3px solid #D97706;
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-size: 14px;
-    color: #8a6e2a;
-    margin-bottom: 10px;
-}
-.restaurant-card .rc-actions { display: flex; gap: 8px; }
-.restaurant-card .rc-actions a {
-    flex: 1; text-align: center;
-    padding: 10px 6px; border-radius: 10px;
-    font-size: 14px; font-weight: 600;
-    text-decoration: none;
-    background: #657b6d; color: white;
-}
-.restaurant-card .rc-actions a:active { transform: scale(0.97); }
-
-@media (max-width: 500px) {
-    .restaurant-section h2 { font-size: 22px; }
-    .restaurant-card .rc-name { font-size: 17px; }
-}
 </style>
 </head>
 
@@ -412,10 +432,10 @@ body { padding-bottom: 95px; }
   </div>
 </section>
 
-<!-- 推薦餐廳快速方塊 + 篩選 -->
+<!-- 推薦餐廳（合併展開式卡片） -->
 <section class="restaurant-index">
   <div class="restaurant-index-title">🍽️ 推薦餐廳</div>
-  <div class="restaurant-index-subtitle">點選餐廳，查看地圖位置</div>
+  <div class="restaurant-index-subtitle">點擊餐廳名稱，展開詳情（招牌菜・排隊提醒・地圖）</div>
 
   <!-- 篩選按鈕 -->
   <div class="filter-row" id="restaurantFilter">
@@ -424,7 +444,7 @@ body { padding-bottom: 95px; }
     <button class="filter-btn" data-filter="snack">☕ 小食/下午茶</button>
   </div>
 
-  <div class="restaurant-list" id="restaurantIndexList"></div>
+  <div class="acc-list" id="restaurantAccordion"></div>
 </section>
 
 <!-- 備註區：手動輸入想去嘅餐廳 -->
@@ -909,16 +929,6 @@ body { padding-bottom: 95px; }
 </div>
 
 
-<!-- =========================
-     推薦餐廳詳情（豐富卡片）
-     ========================= -->
-<div class="restaurant-section">
-    <h2>🍽️ 推薦餐廳詳情</h2>
-    <div class="sub">分為正餐與小食，按需求篩選 · 招牌菜、排隊提醒、鄰近景點一應俱全</div>
-    <div class="restaurant-grid" id="restaurantDetails"></div>
-</div>
-
-
 <div class="top">
     <a href="#">↑ 返回頁頂</a>
 </div>
@@ -970,39 +980,12 @@ function goToRestaurant(name) {
 }
 
 /* =========================================================
-   餐廳渲染 + 篩選
+   餐廳手風琴卡片 + 篩選
    ========================================================= */
 let currentRestaurantFilter = 'all';
 
-// 快速入口按鈕（頂部索引）
-function renderRestaurantIndex() {
-    const container = document.getElementById('restaurantIndexList');
-    let list = restaurants;
-    if (currentRestaurantFilter === 'dining') {
-        list = restaurants.filter(r => r.category === 'dining');
-    } else if (currentRestaurantFilter === 'snack') {
-        list = restaurants.filter(r => r.category === 'snack');
-    }
-
-    let html = '';
-    list.forEach(r => {
-        // 短名稱（去掉括號後綴）
-        const shortName = r.name.replace(/（.*?）/g, '').replace(/·.*$/g, '').trim();
-        // 副標籤用第一個標籤
-        const sub = r.tags && r.tags[0] ? r.tags[0] : '';
-        html += `
-            <button onclick="goToRestaurant('${r.name.replace(/'/g, "\\'")}')">
-                ${shortName}
-                <span class="sub">${sub}</span>
-            </button>
-        `;
-    });
-    container.innerHTML = html;
-}
-
-// 詳細卡片
-function renderRestaurantDetails() {
-    const container = document.getElementById('restaurantDetails');
+function renderRestaurantAccordion() {
+    const container = document.getElementById('restaurantAccordion');
     let list = restaurants;
     if (currentRestaurantFilter === 'dining') {
         list = restaurants.filter(r => r.category === 'dining');
@@ -1016,31 +999,44 @@ function renderRestaurantDetails() {
     }
 
     let html = '';
-    list.forEach(r => {
+    list.forEach((r, i) => {
         const isDining = r.category === 'dining';
         const badgeClass = isDining ? 'dining' : 'snack';
-        const badgeText = isDining ? '🍽️ 正餐' : '☕ 小食/下午茶';
+        const badgeText = isDining ? '🍽️ 正餐' : '☕ 小食';
 
         const dishes = (r.signatureDishes || []).join('・');
 
         html += `
-            <div class="restaurant-card ${badgeClass}">
-                <span class="badge ${badgeClass}">${badgeText}</span>
-                <div class="rc-name">${r.name}</div>
-                <div class="rc-desc">${r.desc || ''}</div>
-                ${dishes ? `<div class="rc-signature"><strong>🍴 招牌必點</strong>${dishes}</div>` : ''}
-                <div class="rc-meta">
-                    ${r.nearby ? `<span>📍 ${r.nearby}</span>` : ''}
-                    ${r.duration ? `<span>⏱ ${r.duration}</span>` : ''}
+            <div class="acc-card ${badgeClass}" data-index="${i}">
+                <div class="acc-header" onclick="toggleAcc(this)">
+                    <span class="acc-badge ${badgeClass}">${badgeText}</span>
+                    <span class="acc-name">${r.name}</span>
+                    <span class="acc-arrow">▼</span>
                 </div>
-                ${r.queueTip ? `<div class="rc-tip">${r.queueTip}</div>` : ''}
-                <div class="rc-actions">
-                    <a href="map.html?spot=${encodeURIComponent(r.name)}">🗺️ 查看地圖</a>
+                <div class="acc-body">
+                    <div class="acc-inner">
+                        ${r.desc ? `<div class="acc-desc">${r.desc}</div>` : ''}
+                        ${dishes ? `<div class="acc-signature"><strong>🍴 招牌必點</strong>${dishes}</div>` : ''}
+                        <div class="acc-meta">
+                            ${r.nearby ? `<span>📍 ${r.nearby}</span>` : ''}
+                            ${r.duration ? `<span>⏱ ${r.duration}</span>` : ''}
+                        </div>
+                        ${r.queueTip ? `<div class="acc-tip">${r.queueTip}</div>` : ''}
+                        <div class="acc-actions">
+                            <a href="map.html?spot=${encodeURIComponent(r.name)}">🗺️ 查看地圖</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
     });
     container.innerHTML = html;
+}
+
+// 展開 / 收起
+function toggleAcc(header) {
+    const card = header.parentElement;
+    card.classList.toggle('open');
 }
 
 // 篩選按鈕事件
@@ -1049,8 +1045,7 @@ document.querySelectorAll('#restaurantFilter .filter-btn').forEach(btn => {
         document.querySelectorAll('#restaurantFilter .filter-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         currentRestaurantFilter = this.dataset.filter;
-        renderRestaurantIndex();
-        renderRestaurantDetails();
+        renderRestaurantAccordion();
     });
 });
 
@@ -1143,8 +1138,7 @@ document.getElementById('noteInput').addEventListener('keydown', function (e) {
 /* =========================================================
    初始化
    ========================================================= */
-renderRestaurantIndex();
-renderRestaurantDetails();
+renderRestaurantAccordion();
 renderNotes();
 </script>
 
