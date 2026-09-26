@@ -3,111 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>金陵慢遊｜景點百科</title>
 
 <style>
-   .spot-highlight {
-    animation: spotFlash 1.5s ease;
-}
-
+.spot-highlight { animation: spotFlash 1.5s ease; }
 @keyframes spotFlash {
-    0% {
-        box-shadow: 0 0 0 4px rgba(108, 130, 110, 0.45);
-    }
-
-    50% {
-        box-shadow: 0 0 0 8px rgba(108, 130, 110, 0.20);
-    }
-
-    100% {
-        box-shadow: 0 4px 18px rgba(80, 70, 50, 0.08);
-    }
+    0% { box-shadow: 0 0 0 4px rgba(108, 130, 110, 0.45); }
+    50% { box-shadow: 0 0 0 8px rgba(108, 130, 110, 0.20); }
+    100% { box-shadow: 0 4px 18px rgba(80, 70, 50, 0.08); }
 }
+
 /* =========================
    景點百科
    ========================= */
-
 .spot-index {
   margin: 20px 16px 30px;
   padding: 20px 16px;
   background: #f8f5ed;
   border-radius: 22px;
   box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+  position: relative;
 }
+.spot-index-title { font-size: 26px; font-weight: 700; color: #4f6256; margin-bottom: 5px; }
+.spot-index-subtitle { font-size: 16px; color: #8b897f; margin-bottom: 16px; }
 
-.spot-index-title {
-  font-size: 26px;
-  font-weight: 700;
-  color: #4f6256;
-  margin-bottom: 5px;
-}
-
-.spot-index-subtitle {
-  font-size: 16px;
-  color: #8b897f;
-  margin-bottom: 16px;
-}
-
-.spot-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
+.spot-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .spot-list button {
-  min-height: 58px;
-  padding: 10px 12px;
-
-  border: 1px solid #e1ded5;
-  border-radius: 16px;
-
-  background: #ffffff;
-  color: #4f6256;
-
-  font-size: 17px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
-
-  transition:
-    transform 0.15s ease,
-    background 0.15s ease;
+  min-height: 58px; padding: 10px 12px;
+  border: 1px solid #e1ded5; border-radius: 16px;
+  background: #ffffff; color: #4f6256;
+  font-size: 17px; font-weight: 600;
+  cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+  transition: transform 0.15s ease, background 0.15s ease;
 }
-
-.spot-list button:active {
-  transform: scale(0.97);
-  background: #edf2ed;
-}
-
-.spot-list button:hover {
-  background: #f2f5f1;
-}
+.spot-list button:active { transform: scale(0.97); background: #edf2ed; }
+.spot-list button:hover { background: #f2f5f1; }
 
 /* 拿地圖的鴨子樣式 */
 .duck-map {
     position: absolute;
-
-    /* 定位調整：放喺右上角 */
-    top: 10px;       /* 距離頂部 10px */
-    right: 15px;     /* 距離右邊 15px */
-
-    /* 尺寸設定（與首頁差不多大） */
-    width: 85px;     
+    top: 10px;
+    right: 15px;
+    width: 85px;
     height: auto;
     z-index: 10;
-
-    /* 浮動動畫 */
     animation: floatDuck 3s ease-in-out infinite;
     transition: transform 0.2s ease;
-
-    /* 防止鴨子遮擋點擊 */
-    pointer-events: none; 
+    pointer-events: none;
 }
-
-/* 浮動動畫（保持不變） */
 @keyframes floatDuck {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-6px); }
@@ -117,7 +60,6 @@
 /* =========================
    推薦餐廳快速方塊
    ========================= */
-
 .restaurant-index {
   margin: 20px 16px 30px;
   padding: 20px 16px;
@@ -126,111 +68,111 @@
   box-shadow: 0 3px 12px rgba(0,0,0,0.05);
   border: 1px solid #efe8dc;
 }
+.restaurant-index-title { font-size: 26px; font-weight: 700; color: #8a6e4b; margin-bottom: 5px; }
+.restaurant-index-subtitle { font-size: 16px; color: #8b897f; margin-bottom: 16px; }
 
-.restaurant-index-title {
-  font-size: 26px;
-  font-weight: 700;
-  color: #8a6e4b;
-  margin-bottom: 5px;
+.restaurant-list { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.restaurant-list button {
+  min-height: 56px; padding: 10px 8px;
+  border: 1px solid #e8ddd0; border-radius: 14px;
+  background: #ffffff; color: #6a5a4a;
+  font-size: 15px; font-weight: 600;
+  cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+  transition: transform 0.15s ease, background 0.15s ease;
 }
+.restaurant-list button:active { transform: scale(0.97); background: #f8f0e6; }
+.restaurant-list button .sub { display: block; font-size: 11px; font-weight: 400; color: #b09a88; margin-top: 2px; }
 
-.restaurant-index-subtitle {
-  font-size: 16px;
-  color: #8b897f;
+/* =========================
+   篩選按鈕
+   ========================= */
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-bottom: 16px;
 }
-
-.restaurant-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
-}
-
-.restaurant-list button {
-  min-height: 56px;
-  padding: 10px 8px;
-
-  border: 1px solid #e8ddd0;
-  border-radius: 14px;
-
-  background: #ffffff;
-  color: #6a5a4a;
-
+.filter-btn {
+  padding: 8px 16px;
+  border-radius: 24px;
+  border: 1px solid #e0ddd5;
+  background: white;
   font-size: 15px;
   font-weight: 600;
-
+  color: #6a6a5a;
   cursor: pointer;
-
-  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
-
-  transition:
-    transform 0.15s ease,
-    background 0.15s ease;
+  transition: 0.15s;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
 }
+.filter-btn:active { transform: scale(0.94); }
+.filter-btn.active { background: #657b6d; color: white; border-color: #657b6d; }
 
-.restaurant-list button:active {
-  transform: scale(0.97);
-  background: #f8f0e6;
+/* =========================
+   備註區
+   ========================= */
+.note-box {
+  margin: 0 16px 24px;
+  background: #fffdf7;
+  border: 1.5px dashed #d9c9a8;
+  border-radius: 18px;
+  padding: 16px 14px;
 }
+.note-box .note-title {
+  font-size: 17px; font-weight: 700; color: #8a6e4b;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+}
+.note-input-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.note-input-row input {
+  flex: 1; padding: 12px 14px;
+  border: 1px solid #e0ddd5; border-radius: 10px;
+  font-size: 16px; background: white;
+  font-family: inherit; color: #3f3933;
+}
+.note-input-row input:focus { outline: none; border-color: #b89a68; }
+.note-input-row button {
+  padding: 12px 18px; border: none; border-radius: 10px;
+  background: #b89a68; color: white;
+  font-size: 16px; font-weight: 700;
+  cursor: pointer; white-space: nowrap; font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.note-input-row button:active { transform: scale(0.95); }
 
-.restaurant-list button .sub {
-  display: block;
-  font-size: 11px;
-  font-weight: 400;
-  color: #b09a88;
-  margin-top: 2px;
+.note-list { display: flex; flex-direction: column; gap: 8px; }
+.note-item {
+  display: flex; align-items: center; gap: 10px;
+  background: white; border-radius: 10px;
+  padding: 10px 14px; font-size: 16px; color: #4d5748;
+  box-shadow: 0 2px 6px rgba(80, 70, 50, 0.05);
 }
+.note-item .note-text { flex: 1; word-break: break-word; }
+.note-item .note-del {
+  background: none; border: none; color: #d0c8bc;
+  font-size: 18px; cursor: pointer; padding: 2px 6px;
+  border-radius: 6px; -webkit-tap-highlight-color: transparent;
+}
+.note-item .note-del:active { color: #b07a6a; transform: scale(0.9); }
+.note-empty { text-align: center; color: #b0a898; font-size: 15px; padding: 8px 0; }
 
 /* 手機細螢幕 */
 @media (max-width: 500px) {
-
-  .spot-list {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .spot-list button {
-    min-height: 54px;
-    font-size: 16px;
-    padding: 8px 10px;
-  }
-
-  .restaurant-list {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .restaurant-list button {
-    min-height: 52px;
-    font-size: 14px;
-  }
-
-  .restaurant-index-title {
-    font-size: 22px;
-  }
+  .spot-list { grid-template-columns: 1fr 1fr; }
+  .spot-list button { min-height: 54px; font-size: 16px; padding: 8px 10px; }
+  .restaurant-list { grid-template-columns: 1fr 1fr; }
+  .restaurant-list button { min-height: 52px; font-size: 14px; }
+  .restaurant-index-title { font-size: 22px; }
 }
-
 @media (max-width: 380px) {
-  .spot-list {
-    grid-template-columns: 1fr;
-  }
-
-  .restaurant-list {
-    grid-template-columns: 1fr;
-  }
+  .spot-list { grid-template-columns: 1fr; }
+  .restaurant-list { grid-template-columns: 1fr; }
 }
 
-*{
-    box-sizing:border-box;
-}
+*{ box-sizing:border-box; }
 
 body{
     margin:0;
-    font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Noto Sans TC",
-    "Microsoft JhengHei",
-    sans-serif;
-
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
     background:#f7f3ed;
     color:#3f3933;
     line-height:1.9;
@@ -238,28 +180,13 @@ body{
 }
 
 header{
-    background:linear-gradient(
-        135deg,
-        #6e7665,
-        #89917b
-    );
-
+    background:linear-gradient(135deg, #6e7665, #89917b);
     color:white;
     padding:28px 18px;
     text-align:center;
 }
-
-header h1{
-    margin:0;
-    font-size:30px;
-    letter-spacing:2px;
-}
-
-header p{
-    margin:6px 0 0;
-    font-size:16px;
-    opacity:.9;
-}
+header h1{ margin:0; font-size:30px; letter-spacing:2px; }
+header p{ margin:6px 0 0; font-size:16px; opacity:.9; }
 
 .container{
     max-width:760px;
@@ -268,314 +195,109 @@ header p{
 }
 
 /* 景點卡 */
-
 .spot{
     background:white;
     border-radius:18px;
     margin-bottom:22px;
     overflow:hidden;
-
-    box-shadow:
-    0 4px 18px rgba(80,70,50,.08);
+    box-shadow: 0 4px 18px rgba(80,70,50,.08);
 }
-
 .spot-title{
     padding:20px 20px 14px;
-
-    background:
-    linear-gradient(
-        135deg,
-        #f1eee7,
-        #faf8f3
-    );
+    background: linear-gradient(135deg, #f1eee7, #faf8f3);
 }
+.spot-title h2{ margin:0; font-size:26px; color:#4d5748; }
+.subtitle{ margin-top:4px; color:#8a715c; font-size:16px; }
 
-.spot-title h2{
-    margin:0;
-    font-size:26px;
-    color:#4d5748;
-}
+.section{ padding:18px 20px; border-top:1px solid #eee9e0; }
+.section h3{ margin:0 0 12px; font-size:20px; color:#59644f; }
+.section p{ margin:0 0 12px; font-size:18px; }
+.section p:last-child { margin-bottom:0; }
 
-.subtitle{
-    margin-top:4px;
-    color:#8a715c;
-    font-size:16px;
-}
-
-.section{
-    padding:18px 20px;
-    border-top:1px solid #eee9e0;
-}
-
-.section h3{
-    margin:0 0 12px;
-    font-size:20px;
-    color:#59644f;
-}
-
-.section p{
-    margin:0 0 12px;
-    font-size:18px;
-}
-
-.section p:last-child {
-    margin-bottom:0;
-}
-
-ul{
-    margin:5px 0 0;
-    padding-left:22px;
-}
-
-li{
-    margin-bottom:8px;
-    font-size:18px;
-}
+ul{ margin:5px 0 0; padding-left:22px; }
+li{ margin-bottom:8px; font-size:18px; }
 
 /* 資訊格 */
-
-.info-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.info{
-    background:#f7f4ee;
-    border-radius:12px;
-    padding:12px 14px;
-}
-
-.info strong{
-    display:block;
-    color:#6c7562;
-    font-size:15px;
-}
-
-.info span{
-    font-size:16px;
-}
+.info-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.info{ background:#f7f4ee; border-radius:12px; padding:12px 14px; }
+.info strong{ display:block; color:#6c7562; font-size:15px; }
+.info span{ font-size:16px; }
 
 /* 活力需求 */
-
 .energy {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: #f0f2ec;
-    padding: 14px 16px;
-    border-radius: 12px;
-    flex-wrap: wrap;
+    display: flex; align-items: center; gap: 12px;
+    background: #f0f2ec; padding: 14px 16px;
+    border-radius: 12px; flex-wrap: wrap;
 }
-
-.energy-title {
-    font-weight: bold;
-    color: #59644f;
-    font-size: 17px;
-}
-
-.energy .bolts {
-    font-size: 22px;
-    letter-spacing: 2px;
-}
-
-.energy .hint {
-    font-size: 15px;
-    color: #8a8a7a;
-    margin-left: auto;
-}
+.energy-title { font-weight: bold; color: #59644f; font-size: 17px; }
+.energy .bolts { font-size: 22px; letter-spacing: 2px; }
+.energy .hint { font-size: 15px; color: #8a8a7a; margin-left: auto; }
 
 /* 按鈕 */
-
-.buttons{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:10px;
-}
-
+.buttons{ display:grid; grid-template-columns:1fr; gap:10px; }
 .btn{
-    display:block;
-    text-align:center;
-    text-decoration:none;
-
-    padding:13px 10px;
-
-    border-radius:12px;
-
-    font-size:17px;
-    font-weight:bold;
+    display:block; text-align:center; text-decoration:none;
+    padding:13px 10px; border-radius:12px;
+    font-size:17px; font-weight:bold;
 }
-
-.map{
-    background:#e9eee5;
-    color:#53614b;
-}
+.map{ background:#e9eee5; color:#53614b; }
 
 /* 回頂 */
-
-.top{
-    text-align:center;
-    margin-top:25px;
-}
-
-.top a{
-    color:#68735e;
-    text-decoration:none;
-    font-size:17px;
-}
+.top{ text-align:center; margin-top:25px; }
+.top a{ color:#68735e; text-decoration:none; font-size:17px; }
 
 /* 手機 */
-
 @media(max-width:500px){
-
-    header h1{
-        font-size:26px;
-    }
-
-    .container{
-        padding:12px 10px 40px;
-    }
-
-    .spot-title{
-        padding:18px 17px 12px;
-    }
-
-    .section{
-        padding:16px 17px;
-    }
-
-    .spot-title h2{
-        font-size:22px;
-    }
-
-    .section h3{
-        font-size:18px;
-    }
-
-    .section p,
-    li{
-        font-size:17px;
-    }
-
-    .spot-index-title {
-        font-size:22px;
-    }
-
-    .spot-list button {
-        font-size:16px;
-        min-height:54px;
-    }
-
-    .energy .bolts {
-        font-size:19px;
-    }
-
+    header h1{ font-size:26px; }
+    .container{ padding:12px 10px 40px; }
+    .spot-title{ padding:18px 17px 12px; }
+    .section{ padding:16px 17px; }
+    .spot-title h2{ font-size:22px; }
+    .section h3{ font-size:18px; }
+    .section p, li{ font-size:17px; }
+    .spot-index-title { font-size:22px; }
+    .spot-list button { font-size:16px; min-height:54px; }
+    .energy .bolts { font-size:19px; }
 }
-/* =========================
-   返回景點目錄按鈕
-   ========================= */
 
+/* 返回景點目錄按鈕 */
 #backToSpots {
-    position: fixed;
-    right: 16px;
-    bottom: 90px;
-    z-index: 9999;
-
-    border: none;
-    border-radius: 999px;
-
-    padding: 14px 18px;
-
-    background: rgba(108, 126, 111, 0.94);
-    color: white;
-
-    font-size: 16px;
-    font-weight: 600;
-
+    position: fixed; right: 16px; bottom: 90px; z-index: 9999;
+    border: none; border-radius: 999px; padding: 14px 18px;
+    background: rgba(108, 126, 111, 0.94); color: white;
+    font-size: 16px; font-weight: 600;
     box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-
-    cursor: pointer;
-
-    -webkit-tap-highlight-color: transparent;
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
 }
+#backToSpots:active { transform: scale(0.95); }
 
-#backToSpots:active {
-    transform: scale(0.95);
-}
-
-/* =========================
-   手機底部導航
-   ========================= */
-
+/* 手機底部導航 */
 .mobile-nav {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 70px;
-
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
+    position: fixed; left: 0; right: 0; bottom: 0; height: 70px;
+    display: flex; justify-content: space-around; align-items: center;
     background: rgba(255, 255, 255, 0.96);
-
     border-top: 1px solid #e8e5dc;
-
     box-shadow: 0 -3px 15px rgba(0,0,0,0.08);
-
     z-index: 9998;
-
     padding-bottom: env(safe-area-inset-bottom);
 }
-
 .mobile-nav a {
-    flex: 1;
-
-    height: 70px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    text-decoration: none;
-
-    color: #88877f;
-
+    flex: 1; height: 70px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-decoration: none; color: #88877f;
     -webkit-tap-highlight-color: transparent;
 }
-
-.mobile-nav a span {
-    font-size: 22px;
-    line-height: 24px;
-}
-
-.mobile-nav a small {
-    margin-top: 3px;
-
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.mobile-nav a.active {
-    color: #607667;
-}
-
-.mobile-nav a:active {
-    transform: scale(0.95);
-}
+.mobile-nav a span { font-size: 22px; line-height: 24px; }
+.mobile-nav a small { margin-top: 3px; font-size: 13px; font-weight: 600; }
+.mobile-nav a.active { color: #607667; }
+.mobile-nav a:active { transform: scale(0.95); }
 
 /* 避免底部內容被導航列遮住 */
-body {
-    padding-bottom: 95px;
-}
+body { padding-bottom: 95px; }
 
 /* =========================
-   推薦餐廳專區（底部完整版）
+   推薦餐廳詳情卡片
    ========================= */
-
 .restaurant-section {
     margin-top: 35px;
     background: white;
@@ -583,64 +305,74 @@ body {
     padding: 20px 18px;
     box-shadow: 0 4px 18px rgba(80,70,50,.08);
 }
+.restaurant-section h2 { margin: 0 0 6px; font-size: 26px; color: #4d5748; }
+.restaurant-section .sub { color: #8a8a7a; font-size: 16px; margin-bottom: 16px; }
 
-.restaurant-section h2 {
-    margin: 0 0 6px;
-    font-size: 26px;
-    color: #4d5748;
-}
+.restaurant-grid { display: flex; flex-direction: column; gap: 12px; }
 
-.restaurant-section .sub {
-    color: #8a8a7a;
-    font-size: 16px;
-    margin-bottom: 16px;
-}
-
-.restaurant-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.restaurant-item {
-    background: #f8f5ed;
+.restaurant-card {
+    background: #faf8f5;
     border-radius: 14px;
-    padding: 14px 14px;
+    padding: 16px 14px;
+    border-left: 5px solid #e0ddd5;
 }
+.restaurant-card.dining { border-left-color: #1E3A8A; }
+.restaurant-card.snack { border-left-color: #D97706; }
 
-.restaurant-item .name {
-    font-weight: 700;
-    font-size: 17px;
-    color: #3f3933;
+.restaurant-card .badge {
+    display: inline-block;
+    font-size: 13px; font-weight: 700;
+    padding: 3px 12px; border-radius: 20px;
+    margin-bottom: 8px;
 }
+.restaurant-card .badge.dining { background: #e8edf5; color: #1E3A8A; }
+.restaurant-card .badge.snack { background: #fef3e2; color: #D97706; }
 
-.restaurant-item .feature {
-    font-size: 15px;
-    color: #8a715c;
-    margin-top: 2px;
+.restaurant-card .rc-name {
+    font-size: 19px; font-weight: 700;
+    color: #3f3933; margin-bottom: 4px;
 }
-
-.restaurant-item .addr {
+.restaurant-card .rc-desc {
+    font-size: 15px; color: #756e66; margin-bottom: 10px;
+}
+.restaurant-card .rc-signature {
+    background: #ffffff; border-radius: 10px;
+    padding: 10px 12px; margin-bottom: 10px;
+    font-size: 15px; color: #4d5748;
+}
+.restaurant-card .rc-signature strong {
+    display: block; font-size: 13px;
+    color: #8a8a7a; margin-bottom: 4px;
+}
+.restaurant-card .rc-meta {
+    display: flex; flex-wrap: wrap;
+    gap: 6px 14px; font-size: 14px;
+    color: #8a8a7a; margin-bottom: 10px;
+}
+.restaurant-card .rc-tip {
+    background: #fff8e6;
+    border-left: 3px solid #D97706;
+    border-radius: 6px;
+    padding: 8px 12px;
     font-size: 14px;
-    color: #aaa;
-    margin-top: 4px;
+    color: #8a6e2a;
+    margin-bottom: 10px;
 }
+.restaurant-card .rc-actions { display: flex; gap: 8px; }
+.restaurant-card .rc-actions a {
+    flex: 1; text-align: center;
+    padding: 10px 6px; border-radius: 10px;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none;
+    background: #657b6d; color: white;
+}
+.restaurant-card .rc-actions a:active { transform: scale(0.97); }
 
 @media (max-width: 500px) {
-    .restaurant-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .restaurant-section h2 {
-        font-size: 22px;
-    }
-
-    .restaurant-item .name {
-        font-size: 16px;
-    }
+    .restaurant-section h2 { font-size: 22px; }
+    .restaurant-card .rc-name { font-size: 17px; }
 }
 </style>
-
 </head>
 
 <body>
@@ -653,22 +385,12 @@ body {
 <div class="container">
 
 <!-- 景點百科快速入口 -->
-<section class="spot-index" style="position: relative;"> <!-- 加入 position: relative; -->
-
-  <!-- 拿地圖的鴨子（放喺最頂） -->
+<section class="spot-index">
   <img src="duck-map.png" alt="地圖導遊鴨" class="duck-map">
-
-  <!-- 原有標題（保留原裝，不要重複） -->
-  <div class="spot-index-title">
-    📚 景點百科
-  </div>
-
-  <div class="spot-index-subtitle">
-    點選景點，直接查看完整導遊資料
-  </div>
+  <div class="spot-index-title">📚 景點百科</div>
+  <div class="spot-index-subtitle">點選景點，直接查看完整導遊資料</div>
 
   <div class="spot-list">
-
     <button onclick="goSpot('南京博物院')">1. 南京博物院🎧</button>
     <button onclick="goSpot('明孝陵')">2. 明孝陵🎧</button>
     <button onclick="goSpot('總統府')">3. 總統府🎧</button>
@@ -687,112 +409,51 @@ body {
     <button onclick="goSpotById('nanjing-massacre-memorial')">16. 南京大屠殺紀念館</button>
     <button onclick="goSpot('高淳老街')">17. 高淳老街</button>
     <button onclick="goSpot('漆橋古村')">18. 漆橋古村</button>
-
   </div>
-
 </section>
 
-<!-- 推薦餐廳快速方塊 -->
+<!-- 推薦餐廳快速方塊 + 篩選 -->
 <section class="restaurant-index">
+  <div class="restaurant-index-title">🍽️ 推薦餐廳</div>
+  <div class="restaurant-index-subtitle">點選餐廳，查看地圖位置</div>
 
-  <div class="restaurant-index-title">
-    🍽️ 推薦餐廳
+  <!-- 篩選按鈕 -->
+  <div class="filter-row" id="restaurantFilter">
+    <button class="filter-btn active" data-filter="all">全部</button>
+    <button class="filter-btn" data-filter="dining">🍽️ 正餐</button>
+    <button class="filter-btn" data-filter="snack">☕ 小食/下午茶</button>
   </div>
 
-  <div class="restaurant-index-subtitle">
-    點選餐廳，查看地圖位置
-  </div>
-
-  <div class="restaurant-list">
-
-    <button onclick="goToRestaurant('天圓樓·老南京菜')">
-      天圓樓
-      <span class="sub">金陵烤鴨</span>
-    </button>
-
-    <button onclick="goToRestaurant('碳山河·茶湯火鍋')">
-      碳山河
-      <span class="sub">茶湯火鍋</span>
-    </button>
-
-    <button onclick="goToRestaurant('南京大牌檔')">
-      南京大牌檔
-      <span class="sub">小吃全集</span>
-    </button>
-
-    <button onclick="goToRestaurant('奇芳閣')">
-      奇芳閣
-      <span class="sub">鴨油酥燒餅</span>
-    </button>
-
-    <button onclick="goToRestaurant('韓復興板鴨店')">
-      韓復興
-      <span class="sub">鹽水鴨</span>
-    </button>
-
-    <button onclick="goToRestaurant('金宏興鴨子店')">
-      金宏興
-      <span class="sub">烤鴨</span>
-    </button>
-
-    <button onclick="goToRestaurant('李記清真館')">
-      李記清真
-      <span class="sub">牛肉鍋貼</span>
-    </button>
-
-    <button onclick="goToRestaurant('蔣有記')">
-      蔣有記
-      <span class="sub">牛肉鍋貼</span>
-    </button>
-
-    <button onclick="goToRestaurant('雞鳴湯包')">
-      雞鳴湯包
-      <span class="sub">雞汁湯包</span>
-    </button>
-
-    <button onclick="goToRestaurant('小潘記鴨血粉絲湯')">
-      小潘記
-      <span class="sub">鴨血粉絲湯</span>
-    </button>
-
-    <button onclick="goToRestaurant('回味鴨血粉絲湯')">
-      回味
-      <span class="sub">鴨血粉絲湯</span>
-    </button>
-
-    <button onclick="goToRestaurant('小廚娘淮揚菜')">
-      小廚娘
-      <span class="sub">淮揚菜</span>
-    </button>
-
-  </div>
-
+  <div class="restaurant-list" id="restaurantIndexList"></div>
 </section>
 
+<!-- 備註區：手動輸入想去嘅餐廳 -->
+<div class="note-box">
+    <div class="note-title">📝 我想去嘅餐廳（備註）</div>
+    <div class="note-input-row">
+        <input type="text" id="noteInput" placeholder="輸入餐廳名稱…" maxlength="40">
+        <button id="addNoteBtn">➕ 加入</button>
+    </div>
+    <div class="note-list" id="noteList">
+        <div class="note-empty">暫時未有備註，快啲加入想去嘅餐廳啦！</div>
+    </div>
+</div>
+
+
+<!-- ==================================================
+     景點卡片（1-18）
+     ================================================== -->
 
 <!-- 1. 南京博物院 -->
 <div class="spot">
-<div class="spot-title">
-<h2>1. 南京博物院</h2>
-<div class="subtitle">中國三大博物館之一 · 江蘇五千年文明縮影</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>南京博物院是中國三大博物館之一，擁有42萬件珍貴藏品。館區分為歷史館、特展館、數字館、民國館和藝術館，三幢建築相連。</p>
-</div>
-
-<div class="section">
-<h3>✨ 不可錯過的看點</h3>
-<ul>
+<div class="spot-title"><h2>1. 南京博物院</h2><div class="subtitle">中國三大博物館之一 · 江蘇五千年文明縮影</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>南京博物院是中國三大博物館之一，擁有42萬件珍貴藏品。館區分為歷史館、特展館、數字館、民國館和藝術館，三幢建築相連。</p></div>
+<div class="section"><h3>✨ 不可錯過的看點</h3><ul>
 <li><b>歷史館：</b>從遠古到明清按時代順序陳列文物，行走其中如同漫步江蘇上下五千年文明。鎮館之寶包括金縷衣、銀縷衣，以及南北朝時期刻有「竹林七賢」的磚雕牆。</li>
 <li><b>民國館：</b>南博最具特色的展館，復原了一整條民國街道。服裝店真的賣旗袍、郵局真的賣郵票。建築內部彼此連通，可從一棟樓穿到另一棟的二層，俯瞰街景。館內甚至陳列著一列民國小火車，踏進展館瞬間彷彿穿越時空。</li>
 <li><b>數字館：</b>以多媒體呈現明代《南都繁會景物圖卷》——堪稱江南版《清明上河圖》；還有動態展示的《韓熙載夜宴圖》，沿弧形牆面行走如同走進畫中。</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+</ul></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>約 3 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>免費，需預約</span></div>
@@ -808,44 +469,24 @@ body {
     <span class="hint">館區大，需步行 2-3 小時，但有冷氣、多座位</span>
 </div>
 </div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>務必提前7天通過官方小程序預約，門票免費但名額極其搶手。建議預留3小時，可租借講解器（租金20元）。部分團友可以參加專業講解團，其他人可按自己興趣自由參觀。</p>
-</div>
-
-<div class="section">
-<div class="buttons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+<div class="section"><h3>💡 導遊建議</h3><p>務必提前7天通過官方小程序預約，門票免費但名額極其搶手。建議預留3小時，可租借講解器（租金20元）。部分團友可以參加專業講解團，其他人可按自己興趣自由參觀。</p></div>
+<div class="section"><div class="buttons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
     <a class="btn map" href="nanjing-museum-guide.html" style="background:#b89a68; color:white;">🎧 自助講解</a>
     <a class="btn map" href="map.html?spot=南京博物院">🗺️ 查看地圖</a>
-</div>
-</div>
+</div></div>
 </div>
 
 
 <!-- 2. 明孝陵 -->
 <div class="spot">
-<div class="spot-title">
-<h2>2. 明孝陵</h2>
-<div class="subtitle">世界文化遺產 · 南京秋色之魂</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>明孝陵是明太祖朱元璋與馬皇后的陵寢，世界文化遺產明清皇家陵寢的組成部分。與前朝帝王陵墓不同，明孝陵神道蜿蜒曲折，環繞梅花山形成北斗七星狀。</p>
-</div>
-
-<div class="section">
-<h3>✨ 不可錯過的看點</h3>
-<ul>
+<div class="spot-title"><h2>2. 明孝陵</h2><div class="subtitle">世界文化遺產 · 南京秋色之魂</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>明孝陵是明太祖朱元璋與馬皇后的陵寢，世界文化遺產明清皇家陵寢的組成部分。與前朝帝王陵墓不同，明孝陵神道蜿蜒曲折，環繞梅花山形成北斗七星狀。</p></div>
+<div class="section"><h3>✨ 不可錯過的看點</h3><ul>
 <li><b>石象路（「南京最美600米」）：</b>神道東段全長615米，兩側依次排列獅子、獬豸、駱駝、大象、麒麟、馬六種石獸，每種兩跪兩立，共12對24件。最大石象重達80噸。11月初銀杏金黃、紅楓似火，色彩斑斕，是南京秋色的巔峰之作。</li>
 <li><b>翁仲路：</b>神道北段，立有八尊文武官像（兩對武將、兩對文臣），源於秦將阮翁仲守陵典故。</li>
 <li><b>方城明樓：</b>明孝陵核心建築，登上明樓可遠眺紫金山全景。</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+</ul></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>約 2.5 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>約 ¥70</span></div>
@@ -861,43 +502,23 @@ body {
     <span class="hint">景區極大，雖可坐觀光車，但石象路仍需步行</span>
 </div>
 </div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>建議上午8:00前抵達，避開人潮並捕捉最佳光線。景區極大，務必乘坐景區觀光車減少步行。集中欣賞石象路、翁仲路及方城明樓即可。</p>
-</div>
-
-<div class="section">
-<div class="buttons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+<div class="section"><h3>💡 導遊建議</h3><p>建議上午8:00前抵達，避開人潮並捕捉最佳光線。景區極大，務必乘坐景區觀光車減少步行。集中欣賞石象路、翁仲路及方城明樓即可。</p></div>
+<div class="section"><div class="buttons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
     <a class="btn map" href="mingxiaoling-guide.html" style="background:#b89a68; color:white;">🎧 自助講解</a>
     <a class="btn map" href="map.html?spot=明孝陵">🗺️ 查看地圖</a>
-</div>
-</div>
+</div></div>
 </div>
 
 
 <!-- 3. 總統府 -->
 <div class="spot">
-<div class="spot-title">
-<h2>3. 總統府</h2>
-<div class="subtitle">中國近代史縮影 · 六百年歷史建築群</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>南京總統府是中國近代建築遺存中規模最大、保存最完整的建築群，有600多年歷史。明初為歸德侯府和漢王府；清代為兩江總督署、江寧織造署；太平天國時改建為天王府；1912年孫中山在此宣誓就職臨時大總統。</p>
-</div>
-
-<div class="section">
-<h3>✨ 不可錯過的看點</h3>
-<ul>
+<div class="spot-title"><h2>3. 總統府</h2><div class="subtitle">中國近代史縮影 · 六百年歷史建築群</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>南京總統府是中國近代建築遺存中規模最大、保存最完整的建築群，有600多年歷史。明初為歸德侯府和漢王府；清代為兩江總督署、江寧織造署；太平天國時改建為天王府；1912年孫中山在此宣誓就職臨時大總統。</p></div>
+<div class="section"><h3>✨ 不可錯過的看點</h3><ul>
 <li><b>中西建築融合：</b>既有中國傳統江南園林（煦園），也有西風東漸的民國建築遺存。</li>
 <li><b>三大展區：</b>中區為國民政府及總統府舊址；西區有孫中山臨時大總統辦公室、西花園；東區有行政院舊址等。</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+</ul></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>約 2.5 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>約 ¥35（60-69歲半價）</span></div>
@@ -913,44 +534,24 @@ body {
     <span class="hint">建築群較大，有室外園林步行，但有座位可休息</span>
 </div>
 </div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>建議按照明代王府 → 太平天國 → 民國總統府的時間線參觀，會更加容易理解南京在中國近代史中的特殊地位。需提前在「南京總統府」小程序預約。</p>
-</div>
-
-<div class="section">
-<div class="buttons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+<div class="section"><h3>💡 導遊建議</h3><p>建議按照明代王府 → 太平天國 → 民國總統府的時間線參觀，會更加容易理解南京在中國近代史中的特殊地位。需提前在「南京總統府」小程序預約。</p></div>
+<div class="section"><div class="buttons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
     <a class="btn map" href="zongtongfu-guide.html" style="background:#b89a68; color:white;">🎧 自助講解</a>
     <a class="btn map" href="map.html?spot=總統府">🗺️ 查看地圖</a>
-</div>
-</div>
+</div></div>
 </div>
 
 
 <!-- 4. 科舉博物館 -->
 <div class="spot">
-<div class="spot-title">
-<h2>4. 科舉博物館</h2>
-<div class="subtitle">中國唯一地下博物館 · 江南貢院遺址</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>中國科舉博物館以江南貢院遺址為基礎修建。江南貢院曾是中國最大考場，佔地30餘萬平方米，僅號舍就有20644間。</p>
-</div>
-
-<div class="section">
-<h3>✨ 不可錯過的看點</h3>
-<ul>
+<div class="spot-title"><h2>4. 科舉博物館</h2><div class="subtitle">中國唯一地下博物館 · 江南貢院遺址</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>中國科舉博物館以江南貢院遺址為基礎修建。江南貢院曾是中國最大考場，佔地30餘萬平方米，僅號舍就有20644間。</p></div>
+<div class="section"><h3>✨ 不可錯過的看點</h3><ul>
 <li><b>獨特建築：</b>中國唯一一座地下博物館。屋頂是一方如明鏡的「墨池」，四周環繞竹簡。入口坡道長130米，象徵科舉制度1300多年歷史。</li>
 <li><b>五大展區：</b>為國求賢、魚龍變化、金榜題名、金陵佳話、源遠流長。</li>
 <li><b>珍貴文物：</b>科第世家牌坊、宋代「唯有讀書高」陶俑、林則徐制定的規約、光緒二十年大金榜等。</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+</ul></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>1.5–2 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>約 ¥50（60-69歲半價）</span></div>
@@ -966,41 +567,19 @@ body {
     <span class="hint">全地下、有冷氣、平坦、有座位，非常輕鬆</span>
 </div>
 </div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>全地下室、恆溫空調，非常適合午後參觀。開放至22:00，時間從容。位於夫子廟核心區，從酒店步行可達。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=科舉博物館">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><h3>💡 導遊建議</h3><p>全地下室、恆溫空調，非常適合午後參觀。開放至22:00，時間從容。位於夫子廟核心區，從酒店步行可達。</p></div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=科舉博物館">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 5. 德基藝術博物館 -->
 <div class="spot">
-<div class="spot-title">
-<h2>5. 德基藝術博物館</h2>
-<div class="subtitle">全球唯一的「0點博物館」</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>德基藝術博物館位於德基廣場二期8樓，是全球唯一常態化開放至午夜0點的博物館。</p>
-</div>
-
-<div class="section">
-<h3>✨ 不可錯過的看點</h3>
-<ul>
+<div class="spot-title"><h2>5. 德基藝術博物館</h2><div class="subtitle">全球唯一的「0點博物館」</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>德基藝術博物館位於德基廣場二期8樓，是全球唯一常態化開放至午夜0點的博物館。</p></div>
+<div class="section"><h3>✨ 不可錯過的看點</h3><ul>
 <li><b>《金陵圖》數字藝術展：</b>清代宮廷畫師馮寧1794年所作，描繪宋代南京城市風貌。展覽以110米長、3.6米高的超大LED屏呈現。觀眾戴上手環、選擇宋代人物角色，即可「穿越」到畫中，與533位畫中人互動。</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+</ul></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>約 1.5 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>約 80–140 元</span></div>
@@ -1016,29 +595,15 @@ body {
     <span class="hint">商場內、全室內、有冷氣、可隨時坐低</span>
 </div>
 </div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=德基藝術博物館">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=德基藝術博物館">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 6. 六朝博物館 -->
 <div class="spot">
-<div class="spot-title">
-<h2>6. 六朝博物館</h2>
-<div class="subtitle">貝氏光影美學 · 六朝文物精華</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>六朝博物館展示六朝文物，由貝聿銘家族設計，光影空間極美。館藏以六朝時期陶瓷、石雕、磚畫為主，展陳雅緻。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+<div class="spot-title"><h2>6. 六朝博物館</h2><div class="subtitle">貝氏光影美學 · 六朝文物精華</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>六朝博物館展示六朝文物，由貝聿銘家族設計，光影空間極美。館藏以六朝時期陶瓷、石雕、磚畫為主，展陳雅緻。</p></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>1–1.5 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>約 ¥30（60-69歲半價）</span></div>
@@ -1053,37 +618,19 @@ body {
     <span class="hint">展館不大、全室內、有冷氣、有座位</span>
 </div>
 </div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=六朝博物館">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=六朝博物館">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 7. 李香君故居 -->
 <div class="spot">
-<div class="spot-title">
-<h2>7. 李香君故居（媚香樓）</h2>
-<div class="subtitle">《桃花扇》中的秦淮名妓</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>李香君是明末「秦淮八豔」之一，清初戲劇家孔尚任名著《桃花扇》中的女主角。媚香樓是十里秦淮兩岸唯一保存的明清時期古建築，已有300多年歷史。</p>
-</div>
-
-<div class="section">
-<h3>✨ 不可錯過的看點</h3>
-<ul>
+<div class="spot-title"><h2>7. 李香君故居（媚香樓）</h2><div class="subtitle">《桃花扇》中的秦淮名妓</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>李香君是明末「秦淮八豔」之一，清初戲劇家孔尚任名著《桃花扇》中的女主角。媚香樓是十里秦淮兩岸唯一保存的明清時期古建築，已有300多年歷史。</p></div>
+<div class="section"><h3>✨ 不可錯過的看點</h3><ul>
 <li><b>唯一倖存的明清河房建築：</b>背依秦淮河，擁有私家小碼頭，李香君當年從這裡出入畫舫。</li>
 <li><b>兩層木樓：</b>樓上為李香君與侯方域的新房，陳列著扇面、琵琶等展品，以及後人歌頌李香君的詩聯。</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+</ul></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>約 30 分鐘</span></div>
 <div class="info"><strong>🎫 門票</strong><span>約 ¥10（60歲以上免票）</span></div>
@@ -1098,37 +645,19 @@ body {
     <span class="hint">極小、30分鐘行完、平坦、有座位</span>
 </div>
 </div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=李香君故居">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=李香君故居">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 8. 老門東 -->
 <div class="spot">
-<div class="spot-title">
-<h2>8. 老門東歷史街區</h2>
-<div class="subtitle">明清街巷 · 南京傳統小吃集中地</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>老門東保存大量明清風格街巷及傳統建築，是了解南京城市生活與飲食文化的好地方。相比大型景區，這裡更適合隨意行走、買手信及感受氣氛。</p>
-</div>
-
-<div class="section">
-<h3>✨ 不可錯過</h3>
-<ul>
+<div class="spot-title"><h2>8. 老門東歷史街區</h2><div class="subtitle">明清街巷 · 南京傳統小吃集中地</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>老門東保存大量明清風格街巷及傳統建築，是了解南京城市生活與飲食文化的好地方。相比大型景區，這裡更適合隨意行走、買手信及感受氣氛。</p></div>
+<div class="section"><h3>✨ 不可錯過</h3><ul>
 <li>蔣有記鍋貼、陸氏梅花糕、藍老大糖芋苗等南京小吃</li>
 <li>明清風格街巷與傳統店舖</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+</ul></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>1–2 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>免費</span></div>
@@ -1141,29 +670,15 @@ body {
     <span class="hint">露天街區，步行約 1-2 小時，有凳可休息</span>
 </div>
 </div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=老門東">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=老門東">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 9. 三七八巷 -->
 <div class="spot">
-<div class="spot-title">
-<h2>9. 三七八巷</h2>
-<div class="subtitle">藏在居民樓下的地道菜市場</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>藏在居民樓下的地道菜市場，充滿老南京煙火氣。可品嚐剛出爐的燒餅、現炸油條、蒸兒糕。環境接地氣，適合喜歡體驗本地生活的長輩。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+<div class="spot-title"><h2>9. 三七八巷</h2><div class="subtitle">藏在居民樓下的地道菜市場</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>藏在居民樓下的地道菜市場，充滿老南京煙火氣。可品嚐剛出爐的燒餅、現炸油條、蒸兒糕。環境接地氣，適合喜歡體驗本地生活的長輩。</p></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>1 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>免費</span></div>
@@ -1176,29 +691,15 @@ body {
     <span class="hint">小巷步行約 1 小時，平坦、接地氣</span>
 </div>
 </div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=三七八巷">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=三七八巷">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 10. 瞻園 -->
 <div class="spot">
-<div class="spot-title">
-<h2>10. 瞻園</h2>
-<div class="subtitle">金陵第一園 · 太平天國歷史博物館</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>瞻園是南京現存歷史最悠久的明代古典園林，已有600餘年歷史，與蘇州拙政園、上海豫園等並稱為「江南四大名園」。明初為中山王徐達府邸花園，清代為布政使衙署。園內同時設有太平天國歷史博物館。87版《紅樓夢》和《新白娘子傳奇》都曾在此取景。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+<div class="spot-title"><h2>10. 瞻園</h2><div class="subtitle">金陵第一園 · 太平天國歷史博物館</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>瞻園是南京現存歷史最悠久的明代古典園林，已有600餘年歷史，與蘇州拙政園、上海豫園等並稱為「江南四大名園」。明初為中山王徐達府邸花園，清代為布政使衙署。園內同時設有太平天國歷史博物館。87版《紅樓夢》和《新白娘子傳奇》都曾在此取景。</p></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>1.5–2 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>日場約 ¥30（60-69歲半價）；夜場約 ¥50</span></div>
@@ -1212,42 +713,20 @@ body {
     <span class="hint">園林有步道、有上落，但園區不大、多座位</span>
 </div>
 </div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>秋季園內銀杏金黃，運氣好可遇見園中「喵星人」。若Day 4下午時間充裕，可在遊覽完科舉博物館和李香君故居後，直接步行前往。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=瞻園">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><h3>💡 導遊建議</h3><p>秋季園內銀杏金黃，運氣好可遇見園中「喵星人」。若Day 4下午時間充裕，可在遊覽完科舉博物館和李香君故居後，直接步行前往。</p></div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=瞻園">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 11. 雞鳴寺 -->
 <div class="spot">
-<div class="spot-title">
-<h2>11. 雞鳴寺</h2>
-<div class="subtitle">南朝第一寺 · 千年古剎</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>南京最古老的梵剎之一，有「南朝第一寺」之稱，始建於西晉，已逾1700年歷史。秋季銀杏落滿黃牆，秋意濃郁。</p>
-</div>
-
-<div class="section">
-<h3>✨ 不可錯過的看點</h3>
-<ul>
+<div class="spot-title"><h2>11. 雞鳴寺</h2><div class="subtitle">南朝第一寺 · 千年古剎</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>南京最古老的梵剎之一，有「南朝第一寺」之稱，始建於西晉，已逾1700年歷史。秋季銀杏落滿黃牆，秋意濃郁。</p></div>
+<div class="section"><h3>✨ 不可錯過的看點</h3><ul>
 <li>古寺建築與黃牆景色</li>
 <li>登上藥師佛塔可北眺玄武湖全景，東望紫金山</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+</ul></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>1–2 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>約 ¥10（含三炷香，60歲以上半價）</span></div>
@@ -1261,34 +740,16 @@ body {
     <span class="hint">有斜坡及樓梯上塔，但可選擇唔上塔，只行寺院</span>
 </div>
 </div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>可與玄武湖、台城城牆一併遊覽，安排在同一上午或下午。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=雞鳴寺">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><h3>💡 導遊建議</h3><p>可與玄武湖、台城城牆一併遊覽，安排在同一上午或下午。</p></div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=雞鳴寺">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 12. 玄武湖 -->
 <div class="spot">
-<div class="spot-title">
-<h2>12. 玄武湖</h2>
-<div class="subtitle">金陵明珠 · 皇家園林湖泊</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>江南現存最大的皇家園林湖泊，已有1600多年歷史。秋季梁洲銀杏大道一片金黃，菊花展亦在10月底至11月舉辦，是賞秋好去處。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+<div class="spot-title"><h2>12. 玄武湖</h2><div class="subtitle">金陵明珠 · 皇家園林湖泊</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>江南現存最大的皇家園林湖泊，已有1600多年歷史。秋季梁洲銀杏大道一片金黃，菊花展亦在10月底至11月舉辦，是賞秋好去處。</p></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>1.5–3 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>免費</span></div>
@@ -1303,34 +764,16 @@ body {
     <span class="hint">範圍大，但可坐觀光車，輕鬆好多</span>
 </div>
 </div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>可與雞鳴寺、台城段城牆一併遊覽。乘觀光車遊覽輕鬆愜意。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=玄武湖">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><h3>💡 導遊建議</h3><p>可與雞鳴寺、台城段城牆一併遊覽。乘觀光車遊覽輕鬆愜意。</p></div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=玄武湖">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 13. 南京城牆 -->
 <div class="spot">
-<div class="spot-title">
-<h2>13. 南京城牆（中華門甕城）</h2>
-<div class="subtitle">世界最長城垣 · 最大甕城</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>南京城牆是現存世界最長、規模最大的古代城垣，全長35.3公里。中華門甕城是我國現存規模最大的甕城，設有三道甕城、四道券門，城內有27個藏兵洞，可藏兵三千。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+<div class="spot-title"><h2>13. 南京城牆（中華門甕城）</h2><div class="subtitle">世界最長城垣 · 最大甕城</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>南京城牆是現存世界最長、規模最大的古代城垣，全長35.3公里。中華門甕城是我國現存規模最大的甕城，設有三道甕城、四道券門，城內有27個藏兵洞，可藏兵三千。</p></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>1–2 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>約 ¥47</span></div>
@@ -1344,34 +787,16 @@ body {
     <span class="hint">有上落城牆嘅樓梯，上面平坦，可慢慢行</span>
 </div>
 </div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>緊鄰老門東，可安排在一起遊覽。登上城牆可了解古代軍事防衛智慧，並眺望南京城景。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=南京城牆">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><h3>💡 導遊建議</h3><p>緊鄰老門東，可安排在一起遊覽。登上城牆可了解古代軍事防衛智慧，並眺望南京城景。</p></div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=南京城牆">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 14. 頤和路 -->
 <div class="spot">
-<div class="spot-title">
-<h2>14. 頤和路民國公館區</h2>
-<div class="subtitle">梧桐深處 · 半部民國史</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>被譽為「一條頤和路，半部民國史」。頤和路及周邊12個片區，聚集了上百棟民國時期使領館、名人公館，包括蔣介石、宋子文、汪精衛等故居。秋季梧桐葉黃，光影斑駁。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+<div class="spot-title"><h2>14. 頤和路民國公館區</h2><div class="subtitle">梧桐深處 · 半部民國史</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>被譽為「一條頤和路，半部民國史」。頤和路及周邊12個片區，聚集了上百棟民國時期使領館、名人公館，包括蔣介石、宋子文、汪精衛等故居。秋季梧桐葉黃，光影斑駁。</p></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>2–3 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>免費</span></div>
@@ -1386,34 +811,16 @@ body {
     <span class="hint">平地散步，冇上落，可隨時停低休息</span>
 </div>
 </div>
-
-<div class="section">
-<h3>💡 導遊建議</h3>
-<p>適合散步拍照，安排在上午或黃昏最佳。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=頤和路">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><h3>💡 導遊建議</h3><p>適合散步拍照，安排在上午或黃昏最佳。</p></div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=頤和路">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 15. 甘熙故居 -->
 <div class="spot">
-<div class="spot-title">
-<h2>15. 甘熙故居（南京民俗博物館）</h2>
-<div class="subtitle">九十九間半 · 江南最大私人民居</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>江南現存規模最大、保存最完整的私人民居，有「九十九間半」之稱。始建於清代，為甘熙家族宅第，融合徽派與蘇式建築風格。現為南京民俗博物館，展示南京傳統民居、婚嫁習俗、非遺技藝等。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+<div class="spot-title"><h2>15. 甘熙故居（南京民俗博物館）</h2><div class="subtitle">九十九間半 · 江南最大私人民居</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>江南現存規模最大、保存最完整的私人民居，有「九十九間半」之稱。始建於清代，為甘熙家族宅第，融合徽派與蘇式建築風格。現為南京民俗博物館，展示南京傳統民居、婚嫁習俗、非遺技藝等。</p></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>1–2 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>約 ¥20</span></div>
@@ -1428,29 +835,15 @@ body {
     <span class="hint">室內為主、平坦、有座位、範圍不大</span>
 </div>
 </div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=甘熙故居">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=甘熙故居">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 16. 南京大屠殺紀念館 -->
 <div class="spot">
-<div class="spot-title">
-<h2>16. 南京大屠殺紀念館</h2>
-<div class="subtitle">銘記歷史 · 珍愛和平</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>記錄民族傷痛的嚴肅場所，建於江東門集體屠殺及遺址之上。展陳以大量史料、證物、影像詳實記錄了1937年12月至1938年1月的歷史，具有極強的教育意義與震撼力。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+<div class="spot-title"><h2>16. 南京大屠殺紀念館</h2><div class="subtitle">銘記歷史 · 珍愛和平</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>記錄民族傷痛的嚴肅場所，建於江東門集體屠殺及遺址之上。展陳以大量史料、證物、影像詳實記錄了1937年12月至1938年1月的歷史，具有極強的教育意義與震撼力。</p></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>2–3 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>免費，務必提前1-7天預約</span></div>
@@ -1465,42 +858,20 @@ body {
     <span class="hint">室內展館、平坦、有座位，但主題沉重</span>
 </div>
 </div>
-
-<div class="section">
-<h3>⚠️ 特別提醒</h3>
-<p>請務必評估心理承受能力，主題沉重。</p>
-</div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=南京大屠殺紀念館">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><h3>⚠️ 特別提醒</h3><p>請務必評估心理承受能力，主題沉重。</p></div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=南京大屠殺紀念館">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 17. 高淳老街 -->
 <div class="spot">
-<div class="spot-title">
-<h2>17. 高淳老街</h2>
-<div class="subtitle">金陵第一古街 · 900年歷史</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>高淳老街擁有900多年歷史，是江蘇保存較完整的古建築街區之一。11月正值固城湖螃蟹最肥美季節。</p>
-</div>
-
-<div class="section">
-<h3>✨ 不可錯過的看點</h3>
-<ul>
+<div class="spot-title"><h2>17. 高淳老街</h2><div class="subtitle">金陵第一古街 · 900年歷史</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>高淳老街擁有900多年歷史，是江蘇保存較完整的古建築街區之一。11月正值固城湖螃蟹最肥美季節。</p></div>
+<div class="section"><h3>✨ 不可錯過的看點</h3><ul>
 <li>明清建築、吳氏宗祠、楊廳、關王廟</li>
 <li>11月限定：固城湖螃蟹</li>
-</ul>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+</ul></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>約 2 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>街區免費，小景點聯票約 ¥60</span></div>
@@ -1513,29 +884,15 @@ body {
     <span class="hint">露天步行約 1-2 小時，平坦、有凳可休息</span>
 </div>
 </div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=高淳老街">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=高淳老街">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- 18. 漆橋古村 -->
 <div class="spot">
-<div class="spot-title">
-<h2>18. 漆橋古村</h2>
-<div class="subtitle">江南孔子第一村 · 原生態古村</div>
-</div>
-
-<div class="section">
-<h3>📖 歷史背景</h3>
-<p>漆橋古村擁有2000多年歷史，南宋時期孔子後裔遷居於此，是僅次於曲阜的孔子後裔第二大居住地。500米原生態青石板老街、古橋、古井保存完好。</p>
-</div>
-
-<div class="section">
-<h3>🎫 導遊攻略</h3>
+<div class="spot-title"><h2>18. 漆橋古村</h2><div class="subtitle">江南孔子第一村 · 原生態古村</div></div>
+<div class="section"><h3>📖 歷史背景</h3><p>漆橋古村擁有2000多年歷史，南宋時期孔子後裔遷居於此，是僅次於曲阜的孔子後裔第二大居住地。500米原生態青石板老街、古橋、古井保存完好。</p></div>
+<div class="section"><h3>🎫 導遊攻略</h3>
 <div class="info-grid">
 <div class="info"><strong>⏱ 建議時間</strong><span>1–1.5 小時</span></div>
 <div class="info"><strong>🎫 門票</strong><span>完全免費</span></div>
@@ -1548,98 +905,17 @@ body {
     <span class="hint">露天步行約 1 小時，平坦、原生態</span>
 </div>
 </div>
-
-<div class="section">
-<div class="buttons">
-<a class="btn map" href="map.html?spot=漆橋古村">🗺️ 查看地圖</a>
-</div>
-</div>
+<div class="section"><div class="buttons"><a class="btn map" href="map.html?spot=漆橋古村">🗺️ 查看地圖</a></div></div>
 </div>
 
 
 <!-- =========================
-     推薦餐廳專區（底部完整版）
+     推薦餐廳詳情（豐富卡片）
      ========================= -->
-
 <div class="restaurant-section">
-    <h2>🍽️ 推薦餐廳</h2>
-    <div class="sub">在地美食 · 方便團友搵食</div>
-
-    <div class="restaurant-grid">
-
-        <div class="restaurant-item">
-            <div class="name">天圓樓·老南京菜</div>
-            <div class="feature">30年老字號 · 金陵烤鴨</div>
-            <div class="addr">📍 夫子廟大石壩街75號</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">碳山河·茶湯火鍋</div>
-            <div class="feature">龍井茉莉茶湯 + 鮮切吊龍</div>
-            <div class="addr">📍 金陵天地5樓L551</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">南京大牌檔</div>
-            <div class="feature">金陵小吃全集</div>
-            <div class="addr">📍 夫子廟平江府店</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">奇芳閣</div>
-            <div class="feature">鴨油酥燒餅 · 素菜包</div>
-            <div class="addr">📍 夫子廟貢院街</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">韓復興板鴨店</div>
-            <div class="feature">鹽水鴨 · 鴨油燒餅（1866年）</div>
-            <div class="addr">📍 夫子廟石壩街126號</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">金宏興鴨子店</div>
-            <div class="feature">烤鴨 · 鹽水鴨</div>
-            <div class="addr">📍 明瓦廊5號105室（新街口）</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">李記清真館</div>
-            <div class="feature">牛肉鍋貼（百年老字號）</div>
-            <div class="addr">📍 秦淮區打釘巷1號</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">蔣有記</div>
-            <div class="feature">牛肉鍋貼（1922年創立）</div>
-            <div class="addr">📍 老門東三條營49-3號</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">雞鳴湯包</div>
-            <div class="feature">雞汁湯包</div>
-            <div class="addr">📍 玄武區太平門街10號</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">小潘記鴨血粉絲湯</div>
-            <div class="feature">鴨血粉絲湯</div>
-            <div class="addr">📍 玄武區珠江路275-3號</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">回味鴨血粉絲湯</div>
-            <div class="feature">連鎖老字號</div>
-            <div class="addr">📍 夫子廟站4號口店</div>
-        </div>
-
-        <div class="restaurant-item">
-            <div class="name">小廚娘淮揚菜</div>
-            <div class="feature">淮揚菜（29年本地品牌）</div>
-            <div class="addr">📍 新街口艾尚天地B座3樓</div>
-        </div>
-
-    </div>
+    <h2>🍽️ 推薦餐廳詳情</h2>
+    <div class="sub">分為正餐與小食，按需求篩選 · 招牌菜、排隊提醒、鄰近景點一應俱全</div>
+    <div class="restaurant-grid" id="restaurantDetails"></div>
 </div>
 
 
@@ -1648,24 +924,21 @@ body {
 </div>
 
 </div>
+
 <script src="spots-data.js"></script>
 <script>
+/* =========================================================
+   景點跳轉
+   ========================================================= */
 function goSpot(name) {
     const spots = document.querySelectorAll('.spot');
-
     for (const spot of spots) {
         const title = spot.querySelector('.spot-title h2');
         if (title && title.textContent.includes(name)) {
-            spot.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-
+            spot.scrollIntoView({ behavior: 'smooth', block: 'start' });
             setTimeout(() => {
                 spot.classList.add('spot-highlight');
-                setTimeout(() => {
-                    spot.classList.remove('spot-highlight');
-                }, 1500);
+                setTimeout(() => { spot.classList.remove('spot-highlight'); }, 1500);
             }, 400);
             return;
         }
@@ -1674,25 +947,17 @@ function goSpot(name) {
 }
 
 function goSpotById(id) {
-    // 先喺 spots-data.js 入面搵景點
     const spot = getSpotById(id);
-    if (!spot) {
-        alert('暫時找不到這個景點資料');
-        return;
-    }
-
+    if (!spot) { alert('暫時找不到這個景點資料'); return; }
     const name = spot.name;
     const spots = document.querySelectorAll('.spot');
-
     for (const s of spots) {
         const title = s.querySelector('.spot-title h2');
         if (title && title.textContent.includes(name)) {
             s.scrollIntoView({ behavior: 'smooth', block: 'start' });
             setTimeout(() => {
                 s.classList.add('spot-highlight');
-                setTimeout(() => {
-                    s.classList.remove('spot-highlight');
-                }, 1500);
+                setTimeout(() => { s.classList.remove('spot-highlight'); }, 1500);
             }, 400);
             return;
         }
@@ -1703,6 +968,184 @@ function goSpotById(id) {
 function goToRestaurant(name) {
     window.location.href = 'map.html?spot=' + encodeURIComponent(name);
 }
+
+/* =========================================================
+   餐廳渲染 + 篩選
+   ========================================================= */
+let currentRestaurantFilter = 'all';
+
+// 快速入口按鈕（頂部索引）
+function renderRestaurantIndex() {
+    const container = document.getElementById('restaurantIndexList');
+    let list = restaurants;
+    if (currentRestaurantFilter === 'dining') {
+        list = restaurants.filter(r => r.category === 'dining');
+    } else if (currentRestaurantFilter === 'snack') {
+        list = restaurants.filter(r => r.category === 'snack');
+    }
+
+    let html = '';
+    list.forEach(r => {
+        // 短名稱（去掉括號後綴）
+        const shortName = r.name.replace(/（.*?）/g, '').replace(/·.*$/g, '').trim();
+        // 副標籤用第一個標籤
+        const sub = r.tags && r.tags[0] ? r.tags[0] : '';
+        html += `
+            <button onclick="goToRestaurant('${r.name.replace(/'/g, "\\'")}')">
+                ${shortName}
+                <span class="sub">${sub}</span>
+            </button>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+// 詳細卡片
+function renderRestaurantDetails() {
+    const container = document.getElementById('restaurantDetails');
+    let list = restaurants;
+    if (currentRestaurantFilter === 'dining') {
+        list = restaurants.filter(r => r.category === 'dining');
+    } else if (currentRestaurantFilter === 'snack') {
+        list = restaurants.filter(r => r.category === 'snack');
+    }
+
+    if (list.length === 0) {
+        container.innerHTML = '<div class="note-empty">暫無餐廳資料</div>';
+        return;
+    }
+
+    let html = '';
+    list.forEach(r => {
+        const isDining = r.category === 'dining';
+        const badgeClass = isDining ? 'dining' : 'snack';
+        const badgeText = isDining ? '🍽️ 正餐' : '☕ 小食/下午茶';
+
+        const dishes = (r.signatureDishes || []).join('・');
+
+        html += `
+            <div class="restaurant-card ${badgeClass}">
+                <span class="badge ${badgeClass}">${badgeText}</span>
+                <div class="rc-name">${r.name}</div>
+                <div class="rc-desc">${r.desc || ''}</div>
+                ${dishes ? `<div class="rc-signature"><strong>🍴 招牌必點</strong>${dishes}</div>` : ''}
+                <div class="rc-meta">
+                    ${r.nearby ? `<span>📍 ${r.nearby}</span>` : ''}
+                    ${r.duration ? `<span>⏱ ${r.duration}</span>` : ''}
+                </div>
+                ${r.queueTip ? `<div class="rc-tip">${r.queueTip}</div>` : ''}
+                <div class="rc-actions">
+                    <a href="map.html?spot=${encodeURIComponent(r.name)}">🗺️ 查看地圖</a>
+                </div>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+// 篩選按鈕事件
+document.querySelectorAll('#restaurantFilter .filter-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+        document.querySelectorAll('#restaurantFilter .filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentRestaurantFilter = this.dataset.filter;
+        renderRestaurantIndex();
+        renderRestaurantDetails();
+    });
+});
+
+/* =========================================================
+   備註功能（localStorage）
+   ========================================================= */
+const NOTE_STORAGE_KEY = 'nanjing_restaurant_notes';
+
+function loadNotes() {
+    try {
+        const raw = localStorage.getItem(NOTE_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+        console.warn('讀取備註失敗:', e);
+        return [];
+    }
+}
+
+function saveNotes(notes) {
+    try {
+        localStorage.setItem(NOTE_STORAGE_KEY, JSON.stringify(notes));
+    } catch (e) {
+        console.warn('儲存備註失敗:', e);
+    }
+}
+
+function renderNotes() {
+    const notes = loadNotes();
+    const container = document.getElementById('noteList');
+
+    if (notes.length === 0) {
+        container.innerHTML = '<div class="note-empty">暫時未有備註，快啲加入想去嘅餐廳啦！</div>';
+        return;
+    }
+
+    let html = '';
+    notes.forEach((note, index) => {
+        html += `
+            <div class="note-item">
+                <span class="note-text">🍽️ ${note}</span>
+                <button class="note-del" data-index="${index}">✕</button>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+
+    container.querySelectorAll('.note-del').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const idx = parseInt(this.dataset.index);
+            deleteNote(idx);
+        });
+    });
+}
+
+function addNote() {
+    const input = document.getElementById('noteInput');
+    const text = input.value.trim();
+    if (!text) {
+        alert('請輸入餐廳名稱');
+        return;
+    }
+    const notes = loadNotes();
+    if (notes.includes(text)) {
+        alert('呢間餐廳已經喺備註入面啦！');
+        return;
+    }
+    notes.push(text);
+    saveNotes(notes);
+    input.value = '';
+    renderNotes();
+}
+
+function deleteNote(index) {
+    const notes = loadNotes();
+    if (index >= 0 && index < notes.length) {
+        notes.splice(index, 1);
+        saveNotes(notes);
+        renderNotes();
+    }
+}
+
+document.getElementById('addNoteBtn').addEventListener('click', addNote);
+document.getElementById('noteInput').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        addNote();
+    }
+});
+
+/* =========================================================
+   初始化
+   ========================================================= */
+renderRestaurantIndex();
+renderRestaurantDetails();
+renderNotes();
 </script>
 
 <!-- 返回景點目錄 -->
@@ -1712,19 +1155,10 @@ function goToRestaurant(name) {
 
 <!-- 手機底部導航 -->
 <nav class="mobile-nav">
-  <a href="index.html">
-    <span>🏠</span>
-    <small>首頁</small>
-  </a>
-  <a href="itinerary.html">
-    <span>📅</span>
-    <small>六日行程</small>
-  </a>
-  <a href="spots.html" class="active">
-    <span>📚</span>
-    <small>景點百科</small>
-  </a>
+  <a href="index.html"><span>🏠</span><small>首頁</small></a>
+  <a href="itinerary.html"><span>📅</span><small>六日行程</small></a>
+  <a href="spots.html" class="active"><span>📚</span><small>景點百科</small></a>
 </nav>
 
 </body>
-   </html>
+</html>
