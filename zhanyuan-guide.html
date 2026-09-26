@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>瞻園導覽｜金陵慢遊</title>
+
+<style>
+/* ===== 基本重置 ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    background: #f5f2ec;
+    color: #3f3933;
+    font-size: 18px;
+    line-height: 1.8;
+    padding: 0 0 95px 0;
+    min-height: 100vh;
+}
+
+/* ===== 頂部標題欄 ===== */
+.header {
+    background: linear-gradient(135deg, #657b6d, #879889);
+    color: white;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header .back-btn {
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.header .back-btn:active {
+    transform: scale(0.95);
+}
+
+.header h1 {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.header .placeholder {
+    width: 68px;
+}
+
+/* ===== 主容器 ===== */
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 18px 16px 40px;
+}
+
+/* ===== Hero ===== */
+.hero {
+    background: white;
+    border-radius: 20px;
+    padding: 26px 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 18px rgba(80, 70, 50, 0.08);
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 28px;
+    color: #4d5748;
+    margin-bottom: 6px;
+}
+
+.hero .subtitle {
+    font-size: 16px;
+    color: #8a715c;
+    margin-bottom: 18px;
+}
+
+.hero .route-box {
+    background: #f8f5ed;
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 16px;
+    color: #4d5748;
+    line-height: 1.9;
+    text-align: left;
+}
+
+.hero .route-box strong {
+    color: #657b6d;
+}
+
+/* ===== 路線圖 ===== */
+.route-map {
+    background: white;
+    border-radius: 20px;
+    padding: 22px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 18px rgba(80, 70, 50, 0.08);
+}
+
+.route-map h3 {
+    font-size: 19px;
+    color: #4d5748;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.route-stop {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px dashed #e8e5dc;
+}
+
+.route-stop:last-child {
+    border-bottom: none;
+}
+
+.route-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+}
+
+.route-icon.east { background: #657b6d; }
+.route-icon.central { background: #8a6e4b; }
+.route-icon.west { background: #b89a68; }
+.route-icon.exit { background: #a0a8a0; }
+
+.route-info {
+    flex: 1;
+}
+
+.route-info .name {
+    font-weight: 700;
+    font-size: 17px;
+    color: #3f3933;
+}
+
+.route-info .desc {
+    font-size: 15px;
+    color: #8a8a7a;
+    margin-top: 2px;
+}
+
+/* ===== 講解卡片 ===== */
+.guide-card {
+    background: white;
+    border-radius: 20px;
+    padding: 22px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 18px rgba(80, 70, 50, 0.08);
+}
+
+.guide-card .card-number {
+    display: inline-block;
+    background: #657b6d;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.guide-card h2 {
+    font-size: 22px;
+    color: #4d5748;
+    margin-bottom: 8px;
+}
+
+.guide-card .oneliner {
+    background: #f0f2ec;
+    border-left: 4px solid #657b6d;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #4d5748;
+    margin-bottom: 16px;
+}
+
+.guide-card h3 {
+    font-size: 18px;
+    color: #59644f;
+    margin: 16px 0 10px;
+}
+
+.guide-card ul {
+    padding-left: 22px;
+    margin-bottom: 12px;
+}
+
+.guide-card li {
+    font-size: 17px;
+    margin-bottom: 8px;
+    line-height: 1.7;
+}
+
+.guide-card li b {
+    color: #4d5748;
+}
+
+/* 步行資訊列 */
+.walk-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    background: #faf8f5;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 15px;
+    color: #6a6a5a;
+    margin: 14px 0;
+}
+
+/* 提示框 */
+.tip-box {
+    background: #fff8e6;
+    border-left: 4px solid #D97706;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 15px;
+    color: #8a6e2a;
+    margin-top: 12px;
+    line-height: 1.7;
+}
+
+/* ===== 冷知識 ===== */
+.knowledge-box {
+    background: white;
+    border-radius: 20px;
+    padding: 22px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 18px rgba(80, 70, 50, 0.08);
+}
+
+.knowledge-box h3 {
+    font-size: 19px;
+    color: #8a6e4b;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.knowledge-item {
+    background: #faf8f5;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+}
+
+.knowledge-item:last-child {
+    margin-bottom: 0;
+}
+
+.knowledge-item .k-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: #4d5748;
+    margin-bottom: 4px;
+}
+
+.knowledge-item .k-desc {
+    font-size: 15px;
+    color: #6a6a5a;
+    line-height: 1.7;
+}
+
+/* ===== 貼心提示 ===== */
+.tips-box {
+    background: #e9eee8;
+    border-radius: 20px;
+    padding: 22px 20px;
+    margin-bottom: 18px;
+}
+
+.tips-box h3 {
+    font-size: 19px;
+    color: #4d5748;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tips-box ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.tips-box li {
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding-left: 4px;
+    line-height: 1.7;
+}
+
+.tips-box li b {
+    color: #4d5748;
+}
+
+/* ===== VR 按鈕 ===== */
+.vr-btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: #657b6d;
+    color: white;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 10px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.vr-btn:active {
+    transform: scale(0.97);
+    background: #556b5d;
+}
+
+/* ===== 返回 ===== */
+.back-bottom {
+    display: block;
+    text-align: center;
+    margin-top: 28px;
+    color: #657b6d;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+/* ===== 手機底部導航 ===== */
+.mobile-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.96);
+    border-top: 1px solid #e8e5dc;
+    box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.06);
+    z-index: 9998;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.mobile-nav a {
+    flex: 1;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #88877f;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-nav a span {
+    font-size: 22px;
+    line-height: 24px;
+}
+
+.mobile-nav a small {
+    margin-top: 3px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.mobile-nav a.active {
+    color: #607667;
+}
+
+.mobile-nav a:active {
+    transform: scale(0.95);
+}
+
+/* ===== 手機適配 ===== */
+@media (max-width: 500px) {
+    .hero h1 { font-size: 24px; }
+    .guide-card h2 { font-size: 20px; }
+    .guide-card li { font-size: 16px; }
+    .route-info .name { font-size: 16px; }
+    .route-info .desc { font-size: 14px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== 頂部標題欄 ===== -->
+<div class="header">
+    <a href="spots.html" class="back-btn">← 返回</a>
+    <h1>🌿 瞻園導覽</h1>
+    <div class="placeholder"></div>
+</div>
+
+<div class="container">
+
+    <!-- ===== Hero ===== -->
+    <div class="hero">
+        <h1>🌿 瞻園導覽</h1>
+        <div class="subtitle">金陵第一園 · 600年明代園林</div>
+        <div class="route-box">
+            <strong>🗺️ 建議路線：</strong><br>
+            東門入口 → 靜妙堂 → 石舫 → 太湖石群 → 太平天國歷史博物館 → 出口<br>
+            <strong>全程約 1.5 小時</strong>
+        </div>
+    </div>
+
+    <!-- ===== 路線圖 ===== -->
+    <div class="route-map">
+        <h3>📍 園區路線圖</h3>
+
+        <div class="route-stop">
+            <div class="route-icon exit">🚪</div>
+            <div class="route-info">
+                <div class="name">入口：瞻園路128號（東門）</div>
+                <div class="desc">📍 從夫子廟亞朵酒店步行約 10 分鐘，打車可停「瞻園停車場」</div>
+            </div>
+        </div>
+
+        <div class="route-stop">
+            <div class="route-icon east">東</div>
+            <div class="route-info">
+                <div class="name">🌿 東園（園林精華區）</div>
+                <div class="desc">靜妙堂 → 石舫 → 太湖石群 ｜ 平路 🪑 亭台有長凳 ⚠️ 石橋有小階梯</div>
+            </div>
+        </div>
+
+        <div class="route-stop">
+            <div class="route-icon central">中</div>
+            <div class="route-info">
+                <div class="name">🏛️ 中區（太平天國歷史博物館）</div>
+                <div class="desc">史料展廳 → 天王寶座 → 文物陳列 ｜ 平路 🪑 有座位 ♿ 有電梯</div>
+            </div>
+        </div>
+
+        <div class="route-stop">
+            <div class="route-icon west">西</div>
+            <div class="route-info">
+                <div class="name">🌸 西園（後花園）</div>
+                <div class="desc">花園 → 迴廊 → 出口 ｜ 平路 🪑 有長凳</div>
+            </div>
+        </div>
+
+        <div class="route-stop">
+            <div class="route-icon exit">🚪</div>
+            <div class="route-info">
+                <div class="name">撤退／休息點</div>
+                <div class="desc">• 靜妙堂旁迴廊 — 大量長凳，可坐低飲水、睇池塘錦鯉<br>• 石舫附近 — 樹蔭下有多張長椅，環境清幽<br>• 出口 — 遊覽完可直接離開園區</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 景點詳細講解 ===== -->
+    <h2 style="font-size: 20px; color: #4d5748; margin: 24px 0 14px;">📖 景點詳細講解</h2>
+
+    <!-- 1. 東園 -->
+    <div class="guide-card">
+        <div class="card-number">1</div>
+        <h2>🌿 東園（園林精華區）</h2>
+        <div class="oneliner">
+            <strong>一句話精華：</strong>明代徐達府邸花園，600年歷史，江南四大名園之一，87版《紅樓夢》取景地。
+        </div>
+
+        <h3>👀 睇咩？</h3>
+        <ul>
+            <li><b>靜妙堂：</b>瞻園主廳，堂前有兩棵百年桂花樹，秋季金桂飄香。堂內陳列瞻園歷史沿革，係全園最涼爽嘅地方。</li>
+            <li><b>石舫：</b>明代古蹟，乾隆皇帝下江南時曾在此休憩。石舫建於水面之上，造型仿船，係江南園林罕見嘅石舫建築。</li>
+            <li><b>太湖石群：</b>園內最著名嘅假山群，由明代疊石名家周秉忠設計。石峰玲瓏剔透，有「瘦、皺、漏、透」四大特色，係江南園林疊石藝術嘅代表。</li>
+            <li><b>迴廊與水榭：</b>全園由迴廊串連，即使落雨都唔會淋濕。水榭旁邊有大量錦鯉，可以慢慢欣賞。</li>
+        </ul>
+
+        <div class="walk-info">
+            <span>🚶 步行度：★★★★★</span>
+            <span>🧗 階梯度：★★★★★</span>
+            <span>⏱ 停留時間：約 40 分鐘</span>
+        </div>
+
+        <div class="tip-box">
+            💡 <strong>貼心提示：</strong>東園係成個瞻園最舒服嘅區域，迴廊同亭台都有大量長凳，可以坐低飲水、吹風、睇池塘風景，體力完全恢復。
+        </div>
+    </div>
+
+    <!-- 2. 中區 -->
+    <div class="guide-card">
+        <div class="card-number">2</div>
+        <h2>🏛️ 中區（太平天國歷史博物館）</h2>
+        <div class="oneliner">
+            <strong>一句話精華：</strong>中國唯一太平天國專題博物館，藏品豐富，空調充足。
+        </div>
+
+        <h3>👀 睇咩？</h3>
+        <ul>
+            <li><b>天王寶座：</b>復原嘅洪秀全寶座，金碧輝煌，係太平天國天王府嘅核心象徵。</li>
+            <li><b>史料展廳：</b>展出太平天國時期嘅文獻、兵器、服飾、印章等文物，詳細介紹太平天國由興起到滅亡嘅歷史。</li>
+            <li><b>文物陳列：</b>包括太平天國嘅錢幣、詔書、玉璽等珍貴文物，部分係全國僅存嘅孤品。</li>
+        </ul>
+
+        <div class="walk-info">
+            <span>🚶 步行度：★★★★★</span>
+            <span>🧗 階梯度：★★★★★</span>
+            <span>⏱ 停留時間：約 30 分鐘</span>
+        </div>
+
+        <div class="tip-box">
+            💡 <strong>貼心提示：</strong>展館全室內、有冷氣、有電梯，非常適合午後參觀。如果對太平天國歷史有興趣，可以預留多啲時間。
+        </div>
+    </div>
+
+    <!-- 3. 西園 -->
+    <div class="guide-card">
+        <div class="card-number">3</div>
+        <h2>🌸 西園（後花園）</h2>
+        <div class="oneliner">
+            <strong>一句話精華：</strong>幽靜後花園，遊客較少，環境清幽，適合輕鬆收尾。
+        </div>
+
+        <h3>👀 睇咩？</h3>
+        <ul>
+            <li><b>花園景觀：</b>西園以植物造景為主，秋季有銀杏、紅楓，色彩斑斕。</li>
+            <li><b>迴廊：</b>連通東西兩園，沿途可以欣賞園林景色。</li>
+            <li><b>出口通道：</b>沿西園一路向南，剛好順路返回東門出口，完全唔使走回頭路。</li>
+        </ul>
+
+        <div class="walk-info">
+            <span>🚶 步行度：★★★★★</span>
+            <span>🧗 階梯度：★★★★★</span>
+            <span>⏱ 停留時間：約 20 分鐘</span>
+        </div>
+
+        <div class="tip-box">
+            💡 <strong>貼心提示：</strong>西園遊客較少，環境清幽，適合慢慢行、影相。如果體力一般，可以喺迴廊長凳坐低休息。
+        </div>
+    </div>
+
+    <!-- ===== 冷知識 ===== -->
+    <div class="knowledge-box">
+        <h3>📜 瞻園知多啲</h3>
+
+        <div class="knowledge-item">
+            <div class="k-title">🌿 一座瞻園，600年園林史</div>
+            <div class="k-desc">瞻園始建於明初，係中山王徐達嘅府邸花園，至今已有600餘年歷史。與蘇州拙政園、上海豫園、無錫寄暢園並稱「江南四大名園」，係南京現存最悠久嘅明代古典園林。</div>
+        </div>
+
+        <div class="knowledge-item">
+            <div class="k-title">📖 紅樓夢同瞻園有關係？</div>
+            <div class="k-desc">87版《紅樓夢》同趙雅芝版《新白娘子傳奇》都曾喺瞻園取景。相傳曹雪芹家族世代任職江寧織造，對江南園林非常熟悉，瞻園嘅園林結構被認為係《紅樓夢》大觀園嘅參考原型之一。</div>
+        </div>
+
+        <div class="knowledge-item">
+            <div class="k-title">🐱 園中「喵星人」</div>
+            <div class="k-desc">瞻園入面有幾隻常住嘅貓咪，佢哋係園內嘅「正式員工」，負責捉老鼠同陪遊客影相。如果見到佢哋，可以輕輕摸吓，但記得唔好餵食人類食物呀！</div>
+        </div>
+    </div>
+
+    <!-- ===== 貼心提示 ===== -->
+    <div class="tips-box">
+        <h3>📌 漫遊貼心提示</h3>
+        <ul>
+            <li>🎫 <b>門票：</b>日場約 ¥30（60-69歲半價 ¥15）；夜場約 ¥50，開放至 21:00</li>
+            <li>🕐 <b>開放時間：</b>日場約 8:00–17:00；夜場至 21:00</li>
+            <li>👟 <b>園區唔大，但建議著舒服嘅波鞋</b></li>
+            <li>🚻 <b>洗手間：</b>入口附近、中區博物館旁</li>
+            <li>🪑 <b>休息區：</b>東園迴廊（大量長凳）、靜妙堂旁、石舫附近</li>
+            <li>🧗 <b>階梯較多位置：</b>東園石橋（可繞平路）、假山群（唔建議爬上）</li>
+            <li>♿ <b>無障礙路線：</b>中區博物館有電梯；東園主要通道平坦，輪椅可通行</li>
+            <li>📸 <b>最佳拍照點：</b>11月銀杏同紅楓開始變色，喺「靜妙堂」前同「石舫」旁影相最出片！</li>
+            <li>⏱ <b>最少預留 1 小時（精華路線）至 2 小時（詳細參觀）</b></li>
+            <li>🍽️ <b>午餐建議：</b>行完瞻園後，可步行返回夫子廟，推薦「南京大牌檔」、「天圓樓·老南京菜」、「奇芳閣」</li>
+        </ul>
+    </div>
+
+    <!-- ===== VR 導覽 ===== -->
+    <div class="guide-card" style="text-align: center;">
+        <h2 style="font-size: 19px; margin-bottom: 8px;">🎥 想先睇 VR 全景？</h2>
+        <p style="font-size: 16px; color: #6a6a5a; margin-bottom: 14px;">
+            關注「太平天国历史博物馆」公眾號，點擊「語音導覽」→「虛擬展廳」，即可 720° VR 全景漫遊瞻園。
+        </p>
+        <a href="spots.html" class="vr-btn">← 返回景點百科</a>
+    </div>
+
+    <a href="itinerary.html?day=5" class="back-bottom">← 返回 Day 5 行程</a>
+
+</div>
+
+<!-- ===== 手機底部導航 ===== -->
+<nav class="mobile-nav">
+    <a href="index.html">
+        <span>🏠</span>
+        <small>首頁</small>
+    </a>
+    <a href="itinerary.html">
+        <span>📅</span>
+        <small>六日行程</small>
+    </a>
+    <a href="spots.html" class="active">
+        <span>📚</span>
+        <small>景點百科</small>
+    </a>
+</nav>
+
+</body>
+</html>
