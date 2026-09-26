@@ -245,16 +245,7 @@ header p {
     font-size: 16px;
     color: #706961;
 }
-/* 尋找原有的 .event 區塊，並在裡面加入 position: relative; */
-.event {
-    position: relative;
-    background: white;
-    border-radius: 16px;
-    padding: 15px 16px;
-    margin-bottom: 15px;
-    box-shadow:
-    0 3px 10px rgba(0,0,0,0.05);
-}
+
 /* 新增：小導遊鴨子樣式 */
 .duck-corner {
     position: absolute;
@@ -1100,18 +1091,11 @@ function renderDay(dayNumber) {
     container.appendChild(heading);
     container.appendChild(theme);
     container.appendChild(timeline);
-}
 
-    // ⬇️ 加入呢兩行：每次切換日數時，重新渲染該日嘅備註
+    // ⬇️ 呢兩行要喺 renderDay 函數裏面，先可以攞到 dayNumber
     renderDayNotes(dayNumber);
 }
 
-/* =====================================
-   啟動
-===================================== */
-
-const todayDay = getTodayDay();
-renderDay(todayDay);
 
 /* ============================================================
    每日備註功能（localStorage，按天數分開儲存）
@@ -1207,6 +1191,13 @@ document.getElementById('dayNoteInput').addEventListener('keydown', function (e)
         addDayNote(currentDay);
     }
 });
+
+/* =====================================
+   啟動
+===================================== */
+
+const todayDay = getTodayDay();
+renderDay(todayDay);
 
 </script>
 
