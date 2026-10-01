@@ -363,215 +363,228 @@
 </script>
 
 <script>
+   
     // ============================================================
-    // 1. 初始化地圖（南京市中心）
-    // ============================================================
+// 1. 初始化地圖（南京市中心）
+// ============================================================
 
-    const map = L.map('map', {
-        center: [32.06, 118.78],
-        zoom: 13,
-        zoomControl: true,
-        fadeAnimation: true,
-        attributionControl: true
-    });
+const map = L.map('map', {
+    center: [32.06, 118.78],
+    zoom: 13,
+    zoomControl: true,
+    fadeAnimation: true,
+    attributionControl: true
+});
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
 
-    // ============================================================
-    // 2. 自訂標記圖示
-    // ============================================================
+// ============================================================
+// 2. 自訂標記圖示
+// ============================================================
 
-    // 景點標記（綠色）
-    const greenIcon = L.divIcon({
-        className: 'marker-green',
-        iconSize: [20, 20],
-        popupAnchor: [0, -12]
-    });
+const greenIcon = L.divIcon({
+    className: 'marker-green',
+    iconSize: [20, 20],
+    popupAnchor: [0, -12]
+});
 
-    // 酒店標記（用 🏨 emoji）
-    const hotelIcon = L.divIcon({
-        className: 'marker-hotel',
-        iconSize: [32, 32],
-        popupAnchor: [0, -18],
-        html: '🏨'
-    });
+const hotelIcon = L.divIcon({
+    className: 'marker-hotel',
+    iconSize: [32, 32],
+    popupAnchor: [0, -18],
+    html: '🏨'
+});
 
-    // 餐廳標記（橙色）
-    const foodIcon = L.divIcon({
-        className: 'marker-food',
-        iconSize: [18, 18],
-        popupAnchor: [0, -10]
-    });
+const foodIcon = L.divIcon({
+    className: 'marker-food',
+    iconSize: [18, 18],
+    popupAnchor: [0, -10]
+});
 
-    // ============================================================
-    // 3. 加入所有標記
-    // ============================================================
+// ============================================================
+// 3. 加入所有標記
+// ============================================================
 
-    const allMarkers = [];
-    const spotMap = {};
-    let hotelMarkerObj = null;
-    const restaurantMarkers = [];
+const allMarkers = [];
+const spotMap = {};
+let hotelMarkerObj = null;
+const restaurantMarkers = [];
 
-    // 3a. 景點標記（過濾掉酒店，酒店另外處理）
-    spots.forEach(spot => {
-        if (spot.category === '住宿') return; // 酒店另外處理
+// 3a. 景點標記
+spots.forEach(spot => {
+    if (spot.category === '住宿') return;
 
-        const marker = L.marker([spot.lat, spot.lng], { icon: greenIcon })
+    const marker = L.marker([spot.lat, spot.lng], { icon: greenIcon })
+        .addTo(map)
+        .bindPopup(`
+            <strong>${spot.name}</strong>
+            <div class="addr">📍 ${spot.address}</div>
+            <div><span class="tag spot-tag">🏷️ ${spot.category}</span></div>
+            <div style="margin-top:6px;">
+                <a href="spots.html" style="color:#657b6d;text-decoration:none;font-weight:bold;">📖 景點導遊</a>
+            </div>
+        `);
+
+    allMarkers.push(marker);
+    spotMap[spot.name] = marker;
+});
+
+// 3b. 酒店標記
+const hotelData = spots.find(s => s.category === '住宿');
+if (hotelData) {
+    const marker = L.marker([hotelData.lat, hotelData.lng], { icon: hotelIcon })
+        .addTo(map)
+        .bindPopup(`
+            <strong>🏨 ${hotelData.name}</strong>
+            <div class="addr">📍 ${hotelData.address}</div>
+            <div><span class="tag hotel-tag">🏠 連住5晚</span></div>
+            <div style="margin-top:4px;font-size:15px;color:#666;">步行3分鐘到夫子廟核心區</div>
+            <div style="margin-top:6px;">
+                <button class="btn-locate" onclick="zoomToHotel()">📍 查看酒店位置</button>
+            </div>
+        `);
+
+    allMarkers.push(marker);
+    hotelMarkerObj = marker;
+    spotMap[hotelData.name] = marker;
+}
+
+// 3c. 餐廳標記
+if (typeof restaurants !== 'undefined') {
+    restaurants.forEach(r => {
+        const marker = L.marker([r.lat, r.lng], { icon: foodIcon })
             .addTo(map)
             .bindPopup(`
-                <strong>${spot.name}</strong>
-                <div class="addr">📍 ${spot.address}</div>
-                <div><span class="tag spot-tag">🏷️ ${spot.category}</span></div>
-                <div style="margin-top:6px;">
-                    <a href="spots.html" style="color:#657b6d;text-decoration:none;font-weight:bold;">📖 景點導遊</a>
-                </div>
+                <strong>🍴 ${r.name}</strong>
+                <div style="font-size:15px;color:#8a715c;">${r.feature || ''}</div>
+                <div class="addr">📍 ${r.address}</div>
+                <div><span class="tag food-tag">🍽️ 推薦餐廳</span></div>
             `);
 
         allMarkers.push(marker);
-        spotMap[spot.name] = marker;
+        restaurantMarkers.push(marker);
     });
+}
 
-    // 3b. 酒店標記（用 🏨 圖標）
-    const hotelData = spots.find(s => s.category === '住宿');
-    if (hotelData) {
-        const marker = L.marker([hotelData.lat, hotelData.lng], { icon: hotelIcon })
-            .addTo(map)
-            .bindPopup(`
-                <strong>🏨 ${hotelData.name}</strong>
-                <div class="addr">📍 ${hotelData.address}</div>
-                <div><span class="tag hotel-tag">🏠 連住5晚</span></div>
-                <div style="margin-top:4px;font-size:15px;color:#666;">步行3分鐘到夫子廟核心區</div>
-                <div style="margin-top:6px;">
-                    <button class="btn-locate" onclick="zoomToHotel()">📍 查看酒店位置</button>
-                </div>
-            `);
+// ============================================================
+// 4. 縮放到酒店
+// ============================================================
 
-        allMarkers.push(marker);
-        hotelMarkerObj = marker;
-        spotMap[hotelData.name] = marker;
+function zoomToHotel() {
+    if (hotelMarkerObj) {
+        const latlng = hotelMarkerObj.getLatLng();
+        map.setView(latlng, 17, { animate: true, duration: 0.8 });
+        hotelMarkerObj.openPopup();
     }
+}
 
-    // 3c. 餐廳標記
-    if (typeof restaurants !== 'undefined') {
-        restaurants.forEach(r => {
-            const marker = L.marker([r.lat, r.lng], { icon: foodIcon })
-                .addTo(map)
-                .bindPopup(`
-                    <strong>🍴 ${r.name}</strong>
-                    <div style="font-size:15px;color:#8a715c;">${r.feature}</div>
-                    <div class="addr">📍 ${r.address}</div>
-                    <div><span class="tag food-tag">🍽️ 推薦餐廳</span></div>
-                `);
+// ============================================================
+// 5. 從 URL 參數讀取景點名稱並縮放（簡化版）
+// ============================================================
 
-            allMarkers.push(marker);
-            restaurantMarkers.push(marker);
-        });
-    }
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
 
-    // ============================================================
-    // 4. 縮放到酒店
-    // ============================================================
-
-    function zoomToHotel() {
-        if (hotelMarkerObj) {
-            const latlng = hotelMarkerObj.getLatLng();
-            map.setView(latlng, 17, {
-                animate: true,
-                duration: 0.8
-            });
-            hotelMarkerObj.openPopup();
-        }
-    }
-
-    // ============================================================
-    // 5. 從 URL 參數讀取景點名稱並縮放
-    // ============================================================
-
-    function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
-
-    function zoomToSpot(spotName) {
+function zoomToSpot(spotName) {
     if (!spotName) return;
 
-    // 先試 id match（新加）
-    let marker = null;
+    let targetLatLng = null;
+
+    // 1. spots id match
     if (typeof spots !== 'undefined') {
-        const spotById = spots.find(s => s.id === spotName);
-        if (spotById) {
-            marker = spotMap[spotById.name];
-        }
-    }
-    if (!marker && typeof restaurants !== 'undefined') {
-        const restaurantById = restaurants.find(r => r.id === spotName);
-        if (restaurantById) {
-            const idx = restaurants.indexOf(restaurantById);
-            if (idx >= 0 && idx < restaurantMarkers.length) {
-                marker = restaurantMarkers[idx];
-            }
-        }
+        const s = spots.find(x => x.id === spotName);
+        if (s) targetLatLng = [s.lat, s.lng];
     }
 
-    // 如果搵唔到，再試 name match
-    if (!marker) {
-        marker = spotMap[spotName];
+    // 2. spots name match
+    if (!targetLatLng && typeof spots !== 'undefined') {
+        const s = spots.find(x => x.name === spotName);
+        if (s) targetLatLng = [s.lat, s.lng];
     }
-    if (!marker) {
-        for (const [name, m] of Object.entries(spotMap)) {
-            if (name.includes(spotName) || spotName.includes(name)) {
-                marker = m;
+
+    // 3. restaurants id match
+    if (!targetLatLng && typeof restaurants !== 'undefined') {
+        const r = restaurants.find(x => x.id === spotName);
+        if (r) targetLatLng = [r.lat, r.lng];
+    }
+
+    // 4. restaurants name match
+    if (!targetLatLng && typeof restaurants !== 'undefined') {
+        const r = restaurants.find(x => x.name === spotName);
+        if (r) targetLatLng = [r.lat, r.lng];
+    }
+
+    // 5. 模糊 match
+    if (!targetLatLng && typeof spots !== 'undefined') {
+        for (const s of spots) {
+            if (s.name.includes(spotName) || spotName.includes(s.name)) {
+                targetLatLng = [s.lat, s.lng];
                 break;
             }
         }
     }
-    if (!marker && typeof restaurants !== 'undefined') {
+    if (!targetLatLng && typeof restaurants !== 'undefined') {
         for (const r of restaurants) {
             if (r.name.includes(spotName) || spotName.includes(r.name)) {
-                const idx = restaurants.indexOf(r);
-                if (idx >= 0 && idx < restaurantMarkers.length) {
-                    marker = restaurantMarkers[idx];
-                }
+                targetLatLng = [r.lat, r.lng];
                 break;
             }
         }
     }
 
-    if (marker) {
-        const latlng = marker.getLatLng();
-        map.setView(latlng, 16, { animate: true, duration: 0.8 });
-        marker.openPopup();
+    if (targetLatLng) {
+        // 喺 allMarkers 入面搵最接近嘅 marker
+        let closestMarker = null;
+        let minDist = Infinity;
+        allMarkers.forEach(m => {
+            const ll = m.getLatLng();
+            const dist = Math.abs(ll.lat - targetLatLng[0]) + Math.abs(ll.lng - targetLatLng[1]);
+            if (dist < minDist) {
+                minDist = dist;
+                closestMarker = m;
+            }
+        });
+
+        if (closestMarker) {
+            const latlng = closestMarker.getLatLng();
+            map.setView(latlng, 16, { animate: true, duration: 0.8 });
+            closestMarker.openPopup();
+        } else {
+            map.setView(targetLatLng, 16, { animate: true, duration: 0.8 });
+        }
     } else {
         map.setView([32.06, 118.78], 13);
     }
-    }
+}
 
-    const spotParam = getQueryParam('spot');
-    if (spotParam) {
-        setTimeout(() => {
-            zoomToSpot(decodeURIComponent(spotParam));
-        }, 500);
-    }
-
-    // ============================================================
-    // 6. 響應式處理
-    // ============================================================
-
+const spotParam = getQueryParam('spot');
+if (spotParam) {
     setTimeout(() => {
-        map.invalidateSize();
-    }, 300);
+        zoomToSpot(decodeURIComponent(spotParam));
+    }, 500);
+}
 
-    window.addEventListener('resize', () => {
-        map.invalidateSize();
-    });
+// ============================================================
+// 6. 響應式處理
+// ============================================================
 
-    console.log('🗺️ 南京地圖已載入：' +
-        spots.filter(s => s.category !== '住宿').length + ' 個景點 + ' +
-        '1 間酒店 + ' +
-        (typeof restaurants !== 'undefined' ? restaurants.length : 0) + ' 間餐廳');
+setTimeout(() => {
+    map.invalidateSize();
+}, 300);
+
+window.addEventListener('resize', () => {
+    map.invalidateSize();
+});
+
+console.log('🗺️ 南京地圖已載入：' +
+    spots.filter(s => s.category !== '住宿').length + ' 個景點 + ' +
+    '1 間酒店 + ' +
+    (typeof restaurants !== 'undefined' ? restaurants.length : 0) + ' 間餐廳');
 </script>
 
 </body>
