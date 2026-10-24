@@ -8,9 +8,6 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        /* =========================
-           手機底部導航
-           ========================= */
         .mobile-nav {
             position: fixed; left: 0; right: 0; bottom: 0; height: 70px;
             display: flex; justify-content: space-around; align-items: center;
@@ -80,7 +77,6 @@
         .leaflet-popup-content .tag.spot-tag { background: #657b6d; }
         .leaflet-popup-content .tag.hotel-tag { background: #c49a6c; }
         .leaflet-popup-content .tag.food-tag { background: #e07b5a; }
-        .leaflet-popup-content .btn-locate { display: inline-block; margin-top: 8px; padding: 8px 18px; background: #c49a6c; color: white; border-radius: 20px; text-decoration: none; font-size: 15px; font-weight: 600; border: none; cursor: pointer; }
 
         @media (max-width: 600px) {
             #map { height: calc(100vh - 60px - 95px); min-height: 400px; }
@@ -119,9 +115,6 @@
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<!-- 載入景點資料 (如果有，會自動讀取；如果冇，下面有備用) -->
-<script src="spots-data.js"></script>
-
 <script>
 // ============================================================
 // 1. 初始化地圖
@@ -145,66 +138,92 @@ const hotelIcon = L.divIcon({ className: 'marker-hotel', iconSize: [32, 32], pop
 const foodIcon = L.divIcon({ className: 'marker-food', iconSize: [18, 18], popupAnchor: [0, -10] });
 
 // ============================================================
-// 3. 資料整合與標記
+// 3. 終極資料庫 (直接寫死，唔靠 spots-data.js，保證有橙點)
+// ============================================================
+const mapData = [
+    // ===== 酒店 =====
+    { name: "夫子廟亞朵酒店", lat: 32.01947, lng: 118.78772, type: "hotel", desc: "秦淮區大石壩街35號" },
+
+    // ===== 景點 =====
+    { name: "南京博物院", lat: 32.040802, lng: 118.825064, type: "spot", desc: "中山東路321號" },
+    { name: "明孝陵", lat: 32.058355, lng: 118.839731, type: "spot", desc: "石象路7號" },
+    { name: "總統府", lat: 32.044258, lng: 118.797318, type: "spot", desc: "長江路292號" },
+    { name: "科舉博物館", lat: 32.02171, lng: 118.79049, type: "spot", desc: "貢院街95號" },
+    { name: "德基藝術博物館", lat: 32.050008, lng: 118.785075, type: "spot", desc: "中山路18號德基廣場二期8樓" },
+    { name: "六朝博物館", lat: 32.04370, lng: 118.79760, type: "spot", desc: "長江路302號" },
+    { name: "李香君故居", lat: 32.02472, lng: 118.78906, type: "spot", desc: "大石壩街150號" },
+    { name: "老門東", lat: 32.01162, lng: 118.78724, type: "spot", desc: "剪子巷54號" },
+    { name: "三七八巷", lat: 32.01557, lng: 118.78039, type: "spot", desc: "長樂路" },
+    { name: "瞻園", lat: 32.02052, lng: 118.78550, type: "spot", desc: "瞻園路128號" },
+    { name: "雞鳴寺", lat: 32.057266, lng: 118.798082, type: "spot", desc: "雞鳴寺路1號" },
+    { name: "玄武湖", lat: 32.074816, lng: 118.792841, type: "spot", desc: "玄武巷1號" },
+    { name: "南京城牆(中華門)", lat: 32.01295, lng: 118.78168, type: "spot", desc: "中華路" },
+    { name: "頤和路", lat: 32.06485, lng: 118.77062, type: "spot", desc: "鼓樓區頤和路" },
+    { name: "甘熙故居", lat: 32.02852, lng: 118.77598, type: "spot", desc: "中山南路400號" },
+    { name: "南京大屠殺紀念館", lat: 32.03535, lng: 118.74215, type: "spot", desc: "水西門大街418號" },
+    { name: "高淳老街", lat: 31.32018, lng: 118.86773, type: "spot", desc: "高淳區淳溪街道" },
+    { name: "漆橋古村", lat: 31.37593, lng: 118.992493, type: "spot", desc: "高淳區漆橋村" },
+    { name: "江寧織造博物館", lat: 32.046, lng: 118.794, type: "spot", desc: "長江路123號" },
+
+    // ===== 餐廳 (包含所有新舊餐廳，保證有橙點) =====
+    { name: "小潘記鴨血粉絲湯", lat: 32.04900, lng: 118.79550, type: "restaurant", desc: "珠江路275-3號" },
+    { name: "南京大牌檔（夫子廟平江店）", lat: 32.01850, lng: 118.78650, type: "restaurant", desc: "大石壩街48號" },
+    { name: "南京大牌檔（1912街區店）", lat: 32.04450, lng: 118.79920, type: "restaurant", desc: "長江路288號1912街區" },
+    { name: "天圓樓·老南京菜", lat: 32.01985, lng: 118.78780, type: "restaurant", desc: "大石壩街75號" },
+    { name: "碳山河·茶湯火鍋", lat: 32.05050, lng: 118.78620, type: "restaurant", desc: "金陵天地5樓L551" },
+    { name: "奇芳閣", lat: 32.02020, lng: 118.78700, type: "restaurant", desc: "貢院西街12-1號" },
+    { name: "韓復興板鴨店", lat: 32.01920, lng: 118.78850, type: "restaurant", desc: "石壩街126號" },
+    { name: "金宏興鴨子店", lat: 32.04500, lng: 118.78350, type: "restaurant", desc: "明瓦廊5號105室" },
+    { name: "李記清真館", lat: 32.02680, lng: 118.77680, type: "restaurant", desc: "打釘巷1號" },
+    { name: "蔣有記（老門東店）", lat: 32.01120, lng: 118.78750, type: "restaurant", desc: "老門東三條營49-3號" },
+    { name: "雞鳴湯包", lat: 32.05650, lng: 118.79850, type: "restaurant", desc: "太平門街10號" },
+    { name: "小廚娘淮揚菜", lat: 32.04550, lng: 118.78550, type: "restaurant", desc: "新街口艾尚天地B座3樓" },
+    { name: "李百蟹·江南蟹黃麵", lat: 32.01950, lng: 118.78900, type: "restaurant", desc: "夫子廟大石壩街（瞻園附近）" },
+    { name: "回味鴨血粉絲湯", lat: 32.01650, lng: 118.78650, type: "restaurant", desc: "夫子廟站4號口店" }
+];
+
+// ============================================================
+// 4. 將資料標記在地圖上
 // ============================================================
 const allMarkers = [];
-const nameToMarkerMap = {}; // 用名稱來快速找標記
+const markerDictionary = {}; // 用嚟記錄名同 Marker 嘅對應
 
-// 3a. 景點標記 (從 spots-data.js 讀取)
-if (typeof spots !== 'undefined') {
-    spots.forEach(spot => {
-        if (spot.category === '住宿') return;
-        const marker = L.marker([spot.lat, spot.lng], { icon: greenIcon })
-            .addTo(map)
-            .bindPopup(`
-                <strong>${spot.name}</strong>
-                <div class="addr">📍 ${spot.address}</div>
-                <div><span class="tag spot-tag">🏷️ ${spot.category}</span></div>
-                <div style="margin-top:6px;">
-                    <a href="spots.html" style="color:#657b6d;text-decoration:none;font-weight:bold;">📖 景點導遊</a>
-                </div>
-            `);
-        allMarkers.push(marker);
-        nameToMarkerMap[spot.name] = marker;
-    });
-}
+mapData.forEach(loc => {
+    let icon, popupHtml;
 
-// 3b. 酒店標記
-let hotelMarkerObj = null;
-if (typeof spots !== 'undefined') {
-    const hotelData = spots.find(s => s.category === '住宿');
-    if (hotelData) {
-        hotelMarkerObj = L.marker([hotelData.lat, hotelData.lng], { icon: hotelIcon })
-            .addTo(map)
-            .bindPopup(`
-                <strong>🏨 ${hotelData.name}</strong>
-                <div class="addr">📍 ${hotelData.address}</div>
-                <div><span class="tag hotel-tag">🏠 連住5晚</span></div>
-                <div style="margin-top:4px;font-size:15px;color:#666;">步行3分鐘到夫子廟核心區</div>
-            `);
-        allMarkers.push(hotelMarkerObj);
-        nameToMarkerMap[hotelData.name] = hotelMarkerObj;
+    if (loc.type === 'hotel') {
+        icon = hotelIcon;
+        popupHtml = `
+            <strong>🏨 ${loc.name}</strong>
+            <div class="addr">📍 ${loc.desc}</div>
+            <div><span class="tag hotel-tag">🏠 連住5晚</span></div>
+        `;
+    } else if (loc.type === 'spot') {
+        icon = greenIcon;
+        popupHtml = `
+            <strong>📍 ${loc.name}</strong>
+            <div class="addr">📍 ${loc.desc}</div>
+            <div><span class="tag spot-tag">🏷️ 景點</span></div>
+        `;
+    } else {
+        icon = foodIcon;
+        popupHtml = `
+            <strong>🍴 ${loc.name}</strong>
+            <div class="addr">📍 ${loc.desc}</div>
+            <div><span class="tag food-tag">🍽️ 推薦餐廳</span></div>
+        `;
     }
-}
 
-// 3c. 餐廳標記 (從 spots-data.js 讀取)
-if (typeof restaurants !== 'undefined') {
-    restaurants.forEach(r => {
-        const marker = L.marker([r.lat, r.lng], { icon: foodIcon })
-            .addTo(map)
-            .bindPopup(`
-                <strong>🍴 ${r.name}</strong>
-                <div style="font-size:15px;color:#8a715c;">${r.feature || ''}</div>
-                <div class="addr">📍 ${r.address}</div>
-                <div><span class="tag food-tag">🍽️ 推薦餐廳</span></div>
-            `);
-        allMarkers.push(marker);
-        nameToMarkerMap[r.name] = marker;
-    });
-}
+    const marker = L.marker([loc.lat, loc.lng], { icon: icon })
+        .addTo(map)
+        .bindPopup(popupHtml);
+
+    allMarkers.push(marker);
+    markerDictionary[loc.name] = marker;
+});
 
 // ============================================================
-// 4. 無敵定位邏輯 (處理 URL ?spot=...)
+// 5. 無敵 URL 定位邏輯
 // ============================================================
 function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -221,38 +240,19 @@ function zoomToTarget(queryName) {
     let targetMarker = null;
 
     // 1. 精確匹配
-    if (nameToMarkerMap[queryName]) {
-        targetMarker = nameToMarkerMap[queryName];
+    if (markerDictionary[queryName]) {
+        targetMarker = markerDictionary[queryName];
     } else {
-        // 2. 模糊匹配 (雙向 includes)
-        for (const name in nameToMarkerMap) {
-            if (name.includes(queryName) || queryName.includes(name)) {
-                targetMarker = nameToMarkerMap[name];
+        // 2. 模糊匹配 (雙向 includes，處理例如「南京大牌檔」對「南京大牌檔（夫子廟平江店）」)
+        for (const name in markerDictionary) {
+            // 去除括號內容再比對，增加成功率
+            const cleanName = name.split('（')[0].split('(')[0];
+            const cleanQuery = queryName.split('（')[0].split('(')[0];
+            
+            if (name.includes(queryName) || queryName.includes(name) || 
+                cleanName.includes(cleanQuery) || cleanQuery.includes(cleanName)) {
+                targetMarker = markerDictionary[name];
                 break;
-            }
-        }
-    }
-
-    // 3. 如果真係搵唔到，但有經緯度 (備用方案)
-    if (!targetMarker) {
-        // 手動補上常用餐廳經緯度，以防 spots-data.js 出錯
-        const backupData = {
-            "小潘記鴨血粉絲湯": [32.04900, 118.79550],
-            "南京大牌檔": [32.01850, 118.78650],
-            "天圓樓": [32.01985, 118.78780],
-            "李記清真館": [32.02680, 118.77680],
-            "金宏興": [32.04500, 118.78350]
-        };
-        for (const key in backupData) {
-            if (key.includes(queryName) || queryName.includes(key)) {
-                const coords = backupData[key];
-                map.setView(coords, 16, { animate: true });
-                // 建立臨時彈窗
-                L.popup()
-                    .setLatLng(coords)
-                    .setContent(`<strong>🍴 ${queryName}</strong><br><div class="addr">📍 座標備用定位</div>`)
-                    .openOn(map);
-                return;
             }
         }
     }
@@ -261,10 +261,13 @@ function zoomToTarget(queryName) {
         const latlng = targetMarker.getLatLng();
         map.setView(latlng, 16, { animate: true, duration: 0.8 });
         targetMarker.openPopup();
+    } else {
+        console.warn('地圖上找不到：', queryName);
+        alert('地圖上找不到「' + queryName + '」的準確位置。');
     }
 }
 
-// 延遲執行，確保地圖同資料載入完成
+// 延遲執行確保地圖載入完成
 setTimeout(() => {
     const spotParam = getQueryParam('spot');
     if (spotParam) {
@@ -272,9 +275,6 @@ setTimeout(() => {
     }
 }, 400);
 
-// ============================================================
-// 5. 響應式處理
-// ============================================================
 window.addEventListener('resize', () => {
     map.invalidateSize();
 });
