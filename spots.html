@@ -49,11 +49,9 @@
     z-index: 10;
     animation: floatDuck 3s ease-in-out infinite;
     transition: transform 0.2s ease;
-    cursor: pointer; /* 👈 改為可點擊 */
+    cursor: pointer;
 }
-.duck-map:active {
-    transform: scale(0.9);
-}
+.duck-map:active { transform: scale(0.9); }
 @keyframes floatDuck {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-6px); }
@@ -75,203 +73,75 @@
 .restaurant-index-subtitle { font-size: 16px; color: #8b897f; margin-bottom: 16px; }
 
 /* 篩選按鈕 */
-.filter-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-}
+.filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
 .filter-btn {
-  padding: 8px 16px;
-  border-radius: 24px;
-  border: 1px solid #e0ddd5;
-  background: white;
-  font-size: 15px;
-  font-weight: 600;
-  color: #6a6a5a;
-  cursor: pointer;
-  transition: 0.15s;
-  font-family: inherit;
-  -webkit-tap-highlight-color: transparent;
+  padding: 8px 16px; border-radius: 24px;
+  border: 1px solid #e0ddd5; background: white;
+  font-size: 15px; font-weight: 600; color: #6a6a5a;
+  cursor: pointer; transition: 0.15s;
+  font-family: inherit; -webkit-tap-highlight-color: transparent;
 }
 .filter-btn:active { transform: scale(0.94); }
 .filter-btn.active { background: #657b6d; color: white; border-color: #657b6d; }
 
 /* 展開式餐廳卡片 */
 .acc-list { display: flex; flex-direction: column; gap: 10px; }
-
 .acc-card {
-    background: white;
-    border-radius: 14px;
-    overflow: hidden;
-    border-left: 5px solid #e0ddd5;
-    box-shadow: 0 2px 8px rgba(80,70,50,.06);
+    background: white; border-radius: 14px; overflow: hidden;
+    border-left: 5px solid #e0ddd5; box-shadow: 0 2px 8px rgba(80,70,50,.06);
 }
 .acc-card.dining { border-left-color: #1E3A8A; }
 .acc-card.snack { border-left-color: #D97706; }
 
-/* 點擊標題列 */
 .acc-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 16px;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    transition: background 0.15s;
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 16px; cursor: pointer;
+    -webkit-tap-highlight-color: transparent; transition: background 0.15s;
 }
 .acc-header:active { background: #faf8f5; }
 
 .acc-badge {
-    font-size: 12px;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 20px;
-    white-space: nowrap;
+    font-size: 12px; font-weight: 700; padding: 3px 10px;
+    border-radius: 20px; white-space: nowrap;
 }
 .acc-badge.dining { background: #e8edf5; color: #1E3A8A; }
 .acc-badge.snack { background: #fef3e2; color: #D97706; }
 
-.acc-name {
-    flex: 1;
-    font-size: 17px;
-    font-weight: 700;
-    color: #3f3933;
-    line-height: 1.4;
-}
-.acc-arrow {
-    font-size: 14px;
-    color: #b0a898;
-    transition: transform 0.25s ease;
-    flex-shrink: 0;
-}
+.acc-name { flex: 1; font-size: 17px; font-weight: 700; color: #3f3933; line-height: 1.4; }
+.acc-arrow { font-size: 14px; color: #b0a898; transition: transform 0.25s ease; flex-shrink: 0; }
 .acc-card.open .acc-arrow { transform: rotate(180deg); }
 
-/* 展開內容 */
-.acc-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-.acc-card.open .acc-body {
-    max-height: 800px;
-}
-.acc-inner {
-    padding: 0 16px 16px 16px;
-    border-top: 1px dashed #eee9e0;
-    padding-top: 12px;
-}
+.acc-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.acc-card.open .acc-body { max-height: 800px; }
+.acc-inner { padding: 12px 16px 16px 16px; border-top: 1px dashed #eee9e0; }
 
-.acc-desc {
-    font-size: 15px;
-    color: #756e66;
-    margin-bottom: 10px;
-}
-.acc-signature {
-    background: #faf8f5;
-    border-radius: 10px;
-    padding: 10px 12px;
-    margin-bottom: 10px;
-    font-size: 15px;
-    color: #4d5748;
-}
-.acc-signature strong {
-    display: block;
-    font-size: 13px;
-    color: #8a8a7a;
-    margin-bottom: 4px;
-}
-.acc-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 14px;
-    font-size: 14px;
-    color: #8a8a7a;
-    margin-bottom: 10px;
-}
-.acc-tip {
-    background: #fff8e6;
-    border-left: 3px solid #D97706;
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-size: 14px;
-    color: #8a6e2a;
-    margin-bottom: 10px;
-}
-.acc-actions a {
-    display: block;
-    text-align: center;
-    padding: 10px 6px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    background: #657b6d;
-    color: white;
-}
+.acc-desc { font-size: 15px; color: #756e66; margin-bottom: 10px; }
+.acc-signature { background: #faf8f5; border-radius: 10px; padding: 10px 12px; margin-bottom: 10px; font-size: 15px; color: #4d5748; }
+.acc-signature strong { display: block; font-size: 13px; color: #8a8a7a; margin-bottom: 4px; }
+.acc-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 14px; color: #8a8a7a; margin-bottom: 10px; }
+.acc-tip { background: #fff8e6; border-left: 3px solid #D97706; border-radius: 6px; padding: 8px 12px; font-size: 14px; color: #8a6e2a; margin-bottom: 10px; }
+.acc-actions a { display: block; text-align: center; padding: 10px 6px; border-radius: 10px; font-size: 14px; font-weight: 600; text-decoration: none; background: #657b6d; color: white; }
 .acc-actions a:active { transform: scale(0.97); }
 
 /* =========================
    備註區
    ========================= */
-.note-box {
-  margin: 0 16px 24px;
-  background: #fffdf7;
-  border: 1.5px dashed #d9c9a8;
-  border-radius: 18px;
-  padding: 16px 14px;
-}
-.note-box .note-title {
-  font-size: 17px; font-weight: 700; color: #8a6e4b;
-  margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
-}
+.note-box { margin: 0 16px 24px; background: #fffdf7; border: 1.5px dashed #d9c9a8; border-radius: 18px; padding: 16px 14px; }
+.note-box .note-title { font-size: 17px; font-weight: 700; color: #8a6e4b; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
 .note-input-row { display: flex; gap: 8px; margin-bottom: 12px; }
-.note-input-row input {
-  flex: 1; padding: 12px 14px;
-  border: 1px solid #e0ddd5; border-radius: 10px;
-  font-size: 16px; background: white;
-  font-family: inherit; color: #3f3933;
-}
+.note-input-row input { flex: 1; padding: 12px 14px; border: 1px solid #e0ddd5; border-radius: 10px; font-size: 16px; background: white; font-family: inherit; color: #3f3933; }
 .note-input-row input:focus { outline: none; border-color: #b89a68; }
-.note-input-row button {
-  padding: 12px 18px; border: none; border-radius: 10px;
-  background: #b89a68; color: white;
-  font-size: 16px; font-weight: 700;
-  cursor: pointer; white-space: nowrap; font-family: inherit;
-  -webkit-tap-highlight-color: transparent;
-}
+.note-input-row button { padding: 12px 18px; border: none; border-radius: 10px; background: #b89a68; color: white; font-size: 16px; font-weight: 700; cursor: pointer; white-space: nowrap; font-family: inherit; -webkit-tap-highlight-color: transparent; }
 .note-input-row button:active { transform: scale(0.95); }
 
 .note-list { display: flex; flex-direction: column; gap: 8px; }
-.note-item {
-  display: flex; align-items: center; gap: 10px;
-  background: white; border-radius: 10px;
-  padding: 10px 14px; font-size: 16px; color: #4d5748;
-  box-shadow: 0 2px 6px rgba(80, 70, 50, 0.05);
-}
+.note-item { display: flex; align-items: center; gap: 10px; background: white; border-radius: 10px; padding: 10px 14px; font-size: 16px; color: #4d5748; box-shadow: 0 2px 6px rgba(80, 70, 50, 0.05); }
 .note-item .note-text { flex: 1; word-break: break-word; }
-.note-item .note-del {
-  background: none; border: none; color: #d0c8bc;
-  font-size: 18px; cursor: pointer; padding: 2px 6px;
-  border-radius: 6px; -webkit-tap-highlight-color: transparent;
-}
+.note-item .note-del { background: none; border: none; color: #d0c8bc; font-size: 18px; cursor: pointer; padding: 2px 6px; border-radius: 6px; -webkit-tap-highlight-color: transparent; }
 .note-item .note-del:active { color: #b07a6a; transform: scale(0.9); }
 .note-empty { text-align: center; color: #b0a898; font-size: 15px; padding: 8px 0; }
-.note-item .note-edit {
-    background: none;
-    border: none;
-    color: #b0c4b0;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 2px 6px;
-    border-radius: 6px;
-    -webkit-tap-highlight-color: transparent;
-    flex-shrink: 0;
-}
-.note-item .note-edit:active {
-    color: #657b6d;
-    transform: scale(0.9);
-}
+.note-item .note-edit { background: none; border: none; color: #b0c4b0; font-size: 16px; cursor: pointer; padding: 2px 6px; border-radius: 6px; -webkit-tap-highlight-color: transparent; flex-shrink: 0; }
+.note-item .note-edit:active { color: #657b6d; transform: scale(0.9); }
 
 /* 手機細螢幕 */
 @media (max-width: 500px) {
@@ -287,41 +157,19 @@
 *{ box-sizing:border-box; }
 
 body{
-    margin:0;
-    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-    background:#f7f3ed;
-    color:#3f3933;
-    line-height:1.9;
-    font-size:18px;
+    margin:0; font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    background:#f7f3ed; color:#3f3933; line-height:1.9; font-size:18px;
 }
 
-header{
-    background:linear-gradient(135deg, #6e7665, #89917b);
-    color:white;
-    padding:28px 18px;
-    text-align:center;
-}
+header{ background:linear-gradient(135deg, #6e7665, #89917b); color:white; padding:28px 18px; text-align:center; }
 header h1{ margin:0; font-size:30px; letter-spacing:2px; }
 header p{ margin:6px 0 0; font-size:16px; opacity:.9; }
 
-.container{
-    max-width:760px;
-    margin:auto;
-    padding:18px 14px 50px;
-}
+.container{ max-width:760px; margin:auto; padding:18px 14px 50px; }
 
 /* 景點卡 */
-.spot{
-    background:white;
-    border-radius:18px;
-    margin-bottom:22px;
-    overflow:hidden;
-    box-shadow: 0 4px 18px rgba(80,70,50,.08);
-}
-.spot-title{
-    padding:20px 20px 14px;
-    background: linear-gradient(135deg, #f1eee7, #faf8f3);
-}
+.spot{ background:white; border-radius:18px; margin-bottom:22px; overflow:hidden; box-shadow: 0 4px 18px rgba(80,70,50,.08); }
+.spot-title{ padding:20px 20px 14px; background: linear-gradient(135deg, #f1eee7, #faf8f3); }
 .spot-title h2{ margin:0; font-size:26px; color:#4d5748; }
 .subtitle{ margin-top:4px; color:#8a715c; font-size:16px; }
 
@@ -340,22 +188,14 @@ li{ margin-bottom:8px; font-size:18px; }
 .info span{ font-size:16px; }
 
 /* 活力需求 */
-.energy {
-    display: flex; align-items: center; gap: 12px;
-    background: #f0f2ec; padding: 14px 16px;
-    border-radius: 12px; flex-wrap: wrap;
-}
+.energy { display: flex; align-items: center; gap: 12px; background: #f0f2ec; padding: 14px 16px; border-radius: 12px; flex-wrap: wrap; }
 .energy-title { font-weight: bold; color: #59644f; font-size: 17px; }
 .energy .bolts { font-size: 22px; letter-spacing: 2px; }
 .energy .hint { font-size: 15px; color: #8a8a7a; margin-left: auto; }
 
 /* 按鈕 */
 .buttons{ display:grid; grid-template-columns:1fr; gap:10px; }
-.btn{
-    display:block; text-align:center; text-decoration:none;
-    padding:13px 10px; border-radius:12px;
-    font-size:17px; font-weight:bold;
-}
+.btn{ display:block; text-align:center; text-decoration:none; padding:13px 10px; border-radius:12px; font-size:17px; font-weight:bold; }
 .map{ background:#e9eee5; color:#53614b; }
 
 /* 回頂 */
@@ -380,10 +220,8 @@ li{ margin-bottom:8px; font-size:18px; }
 #backToSpots {
     position: fixed; right: 16px; bottom: 90px; z-index: 9999;
     border: none; border-radius: 999px; padding: 14px 18px;
-    background: rgba(108, 126, 111, 0.94); color: white;
-    font-size: 16px; font-weight: 600;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-    cursor: pointer; -webkit-tap-highlight-color: transparent;
+    background: rgba(108, 126, 111, 0.94); color: white; font-size: 16px; font-weight: 600;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18); cursor: pointer; -webkit-tap-highlight-color: transparent;
 }
 #backToSpots:active { transform: scale(0.95); }
 
@@ -391,87 +229,26 @@ li{ margin-bottom:8px; font-size:18px; }
 .mobile-nav {
     position: fixed; left: 0; right: 0; bottom: 0; height: 70px;
     display: flex; justify-content: space-around; align-items: center;
-    background: rgba(255, 255, 255, 0.96);
-    border-top: 1px solid #e8e5dc;
-    box-shadow: 0 -3px 15px rgba(0,0,0,0.08);
-    z-index: 9998;
-    padding-bottom: env(safe-area-inset-bottom);
+    background: rgba(255, 255, 255, 0.96); border-top: 1px solid #e8e5dc;
+    box-shadow: 0 -3px 15px rgba(0,0,0,0.08); z-index: 9998; padding-bottom: env(safe-area-inset-bottom);
 }
-.mobile-nav a {
-    flex: 1; height: 70px;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-decoration: none; color: #88877f;
-    -webkit-tap-highlight-color: transparent;
-}
+.mobile-nav a { flex: 1; height: 70px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-decoration: none; color: #88877f; -webkit-tap-highlight-color: transparent; }
 .mobile-nav a span { font-size: 22px; line-height: 24px; }
 .mobile-nav a small { margin-top: 3px; font-size: 13px; font-weight: 600; }
 .mobile-nav a.active { color: #607667; }
 .mobile-nav a:active { transform: scale(0.95); }
 
-/* 避免底部內容被導航列遮住 */
 body { padding-bottom: 95px; }
 
 /* ===== 鴨鴨導遊海報彈窗 ===== */
-.poster-modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 99999;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-.poster-modal.show {
-    display: flex;
-}
-.poster-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(4px);
-}
-.poster-content {
-    position: relative;
-    max-width: 90%;
-    max-height: 85%;
-    z-index: 1;
-    animation: popIn 0.3s ease;
-}
-.poster-content img {
-    width: 100%;
-    height: auto;
-    max-height: 85vh;
-    object-fit: contain;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-}
-.poster-close {
-    position: absolute;
-    top: -12px;
-    right: -12px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: none;
-    background: #fff;
-    color: #333;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    -webkit-tap-highlight-color: transparent;
-}
-.poster-close:active {
-    transform: scale(0.9);
-}
-@keyframes popIn {
-    from { transform: scale(0.7); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
+.poster-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 99999; align-items: center; justify-content: center; padding: 20px; }
+.poster-modal.show { display: flex; }
+.poster-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px); }
+.poster-content { position: relative; max-width: 90%; max-height: 85%; z-index: 1; animation: popIn 0.3s ease; }
+.poster-content img { width: 100%; height: auto; max-height: 85vh; object-fit: contain; border-radius: 12px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); }
+.poster-close { position: absolute; top: -12px; right: -12px; width: 36px; height: 36px; border-radius: 50%; border: none; background: #fff; color: #333; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
+.poster-close:active { transform: scale(0.9); }
+@keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 </style>
 </head>
 
@@ -1078,7 +855,6 @@ body { padding-bottom: 95px; }
 
 </div>
 
-<script src="spots-data.js"></script>
 <script>
 /* =========================================================
    景點跳轉
@@ -1100,22 +876,12 @@ function goSpot(name) {
 }
 
 function goSpotById(id) {
-    const spot = getSpotById(id);
-    if (!spot) { alert('暫時找不到這個景點資料'); return; }
-    const name = spot.name;
-    const spots = document.querySelectorAll('.spot');
-    for (const s of spots) {
-        const title = s.querySelector('.spot-title h2');
-        if (title && title.textContent.includes(name)) {
-            s.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setTimeout(() => {
-                s.classList.add('spot-highlight');
-                setTimeout(() => { s.classList.remove('spot-highlight'); }, 1500);
-            }, 400);
-            return;
-        }
+    // 呢度因為冇載入 spots-data.js，所以直接手動處理大屠殺紀念館
+    if (id === 'nanjing-massacre-memorial') {
+        goSpot('南京大屠殺紀念館');
+    } else {
+        alert('暫時找不到這個景點資料');
     }
-    alert('暫時找不到「' + name + '」的景點資料');
 }
 
 function goToRestaurant(name) {
@@ -1123,17 +889,33 @@ function goToRestaurant(name) {
 }
 
 /* =========================================================
-   餐廳手風琴卡片 + 篩選
+   餐廳資料（直接寫入，保證讀取得到）
    ========================================================= */
+const allRestaurants = [
+    // 正餐
+    { name: "天圓樓·老南京菜", category: "dining", desc: "30年老字號，二樓靠窗可看秦淮河街景", signatureDishes: ["金陵烤鴨", "鮑魚紅燒肉", "松鼠桂魚"], nearby: "夫子廟，步行約5分鐘", duration: "1~1.5 小時", queueTip: "💡 建議提前喺大眾點評取號，避開 12:00-13:00 高峰" },
+    { name: "南京大牌檔（夫子廟平江店）", category: "dining", desc: "一站食齊南京特色，遊客首選", signatureDishes: ["鹽水鴨", "民國美齡粥", "天王烤鴨包"], nearby: "夫子廟，步行約3分鐘", duration: "1~1.5 小時", queueTip: "⚠️ 飯口必排隊！建議提前1小時喺小程序取號" },
+    { name: "小廚娘淮揚菜", category: "dining", desc: "本地人認可嘅淮揚菜連鎖，環境雅緻", signatureDishes: ["太祖金陵脆皮烤鴨", "蟹粉蝦仁豆腐", "黑豬肉小籠包"], nearby: "新街口地鐵站，步行約5分鐘", duration: "1~1.5 小時", queueTip: "💡 建議提前致電訂座" },
+    { name: "李記清真館", category: "dining", desc: "南京官方認定清真老字號，鍋貼即點即煎", signatureDishes: ["牛肉鍋貼", "牛雜湯", "牛肉小餛飩"], nearby: "夫子廟，打車約8分鐘", duration: "約 1 小時", queueTip: "⚠️ 排隊人龍長！建議避開 12:00-13:00 高峰" },
+    { name: "小潘記鴨血粉絲湯", category: "dining", desc: "南京超人氣排隊小吃，老鴨湯頭濃郁", signatureDishes: ["招牌鴨血粉絲湯", "鴨油酥燒餅", "烤鴨"], nearby: "總統府，打車約10分鐘", duration: "45分鐘~1 小時", queueTip: "⚠️ 米芝蓮指南推薦，排隊必不可免" },
+    { name: "金宏興鴨子店", category: "dining", desc: "南京排名第一烤鴨店，一日賣1000隻", signatureDishes: ["烤鴨", "鹽水鴨", "鴨翅膀"], nearby: "新街口地鐵站，步行約8分鐘", duration: "約 30 分鐘（外帶為主）", queueTip: "⚠️ 7點開門就排長龍，建議早去" },
+    // 小食 / 下午茶
+    { name: "奇芳閣", category: "snack", desc: "非遺秦淮小吃傳承單位，鴨油酥燒餅酥到掉渣", signatureDishes: ["鴨油酥燒餅", "麻油素乾絲", "狀元豆"], nearby: "夫子廟，地鐵站步行5分鐘", duration: "20-30 分鐘", queueTip: "💡 外帶窗口排隊較快" },
+    { name: "韓復興板鴨店", category: "snack", desc: "南京桂花鴨集團旗下，清真老字號", signatureDishes: ["鹽水鴨", "鴨油酥燒餅", "五香牛肉"], nearby: "夫子廟，步行約3分鐘", duration: "15-20 分鐘（外帶）", queueTip: "💡 可真空包裝，適合買返香港" },
+    { name: "蔣有記（老門東店）", category: "snack", desc: "秦淮八絕之一，鍋貼外皮酥脆爆汁", signatureDishes: ["牛肉鍋貼", "牛雜湯", "牛肉餛飩"], nearby: "老門東，步行約2分鐘", duration: "約 30 分鐘", queueTip: "⚠️ 排隊較長，建議避開正餐高峰" },
+    { name: "雞鳴湯包", category: "snack", desc: "皮薄如紙，雞汁鮮美", signatureDishes: ["雞汁湯包", "菊葉湯包", "鴨血粉絲湯"], nearby: "雞鳴寺，步行約8分鐘", duration: "20-30 分鐘", queueTip: "💡 建議避開早餐高峰" },
+    { name: "1912街區（咖啡·茶館）", category: "snack", desc: "1912街區內咖啡茶館，行完總統府歇腳之選", signatureDishes: ["手沖咖啡", "熱茶", "輕食"], nearby: "總統府，步行約3分鐘", duration: "30-45 分鐘", queueTip: "💡 適合行完總統府後飲杯茶休息" }
+];
+
 let currentRestaurantFilter = 'all';
 
 function renderRestaurantAccordion() {
     const container = document.getElementById('restaurantAccordion');
-    let list = restaurants;
+    let list = allRestaurants;
     if (currentRestaurantFilter === 'dining') {
-        list = restaurants.filter(r => r.category === 'dining');
+        list = allRestaurants.filter(r => r.category === 'dining');
     } else if (currentRestaurantFilter === 'snack') {
-        list = restaurants.filter(r => r.category === 'snack');
+        list = allRestaurants.filter(r => r.category === 'snack');
     }
 
     if (list.length === 0) {
@@ -1146,7 +928,6 @@ function renderRestaurantAccordion() {
         const isDining = r.category === 'dining';
         const badgeClass = isDining ? 'dining' : 'snack';
         const badgeText = isDining ? '🍽️ 正餐' : '☕ 小食';
-
         const dishes = (r.signatureDishes || []).join('・');
 
         html += `
@@ -1176,13 +957,11 @@ function renderRestaurantAccordion() {
     container.innerHTML = html;
 }
 
-// 展開 / 收起
 function toggleAcc(header) {
     const card = header.parentElement;
     card.classList.toggle('open');
 }
 
-// 篩選按鈕事件
 document.querySelectorAll('#restaurantFilter .filter-btn').forEach(btn => {
     btn.addEventListener('click', function () {
         document.querySelectorAll('#restaurantFilter .filter-btn').forEach(b => b.classList.remove('active'));
@@ -1243,7 +1022,6 @@ function renderNotes() {
         });
     });
 
-    // 新增：編輯按鈕
     container.querySelectorAll('.note-edit').forEach(btn => {
         btn.addEventListener('click', function () {
             const idx = parseInt(this.dataset.index);
@@ -1252,13 +1030,12 @@ function renderNotes() {
     });
 }
 
-// 新增：編輯備註
 function editNote(index) {
     const notes = loadNotes();
     if (index < 0 || index >= notes.length) return;
 
     const newText = prompt('編輯備註：', notes[index]);
-    if (newText === null) return; // 用戶取消
+    if (newText === null) return;
 
     const trimmed = newText.trim();
     if (!trimmed) {
@@ -1307,14 +1084,11 @@ document.getElementById('noteInput').addEventListener('keydown', function (e) {
 });
 
 /* =========================================================
-   初始化
+   初始化 + 鴨鴨海報
    ========================================================= */
 renderRestaurantAccordion();
 renderNotes();
 
-/* =========================================================
-   鴨鴨導遊海報彈窗
-   ========================================================= */
 function openDuckPoster() {
     document.getElementById('posterModal').classList.add('show');
 }
